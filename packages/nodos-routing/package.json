@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@babel/preset-env": "^7.1.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "js-yaml": "^3.12.0"
+  }
+}

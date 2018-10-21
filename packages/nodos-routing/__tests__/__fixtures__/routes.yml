@@ -1,0 +1,22 @@
+---
+
+- pipline:
+    browser:
+      - name: accepts
+      - name: setLocale
+
+- scope:
+    path: '/api'
+    pipline: browser
+    routes:
+      - resources: users
+      - resource: session
+
+- scope:
+    path: '/'
+    routes:
+      - resource: session
+      - resources:
+          name: articles
+          routes:
+            - resources: comments
