@@ -8,5 +8,5 @@ Node.js framework for humans
 $ npm i -g @nodos/cli
 $ nodos new MyBlog
 $ cd MyBlog
-$ bin/nodos server
+$ npx gulp server
 ```
