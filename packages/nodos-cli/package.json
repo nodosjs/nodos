@@ -1,0 +1,6 @@
+{
+  "name": "@nodos/cli",
+  "dependencies": {
+    "hygen": "*"
+  }
+}

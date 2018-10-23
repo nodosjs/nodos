@@ -1,6 +1,6 @@
-import draw from '../src';
+import draw from '..';
 
-test('router', async () => {
+test('nodos-routing', async () => {
   const router = await draw(`${__dirname}/__fixtures__/routes.yml`);
   const request = {
     method: 'get',

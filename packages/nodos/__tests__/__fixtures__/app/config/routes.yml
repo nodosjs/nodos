@@ -1,0 +1,11 @@
+---
+
+- pipline:
+    browser:
+      - name: accepts
+
+- scope:
+    path: '/'
+    pipline: browser
+    routes:
+      - resources: users

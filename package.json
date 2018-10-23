@@ -1,7 +1,40 @@
 {
-  "name": "root",
+  "name": "nodos-monorepo",
   "private": true,
+  "main": "dist/index.js",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "jest",
+    "build": "NODE_ENV=production lerna exec --parallel -- babel src -d dist",
+    "prepublishOnly": "npm run build"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__fixtures__/"
+    ]
+  },
   "devDependencies": {
+    "babel-plugin-dynamic-import-node": "^2.2.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-babel": "^5.2.0",
+    "eslint-plugin-flowtype": "^3.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.0",
+    "flow-bin": "^0.83",
+    "flow-typed": "^2.5.1",
     "lerna": "^3.4.3"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "fastify": "^1.12.1",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0"
   }
 }

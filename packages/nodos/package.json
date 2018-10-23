@@ -1,5 +1,5 @@
 {
-  "name": "@nodos/routing",
+  "name": "nodos",
   "main": "./dist/index.js",
   "dependencies": {
     "js-yaml": "^3.12.0"
