@@ -12,7 +12,7 @@ cache:
 
 before_install:
   - npx lerna bootstrap
-  - bash -c 'cd example && npm install'
+  - bash -c 'cd packages/nodos/__tests__/__fixtures__/app && npm install'
 
 before_script:
   - make build
