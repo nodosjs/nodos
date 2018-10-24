@@ -38,4 +38,4 @@ How to start (https://github.com/nodosjs/nodos/wiki). Russian version only.
     - [ ] Генератор приложения (типа rails new MyBlog)
 - [ ] @nodos
     - [ ] Возможность писать тесты
-    - [ ] Шаблоны
+    - [x] Шаблоны
