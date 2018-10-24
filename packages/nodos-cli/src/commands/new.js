@@ -24,6 +24,7 @@ export default class NewCommand extends Command {
   static description = description
 
   async run() {
+    // FIXME: add http://yeoman.io/authoring/integrating-yeoman.html
     const opt = this.parse(NewCommand);
     const name = opt.flags.name || 'world';
     this.log(`hello ${name} from ./src/commands/hello.js`);
