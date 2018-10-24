@@ -2,4 +2,5 @@
 
 export default (config) => {
   config.logLevel = 'debug';
+  config.cacheModules = true;
 };
