@@ -17,6 +17,10 @@ test('nodos-routing', async () => {
   });
   expect(router.routes[1]).toMatchObject({
     method: 'get',
-    url: '/users',
+    url: '/api/users/new'
+  });
+  expect(router.routes[2]).toMatchObject({
+    method: 'post',
+    url: '/api/users'
   });
 });
