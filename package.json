@@ -37,5 +37,6 @@
     "jest-cli": "^23.6.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.1.0"
   }
 }
