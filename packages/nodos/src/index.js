@@ -4,13 +4,13 @@ import fastifyErrorPage from 'fastify-error-page';
 // import fastifySensible from 'fastify-sensible';
 import pointOfView from 'point-of-view';
 import marko from 'marko';
-import debug from 'debug';
+// import debug from 'debug';
 import buildRouter from './routes';
 import tasks from './tasks';
 import Application from './Application';
 
 const nodosEnv = process.env.NODOS_ENV || 'development';
-const log = debug('nodos');
+// const log = debug('nodos');
 
 export { tasks };
 
@@ -47,7 +47,8 @@ const buildFastify = async (config, router) => {
   const promises = router.routes.map(async (route) => {
     const pathToHandler = path.join(config.paths.handlers, route.resourceName);
     const pathToView = path.join(route.resourceName, route.name);
-    const middlewares = await Promise.all(route.middlewares.map(name => fetchMiddleware(config, name)));
+    const middlewaresPromises = route.middlewares.map(fetchMiddleware.bind(null, config));
+    const middlewares = await Promise.all(middlewaresPromises);
     const opts = {
       beforeHandler: middlewares,
     };
