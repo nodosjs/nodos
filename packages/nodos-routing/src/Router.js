@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import url from 'url';
+import urlJoin from 'url-join';
 import Route from './Route';
 
 const buildScope = ({ routes, path, pipeline }, pipelines) => {
@@ -21,27 +21,27 @@ const normalizeRouteItem = (valueOrValues) => {
 };
 
 const types = {
-  resources: (valueOrValues, rec, { path, middlewares }) => {
-    const values = normalizeRouteItem(valueOrValues);
+  resources: (values, rec, { path, middlewares }) => {
     // FIXME: implement rest of actions
     const actionNames = [
       {
         name: 'index',
+        resourceName: values.name,
         method: 'get',
-        url: url.resolve(path, values.name),
+        url: urlJoin(path, values.name),
         middlewares: middlewares,
       },
     ];
     return actionNames.map(options => new Route(options));
   },
-  resource: (valueOrValues, rec, { path, middlewares }) => {
-    const values = normalizeRouteItem(valueOrValues);
+  resource: (values, rec, { path, middlewares }) => {
     // FIXME: implement rest of actions
     const actionNames = [
       {
         name: 'show',
+        resourceName: values.name,
         method: 'get',
-        url: url.resolve(path, values.name),
+        url: urlJoin(path, values.name),
         middlewares: middlewares,
       },
     ];
@@ -53,7 +53,8 @@ const types = {
 const buildRoutes = (routes, options) => {
   return routes.map((item) => {
     const typeName = detectRouteType(Object.keys(item)[0]);
-    const routes = types[typeName](item[typeName], buildRoutes, options);
+    const values = normalizeRouteItem(item[typeName]);
+    const routes = types[typeName](values, buildRoutes, options);
     return routes;
   });
 }

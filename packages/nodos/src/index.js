@@ -13,7 +13,7 @@ export { tasks };
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
   const router = await buildRouter(projectRootPath);
-  const app = buildFastify(router);
+  const app = buildFastify(projectRootPath, router);
   return new Application(app);
 };
 
@@ -38,7 +38,7 @@ const buildRouter = async (projectRootPath) => {
   return new Router(routesMap);
 };
 
-const buildFastify = (router) => {
+const buildFastify = (projectRootPath, router) => {
   const app = fastify({
     logging: true,
   });
@@ -46,6 +46,16 @@ const buildFastify = (router) => {
   app.get('/', (request, reply) => {
     request.log.info('Some info about the current request')
     reply.send({ hello: 'world' });
+  });
+
+  // FIXME: add middlewares
+  // console.log(router);
+  router.routes.forEach(route => {
+    const pathToHandler = path.join(projectRootPath, 'app', 'handlers', route.resourceName);
+    app[route.method](route.url, async (request, reply) => {
+      const handlers = await import(pathToHandler);
+      return handlers[route.name](request, reply);
+    });
   });
 
   return app;

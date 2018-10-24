@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "./dist/index.js",
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "url-join": "^4.0.0"
   },
   "devDependencies": {
     "js-yaml": "^3.12.0"

@@ -14,11 +14,11 @@ scopes:
     pipeline: browser
     routes:
       - resources: users
-      - resource: session
 
   - path: '/'
     pipeline: browser
     routes:
+      - resources: users
       - resource: session
       - resources:
           name: articles
