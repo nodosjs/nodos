@@ -1,7 +1,7 @@
 import path from 'path';
 import fastify from 'fastify';
 import fastifyErrorPage from 'fastify-error-page';
-import fastifySensible from 'fastify-sensible';
+// import fastifySensible from 'fastify-sensible';
 import pointOfView from 'point-of-view';
 import marko from 'marko';
 import debug from 'debug';

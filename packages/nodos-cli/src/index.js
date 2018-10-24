@@ -2,8 +2,8 @@ const { Command, flags } = require('@oclif/command');
 
 class NodosCliCommand extends Command {
   async run() {
-    const { flags } = this.parse(NodosCliCommand);
-    const name = flags.name || 'world';
+    const opt = this.parse(NodosCliCommand);
+    const name = opt.flags.name || 'world';
     this.log(`hello ${name} from ./src/index.js`);
   }
 }
