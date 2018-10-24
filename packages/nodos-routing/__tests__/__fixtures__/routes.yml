@@ -1,19 +1,23 @@
 ---
 
-- pipeline:
-    browser:
-      - name: accepts
-      - name: setLocale
+pipelines:
+  browser:
+    - accepts
+    - setLocale
+  api:
+    - accepts
+    - setLocale
 
-- scope:
-    path: '/api'
+scopes:
+
+  - path: '/api'
     pipeline: browser
     routes:
       - resources: users
       - resource: session
 
-- scope:
-    path: '/'
+  - path: '/'
+    pipeline: browser
     routes:
       - resource: session
       - resources:

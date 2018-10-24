@@ -1,31 +1,30 @@
 import fastify from 'fastify';
 
 export default class Application {
-  constructor(router) {
-    this.router = router;
-    this.app = fastify({
-      logging: true,
+  constructor(app) {
+    this.app = app;
+  }
+
+  get(url) {
+    return this.request('GET', url);
+  }
+  post(url) {
+    return this.request('POST', url);
+  }
+  put(url) {
+    return this.request('PUT', url);
+  }
+  patch(url) {
+    return this.request('PATCH', url);
+  }
+  delete(url) {
+    return this.request('DELETE', url);
+  }
+
+  request(method, url) {
+    return this.app.inject({
+      method,
+      url,
     });
-  }
-
-  get(path) {
-    request('get', path);
-  }
-  post(path) {
-    request('post', path);
-  }
-  put(path) {
-    request('put', path);
-  }
-  patch(path) {
-    request('patch', path);
-  }
-  delete(path) {
-    request('delete', path);
-  }
-
-  request(method, path) {
-    console.log('hello');
-    // route = router.recognize({ method, path });
   }
 }

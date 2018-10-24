@@ -2,4 +2,4 @@ test:
 	npx jest
 
 build:
-	npm run-scripts build
+	npm run-script build
