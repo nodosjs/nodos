@@ -2,7 +2,9 @@ test:
 	NODOS_ENV=test DEBUG=nodos:* npx jest
 
 setup:
+	npm i
 	npx lerna bootstrap
+	npm run-script build
 
 build:
 	npm run-script build
