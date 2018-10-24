@@ -2,10 +2,6 @@ import _ from 'lodash';
 import urlJoin from 'url-join';
 import Route from './Route';
 
-const buildScope = ({ routes, path, pipeline }, pipelines) => {
-  return buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
-};
-
 const detectRouteType = (currentName) => {
   const names = ['resources', 'resource'];
   return names.find(name => name === currentName);
@@ -22,21 +18,75 @@ const normalizeRouteItem = (valueOrValues) => {
 
 const types = {
   resources: (values, rec, { path, middlewares }) => {
-    // FIXME: implement rest of actions
     const actionNames = [
       {
         name: 'index',
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name),
-        middlewares: middlewares,
+        middlewares
       },
+      {
+        name: 'new',
+        resourceName: values.name,
+        method: 'get',
+        url: urlJoin(path, values.name, '/new'),
+        middlewares
+      },
+      {
+        name: 'create',
+        resourceName: values.name,
+        method: 'post',
+        url: urlJoin(path, values.name),
+        middlewares
+      },
+      {
+        name: 'show',
+        resourceName: values.name,
+        method: 'get',
+        url: urlJoin(path, values.name, '/:id'),
+        middlewares
+      },
+      {
+        name: 'edit',
+        resourceName: values.name,
+        method: 'get',
+        url: urlJoin(path, values.name, '/:id/edit'),
+        middlewares
+      },
+      {
+        name: 'update',
+        resourceName: values.name,
+        method: 'patch',
+        url: urlJoin(path, values.name, '/:id'),
+        middlewares
+      },
+      {
+        name: 'update',
+        resourceName: values.name,
+        method: 'put',
+        url: urlJoin(path, values.name, '/:id'),
+        middlewares
+      },
+      {
+        name: 'destroy',
+        resourceName: values.name,
+        method: 'delete',
+        url: urlJoin(path, values.name, '/:id'),
+        middlewares
+      }
     ];
     return actionNames.map(options => new Route(options));
   },
   resource: (values, rec, { path, middlewares }) => {
-    // FIXME: implement rest of actions
     const actionNames = [
+      {
+        name: 'new',
+        resourceName: values.name,
+        method: 'get',
+        url: urlJoin(path, values.name, '/new'),
+        middlewares
+      },
       {
         name: 'show',
         resourceName: values.name,
@@ -44,6 +94,35 @@ const types = {
         url: urlJoin(path, values.name),
         middlewares: middlewares,
       },
+      {
+        name: 'edit',
+        resourceName: values.name,
+        method: 'get',
+        url: urlJoin(path, values.name, '/edit'),
+        middlewares
+      },
+      {
+        name: 'update',
+        resourceName: values.name,
+        method: 'patch',
+        url: urlJoin(path, values.name),
+        middlewares
+      },
+      {
+        name: 'update',
+        resourceName: values.name,
+        method: 'put',
+        url: urlJoin(path, values.name),
+        middlewares
+      },
+      {
+        name: 'destroy',
+        resourceName: values.name,
+        method: 'delete',
+        url: urlJoin(path, values.name),
+        middlewares
+      }
+
     ];
     return actionNames.map(options => new Route(options));
   },
@@ -58,6 +137,10 @@ const buildRoutes = (routes, options) => {
     return routes;
   });
 }
+
+const buildScope = ({ routes, path, pipeline }, pipelines) => {
+  return buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
+};
 
 export default class Router {
   constructor(routeMap) {
