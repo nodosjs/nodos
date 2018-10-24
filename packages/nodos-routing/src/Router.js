@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import urlJoin from 'url-join';
 import Route from './Route';
+import validateSchema from './validateSchema';
 
 const detectRouteType = (currentName) => {
   const names = ['resources', 'resource'];
@@ -142,6 +143,8 @@ const buildScope = ({ routes, path, pipeline }, pipelines) => {
 
 export default class Router {
   constructor(routeMap) {
+    validateSchema(routeMap);
+
     this.routeMap = routeMap;
     this.routes = routeMap.scopes.map(scope => buildScope(scope, routeMap.pipelines))
       |> _.flattenDeep;

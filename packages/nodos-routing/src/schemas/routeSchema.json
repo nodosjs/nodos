@@ -1,0 +1,24 @@
+{
+  "$id": "routeSchema",
+  "properties": {
+    "resources": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "routes": {
+              "type": "array",
+              "items": [
+                { "$ref": "routeSchema" }
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

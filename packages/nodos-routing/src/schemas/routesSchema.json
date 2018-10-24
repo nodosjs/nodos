@@ -1,0 +1,34 @@
+{
+  "$id": "routesSchema",
+  "properties": {
+    "pipelines": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": [
+          { "type": "string" }
+        ]
+      }
+    },
+    "scopes": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" },
+            "pipeline": { "type": "string" },
+            "routes": {
+              "type": "array",
+              "items": [
+                { "$ref": "routeSchema" }
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
