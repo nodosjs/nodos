@@ -1,8 +1,8 @@
 import path from 'path';
 import { promises as fs } from 'fs';
-import yml from 'js-yaml';
 import fastify from 'fastify';
-import Router from '@nodos/routing';
+import decache from 'decache';
+import buildRouter from './routes';
 import tasks from './tasks';
 import Application from './Application';
 
@@ -31,13 +31,6 @@ const buildConfig = async (projectRootPath) => {
   return config;
 }
 
-const buildRouter = async (projectRootPath) => {
-  const routesFilePath = path.join(projectRootPath, 'config', 'routes.yml');
-  const rawData = await fs.readFile(routesFilePath);
-  const routesMap = yml.safeLoad(rawData);
-  return new Router(routesMap);
-};
-
 const buildFastify = (projectRootPath, router) => {
   const app = fastify({
     logging: true,
@@ -53,6 +46,7 @@ const buildFastify = (projectRootPath, router) => {
   router.routes.forEach(route => {
     const pathToHandler = path.join(projectRootPath, 'app', 'handlers', route.resourceName);
     app[route.method](route.url, async (request, reply) => {
+      // decache(pathToHandler);
       const handlers = await import(pathToHandler);
       return handlers[route.name](request, reply);
     });

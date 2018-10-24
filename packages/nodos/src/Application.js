@@ -5,6 +5,10 @@ export default class Application {
     this.app = app;
   }
 
+  listen(...args) {
+    return this.app.listen(...args)
+  }
+
   get(url) {
     return this.request('GET', url);
   }
