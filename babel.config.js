@@ -10,6 +10,7 @@ module.exports = {
   ],
   plugins: [
     ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
+    '@babel/plugin-proposal-class-properties',
     'dynamic-import-node',
   ],
 };

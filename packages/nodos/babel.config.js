@@ -10,5 +10,6 @@ module.exports = {
   ],
   plugins: [
     'dynamic-import-node',
+    '@babel/plugin-proposal-class-properties',
   ],
 };

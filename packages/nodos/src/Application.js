@@ -7,9 +7,7 @@ export default class Application {
     return this.app.listen(...args);
   }
 
-  get(url) {
-    return this.request('GET', url);
-  }
+  get = url => this.request('GET', url)
 
   post(url) {
     return this.request('POST', url);
