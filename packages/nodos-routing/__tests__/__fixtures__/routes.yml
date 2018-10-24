@@ -1,13 +1,13 @@
 ---
 
-- pipline:
+- pipeline:
     browser:
       - name: accepts
       - name: setLocale
 
 - scope:
     path: '/api'
-    pipline: browser
+    pipeline: browser
     routes:
       - resources: users
       - resource: session
