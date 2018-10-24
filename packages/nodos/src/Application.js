@@ -1,5 +1,3 @@
-import fastify from 'fastify';
-
 export default class Application {
   constructor(app) {
     this.app = app;

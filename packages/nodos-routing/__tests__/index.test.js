@@ -5,22 +5,17 @@ import Router from '../src';
 test('nodos-routing', async () => {
   const routesData = await fs.readFile(`${__dirname}/__fixtures__/routes.yml`);
   const routesMap = yml.safeLoad(routesData);
-  const request = {
-    method: 'get',
-    url: '/users',
-  };
   const router = new Router(routesMap);
-  // const route = router.recognize(request);
   expect(router.routes[0]).toMatchObject({
     method: 'get',
     url: '/api/users',
   });
   expect(router.routes[1]).toMatchObject({
     method: 'get',
-    url: '/api/users/new'
+    url: '/api/users/new',
   });
   expect(router.routes[2]).toMatchObject({
     method: 'post',
-    url: '/api/users'
+    url: '/api/users',
   });
 });

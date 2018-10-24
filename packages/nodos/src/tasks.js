@@ -8,7 +8,8 @@ module.exports = (projectRoot, gulp) => {
   });
   gulp.task('server', async () => {
     const app = await nodos(projectRoot);
-    app.listen(3000);
+    app.listen(3000, () => {
+    });
   });
 
   gulp.task('routes', async () => {

@@ -25,9 +25,7 @@
     "eslint-plugin-jest": "^21.22.0",
     "flow-bin": "^0.83",
     "flow-typed": "^2.5.1",
-    "lerna": "^3.4.3"
-  },
-  "dependencies": {
+    "lerna": "^3.4.3",
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
@@ -35,8 +33,9 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
-    "fastify": "^1.12.1",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0"
+  },
+  "dependencies": {
   }
 }

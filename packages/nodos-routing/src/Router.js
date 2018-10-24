@@ -132,8 +132,7 @@ const types = {
 const buildRoutes = (routes, options) => routes.map((item) => {
   const typeName = detectRouteType(Object.keys(item)[0]);
   const values = normalizeRouteItem(item[typeName]);
-  const routes = types[typeName](values, buildRoutes, options);
-  return routes;
+  return types[typeName](values, buildRoutes, options);
 });
 
 const buildScope = ({ routes, path, pipeline }, pipelines) => buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
@@ -145,6 +144,6 @@ export default class Router {
       |> _.flattenDeep;
   }
 
-  recognize(request) {
-  }
+  // recognize(request) {
+  // }
 }
