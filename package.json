@@ -37,7 +37,9 @@
     "jest-cli": "^23.6.0",
     "lerna": "^3.4.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "yeoman-environment": "^2.3.3"
+  },
   "engines": {
     "node": ">=10"
   }
