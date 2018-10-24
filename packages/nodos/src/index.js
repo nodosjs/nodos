@@ -1,8 +1,10 @@
 import path from 'path';
-// import { promises as fs } from 'fs';
 import fastify from 'fastify';
+import fastifyErrorPage from 'fastify-error-page';
+import fastifySensible from 'fastify-sensible';
+import pointOfView from 'point-of-view';
+import marko from 'marko';
 import debug from 'debug';
-// import decache from 'decache';
 import buildRouter from './routes';
 import tasks from './tasks';
 import Application from './Application';
@@ -14,7 +16,16 @@ export { tasks };
 
 const buildFastify = (projectRootPath, router) => {
   const app = fastify({
-    logging: true,
+    logger: true,
+  });
+  // app.register(fastifySensible);
+  if (nodosEnv === 'development') {
+    app.register(fastifyErrorPage);
+  }
+  app.register(pointOfView, {
+    engine: { marko },
+    includeViewExtension: true,
+    templates: path.join(projectRootPath, 'app', 'views'),
   });
 
   app.get('/', (request, reply) => {
@@ -26,11 +37,13 @@ const buildFastify = (projectRootPath, router) => {
   // console.log(router);
   router.routes.forEach((route) => {
     const pathToHandler = path.join(projectRootPath, 'app', 'handlers', route.resourceName);
+    const pathToView = path.join(route.resourceName, route.name);
     app[route.method](route.url, async (request, reply) => {
       // decache(pathToHandler);
       // FIXME: implement reloading on request
       const handlers = await import(pathToHandler);
-      return handlers[route.name](request, reply);
+      const locals = handlers[route.name](request, reply);
+      reply.view(pathToView, locals);
     });
   });
 

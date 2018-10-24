@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "@babel/register": "^7.0.0",
-    "gulp": "^4.0.0",
-    "gulp-cli": "^2.0.1",
     "nodos": "file:../../.."
   }
 }

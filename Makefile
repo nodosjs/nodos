@@ -1,5 +1,5 @@
 test:
-	DEBUG=nodos:* npx jest
+	NODOS_ENV=test DEBUG=nodos:* npx jest
 
 setup:
 	npx lerna bootstrap

@@ -6,5 +6,5 @@ test('nodos', async () => {
   expect(result).toMatchObject({ statusCode: 200 });
 
   const result2 = await app.get('/users');
-  expect(result2).toMatchObject({ statusCode: 200, body: 'users#index' });
+  expect(result2).toMatchObject({ statusCode: 200, body: '<h1>hello</h1>' });
 });
