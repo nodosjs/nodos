@@ -1,5 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 export default (config) => {
   config.logLevel = 'info';
-
-  return config;
 };

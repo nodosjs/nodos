@@ -42,6 +42,7 @@ const buildConfig = async (projectRootPath) => {
   };
 
   const pathToAppConfig = path.join(projectRootPath, 'config', 'application.js');
+  log(pathToAppConfig);
   const configureForApp = await import(pathToAppConfig);
   const pathToConfigForCurrentStage = path.join(projectRootPath, 'config', 'environments', `${nodosEnv}.js`);
   const configureForStage = await import(pathToConfigForCurrentStage);

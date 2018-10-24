@@ -135,7 +135,10 @@ const buildRoutes = (routes, options) => routes.map((item) => {
   return types[typeName](values, buildRoutes, options);
 });
 
-const buildScope = ({ routes, path, pipeline }, pipelines) => buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
+const buildScope = ({ routes, path, pipeline }, pipelines) => {
+  const result = buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
+  return result;
+};
 
 export default class Router {
   constructor(routeMap) {
