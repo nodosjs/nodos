@@ -23,3 +23,5 @@ $ cd nodos
 $ make setup
 $ make test
 ```
+
+How to start (https://github.com/nodosjs/nodos/wiki). Russian version only.
