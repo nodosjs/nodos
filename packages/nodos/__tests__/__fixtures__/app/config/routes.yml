@@ -1,9 +1,15 @@
 ---
 
 pipelines:
+
   browser:
-    - accepts
-    - setLocale
+    - checkMigrations
+    # - accepts
+    # - setLocale
+    # - fetchSession
+    # - fetchFlash
+    # - protectFromForgery
+
   api:
     - accepts
     - setLocale

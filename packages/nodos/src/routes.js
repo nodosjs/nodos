@@ -6,10 +6,8 @@ import Router from '@nodos/routing';
 
 const log = debug('nodos');
 
-export default async (projectRootPath) => {
-  const routesFilePath = path.join(projectRootPath, 'config', 'routes.yml');
-  log(routesFilePath);
-  const rawData = await fs.readFile(routesFilePath);
+export default async (config) => {
+  const rawData = await fs.readFile(config.paths.routes);
   const routesMap = yml.safeLoad(rawData);
   return new Router(routesMap);
 };

@@ -14,7 +14,17 @@ const log = debug('nodos');
 
 export { tasks };
 
-const buildFastify = (projectRootPath, router) => {
+const fetchMiddleware = async (config, middlewareName) => {
+  const middleware = await import(path.join(config.paths.middlewares, middlewareName))
+    .catch(() => import(path.join(__dirname, 'middlewares', middlewareName)))
+    .catch(() => import(middlewareName))
+    .catch(() => {
+      throw new Error(`Middleware '${middlewareName}' is absent.`);
+    });
+  return middleware.default;
+};
+
+const buildFastify = async (config, router) => {
   const app = fastify({
     logger: true,
   });
@@ -25,7 +35,7 @@ const buildFastify = (projectRootPath, router) => {
   app.register(pointOfView, {
     engine: { marko },
     includeViewExtension: true,
-    templates: path.join(projectRootPath, 'app', 'views'),
+    templates: config.paths.templates,
   });
 
   app.get('/', (request, reply) => {
@@ -33,12 +43,15 @@ const buildFastify = (projectRootPath, router) => {
     reply.send({ hello: 'world' });
   });
 
-  // FIXME: add middlewares
   // console.log(router);
-  router.routes.forEach((route) => {
-    const pathToHandler = path.join(projectRootPath, 'app', 'handlers', route.resourceName);
+  const promises = router.routes.map(async (route) => {
+    const pathToHandler = path.join(config.paths.handlers, route.resourceName);
     const pathToView = path.join(route.resourceName, route.name);
-    app[route.method](route.url, async (request, reply) => {
+    const middlewares = await Promise.all(route.middlewares.map(name => fetchMiddleware(config, name)));
+    const opts = {
+      beforeHandler: middlewares,
+    };
+    app[route.method](route.url, opts, async (request, reply) => {
       // decache(pathToHandler);
       // FIXME: implement reloading on request
       const handlers = await import(pathToHandler);
@@ -46,18 +59,27 @@ const buildFastify = (projectRootPath, router) => {
       reply.view(pathToView, locals);
     });
   });
+  await promises;
 
   return app;
 };
 
 const buildConfig = async (projectRootPath) => {
+  const join = path.join.bind(null, projectRootPath);
   const config = {
+    paths: {
+      routes: join('config', 'routes.yml'),
+      application: join('config', 'application'),
+      config: join('config'),
+      environments: join('config/environments'),
+      templates: join('app', 'templates'),
+      handlers: join('app', 'handlers'),
+      middlewares: join('app', 'middlewares'),
+    },
   };
 
-  const pathToAppConfig = path.join(projectRootPath, 'config', 'application.js');
-  log(pathToAppConfig);
-  const configureForApp = await import(pathToAppConfig);
-  const pathToConfigForCurrentStage = path.join(projectRootPath, 'config', 'environments', `${nodosEnv}.js`);
+  const configureForApp = await import(config.paths.application);
+  const pathToConfigForCurrentStage = path.join(config.paths.environments, `${nodosEnv}.js`);
   const configureForStage = await import(pathToConfigForCurrentStage);
   // FIXME: remove default
   configureForApp.default(config);
@@ -66,8 +88,8 @@ const buildConfig = async (projectRootPath) => {
 };
 
 export const nodos = async (projectRootPath) => {
-  await buildConfig(projectRootPath);
-  const router = await buildRouter(projectRootPath);
-  const app = buildFastify(projectRootPath, router);
+  const config = await buildConfig(projectRootPath);
+  const router = await buildRouter(config);
+  const app = await buildFastify(config, router);
   return new Application(app);
 };
