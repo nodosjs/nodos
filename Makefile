@@ -14,3 +14,6 @@ lint:
 
 lint-ci:
 	npx eslint --ignore-pattern app --ignore-pattern example .
+
+what-to-do:
+	git grep FIXME
