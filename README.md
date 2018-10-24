@@ -12,3 +12,5 @@ $ nodos new MyBlog
 $ cd MyBlog
 $ npx gulp server
 ```
+
+### Development

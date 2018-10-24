@@ -10,6 +10,7 @@ const nodosEnv = process.env.NODOS_ENV || 'development';
 
 export { tasks };
 
+
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
   const router = await buildRouter(projectRootPath);

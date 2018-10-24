@@ -1,4 +1,5 @@
 import { nodos } from '.';
+import buildRoutes from './routes';
 
 module.exports = (projectRoot, gulp) => {
   gulp.task('default', (done) => {
@@ -11,7 +12,9 @@ module.exports = (projectRoot, gulp) => {
   });
 
   gulp.task('routes', async () => {
-    const app = await nodos(projectRoot);
-    app.listen(3000);
+    const router = buildRoutes(projectRoot);
+    router.routes.forEach((route) => {
+      console.log(route.name, route.method);
+    });
   });
 };
