@@ -1,7 +1,7 @@
 import { nodos } from '.';
 import buildRoutes from './routes';
 
-module.exports = (projectRoot, gulp) => {
+export default (projectRoot, gulp) => {
   gulp.task('default', (done) => {
     console.log('hello from The Nodos!');
     done();

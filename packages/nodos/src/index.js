@@ -1,12 +1,14 @@
 import path from 'path';
 // import { promises as fs } from 'fs';
 import fastify from 'fastify';
+import debug from 'debug';
 // import decache from 'decache';
 import buildRouter from './routes';
 import tasks from './tasks';
 import Application from './Application';
 
 const nodosEnv = process.env.NODOS_ENV || 'development';
+const log = debug('nodos');
 
 export { tasks };
 
