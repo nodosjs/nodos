@@ -47,6 +47,7 @@ const buildFastify = (projectRootPath, router) => {
     const pathToHandler = path.join(projectRootPath, 'app', 'handlers', route.resourceName);
     app[route.method](route.url, async (request, reply) => {
       // decache(pathToHandler);
+      // FIXME: implement reloading on request
       const handlers = await import(pathToHandler);
       return handlers[route.name](request, reply);
     });
