@@ -9,3 +9,6 @@ sudo: false
 cache:
   directories:
     - "node_modules"
+
+before_script:
+  - npx lerna bootstrap
