@@ -9,3 +9,6 @@ build:
 
 lint:
 	npx eslint .
+
+lint-ci:
+	npx eslint --ignore-pattern app --ignore-pattern example .
