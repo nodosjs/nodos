@@ -9,5 +9,3 @@ export default async (projectRootPath) => {
   const routesMap = yml.safeLoad(rawData);
   return new Router(routesMap);
 };
-
-

@@ -14,4 +14,4 @@ module.exports = (projectRoot, gulp) => {
     const app = await nodos(projectRoot);
     app.listen(3000);
   });
-}
+};

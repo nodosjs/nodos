@@ -6,21 +6,25 @@ export default class Application {
   }
 
   listen(...args) {
-    return this.app.listen(...args)
+    return this.app.listen(...args);
   }
 
   get(url) {
     return this.request('GET', url);
   }
+
   post(url) {
     return this.request('POST', url);
   }
+
   put(url) {
     return this.request('PUT', url);
   }
+
   patch(url) {
     return this.request('PATCH', url);
   }
+
   delete(url) {
     return this.request('DELETE', url);
   }

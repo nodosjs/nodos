@@ -19,7 +19,7 @@ export const nodos = async (projectRootPath) => {
 
 const buildConfig = async (projectRootPath) => {
   const config = {
-  }
+  };
 
   const pathToAppConfig = path.join(projectRootPath, 'config', 'application.js');
   const configureForApp = await import(pathToAppConfig);
@@ -29,7 +29,7 @@ const buildConfig = async (projectRootPath) => {
   configureForApp.default(config);
   configureForStage.default(config);
   return config;
-}
+};
 
 const buildFastify = (projectRootPath, router) => {
   const app = fastify({
@@ -37,13 +37,13 @@ const buildFastify = (projectRootPath, router) => {
   });
 
   app.get('/', (request, reply) => {
-    request.log.info('Some info about the current request')
+    request.log.info('Some info about the current request');
     reply.send({ hello: 'world' });
   });
 
   // FIXME: add middlewares
   // console.log(router);
-  router.routes.forEach(route => {
+  router.routes.forEach((route) => {
     const pathToHandler = path.join(projectRootPath, 'app', 'handlers', route.resourceName);
     app[route.method](route.url, async (request, reply) => {
       // decache(pathToHandler);

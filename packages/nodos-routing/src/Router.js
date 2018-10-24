@@ -5,7 +5,7 @@ import Route from './Route';
 const detectRouteType = (currentName) => {
   const names = ['resources', 'resource'];
   return names.find(name => name === currentName);
-}
+};
 
 const normalizeRouteItem = (valueOrValues) => {
   if (_.isObject(valueOrValues)) {
@@ -24,57 +24,57 @@ const types = {
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name),
-        middlewares
+        middlewares,
       },
       {
         name: 'new',
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name, '/new'),
-        middlewares
+        middlewares,
       },
       {
         name: 'create',
         resourceName: values.name,
         method: 'post',
         url: urlJoin(path, values.name),
-        middlewares
+        middlewares,
       },
       {
         name: 'show',
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name, '/:id'),
-        middlewares
+        middlewares,
       },
       {
         name: 'edit',
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name, '/:id/edit'),
-        middlewares
+        middlewares,
       },
       {
         name: 'update',
         resourceName: values.name,
         method: 'patch',
         url: urlJoin(path, values.name, '/:id'),
-        middlewares
+        middlewares,
       },
       {
         name: 'update',
         resourceName: values.name,
         method: 'put',
         url: urlJoin(path, values.name, '/:id'),
-        middlewares
+        middlewares,
       },
       {
         name: 'destroy',
         resourceName: values.name,
         method: 'delete',
         url: urlJoin(path, values.name, '/:id'),
-        middlewares
-      }
+        middlewares,
+      },
     ];
     return actionNames.map(options => new Route(options));
   },
@@ -85,43 +85,43 @@ const types = {
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name, '/new'),
-        middlewares
+        middlewares,
       },
       {
         name: 'show',
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name),
-        middlewares: middlewares,
+        middlewares,
       },
       {
         name: 'edit',
         resourceName: values.name,
         method: 'get',
         url: urlJoin(path, values.name, '/edit'),
-        middlewares
+        middlewares,
       },
       {
         name: 'update',
         resourceName: values.name,
         method: 'patch',
         url: urlJoin(path, values.name),
-        middlewares
+        middlewares,
       },
       {
         name: 'update',
         resourceName: values.name,
         method: 'put',
         url: urlJoin(path, values.name),
-        middlewares
+        middlewares,
       },
       {
         name: 'destroy',
         resourceName: values.name,
         method: 'delete',
         url: urlJoin(path, values.name),
-        middlewares
-      }
+        middlewares,
+      },
 
     ];
     return actionNames.map(options => new Route(options));
@@ -129,18 +129,14 @@ const types = {
 
 };
 
-const buildRoutes = (routes, options) => {
-  return routes.map((item) => {
-    const typeName = detectRouteType(Object.keys(item)[0]);
-    const values = normalizeRouteItem(item[typeName]);
-    const routes = types[typeName](values, buildRoutes, options);
-    return routes;
-  });
-}
+const buildRoutes = (routes, options) => routes.map((item) => {
+  const typeName = detectRouteType(Object.keys(item)[0]);
+  const values = normalizeRouteItem(item[typeName]);
+  const routes = types[typeName](values, buildRoutes, options);
+  return routes;
+});
 
-const buildScope = ({ routes, path, pipeline }, pipelines) => {
-  return buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
-};
+const buildScope = ({ routes, path, pipeline }, pipelines) => buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
 
 export default class Router {
   constructor(routeMap) {
