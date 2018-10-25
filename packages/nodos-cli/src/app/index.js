@@ -9,8 +9,8 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath('.gitignore'),
-      this.destinationPath('ololo/.gitignore'),
+      this.templatePath('index.js'),
+      this.destinationPath('app/index.js'),
     );
   }
 };
