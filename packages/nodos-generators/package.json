@@ -1,0 +1,9 @@
+{
+  "name": "@nodos/generators",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
