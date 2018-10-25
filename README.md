@@ -39,3 +39,7 @@ How to start (https://github.com/nodosjs/nodos/wiki). Russian version only.
 - [ ] @nodos
     - [ ] Возможность писать тесты
     - [x] Шаблоны
+- [ ] @nodos/generators
+    - resource generator
+    - action generator
+    - handlers module generator
