@@ -15,6 +15,9 @@ build:
 lint:
 	npx eslint .
 
+lint-fix:
+	npx eslint . --fix
+
 lint-ci:
 	npx eslint --ignore-pattern app --ignore-pattern example .
 

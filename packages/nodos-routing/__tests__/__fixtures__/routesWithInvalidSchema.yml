@@ -1,0 +1,27 @@
+---
+
+pipelines:
+  browser:
+    - accepts
+    - setLocale
+  api:
+    - accepts
+    - setLocale
+  wrong: 'throws an exception'
+
+scopes:
+
+  - path: '/api'
+    pipeline: browser
+    routes:
+      - wrongAdditionalProperty: users
+
+  - path: '/'
+    pipeline: browser
+    routes:
+      - resources: users
+      - resource: session
+      - resources:
+          names: articles
+          routes:
+            - resources: comments

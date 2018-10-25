@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "./dist/index.js",
   "dependencies": {
+    "ajv": "^6.5.4",
     "lodash": "^4.17.11",
     "url-join": "^4.0.0"
   },
