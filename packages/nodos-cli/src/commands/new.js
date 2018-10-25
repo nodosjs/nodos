@@ -1,7 +1,13 @@
 const { Command, flags } = require('@oclif/command');
+const yeoman = require('yeoman-environment');
+// const generator = require('');
+
+const env = yeoman.createEnv();
+
+env.register(require.resolve('../app'), 'newapp');
 
 const description = `
-The 'nodos new' command creates a new Rails application with a default
+The 'nodos new' command creates a new Nodos application with a default
 directory structure and configuration at the path you specify.
 
 ...
@@ -25,6 +31,7 @@ export default class NewCommand extends Command {
 
   async run() {
     // FIXME: add http://yeoman.io/authoring/integrating-yeoman.html
+    env.run('newapp');
     const opt = this.parse(NewCommand);
     const name = opt.flags.name || 'world';
     this.log(`hello ${name} from ./src/commands/hello.js`);
