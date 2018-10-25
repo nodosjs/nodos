@@ -24,5 +24,5 @@ test('nodos-routing throws an error if schema is invalid', async () => {
   const routesData = await fs.readFile(`${__dirname}/__fixtures__/routesWithInvalidSchema.yml`);
   const routesMap = yml.safeLoad(routesData);
 
-  expect(() => new Router(routesMap)).toThrow(new TypeError('Routes schema is invalid'));
+  expect(() => new Router(routesMap)).toThrowErrorMatchingSnapshot();
 });

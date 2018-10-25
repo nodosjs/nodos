@@ -3,6 +3,6 @@
  */
 
 test('nodos', async () => {
-  const response = await get('/users');
+  const response = await global.get('/users');
   expect(response).toMatchObject({ statusCode: 200 });
 });
