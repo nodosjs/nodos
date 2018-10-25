@@ -7,6 +7,9 @@
     "lodash": "^4.17.11",
     "url-join": "^4.0.0"
   },
+  "files": [
+    "files/*"
+  ],
   "devDependencies": {
     "js-yaml": "^3.12.0"
   }
