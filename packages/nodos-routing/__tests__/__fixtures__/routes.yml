@@ -22,7 +22,9 @@ scopes:
           name: users
           only: ['show']
 
-      - resource: session
+      - resource:
+          name: session
+          except: ['new']
 
       - resources:
           name: articles

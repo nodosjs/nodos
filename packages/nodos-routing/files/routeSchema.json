@@ -14,14 +14,8 @@
               "type": "array",
               "items": { "$ref": "routeSchema" }
             },
-            "only": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "except": {
-              "type": "array",
-              "items": { "type": "string" }
-            }
+            "only": { "$ref": "routeOnlyExceptSchema" },
+            "except": { "$ref": "routeOnlyExceptSchema" }
           },
           "additionalProperties": false
         }
@@ -40,14 +34,8 @@
               "type": "array",
               "items": { "$ref": "routeSchema" }
             },
-            "only": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "except": {
-              "type": "array",
-              "items": { "type": "string" }
-            }
+            "only": { "$ref": "routeOnlyExceptSchema" },
+            "except": { "$ref": "routeOnlyExceptSchema" }
           },
           "additionalProperties": false
         }
