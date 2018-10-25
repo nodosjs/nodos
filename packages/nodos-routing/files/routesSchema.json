@@ -1,33 +1,28 @@
 {
   "$id": "routesSchema",
+  "type": "object",
   "properties": {
     "pipelines": {
       "type": "object",
       "additionalProperties": {
         "type": "array",
-        "items": [
-          { "type": "string" }
-        ]
+        "items": { "type": "string" }
       }
     },
     "scopes": {
       "type": "array",
-      "items": [
-        {
+      "items": {
           "type": "object",
           "properties": {
             "path": { "type": "string" },
             "pipeline": { "type": "string" },
             "routes": {
               "type": "array",
-              "items": [
-                { "$ref": "routeSchema" }
-              ]
+              "items": { "$ref": "routeSchema" }
             }
           },
           "additionalProperties": false
         }
-      ]
     }
   },
   "additionalProperties": false
