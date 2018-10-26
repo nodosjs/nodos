@@ -4,12 +4,12 @@ pipelines:
   browser:
     - accepts
     - setLocale
+
   api:
     - accepts
     - setLocale
 
 scopes:
-
   - path: '/api'
     pipeline: browser
     routes:
@@ -18,9 +18,18 @@ scopes:
   - path: '/'
     pipeline: browser
     routes:
-      - resources: users
-      - resource: session
+      - resources:
+          name: users
+          only: ['show']
+
+      - resource:
+          name: session
+          except: ['new']
+
       - resources:
           name: articles
           routes:
             - resources: comments
+            - resource:
+                name: metadata
+                except: ['show']

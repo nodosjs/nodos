@@ -8,132 +8,152 @@ const detectRouteType = (currentName) => {
   return names.find(name => name === currentName);
 };
 
+const routesDefaultOnly = ['index', 'new', 'create', 'show', 'edit', 'update', 'destroy'];
+const routesDefaultExcept = [];
+
+const buildHandlerNames = (routeItem) => {
+  const onlyNames = _.get(routeItem, 'only', routesDefaultOnly);
+  const exceptNames = _.get(routeItem, 'except', routesDefaultExcept);
+  return _.difference(onlyNames, exceptNames);
+};
+
 const normalizeRouteItem = (valueOrValues) => {
-  if (_.isObject(valueOrValues)) {
-    return valueOrValues;
-  }
+  const routeItem = _.isObject(valueOrValues) ? valueOrValues : { name: valueOrValues };
+
   return {
-    name: valueOrValues,
+    ...routeItem,
+    handlerNames: buildHandlerNames(routeItem),
   };
 };
 
+const selectRequestedHandlers = (routeItem, handlers) => {
+  const { handlerNames } = routeItem;
+  return handlers.filter(handler => handlerNames.includes(handler.name));
+};
+
 const types = {
-  resources: (values, rec, { path, middlewares }) => {
-    const actionNames = [
+  resources: (routeItem, rec, { path, middlewares }) => {
+    const handlers = [
       {
         name: 'index',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'get',
-        url: urlJoin(path, values.name),
+        url: urlJoin(path, routeItem.name),
         middlewares,
       },
       {
         name: 'new',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'get',
-        url: urlJoin(path, values.name, '/new'),
+        url: urlJoin(path, routeItem.name, '/new'),
         middlewares,
       },
       {
         name: 'create',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'post',
-        url: urlJoin(path, values.name),
+        url: urlJoin(path, routeItem.name),
         middlewares,
       },
       {
         name: 'show',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'get',
-        url: urlJoin(path, values.name, '/:id'),
+        url: urlJoin(path, routeItem.name, '/:id'),
         middlewares,
       },
       {
         name: 'edit',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'get',
-        url: urlJoin(path, values.name, '/:id/edit'),
+        url: urlJoin(path, routeItem.name, '/:id/edit'),
         middlewares,
       },
       {
         name: 'update',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'patch',
-        url: urlJoin(path, values.name, '/:id'),
+        url: urlJoin(path, routeItem.name, '/:id'),
         middlewares,
       },
       {
         name: 'update',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'put',
-        url: urlJoin(path, values.name, '/:id'),
+        url: urlJoin(path, routeItem.name, '/:id'),
         middlewares,
       },
       {
         name: 'destroy',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'delete',
-        url: urlJoin(path, values.name, '/:id'),
+        url: urlJoin(path, routeItem.name, '/:id'),
         middlewares,
       },
     ];
-    return actionNames.map(options => new Route(options));
+
+    const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
+
+    return requestedHandlers.map(options => new Route(options));
   },
-  resource: (values, rec, { path, middlewares }) => {
-    const actionNames = [
+  resource: (routeItem, rec, { path, middlewares }) => {
+    const handlers = [
       {
         name: 'new',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'get',
-        url: urlJoin(path, values.name, '/new'),
+        url: urlJoin(path, routeItem.name, '/new'),
         middlewares,
       },
       {
         name: 'show',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'get',
-        url: urlJoin(path, values.name),
+        url: urlJoin(path, routeItem.name),
         middlewares,
       },
       {
         name: 'edit',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'get',
-        url: urlJoin(path, values.name, '/edit'),
+        url: urlJoin(path, routeItem.name, '/edit'),
         middlewares,
       },
       {
         name: 'update',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'patch',
-        url: urlJoin(path, values.name),
+        url: urlJoin(path, routeItem.name),
         middlewares,
       },
       {
         name: 'update',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'put',
-        url: urlJoin(path, values.name),
+        url: urlJoin(path, routeItem.name),
         middlewares,
       },
       {
         name: 'destroy',
-        resourceName: values.name,
+        resourceName: routeItem.name,
         method: 'delete',
-        url: urlJoin(path, values.name),
+        url: urlJoin(path, routeItem.name),
         middlewares,
       },
 
     ];
-    return actionNames.map(options => new Route(options));
+
+    const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
+
+    return requestedHandlers.map(options => new Route(options));
   },
 
 };
 
 const buildRoutes = (routes, options) => routes.map((item) => {
   const typeName = detectRouteType(Object.keys(item)[0]);
-  const values = normalizeRouteItem(item[typeName]);
-  return types[typeName](values, buildRoutes, options);
+  const routeItem = normalizeRouteItem(item[typeName]);
+  return types[typeName](routeItem, buildRoutes, options);
 });
 
 const buildScope = ({ routes, path, pipeline }, pipelines) => {

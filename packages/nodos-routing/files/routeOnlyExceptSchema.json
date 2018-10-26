@@ -1,0 +1,9 @@
+{
+  "$id": "routeOnlyExceptSchema",
+  "type": "array",
+  "items": {
+    "enum": [
+     "index", "new", "create", "show", "edit", "update", "destroy"
+    ]
+  }
+}

@@ -18,6 +18,21 @@ test('nodos-routing', async () => {
     method: 'post',
     url: '/api/users',
   });
+
+  // Only
+  const userRootRoutes = router.routes.filter(route => route.url.startsWith('/users'));
+
+  expect(userRootRoutes).toHaveLength(1);
+  expect(userRootRoutes[0]).toMatchObject({
+    method: 'get',
+    name: 'show',
+    url: '/users/:id',
+  });
+
+  // Except
+  const sessionRootRoutes = router.routes.filter(route => route.url.startsWith('/session'));
+  const sessionNameRoute = sessionRootRoutes.find(route => route.name === 'new');
+  expect(sessionNameRoute).toBeUndefined();
 });
 
 test('nodos-routing throws an error if schema is invalid', async () => {

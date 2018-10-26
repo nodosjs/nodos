@@ -1,5 +1,6 @@
 {
   "$id": "routeSchema",
+  "type": "object",
   "properties": {
     "resources": {
       "oneOf": [
@@ -8,12 +9,33 @@
           "type": "object",
           "properties": {
             "name": { "type": "string" },
+
             "routes": {
               "type": "array",
-              "items": [
-                { "$ref": "routeSchema" }
-              ]
-            }
+              "items": { "$ref": "routeSchema" }
+            },
+            "only": { "$ref": "routeOnlyExceptSchema" },
+            "except": { "$ref": "routeOnlyExceptSchema" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+
+    "resource": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+
+            "routes": {
+              "type": "array",
+              "items": { "$ref": "routeSchema" }
+            },
+            "only": { "$ref": "routeOnlyExceptSchema" },
+            "except": { "$ref": "routeOnlyExceptSchema" }
           },
           "additionalProperties": false
         }
