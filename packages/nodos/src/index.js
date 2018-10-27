@@ -6,13 +6,13 @@ import pointOfView from 'point-of-view';
 import marko from 'marko';
 // import debug from 'debug';
 import buildRouter from './routes';
-import tasks from './tasks';
+import cli from './cli';
 import Application from './Application';
 
 const nodosEnv = process.env.NODOS_ENV || 'development';
 // const log = debug('nodos');
 
-export { tasks };
+export { cli };
 
 const fetchMiddleware = async (config, middlewareName) => {
   const middleware = await import(path.join(config.paths.middlewares, middlewareName))

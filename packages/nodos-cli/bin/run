@@ -4,13 +4,14 @@ const yargs = require('yargs');
 
 const commands = {
   new: {
-    configuration: (command) => {
+    command: 'new <appPath>',
+    builder: (command) => {
       command.positional('appPath', {
         describe: 'Path to the application',
       });
     },
     handler: (argv) => {
-      console.log('ehu!!!');
+      console.log(argv);
     },
   },
 };
@@ -26,12 +27,12 @@ nodos new ~/Code/Node/weblog
 This generates a skeletal Nodos installation in ~/Code/Nodos/weblog.
 `;
 
-yargs
+yargs // eslint-disabled no-unused-expressions
   .demandCommand()
   .recommendCommands()
   .strict()
   .showHelpOnFail(true)
-  .command('new <appPath>', '', commands.new.configuration, commands.new.handler)
+  .command(commands.new)
   .option('verbose', {
     alias: 'v',
     default: false,
