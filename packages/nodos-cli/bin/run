@@ -1,5 +1,41 @@
 #!/usr/bin/env node
 
-require('@oclif/command').run()
-  .then(require('@oclif/command/flush'))
-  .catch(require('@oclif/errors/handle'));
+const yargs = require('yargs');
+
+const commands = {
+  new: {
+    configuration: (command) => {
+      command.positional('appPath', {
+        describe: 'Path to the application',
+      });
+    },
+    handler: (argv) => {
+      console.log('ehu!!!');
+    },
+  },
+};
+
+const help = `
+The 'nodos new' command creates a new Nodos application with a default
+directory structure and configuration at the path you specify.
+`;
+
+const example = `
+nodos new ~/Code/Node/weblog
+
+This generates a skeletal Nodos installation in ~/Code/Nodos/weblog.
+`;
+
+yargs
+  .demandCommand()
+  .recommendCommands()
+  .strict()
+  .showHelpOnFail(true)
+  .command('new <appPath>', '', commands.new.configuration, commands.new.handler)
+  .option('verbose', {
+    alias: 'v',
+    default: false,
+  })
+  .epilog(help.trim())
+  .example(example.trim())
+  .argv;
