@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs';
+import _ from 'lodash';
 import yml from 'js-yaml';
 import Router from '../src';
 
@@ -6,18 +7,22 @@ test('nodos-routing', async () => {
   const routesData = await fs.readFile(`${__dirname}/__fixtures__/routes.yml`);
   const routesMap = yml.safeLoad(routesData);
   const router = new Router(routesMap);
-  expect(router.routes[0]).toMatchObject({
-    method: 'get',
-    url: '/api/users',
-  });
-  expect(router.routes[1]).toMatchObject({
-    method: 'get',
-    url: '/api/users/new',
-  });
-  expect(router.routes[2]).toMatchObject({
-    method: 'post',
-    url: '/api/users',
-  });
+
+  const expectedRoutes = [
+    { url: '/api/users', method: 'get' },
+    { url: '/api/users/new', method: 'get' },
+    { url: '/api/users', method: 'post' },
+    { url: '/api/users/:id', method: 'get' },
+    { url: '/users/:id', method: 'get' },
+    { url: '/articles', method: 'get' },
+    { url: '/articles/:id', method: 'patch' },
+  ];
+
+  const actualRoutes = router.routes
+    .map(({ url, method }) => ({ url, method }))
+    .filter(r => expectedRoutes.find(e => _.isEqual(e, r)));
+
+  expect(expectedRoutes).toEqual(actualRoutes);
 
   // Only
   const userRootRoutes = router.routes.filter(route => route.url.startsWith('/users'));
