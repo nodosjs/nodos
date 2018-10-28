@@ -10,7 +10,8 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/__fixtures__/"
+      "/__fixtures__/",
+      "/config/"
     ]
   },
   "devDependencies": {
