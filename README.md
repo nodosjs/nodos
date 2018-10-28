@@ -7,7 +7,7 @@ Node.js framework for humans
 ### Install
 
 ```sh
-$ npm i -g @nodos/cli
+$ npm i -g @nodosjs/cli
 $ nodos new MyBlog
 $ cd MyBlog
 $ npx gulp server
