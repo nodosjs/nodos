@@ -14,4 +14,4 @@ class IntegrationEnvironment extends NodeEnvironment {
 }
 
 export default IntegrationEnvironment;
-module.export = IntegrationEnvironment;
+module.exports = IntegrationEnvironment;
