@@ -9,6 +9,9 @@ install:
 bootstrap:
 	npx lerna bootstrap
 
+publish:
+	npx lerna publish
+
 build:
 	npm run-script build
 

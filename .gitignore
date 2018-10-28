@@ -2,3 +2,4 @@ node_modules
 dist
 *.marko.js
 *.log
+*.tgz

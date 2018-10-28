@@ -1,5 +1,5 @@
 {
-  "name": "nodos",
+  "name": "@nodos/core",
   "version": "0.0.1",
   "main": "./dist/index.js",
   "dependencies": {
@@ -19,5 +19,6 @@
     "marko": "^4.13.8",
     "point-of-view": "^2.0.0",
     "yargs": "^12.0.3-candidate.0"
-  }
+  },
+  "gitHead": "6e834a3b8274d6da642c7116a542a894e5964df3"
 }

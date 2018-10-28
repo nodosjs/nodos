@@ -1,5 +1,6 @@
 {
   "name": "@nodos/generators",
   "version": "0.0.1",
-  "main": "./dist/index.js"
+  "main": "./dist/index.js",
+  "gitHead": "6e834a3b8274d6da642c7116a542a894e5964df3"
 }

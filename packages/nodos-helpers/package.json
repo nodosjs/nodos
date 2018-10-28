@@ -4,5 +4,6 @@
   "main": "./dist/index.js",
   "dependencies": {
     "create-html-element": "^2.0.0"
-  }
+  },
+  "gitHead": "6e834a3b8274d6da642c7116a542a894e5964df3"
 }

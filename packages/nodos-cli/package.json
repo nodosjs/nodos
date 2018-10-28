@@ -18,5 +18,6 @@
   "license": "MIT",
   "main": "dist/index.js",
   "repository": "nodosjs/nodos",
-  "scripts": {}
+  "scripts": {},
+  "gitHead": "6e834a3b8274d6da642c7116a542a894e5964df3"
 }
