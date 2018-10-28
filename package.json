@@ -11,7 +11,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/__fixtures__/",
-      "/config/"
+      "/config/",
       "example"
     ]
   },
