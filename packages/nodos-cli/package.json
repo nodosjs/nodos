@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/cli",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "author": "Kirill Mokevnin @mokevnin",
   "publishConfig": {
     "access": "public"
