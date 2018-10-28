@@ -1,14 +1,14 @@
 import path from 'path';
-import { cli } from '../src';
+import { bin } from '../src';
 
-test('nodos/cli/console', (done) => {
+test('nodos/binNodos/console', (done) => {
   const replServer = { context: {} };
   const container = {
     repl: {
       start: () => replServer,
     },
   };
-  cli(
+  bin.nodos(
     ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'console'],
     { container, done, exitProcess: false },
   );
@@ -16,14 +16,14 @@ test('nodos/cli/console', (done) => {
   expect(replServer.context).toHaveProperty('app');
 });
 
-test('nodos/cli/server', (done) => {
+test('nodos/binNodos/server', (done) => {
   const fillResult = (port, cb) => {
     cb();
   };
   const container = {
     nodos: () => Promise.resolve({ listen: fillResult }),
   };
-  cli(
+  bin.nodos(
     ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'server'],
     { container, done, exitProcess: false },
   );
