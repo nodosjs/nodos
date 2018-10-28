@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "bin/test"
+  },
+  "dependencies": {
+    "@nodosjs/core": "0.0.8"
+  }
+}

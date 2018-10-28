@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
+const yeoman = require('yeoman-environment');
+const env = yeoman.createEnv();
+
+env.register(require.resolve('../dist/'), 'newapp');
 
 const commands = {
   new: {
@@ -11,7 +15,7 @@ const commands = {
       });
     },
     handler: (argv) => {
-      console.log(argv);
+      env.run(`newapp ${argv.appPath}`);
     },
   },
 };
