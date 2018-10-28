@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@nodosjs/core": "0.0.7",
-    "nodos": "^1.1.0"
+    "@nodosjs/core": "0.0.8"
   }
 }
