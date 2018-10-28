@@ -1,6 +1,6 @@
 {
   "name": "@nodos/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Kirill Mokevnin @mokevnin",
   "bin": {
     "nodos": "./bin/run"

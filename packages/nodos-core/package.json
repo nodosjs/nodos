@@ -1,11 +1,11 @@
 {
   "name": "@nodos/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/index.js",
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/register": "^7.0.0",
-    "@nodos/routing": "^0.0.1",
+    "@nodos/routing": "^0.0.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "debug": "^4.1.0",
