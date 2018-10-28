@@ -1,5 +1,5 @@
 {
-  "name": "@nodos/routing",
+  "name": "@nodosjs/routing",
   "version": "0.0.4",
   "main": "./dist/index.js",
   "publishConfig": {
@@ -16,5 +16,5 @@
   "devDependencies": {
     "js-yaml": "^3.12.0"
   },
-  "gitHead": "75f4bb57a268468190f42f59a99e08bba084cef0"
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }

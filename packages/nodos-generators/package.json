@@ -1,9 +1,9 @@
 {
-  "name": "@nodos/generators",
+  "name": "@nodosjs/generators",
   "version": "0.0.4",
   "publishConfig": {
     "access": "public"
   },
   "main": "./dist/index.js",
-  "gitHead": "75f4bb57a268468190f42f59a99e08bba084cef0"
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }
