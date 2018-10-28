@@ -1,8 +1,12 @@
-/**
- * @jest-environment ./packages/nodos-core/src/testEnvironments/IntegrationEnvironment
- */
+import IntegrationEnvironment from '../src/testEnvironments/IntegrationEnvironment';
 
-test('nodos', async () => {
-  const response = await global.get('/users');
-  expect(response).toMatchObject({ statusCode: 200 });
+test('nodos/testEnvironment', async () => {
+  const config = {
+    testEnvironmentOptions: {
+      rootDir: `${__dirname}/__fixtures__/app`,
+    },
+  };
+  const env = new IntegrationEnvironment(config);
+  await env.setup();
+  expect(env.global.get).not.toBeUndefined();
 });
