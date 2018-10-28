@@ -1,16 +1,14 @@
-require('@babel/register');
 const NodeEnvironment = require('jest-environment-node');
 const { nodos } = require('..');
 
-class IntegrationEnvironment extends NodeEnvironment {
+export default class IntegrationEnvironment extends NodeEnvironment {
   // constructor(config) {
   //   super(config);
   // }
 
   async setup() {
     await super.setup();
-    const app = await nodos(`${__dirname}/../../__tests__/__fixtures__/app`);
-    console.log('!!!!!!!!');
+    const app = await nodos(this.context.rootDir);
     this.global.get = app.get;
   }
 
@@ -18,5 +16,3 @@ class IntegrationEnvironment extends NodeEnvironment {
     await super.teardown();
   }
 }
-
-module.exports = IntegrationEnvironment;
