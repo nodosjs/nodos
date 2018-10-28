@@ -1,0 +1,8 @@
+---
+
+production:
+  name: app_production
+development:
+  name: app_development
+test:
+  name: app_test
