@@ -1,7 +1,7 @@
 import yml from 'js-yaml';
 // import debug from 'debug';
 import { promises as fs } from 'fs';
-import Router from '@nodos/routing';
+import Router from '@nodosjs/routing';
 
 // const log = debug('nodos');
 
