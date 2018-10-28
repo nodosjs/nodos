@@ -23,7 +23,7 @@ test('nodos/cli/server', (done) => {
     cb();
   };
   const container = {
-    nodos: () => ({ listen: fillResult }),
+    nodos: () => Promise.resolve({ listen: fillResult }),
   };
   cli(
     ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'server'],

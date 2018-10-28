@@ -1,4 +1,4 @@
-start:
-	npx gulp server
+server:
+	bin/nodos server
 test:
-	npx gulp test
+	npx jest

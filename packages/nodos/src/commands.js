@@ -43,7 +43,7 @@ export default (container, done) => [
     describe: 'run server',
     handler: async (argv) => {
       const nodosItem = _.get(container, 'nodos', nodos);
-      const app = nodosItem(argv.projectRoot);
+      const app = await nodosItem(argv.projectRoot);
       app.listen(3000, () => {
         done();
       });
