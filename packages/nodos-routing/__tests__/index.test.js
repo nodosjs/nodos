@@ -23,7 +23,7 @@ test('nodos-routing', async () => {
     { name: 'show', url: '/articles/:article_id/comments/:id', method: 'get' },
   ];
 
-  const actualRoutes = routes.flatMap(({ handlers }) => handlers)
+  const actualRoutes = routes.flatMap(({ actions }) => actions)
     .filter(r => expectedRoutes.find(e => _.isEqual(e, r)));
 
   expect(_.uniqWith(actualRoutes, _.isEqual)).toEqual(expectedRoutes);
@@ -31,8 +31,8 @@ test('nodos-routing', async () => {
   // Only
   const userRootRoutes = _.find(routes, { resourceName: 'users', path: '/' });
 
-  expect(userRootRoutes.handlers).toHaveLength(1);
-  expect(userRootRoutes.handlers[0]).toMatchObject({
+  expect(userRootRoutes.actions).toHaveLength(1);
+  expect(userRootRoutes.actions[0]).toMatchObject({
     method: 'get',
     name: 'show',
     url: '/users/:id',

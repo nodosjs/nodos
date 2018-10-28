@@ -11,7 +11,7 @@ const detectRouteType = (currentName) => {
 const routesDefaultOnly = ['index', 'new', 'create', 'show', 'edit', 'update', 'destroy'];
 const routesDefaultExcept = [];
 
-const buildHandlerNames = (routeItem) => {
+const buildActionNames = (routeItem) => {
   const onlyNames = _.get(routeItem, 'only', routesDefaultOnly);
   const exceptNames = _.get(routeItem, 'except', routesDefaultExcept);
   return _.difference(onlyNames, exceptNames);
@@ -22,13 +22,13 @@ const normalizeRouteItem = (valueOrValues) => {
 
   return {
     ...routeItem,
-    handlerNames: buildHandlerNames(routeItem),
+    actionNames: buildActionNames(routeItem),
   };
 };
 
-const selectRequestedHandlers = (routeItem, handlers) => {
-  const { handlerNames } = routeItem;
-  return handlers.filter(handler => handlerNames.includes(handler.name));
+const selectRequestedActions = (routeItem, actions) => {
+  const { actionNames } = routeItem;
+  return actions.filter(action => actionNames.includes(action.name));
 };
 
 const types = {
@@ -39,7 +39,7 @@ const types = {
     };
 
     const buildUrl = u => urlJoin(path, routeItem.name, u);
-    const handlers = [
+    const actions = [
       { name: 'index', method: 'get', url: buildUrl('') },
       { name: 'new', method: 'get', url: buildUrl('new') },
       { name: 'create', method: 'post', url: buildUrl('') },
@@ -55,7 +55,7 @@ const types = {
       path,
       parent,
       resourceName: routeItem.name,
-      handlers: selectRequestedHandlers(routeItem, handlers),
+      actions: selectRequestedActions(routeItem, actions),
     });
 
     const nestedRoutes = routeItem.routes
@@ -66,7 +66,7 @@ const types = {
   },
   resource: (routeItem, rec, { path, middlewares, parent }) => {
     const buildUrl = u => urlJoin(path, routeItem.name, u);
-    const handlers = [
+    const actions = [
       { name: 'new', method: 'get', url: buildUrl('new') },
       { name: 'create', method: 'post', url: buildUrl('') },
       { name: 'show', method: 'get', url: buildUrl('') },
@@ -81,7 +81,7 @@ const types = {
       path,
       parent,
       resourceName: routeItem.name,
-      handlers: selectRequestedHandlers(routeItem, handlers),
+      actions: selectRequestedActions(routeItem, actions),
     });
 
     const nestedRoutes = routeItem.routes

@@ -53,13 +53,14 @@ const buildFastify = async (config, router) => {
     const opts = {
       beforeHandler: middlewares,
     };
-    route.handlers.forEach((handler) => {
-      app[handler.method](handler.url, opts, async (request, reply) => {
+
+    route.actions.forEach((action) => {
+      app[action.method](action.url, opts, async (request, reply) => {
         // decache(pathToHandler);
         // FIXME: implement reloading on request
         const handlers = await import(pathToHandler);
-        const locals = handlers[handler.name](request, reply);
-        const pathToView = path.join(route.path, route.resourceName, handler.name);
+        const locals = handlers[action.name](request, reply);
+        const pathToView = path.join(route.path, route.resourceName, action.name);
         reply.view(pathToView, locals);
       });
     });
