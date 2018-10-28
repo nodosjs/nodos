@@ -1,9 +1,8 @@
 {
   "name": "@nodos/helpers",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "dependencies": {
     "create-html-element": "^2.0.0"
-  },
-  "devDependencies": {}
+  }
 }

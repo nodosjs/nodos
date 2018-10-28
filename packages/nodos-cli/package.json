@@ -1,6 +1,6 @@
 {
   "name": "@nodos/cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Kirill Mokevnin @mokevnin",
   "bin": {
     "nodos": "./bin/run"
@@ -11,8 +11,6 @@
     "yeoman-environment": "^2.3.3",
     "yeoman-generator": "^3.1.1"
   },
-  "devDependencies": {
-  },
   "engines": {
     "node": ">=8.0.0"
   },
@@ -20,6 +18,5 @@
   "license": "MIT",
   "main": "dist/index.js",
   "repository": "nodosjs/nodos",
-  "scripts": {
-  }
+  "scripts": {}
 }
