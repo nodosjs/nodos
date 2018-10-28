@@ -1,6 +1,5 @@
 {
   "name": "nodos-monorepo",
-  "private": false,
   "main": "dist/index.js",
   "version": "0.0.1",
   "scripts": {
