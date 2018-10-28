@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-require('jest');
+const jest = require('jest');
 
 jest.run(process.argv);
