@@ -6,38 +6,42 @@ import Router from '../src';
 test('nodos-routing', async () => {
   const routesData = await fs.readFile(`${__dirname}/__fixtures__/routes.yml`);
   const routesMap = yml.safeLoad(routesData);
-  const router = new Router(routesMap);
+  const { routes } = new Router(routesMap);
 
   const expectedRoutes = [
-    { url: '/api/users', method: 'get' },
-    { url: '/api/users/new', method: 'get' },
-    { url: '/api/users', method: 'post' },
-    { url: '/api/users/:id', method: 'get' },
-    { url: '/users/:id', method: 'get' },
-    { url: '/articles', method: 'get' },
-    { url: '/articles/:id', method: 'patch' },
+    { name: 'index', url: '/api/users', method: 'get' },
+    { name: 'new', url: '/api/users/new', method: 'get' },
+    { name: 'create', url: '/api/users', method: 'post' },
+    { name: 'show', url: '/api/users/:id', method: 'get' },
+    { name: 'show', url: '/users/:id', method: 'get' },
+    { name: 'show', url: '/session', method: 'get' },
+    { name: 'update', url: '/session', method: 'patch' },
+    { name: 'show', url: '/session/tokens/:id', method: 'get' },
+    { name: 'index', url: '/articles', method: 'get' },
+    { name: 'update', url: '/articles/:id', method: 'patch' },
+    { name: 'index', url: '/articles/:article_id/comments', method: 'get' },
+    { name: 'show', url: '/articles/:article_id/comments/:id', method: 'get' },
   ];
 
-  const actualRoutes = router.routes
-    .map(({ url, method }) => ({ url, method }))
+  const actualRoutes = routes.flatMap(({ handlers }) => handlers)
     .filter(r => expectedRoutes.find(e => _.isEqual(e, r)));
 
-  expect(expectedRoutes).toEqual(actualRoutes);
+  expect(_.uniqWith(actualRoutes, _.isEqual)).toEqual(expectedRoutes);
 
   // Only
-  const userRootRoutes = router.routes.filter(route => route.url.startsWith('/users'));
+  const userRootRoutes = _.find(routes, { resourceName: 'users', path: '/' });
 
-  expect(userRootRoutes).toHaveLength(1);
-  expect(userRootRoutes[0]).toMatchObject({
+  expect(userRootRoutes.handlers).toHaveLength(1);
+  expect(userRootRoutes.handlers[0]).toMatchObject({
     method: 'get',
     name: 'show',
     url: '/users/:id',
   });
 
   // Except
-  const sessionRootRoutes = router.routes.filter(route => route.url.startsWith('/session'));
-  const sessionNameRoute = sessionRootRoutes.find(route => route.name === 'new');
-  expect(sessionNameRoute).toBeUndefined();
+  const sessionRootRoutes = _.find(routes, { resourceName: 'session' });
+  const sessionNewRoute = _.find(sessionRootRoutes, { name: 'new' });
+  expect(sessionNewRoute).toBeUndefined();
 });
 
 test('nodos-routing throws an error if schema is invalid', async () => {

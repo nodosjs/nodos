@@ -25,6 +25,8 @@ scopes:
       - resource:
           name: session
           except: ['new']
+          routes:
+            - resources: tokens
 
       - resources:
           name: articles

@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Nodos Routing nodos-routing throws an error if schema is invalid 1`] = `"invalidRoutesMap is not defined"`;
+
 exports[`nodos-routing throws an error if schema is invalid 1`] = `"Routes schema is invalid"`;
