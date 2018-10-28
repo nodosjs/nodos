@@ -6,13 +6,15 @@ import pointOfView from 'point-of-view';
 import marko from 'marko';
 // import debug from 'debug';
 import buildRouter from './routes';
-import cli from './cli';
+import binNodos from './binNodos';
+import binTest from './binTest';
 import Application from './Application';
 
 const nodosEnv = process.env.NODOS_ENV || 'development';
 // const log = debug('nodos');
 
-export { cli };
+const bin = { nodos: binNodos, test: binTest };
+export { bin };
 
 const fetchMiddleware = async (config, middlewareName) => {
   const middleware = await import(path.join(config.paths.middlewares, middlewareName))
@@ -91,6 +93,6 @@ const buildConfig = async (projectRootPath) => {
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
   const router = await buildRouter(config);
-  const app = await buildFastify(config, router);
-  return new Application(app);
+  const fastify = await buildFastify(config, router);
+  return new Application({ config, fastify, router });
 };

@@ -1,0 +1,32 @@
+---
+
+pipelines:
+
+  browser:
+    - checkMigrations
+    # - accepts
+    # - setLocale
+    # - fetchSession
+    # - fetchFlash
+    # - protectFromForgery
+
+  api:
+    - accepts
+    - setLocale
+
+scopes:
+
+  - path: '/api'
+    pipeline: browser
+    routes:
+      - resources: users
+
+  - path: '/'
+    pipeline: browser
+    routes:
+      - resources: users
+      - resource: session
+      - resources:
+          name: articles
+          routes:
+            - resources: comments

@@ -1,18 +1,17 @@
-const NodeEnvironment = require('jest-environment-node');
-const { nodos } = require('..');
+import NodeEnvironment from 'jest-environment-node';
+import { nodos } from '..';
 
-export default class IntegrationEnvironment extends NodeEnvironment {
-  // constructor(config) {
-  //   super(config);
-  // }
+class IntegrationEnvironment extends NodeEnvironment {
+  constructor(config) {
+    super(config);
+    this.config = config;
+  }
 
   async setup() {
-    await super.setup();
-    const app = await nodos(this.context.rootDir);
+    const app = await nodos(this.config.rootDir);
     this.global.get = app.get;
   }
-
-  async teardown() {
-    await super.teardown();
-  }
 }
+
+export default IntegrationEnvironment;
+module.exports = IntegrationEnvironment;

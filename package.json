@@ -12,6 +12,7 @@
       "/node_modules/",
       "/__fixtures__/",
       "/config/"
+      "example"
     ]
   },
   "devDependencies": {

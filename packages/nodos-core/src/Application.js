@@ -1,10 +1,12 @@
 export default class Application {
-  constructor(app) {
-    this.app = app;
+  constructor({ fastify, config, router }) {
+    this.fastify = fastify;
+    this.config = config;
+    this.router = router;
   }
 
   listen(...args) {
-    return this.app.listen(...args);
+    return this.fastify.listen(...args);
   }
 
   get = url => this.request('GET', url)
@@ -26,7 +28,7 @@ export default class Application {
   }
 
   request(method, url) {
-    return this.app.inject({
+    return this.fastify.inject({
       method,
       url,
     });
