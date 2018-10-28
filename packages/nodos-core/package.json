@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/core",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "main": "./dist/index.js",
   "publishConfig": {
     "access": "public"
@@ -12,7 +12,7 @@
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/register": "^7.0.0",
-    "@nodosjs/routing": "^0.0.14",
+    "@nodosjs/routing": "^0.0.15",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "debug": "^4.1.0",
