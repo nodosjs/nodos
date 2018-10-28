@@ -65,15 +65,15 @@ const types = {
     return [route, ...nestedRoutes];
   },
   resource: (routeItem, rec, { path, middlewares, parent }) => {
-    const url = urlJoin(path, routeItem.name);
+    const buildUrl = u => urlJoin(path, routeItem.name, u);
     const handlers = [
-      { name: 'new', method: 'get', url },
-      { name: 'create', method: 'get', url },
-      { name: 'show', method: 'get', url },
-      { name: 'edit', method: 'get', url },
-      { name: 'update', method: 'patch', url },
-      { name: 'update', method: 'put', url },
-      { name: 'destroy', method: 'delete', url },
+      { name: 'new', method: 'get', url: buildUrl('new') },
+      { name: 'create', method: 'post', url: buildUrl('') },
+      { name: 'show', method: 'get', url: buildUrl('') },
+      { name: 'edit', method: 'get', url: buildUrl('edit') },
+      { name: 'update', method: 'patch', url: buildUrl('') },
+      { name: 'update', method: 'put', url: buildUrl('') },
+      { name: 'destroy', method: 'delete', url: buildUrl('') },
     ];
 
     const route = new Route({
@@ -85,7 +85,7 @@ const types = {
     });
 
     const nestedRoutes = routeItem.routes
-      ? buildRoutes(routeItem.routes, { path: url, middlewares, parent: route })
+      ? buildRoutes(routeItem.routes, { path: buildUrl(''), middlewares, parent: route })
       : [];
 
     return [route, ...nestedRoutes];

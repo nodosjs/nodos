@@ -47,19 +47,21 @@ const buildFastify = async (config, router) => {
 
   // console.log(router);
   const promises = router.routes.map(async (route) => {
-    const pathToHandler = path.join(config.paths.handlers, route.resourceName);
-    const pathToView = path.join(route.resourceName, route.name);
+    const pathToHandler = path.join(config.paths.handlers, route.path, route.resourceName);
     const middlewaresPromises = route.middlewares.map(fetchMiddleware.bind(null, config));
     const middlewares = await Promise.all(middlewaresPromises);
     const opts = {
       beforeHandler: middlewares,
     };
-    app[route.method](route.url, opts, async (request, reply) => {
-      // decache(pathToHandler);
-      // FIXME: implement reloading on request
-      const handlers = await import(pathToHandler);
-      const locals = handlers[route.name](request, reply);
-      reply.view(pathToView, locals);
+    route.handlers.forEach((handler) => {
+      app[handler.method](handler.url, opts, async (request, reply) => {
+        // decache(pathToHandler);
+        // FIXME: implement reloading on request
+        const handlers = await import(pathToHandler);
+        const locals = handlers[handler.name](request, reply);
+        const pathToView = path.join(route.path, route.resourceName, handler.name);
+        reply.view(pathToView, locals);
+      });
     });
   });
   await promises;
