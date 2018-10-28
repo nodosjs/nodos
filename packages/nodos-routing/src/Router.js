@@ -33,125 +33,107 @@ const selectRequestedHandlers = (routeItem, handlers) => {
 
 const types = {
   resources: (routeItem, rec, { path, middlewares }) => {
+    const sharedData = {
+      resourceName: routeItem.name,
+      middlewares,
+    };
+
     const handlers = [
       {
         name: 'index',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name),
-        middlewares,
       },
       {
         name: 'new',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/new'),
-        middlewares,
       },
       {
         name: 'create',
-        resourceName: routeItem.name,
         method: 'post',
         url: urlJoin(path, routeItem.name),
-        middlewares,
       },
       {
         name: 'show',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
       {
         name: 'edit',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/:id/edit'),
-        middlewares,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'patch',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'put',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
       {
         name: 'destroy',
-        resourceName: routeItem.name,
         method: 'delete',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
     ];
 
     const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
 
-    return requestedHandlers.map(options => new Route(options));
+    const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
+    const nestedPath = urlJoin(path, routeItem.name, `:${routeItem.name.slice(0, -1)}_id`);
+    const nestedRoutes = routeItem.routes ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares }) : [];
+    return [...routes, ...nestedRoutes];
   },
   resource: (routeItem, rec, { path, middlewares, pipeline }) => {
+    const sharedData = {
+      resourceName: routeItem.name,
+      middlewares,
+      pipeline,
+    };
+
     const handlers = [
       {
         name: 'new',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/new'),
-        middlewares,
-        pipeline,
       },
       {
         name: 'show',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
       {
         name: 'edit',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/edit'),
-        middlewares,
-        pipeline,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'patch',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'put',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
       {
         name: 'destroy',
-        resourceName: routeItem.name,
         method: 'delete',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
-
     ];
 
     const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
 
-    return requestedHandlers.map(options => new Route(options));
+    const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
+    const nestedPath = urlJoin(path, routeItem.name);
+    const nestedRoutes = routeItem.routes ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares }) : [];
+    return [...routes, ...nestedRoutes];
   },
 
 };
