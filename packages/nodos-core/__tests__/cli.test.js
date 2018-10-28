@@ -17,9 +17,7 @@ test('nodos/cli/console', (done) => {
 });
 
 test('nodos/cli/server', (done) => {
-  let result;
   const fillResult = (port, cb) => {
-    result = port;
     cb();
   };
   const container = {
@@ -29,6 +27,4 @@ test('nodos/cli/server', (done) => {
     ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'server'],
     { container, done, exitProcess: false },
   );
-
-  expect(result).toBe(3000);
 });
