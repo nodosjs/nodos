@@ -93,6 +93,6 @@ const buildConfig = async (projectRootPath) => {
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
   const router = await buildRouter(config);
-  const fastify = await buildFastify(config, router);
-  return new Application({ config, fastify, router });
+  const fstf = await buildFastify(config, router);
+  return new Application({ config, fastify: fstf, router });
 };
