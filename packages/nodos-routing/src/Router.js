@@ -31,6 +31,12 @@ const selectRequestedHandlers = (routeItem, handlers) => {
   return handlers.filter(handler => handlerNames.includes(handler.name));
 };
 
+const buildRoutes = (routes, options) => routes.map((item) => {
+  const typeName = detectRouteType(Object.keys(item)[0]);
+  const routeItem = normalizeRouteItem(item[typeName]);
+  return types[typeName](routeItem, buildRoutes, options);
+});
+
 const types = {
   resources: (routeItem, rec, { path, middlewares }) => {
     const sharedData = {
@@ -85,7 +91,9 @@ const types = {
 
     const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
     const nestedPath = urlJoin(path, routeItem.name, `:${routeItem.name.slice(0, -1)}_id`);
-    const nestedRoutes = routeItem.routes ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares }) : [];
+    const nestedRoutes = routeItem.routes
+      ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares })
+      : [];
     return [...routes, ...nestedRoutes];
   },
   resource: (routeItem, rec, { path, middlewares, pipeline }) => {
@@ -132,17 +140,13 @@ const types = {
 
     const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
     const nestedPath = urlJoin(path, routeItem.name);
-    const nestedRoutes = routeItem.routes ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares }) : [];
+    const nestedRoutes = routeItem.routes
+      ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares })
+      : [];
     return [...routes, ...nestedRoutes];
   },
 
 };
-
-const buildRoutes = (routes, options) => routes.map((item) => {
-  const typeName = detectRouteType(Object.keys(item)[0]);
-  const routeItem = normalizeRouteItem(item[typeName]);
-  return types[typeName](routeItem, buildRoutes, options);
-});
 
 const buildScope = ({ routes, path, pipeline }, pipelines) => {
   const result = buildRoutes(routes, { path, middlewares: pipelines[pipeline], pipeline });
