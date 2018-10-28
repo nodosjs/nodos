@@ -2,8 +2,8 @@ import IntegrationEnvironment from '../src/testEnvironments/IntegrationEnvironme
 
 test('nodos/testEnvironment', async () => {
   const config = {
+    rootDir: `${__dirname}/__fixtures__/app`,
     testEnvironmentOptions: {
-      rootDir: `${__dirname}/__fixtures__/app`,
     },
   };
   const env = new IntegrationEnvironment(config);
