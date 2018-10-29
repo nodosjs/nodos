@@ -2,7 +2,6 @@ import _ from 'lodash';
 import urlJoin from 'url-join';
 import Route from './Route';
 import validate from './validator';
-import { formatRoutesForConsole } from './formatter';
 
 const detectRouteType = (currentName) => {
   const names = ['resources', 'resource'];

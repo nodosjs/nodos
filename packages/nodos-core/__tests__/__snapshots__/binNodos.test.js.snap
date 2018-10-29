@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nodos/binNodos/routes return valid presentatation when no routes defined 1`] = `
+"You don't have any routes defined!
+
+Please add some routes in config/routes.yml."
+`;
+
+exports[`nodos/binNodos/routes return valid routes presentation 1`] = `
+"Verb   URI Pattern         Middlewares        
+GET    /api/users          [ checkMigrations ]
+GET    /api/users/new      [ checkMigrations ]
+POST   /api/users          [ checkMigrations ]
+GET    /api/users/:id      [ checkMigrations ]
+GET    /api/users/:id/edit [ checkMigrations ]
+PATCH  /api/users/:id      [ checkMigrations ]
+PUT    /api/users/:id      [ checkMigrations ]
+DELETE /api/users/:id      [ checkMigrations ]
+GET    /users              [ checkMigrations ]
+GET    /users/new          [ checkMigrations ]
+POST   /users              [ checkMigrations ]
+GET    /users/:id          [ checkMigrations ]
+GET    /users/:id/edit     [ checkMigrations ]
+PATCH  /users/:id          [ checkMigrations ]
+PUT    /users/:id          [ checkMigrations ]
+DELETE /users/:id          [ checkMigrations ]
+GET    /session/new        [ checkMigrations ]
+GET    /session            [ checkMigrations ]
+GET    /session/edit       [ checkMigrations ]
+PATCH  /session            [ checkMigrations ]
+PUT    /session            [ checkMigrations ]
+DELETE /session            [ checkMigrations ]
+GET    /articles           [ checkMigrations ]
+GET    /articles/new       [ checkMigrations ]
+POST   /articles           [ checkMigrations ]
+GET    /articles/:id       [ checkMigrations ]
+GET    /articles/:id/edit  [ checkMigrations ]
+PATCH  /articles/:id       [ checkMigrations ]
+PUT    /articles/:id       [ checkMigrations ]
+DELETE /articles/:id       [ checkMigrations ]"
+`;

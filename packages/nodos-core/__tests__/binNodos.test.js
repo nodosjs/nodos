@@ -1,5 +1,5 @@
 import path from 'path';
-import { bin } from '../src';
+import { bin, nodos } from '../src';
 
 test('nodos/binNodos/console', (done) => {
   const replServer = { context: {} };
@@ -29,18 +29,28 @@ test('nodos/binNodos/server', (done) => {
   );
 });
 
-test('nodos/binNodos/routes', async () => {
-  const fillResult = jest.fn();
-  const container = {
-    nodos: () => Promise.resolve({ printRoutes: fillResult }),
-  };
-  expect.assertions(1);
-  await new Promise((resolve) => {
+describe('nodos/binNodos/routes', () => {
+  test('return valid routes presentation', (done) => {
+    const container = {
+      nodos: () => nodos(`${__dirname}/__fixtures__/app`),
+      print: (output) => { expect(output).toMatchSnapshot(); },
+    };
     bin.nodos(
       ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
-      { container, done: resolve, exitProcess: true },
+      { container, done },
     );
-  }).then(() => {
-    expect(fillResult).toHaveBeenCalledTimes(1);
+  });
+
+  test('return valid presentatation when no routes defined', (done) => {
+    const container = {
+      nodos: () => Promise.resolve({
+        router: { routes: [] },
+      }),
+      print: (output) => { expect(output).toMatchSnapshot(); },
+    };
+    bin.nodos(
+      ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
+      { container, done },
+    );
   });
 });
