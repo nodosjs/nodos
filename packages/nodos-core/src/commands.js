@@ -49,4 +49,14 @@ export default (container, done) => [
       });
     },
   },
+  {
+    command: 'routes',
+    describe: 'display routes',
+    handler: async (argv) => {
+      const nodosItem = _.get(container, 'nodos', nodos);
+      const app = await nodosItem(argv.projectRoot);
+      app.printRoutes();
+      done();
+    },
+  },
 ];

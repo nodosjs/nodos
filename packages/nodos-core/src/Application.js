@@ -33,4 +33,8 @@ export default class Application {
       url,
     });
   }
+
+  printRoutes() {
+    console.log(this.router.formatRoutesForConsole(this.router.printRoutes));
+  }
 }

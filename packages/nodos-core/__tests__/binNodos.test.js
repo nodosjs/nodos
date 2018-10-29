@@ -28,3 +28,19 @@ test('nodos/binNodos/server', (done) => {
     { container, done, exitProcess: false },
   );
 });
+
+test('nodos/binNodos/routes', async () => {
+  const fillResult = jest.fn();
+  const container = {
+    nodos: () => Promise.resolve({ printRoutes: fillResult }),
+  };
+  expect.assertions(1);
+  await new Promise((resolve) => {
+    bin.nodos(
+      ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
+      { container, done: resolve, exitProcess: true },
+    );
+  }).then(() => {
+    expect(fillResult).toHaveBeenCalledTimes(1);
+  });
+});
