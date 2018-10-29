@@ -20,7 +20,7 @@ const buildHandlerNames = (routeItem) => {
 
 const normalizeRouteItem = (valueOrValues) => {
   const routeItem = _.isObject(valueOrValues) ? valueOrValues : { name: valueOrValues };
-  const routes = routeItem.routes ? routeItem.routes : [];
+  const routes = routeItem.routes || [];
 
   return {
     ...routeItem,
