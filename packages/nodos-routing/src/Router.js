@@ -96,7 +96,7 @@ const types = {
 
     return requestedHandlers.map(options => new Route(options));
   },
-  resource: (routeItem, rec, { path, middlewares }) => {
+  resource: (routeItem, rec, { path, middlewares, pipeline }) => {
     const handlers = [
       {
         name: 'new',
@@ -104,6 +104,7 @@ const types = {
         method: 'get',
         url: urlJoin(path, routeItem.name, '/new'),
         middlewares,
+        pipeline,
       },
       {
         name: 'show',
@@ -111,6 +112,7 @@ const types = {
         method: 'get',
         url: urlJoin(path, routeItem.name),
         middlewares,
+        pipeline,
       },
       {
         name: 'edit',
@@ -118,6 +120,7 @@ const types = {
         method: 'get',
         url: urlJoin(path, routeItem.name, '/edit'),
         middlewares,
+        pipeline,
       },
       {
         name: 'update',
@@ -125,6 +128,7 @@ const types = {
         method: 'patch',
         url: urlJoin(path, routeItem.name),
         middlewares,
+        pipeline,
       },
       {
         name: 'update',
@@ -132,6 +136,7 @@ const types = {
         method: 'put',
         url: urlJoin(path, routeItem.name),
         middlewares,
+        pipeline,
       },
       {
         name: 'destroy',
@@ -139,6 +144,7 @@ const types = {
         method: 'delete',
         url: urlJoin(path, routeItem.name),
         middlewares,
+        pipeline,
       },
 
     ];
@@ -157,7 +163,7 @@ const buildRoutes = (routes, options) => routes.map((item) => {
 });
 
 const buildScope = ({ routes, path, pipeline }, pipelines) => {
-  const result = buildRoutes(routes, { path, middlewares: pipelines[pipeline] });
+  const result = buildRoutes(routes, { path, middlewares: pipelines[pipeline], pipeline });
   return result;
 };
 

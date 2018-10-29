@@ -66,7 +66,7 @@ export default (container, done) => [
         const formattedRoutes = columnify(
           routes,
           {
-            columns: ['method', 'url', 'middlewares'],
+            columns: ['method', 'url', 'pipeline'],
             config: {
               method: {
                 headingTransform: () => 'Verb',
@@ -75,9 +75,8 @@ export default (container, done) => [
               url: {
                 headingTransform: () => 'URI Pattern',
               },
-              middlewares: {
-                headingTransform: () => 'Middlewares',
-                dataTransform: names => `[ ${names} ]`,
+              pipeline: {
+                headingTransform: () => 'Pipeline',
               },
             },
           },
