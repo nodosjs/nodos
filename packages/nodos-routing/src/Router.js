@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import urlJoin from 'url-join';
+import { singularize, foreignKey } from 'inflected';
 import Route from './Route';
 import validate from './validator';
 
@@ -19,10 +20,12 @@ const buildHandlerNames = (routeItem) => {
 
 const normalizeRouteItem = (valueOrValues) => {
   const routeItem = _.isObject(valueOrValues) ? valueOrValues : { name: valueOrValues };
+  const routes = routeItem.routes || [];
 
   return {
     ...routeItem,
     handlerNames: buildHandlerNames(routeItem),
+    routes,
   };
 };
 
@@ -31,127 +34,115 @@ const selectRequestedHandlers = (routeItem, handlers) => {
   return handlers.filter(handler => handlerNames.includes(handler.name));
 };
 
+const getForeignKey = (resourceName) => {
+  const key = resourceName |> singularize |> foreignKey;
+  return `:${key}`;
+};
+
 const types = {
-  resources: (routeItem, rec, { path, middlewares }) => {
+  resources: (routeItem, rec, { path, middlewares, pipeline }) => {
+    const sharedData = {
+      resourceName: routeItem.name,
+      middlewares,
+      pipeline,
+    };
+
     const handlers = [
       {
         name: 'index',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name),
-        middlewares,
       },
       {
         name: 'new',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/new'),
-        middlewares,
       },
       {
         name: 'create',
-        resourceName: routeItem.name,
         method: 'post',
         url: urlJoin(path, routeItem.name),
-        middlewares,
       },
       {
         name: 'show',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
       {
         name: 'edit',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/:id/edit'),
-        middlewares,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'patch',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'put',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
       {
         name: 'destroy',
-        resourceName: routeItem.name,
         method: 'delete',
         url: urlJoin(path, routeItem.name, '/:id'),
-        middlewares,
       },
     ];
 
     const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
 
-    return requestedHandlers.map(options => new Route(options));
+    const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
+    const nestedPath = urlJoin(path, routeItem.name, getForeignKey(routeItem.name));
+    const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
+    return [...routes, ...nestedRoutes];
   },
   resource: (routeItem, rec, { path, middlewares, pipeline }) => {
+    const sharedData = {
+      resourceName: routeItem.name,
+      middlewares,
+      pipeline,
+    };
+
     const handlers = [
       {
         name: 'new',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/new'),
-        middlewares,
-        pipeline,
       },
       {
         name: 'show',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
       {
         name: 'edit',
-        resourceName: routeItem.name,
         method: 'get',
         url: urlJoin(path, routeItem.name, '/edit'),
-        middlewares,
-        pipeline,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'patch',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
       {
         name: 'update',
-        resourceName: routeItem.name,
         method: 'put',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
       {
         name: 'destroy',
-        resourceName: routeItem.name,
         method: 'delete',
         url: urlJoin(path, routeItem.name),
-        middlewares,
-        pipeline,
       },
-
     ];
 
     const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
 
-    return requestedHandlers.map(options => new Route(options));
+    const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
+    const nestedPath = urlJoin(path, routeItem.name);
+    const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
+    return [...routes, ...nestedRoutes];
   },
 
 };

@@ -7,35 +7,43 @@ Please add some routes in config/routes.yml."
 `;
 
 exports[`nodos/binNodos/routes return valid routes presentation 1`] = `
-"Verb   URI Pattern         Pipeline
-GET    /api/users                  
-GET    /api/users/new              
-POST   /api/users                  
-GET    /api/users/:id              
-GET    /api/users/:id/edit         
-PATCH  /api/users/:id              
-PUT    /api/users/:id              
-DELETE /api/users/:id              
-GET    /users                      
-GET    /users/new                  
-POST   /users                      
-GET    /users/:id                  
-GET    /users/:id/edit             
-PATCH  /users/:id                  
-PUT    /users/:id                  
-DELETE /users/:id                  
-GET    /session/new        browser 
-GET    /session            browser 
-GET    /session/edit       browser 
-PATCH  /session            browser 
-PUT    /session            browser 
-DELETE /session            browser 
-GET    /articles                   
-GET    /articles/new               
-POST   /articles                   
-GET    /articles/:id               
-GET    /articles/:id/edit          
-PATCH  /articles/:id               
-PUT    /articles/:id               
-DELETE /articles/:id               "
+"Verb   URI Pattern                             Pipeline
+GET    /api/users                              browser 
+GET    /api/users/new                          browser 
+POST   /api/users                              browser 
+GET    /api/users/:id                          browser 
+GET    /api/users/:id/edit                     browser 
+PATCH  /api/users/:id                          browser 
+PUT    /api/users/:id                          browser 
+DELETE /api/users/:id                          browser 
+GET    /users                                  browser 
+GET    /users/new                              browser 
+POST   /users                                  browser 
+GET    /users/:id                              browser 
+GET    /users/:id/edit                         browser 
+PATCH  /users/:id                              browser 
+PUT    /users/:id                              browser 
+DELETE /users/:id                              browser 
+GET    /session/new                            browser 
+GET    /session                                browser 
+GET    /session/edit                           browser 
+PATCH  /session                                browser 
+PUT    /session                                browser 
+DELETE /session                                browser 
+GET    /articles                               browser 
+GET    /articles/new                           browser 
+POST   /articles                               browser 
+GET    /articles/:id                           browser 
+GET    /articles/:id/edit                      browser 
+PATCH  /articles/:id                           browser 
+PUT    /articles/:id                           browser 
+DELETE /articles/:id                           browser 
+GET    /articles/:article_id/comments          browser 
+GET    /articles/:article_id/comments/new      browser 
+POST   /articles/:article_id/comments          browser 
+GET    /articles/:article_id/comments/:id      browser 
+GET    /articles/:article_id/comments/:id/edit browser 
+PATCH  /articles/:article_id/comments/:id      browser 
+PUT    /articles/:article_id/comments/:id      browser 
+DELETE /articles/:article_id/comments/:id      browser "
 `;
