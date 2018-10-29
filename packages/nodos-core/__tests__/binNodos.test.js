@@ -1,5 +1,5 @@
 import path from 'path';
-import { bin } from '../src';
+import { bin, nodos } from '../src';
 
 test('nodos/binNodos/console', (done) => {
   const replServer = { context: {} };
@@ -27,4 +27,29 @@ test('nodos/binNodos/server', (done) => {
     ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'server'],
     { container, done, exitProcess: false },
   );
+});
+
+describe('nodos/binNodos/routes', () => {
+  test('return valid routes presentation', (done) => {
+    const container = {
+      print: (output) => { expect(output).toMatchSnapshot(); },
+    };
+    bin.nodos(
+      ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
+      { container, done },
+    );
+  });
+
+  test('return valid presentation when no routes defined', (done) => {
+    const container = {
+      nodos: () => Promise.resolve({
+        router: { routes: [] },
+      }),
+      print: (output) => { expect(output).toMatchSnapshot(); },
+    };
+    bin.nodos(
+      ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
+      { container, done },
+    );
+  });
 });

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nodos/binNodos/routes return valid presentation when no routes defined 1`] = `
+"You don't have any routes defined!
+
+Please add some routes in config/routes.yml."
+`;
+
+exports[`nodos/binNodos/routes return valid routes presentation 1`] = `
+"Verb   URI Pattern         Pipeline
+GET    /api/users                  
+GET    /api/users/new              
+POST   /api/users                  
+GET    /api/users/:id              
+GET    /api/users/:id/edit         
+PATCH  /api/users/:id              
+PUT    /api/users/:id              
+DELETE /api/users/:id              
+GET    /users                      
+GET    /users/new                  
+POST   /users                      
+GET    /users/:id                  
+GET    /users/:id/edit             
+PATCH  /users/:id                  
+PUT    /users/:id                  
+DELETE /users/:id                  
+GET    /session/new        browser 
+GET    /session            browser 
+GET    /session/edit       browser 
+PATCH  /session            browser 
+PUT    /session            browser 
+DELETE /session            browser 
+GET    /articles                   
+GET    /articles/new               
+POST   /articles                   
+GET    /articles/:id               
+GET    /articles/:id/edit          
+PATCH  /articles/:id               
+PUT    /articles/:id               
+DELETE /articles/:id               "
+`;
