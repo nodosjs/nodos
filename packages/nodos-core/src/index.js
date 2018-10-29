@@ -9,6 +9,7 @@ import buildRouter from './routes';
 import binNodos from './binNodos';
 import binTest from './binTest';
 import Application from './Application';
+import Response from './http/Response';
 
 const nodosEnv = process.env.NODOS_ENV || 'development';
 // const log = debug('nodos');
@@ -24,6 +25,27 @@ const fetchMiddleware = async (config, middlewareName) => {
       throw new Error(`Middleware '${middlewareName}' is absent.`);
     });
   return middleware.default;
+};
+
+const sendResponse = (response, reply) => {
+  Object.keys(response.headers).forEach((name) => {
+    reply.header(name, response.headers[name]);
+  });
+
+  switch (response.responseType) {
+    case 'code':
+      reply.code(response.code).send();
+      break;
+    case 'rendering':
+      reply.view(response.template(), response.locals);
+      break;
+    case 'redirect':
+      reply.code(response.code).redirect(response.redirectUrl);
+      break;
+
+    default:
+      throw new Error(`Unknown responseType: ${response.responseType}`);
+  }
 };
 
 const buildFastify = async (config, router) => {
@@ -48,7 +70,6 @@ const buildFastify = async (config, router) => {
   // console.log(router);
   const promises = router.routes.map(async (route) => {
     const pathToHandler = path.join(config.paths.handlers, route.resourceName);
-    const pathToView = path.join(route.resourceName, route.name);
     const middlewaresPromises = route.middlewares.map(fetchMiddleware.bind(null, config));
     const middlewares = await Promise.all(middlewaresPromises);
     const opts = {
@@ -58,8 +79,9 @@ const buildFastify = async (config, router) => {
       // decache(pathToHandler);
       // FIXME: implement reloading on request
       const handlers = await import(pathToHandler);
-      const locals = handlers[route.name](request, reply);
-      reply.view(pathToView, locals);
+      const response = new Response({ templateDir: route.resourceName, templateName: route.name });
+      handlers[route.name](request, response);
+      sendResponse(response, reply);
     });
   });
   await promises;

@@ -4,6 +4,7 @@ pipelines:
   browser:
     - accepts
     - setLocale
+    - fastify-formbody
 
   api:
     - accepts

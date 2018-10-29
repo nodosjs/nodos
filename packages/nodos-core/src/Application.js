@@ -1,4 +1,8 @@
+import _ from 'lodash';
+
 export default class Application {
+  defaultOptions = { headers: {}, params: {} };
+
   constructor({ fastify, config, router }) {
     this.fastify = fastify;
     this.config = config;
@@ -11,26 +15,30 @@ export default class Application {
 
   get = url => this.request('GET', url)
 
-  post(url) {
-    return this.request('POST', url);
+  post(url, options = {}) {
+    return this.request('POST', url, options);
   }
 
-  put(url) {
-    return this.request('PUT', url);
+  put(url, options = {}) {
+    return this.request('PUT', url, options);
   }
 
-  patch(url) {
-    return this.request('PATCH', url);
+  patch(url, options = {}) {
+    return this.request('PATCH', url, options);
   }
 
   delete(url) {
     return this.request('DELETE', url);
   }
 
-  request(method, url) {
+  request(method, url, options) {
+    const { params, headers } = { ...this.defaultOptions, ...options };
+
     return this.fastify.inject({
       method,
       url,
+      headers,
+      payload: params,
     });
   }
 }
