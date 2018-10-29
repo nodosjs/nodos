@@ -1,5 +1,5 @@
 import path from 'path';
-import { bin, nodos } from '../src';
+import { bin } from '../src';
 
 test('nodos/binNodos/console', (done) => {
   const replServer = { context: {} };
