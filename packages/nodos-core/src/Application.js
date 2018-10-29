@@ -35,6 +35,6 @@ export default class Application {
   }
 
   printRoutes() {
-    console.log(this.router.formatRoutesForConsole(this.router.printRoutes));
+    console.log(this.router.formatRoutesForConsole());
   }
 }
