@@ -32,7 +32,6 @@ test('nodos/binNodos/server', (done) => {
 describe('nodos/binNodos/routes', () => {
   test('return valid routes presentation', (done) => {
     const container = {
-      nodos: () => nodos(`${__dirname}/__fixtures__/app`),
       print: (output) => { expect(output).toMatchSnapshot(); },
     };
     bin.nodos(
