@@ -46,10 +46,11 @@ const getForeignKey = (resourceName) => {
 };
 
 const types = {
-  resources: (routeItem, rec, { path, middlewares }) => {
+  resources: (routeItem, rec, { path, middlewares, pipeline }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
+      pipeline,
     };
 
     const handlers = [
@@ -99,7 +100,7 @@ const types = {
 
     const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
     const nestedPath = urlJoin(path, routeItem.name, getForeignKey(routeItem.name));
-    const nestedRoutes = buildRoutes(routeItem.routes, { path: nestedPath, middlewares });
+    const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
     return [...routes, ...nestedRoutes];
   },
   resource: (routeItem, rec, { path, middlewares, pipeline }) => {
@@ -146,7 +147,7 @@ const types = {
 
     const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
     const nestedPath = urlJoin(path, routeItem.name);
-    const nestedRoutes = buildRoutes(routeItem.routes, { path: nestedPath, middlewares });
+    const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
     return [...routes, ...nestedRoutes];
   },
 
