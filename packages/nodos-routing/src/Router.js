@@ -34,12 +34,6 @@ const selectRequestedHandlers = (routeItem, handlers) => {
   return handlers.filter(handler => handlerNames.includes(handler.name));
 };
 
-const buildRoutes = (routes, options) => routes.map((item) => {
-  const typeName = detectRouteType(Object.keys(item)[0]);
-  const routeItem = normalizeRouteItem(item[typeName]);
-  return types[typeName](routeItem, buildRoutes, options);
-});
-
 const getForeignKey = (resourceName) => {
   const key = resourceName |> singularize |> foreignKey;
   return `:${key}`;
@@ -152,6 +146,12 @@ const types = {
   },
 
 };
+
+const buildRoutes = (routes, options) => routes.map((item) => {
+  const typeName = detectRouteType(Object.keys(item)[0]);
+  const routeItem = normalizeRouteItem(item[typeName]);
+  return types[typeName](routeItem, buildRoutes, options);
+});
 
 const buildScope = ({ routes, path, pipeline }, pipelines) => {
   const result = buildRoutes(routes, { path, middlewares: pipelines[pipeline], pipeline });
