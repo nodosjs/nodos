@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`nodos/binNodos/routes return valid presentatation when no routes defined 1`] = `
+exports[`nodos/binNodos/routes return valid presentation when no routes defined 1`] = `
 "You don't have any routes defined!
 
 Please add some routes in config/routes.yml."

@@ -41,7 +41,7 @@ describe('nodos/binNodos/routes', () => {
     );
   });
 
-  test('return valid presentatation when no routes defined', (done) => {
+  test('return valid presentation when no routes defined', (done) => {
     const container = {
       nodos: () => Promise.resolve({
         router: { routes: [] },
