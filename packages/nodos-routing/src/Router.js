@@ -172,8 +172,4 @@ export default class Router {
 
   // recognize(request) {
   // }
-
-  formatRoutesForConsole() {
-    return formatRoutesForConsole(this.routes);
-  }
 }
