@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import urlJoin from 'url-join';
+import { singularize, foreignKey } from 'inflected';
 import Route from './Route';
 import validate from './validator';
 
@@ -19,10 +20,12 @@ const buildHandlerNames = (routeItem) => {
 
 const normalizeRouteItem = (valueOrValues) => {
   const routeItem = _.isObject(valueOrValues) ? valueOrValues : { name: valueOrValues };
+  const routes = routeItem.routes ? routeItem.routes : [];
 
   return {
     ...routeItem,
     handlerNames: buildHandlerNames(routeItem),
+    routes,
   };
 };
 
@@ -36,6 +39,11 @@ const buildRoutes = (routes, options) => routes.map((item) => {
   const routeItem = normalizeRouteItem(item[typeName]);
   return types[typeName](routeItem, buildRoutes, options);
 });
+
+const getForeignKey = (resourceName) => {
+  const key = resourceName |> singularize |> foreignKey;
+  return `:${key}`;
+};
 
 const types = {
   resources: (routeItem, rec, { path, middlewares }) => {
@@ -90,10 +98,8 @@ const types = {
     const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
 
     const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
-    const nestedPath = urlJoin(path, routeItem.name, `:${routeItem.name.slice(0, -1)}_id`);
-    const nestedRoutes = routeItem.routes
-      ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares })
-      : [];
+    const nestedPath = urlJoin(path, routeItem.name, getForeignKey(routeItem.name));
+    const nestedRoutes = buildRoutes(routeItem.routes, { path: nestedPath, middlewares });
     return [...routes, ...nestedRoutes];
   },
   resource: (routeItem, rec, { path, middlewares, pipeline }) => {
@@ -140,9 +146,7 @@ const types = {
 
     const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
     const nestedPath = urlJoin(path, routeItem.name);
-    const nestedRoutes = routeItem.routes
-      ? buildRoutes(routeItem.routes, { path: nestedPath, middlewares })
-      : [];
+    const nestedRoutes = buildRoutes(routeItem.routes, { path: nestedPath, middlewares });
     return [...routes, ...nestedRoutes];
   },
 
