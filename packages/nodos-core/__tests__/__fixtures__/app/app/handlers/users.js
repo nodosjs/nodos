@@ -22,3 +22,13 @@ export const create = (request, response) => {
 
   response.render({ user }, 'new');
 };
+
+export const destroy = (request, response) => {
+  const { user } = request.body;
+  if (user instanceof Object) { // validation
+    users.pop();
+  }
+
+  response.redirectTo('/users');
+  return;
+};
