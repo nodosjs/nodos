@@ -24,11 +24,13 @@ export const create = (request, response) => {
 };
 
 export const destroy = (request, response) => {
-  const { user } = request.body;
-  if (user instanceof Object) { // validation
+  const { id: userId } = request.params;
+  if (userId) { // validation
     users.pop();
+    response.redirectTo('/users');
+    return;
   }
 
-  response.redirectTo('/users');
+  response.render({ users })
   return;
 };

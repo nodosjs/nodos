@@ -27,6 +27,6 @@ test('POST /users success', async () => {
 });
 
 test('DELETE /users success', async () => {
-  const result = await app.delete('/users/:id');
+  const result = await app.delete('/users/1');
   expect(result).toMatchObject({ statusCode: 302 });
 });
