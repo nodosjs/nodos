@@ -64,10 +64,10 @@ const buildFastify = async (config, router) => {
     templates: config.paths.templates,
   });
 
-  // app.get('/', (request, reply) => {
-  //   request.log.info('Some info about the current request');
-  //   reply.send({ hello: 'world' });
-  // });
+  app.get('/', (request, reply) => {
+    request.log.info('Some info about the current request');
+    reply.send({ hello: 'world' });
+  });
 
   // console.log(router);
   const promises = router.routes.map(async (route) => {

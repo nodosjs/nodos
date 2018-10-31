@@ -9,7 +9,7 @@ beforeAll(async () => {
 
 test('GET /', async () => {
   const result = await app.get('/');
-  expect(result).toMatchObject({ statusCode: 404 });
+  expect(result).toMatchObject({ statusCode: 200 });
 });
 
 test('GET /users', async () => {
