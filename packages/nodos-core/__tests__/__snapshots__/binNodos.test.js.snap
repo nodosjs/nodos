@@ -9,7 +9,7 @@ Please add some routes in config/routes.yml."
 exports[`nodos/binNodos/routes return valid routes presentation 1`] = `
 "Verb   URI Pattern                             Pipeline
 GET    /api/users                              browser 
-GET    /api/users/new                          browser 
+GET    /api/users/build                        browser 
 POST   /api/users                              browser 
 GET    /api/users/:id                          browser 
 GET    /api/users/:id/edit                     browser 
@@ -17,7 +17,7 @@ PATCH  /api/users/:id                          browser
 PUT    /api/users/:id                          browser 
 DELETE /api/users/:id                          browser 
 GET    /users                                  browser 
-GET    /users/new                              browser 
+GET    /users/build                            browser 
 POST   /users                                  browser 
 GET    /users/:id                              browser 
 GET    /users/:id/edit                         browser 
@@ -25,21 +25,21 @@ PATCH  /users/:id                              browser
 PUT    /users/:id                              browser 
 DELETE /users/:id                              browser 
 GET    /posts                                  browser 
-GET    /posts/new                              browser 
+GET    /posts/build                            browser 
 POST   /posts                                  browser 
 GET    /posts/:id                              browser 
 GET    /posts/:id/edit                         browser 
 PATCH  /posts/:id                              browser 
 PUT    /posts/:id                              browser 
 DELETE /posts/:id                              browser 
-GET    /session/new                            browser 
+GET    /session/build                          browser 
 GET    /session                                browser 
 GET    /session/edit                           browser 
 PATCH  /session                                browser 
 PUT    /session                                browser 
 DELETE /session                                browser 
 GET    /articles                               browser 
-GET    /articles/new                           browser 
+GET    /articles/build                         browser 
 POST   /articles                               browser 
 GET    /articles/:id                           browser 
 GET    /articles/:id/edit                      browser 
@@ -47,7 +47,7 @@ PATCH  /articles/:id                           browser
 PUT    /articles/:id                           browser 
 DELETE /articles/:id                           browser 
 GET    /articles/:article_id/comments          browser 
-GET    /articles/:article_id/comments/new      browser 
+GET    /articles/:article_id/comments/build    browser 
 POST   /articles/:article_id/comments          browser 
 GET    /articles/:article_id/comments/:id      browser 
 GET    /articles/:article_id/comments/:id/edit browser 
