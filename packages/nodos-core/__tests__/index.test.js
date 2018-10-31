@@ -31,3 +31,13 @@ test('DELETE /users success', async () => {
   const result = await app.delete('/users/1');
   expect(result).toMatchObject({ statusCode: 302 });
 });
+
+test('GET /articles', async () => {
+  const result = await app.get('/articles');
+  expect(result).toMatchObject({ statusCode: 200, body: '' });
+});
+
+test('GET /posts', () => {
+  const promise = app.get('/posts');
+  return expect(promise).rejects.toThrow('templates');
+});

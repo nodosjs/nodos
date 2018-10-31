@@ -2,11 +2,13 @@ import path from 'path';
 import status from 'statuses';
 
 export default class Response {
-  responseType = 'code';
+  responseType = 'rendering';
 
   headers = {}
 
   locals = {};
+
+  code = 200;
 
   constructor({ templateName, templateDir }) {
     this.templateName = templateName;

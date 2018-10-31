@@ -24,6 +24,14 @@ GET    /users/:id/edit                         browser
 PATCH  /users/:id                              browser 
 PUT    /users/:id                              browser 
 DELETE /users/:id                              browser 
+GET    /posts                                  browser 
+GET    /posts/new                              browser 
+POST   /posts                                  browser 
+GET    /posts/:id                              browser 
+GET    /posts/:id/edit                         browser 
+PATCH  /posts/:id                              browser 
+PUT    /posts/:id                              browser 
+DELETE /posts/:id                              browser 
 GET    /session/new                            browser 
 GET    /session                                browser 
 GET    /session/edit                           browser 
