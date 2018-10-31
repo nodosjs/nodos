@@ -1,5 +1,5 @@
 export const index = (request, response) => {
-  response.render({ name: 'jopa' });
+  response.render({ name: 'ehu' });
 };
 
 export const show = (request, response) => ({});
