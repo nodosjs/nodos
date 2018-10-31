@@ -3,16 +3,17 @@ import fastify from 'fastify';
 import fastifyErrorPage from 'fastify-error-page';
 // import fastifySensible from 'fastify-sensible';
 import pointOfView from 'point-of-view';
-import marko from 'marko';
+import pug from 'pug';
 // import debug from 'debug';
 import buildRouter from './routes';
 import binNodos from './binNodos';
 import binTest from './binTest';
 import Application from './Application';
 import Response from './http/Response';
+import log from './logger';
 
 const nodosEnv = process.env.NODOS_ENV || 'development';
-// const log = debug('nodos');
+
 
 const bin = { nodos: binNodos, test: binTest };
 export { bin };
@@ -28,6 +29,7 @@ const fetchMiddleware = async (config, middlewareName) => {
 };
 
 const sendResponse = (response, reply) => {
+  log(response);
   Object.keys(response.headers).forEach((name) => {
     reply.header(name, response.headers[name]);
   });
@@ -57,15 +59,15 @@ const buildFastify = async (config, router) => {
     app.register(fastifyErrorPage);
   }
   app.register(pointOfView, {
-    engine: { marko },
+    engine: { pug },
     includeViewExtension: true,
     templates: config.paths.templates,
   });
 
-  app.get('/', (request, reply) => {
-    request.log.info('Some info about the current request');
-    reply.send({ hello: 'world' });
-  });
+  // app.get('/', (request, reply) => {
+  //   request.log.info('Some info about the current request');
+  //   reply.send({ hello: 'world' });
+  // });
 
   // console.log(router);
   const promises = router.routes.map(async (route) => {
@@ -75,17 +77,17 @@ const buildFastify = async (config, router) => {
     const opts = {
       beforeHandler: middlewares,
     };
-    app[route.method](route.url, opts, (request, reply) => {
+    app[route.method](route.url, opts, async (request, reply) => {
       // FIXME: enable only for development environment
       // FIXME: enable only for handlers and they deps
       Object.keys(require.cache).forEach((item) => { delete require.cache[item]; });
-      const handlers = require(pathToHandler);
+      const handlers = await import(pathToHandler);
       const response = new Response({ templateDir: route.resourceName, templateName: route.name });
-      handlers[route.name](request, response);
+      await handlers[route.name](request, response);
       sendResponse(response, reply);
     });
   });
-  await promises;
+  await Promise.all(promises);
 
   return app;
 };

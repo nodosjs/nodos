@@ -12,12 +12,12 @@
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/register": "^7.0.0",
-    "@nodosjs/routing": "^0.0.18",
+    "@nodosjs/routing": "0.0.18",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "columnify": "^1.5.4",
     "debug": "^4.1.0",
-    "fastify": "^1.12.1",
+    "fastify": "^1.13.0",
     "fastify-error-page": "^2.0.0",
     "fastify-formbody": "^2.0.1",
     "fastify-sensible": "^0.2.0",
@@ -28,6 +28,7 @@
     "lodash": "^4.17.11",
     "marko": "^4.13.8",
     "point-of-view": "^2.0.0",
+    "pug": "^2.0.3",
     "statuses": "^1.5.0",
     "yargs": "^12.0.3-candidate.0"
   },

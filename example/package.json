@@ -3,6 +3,6 @@
     "test": "bin/test"
   },
   "dependencies": {
-    "@nodosjs/core": "^0.0.15"
+    "@nodosjs/core": "^0.0.18"
   }
 }

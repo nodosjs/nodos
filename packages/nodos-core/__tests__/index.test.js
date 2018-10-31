@@ -9,12 +9,17 @@ beforeAll(async () => {
 
 test('GET /', async () => {
   const result = await app.get('/');
-  expect(result).toMatchObject({ statusCode: 200 });
+  expect(result).toMatchObject({ statusCode: 404 });
 });
 
 test('GET /users', async () => {
   const result = await app.get('/users');
   expect(result).toMatchObject({ statusCode: 200, body: '<h1>hello</h1>' });
+});
+
+test('GET /users/:id', async () => {
+  const result = await app.get('/users/1');
+  expect(result).toMatchObject({ statusCode: 200, body: '<h3>tom</h3>' });
 });
 
 test('POST /users fail', async () => {
@@ -34,10 +39,11 @@ test('DELETE /users success', async () => {
 
 test('GET /articles', async () => {
   const result = await app.get('/articles');
-  expect(result).toMatchObject({ statusCode: 200, body: '' });
+  expect(result).toMatchObject({ statusCode: 200, body: '<h2>hello</h2>' });
 });
 
-test('GET /posts', () => {
-  const promise = app.get('/posts');
-  return expect(promise).rejects.toThrow('templates');
+test('GET /posts', async () => {
+  const result = await app.get('/posts');
+  // expect(result).toMatchObject({ statusCode: 500 });
+  expect(result.body).toContain('errno');
 });

@@ -1,3 +1,5 @@
-export const index = (request, reply) => ({});
+export const index = (request, response) => {
+  response.render({ name: 'jopa' });
+};
 
-export const show = (request, reply) => ({});
+export const show = (request, response) => ({});
