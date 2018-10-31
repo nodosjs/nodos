@@ -27,10 +27,7 @@ export const destroy = (request, response) => {
   const { id: userId } = request.params;
   if (userId) { // validation
     users.pop();
-    response.redirectTo('/users');
-    return;
   }
 
-  response.render({ users })
-  return;
+  response.redirectTo('/users');
 };
