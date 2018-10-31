@@ -75,10 +75,11 @@ const buildFastify = async (config, router) => {
     const opts = {
       beforeHandler: middlewares,
     };
-    app[route.method](route.url, opts, async (request, reply) => {
-      // decache(pathToHandler);
-      // FIXME: implement reloading on request
-      const handlers = await import(pathToHandler);
+    app[route.method](route.url, opts, (request, reply) => {
+      // FIXME: enable only for development environment
+      // FIXME: enable only for handlers and they deps
+      Object.keys(require.cache).forEach((item) => { delete require.cache[item]; });
+      const handlers = require(pathToHandler);
       const response = new Response({ templateDir: route.resourceName, templateName: route.name });
       handlers[route.name](request, response);
       sendResponse(response, reply);
