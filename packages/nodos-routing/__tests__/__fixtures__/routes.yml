@@ -25,7 +25,7 @@ scopes:
 
       - resource:
           name: session
-          except: ['new']
+          except: ['build']
           routes:
             - resources: tokens
 

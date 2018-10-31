@@ -3,7 +3,7 @@
   "type": "array",
   "items": {
     "enum": [
-     "index", "new", "create", "show", "edit", "update", "destroy"
+     "index", "build", "create", "show", "edit", "update", "destroy"
     ]
   }
 }
