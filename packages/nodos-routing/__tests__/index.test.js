@@ -10,7 +10,7 @@ test('nodos-routing', async () => {
 
   const expectedRoutes = [
     { name: 'index', url: '/api/users', method: 'get' },
-    { name: 'new', url: '/api/users/new', method: 'get' },
+    { name: 'build', url: '/api/users/build', method: 'get' },
     { name: 'create', url: '/api/users', method: 'post' },
     { name: 'show', url: '/api/users/:id', method: 'get' },
     { name: 'show', url: '/users/:id', method: 'get' },
@@ -39,9 +39,8 @@ test('nodos-routing', async () => {
     url: '/users/:id',
   });
 
-  // Except
-  const sessionNewRoute = _.find(routes, { resourceName: 'session', name: 'new' });
-  expect(sessionNewRoute).toBeUndefined();
+  const sessionBuildRoute = _.find(routes, { resourceName: 'session', name: 'build' });
+  expect(sessionBuildRoute).toBeUndefined();
 });
 
 test('nodos-routing throws an error if schema is invalid', async () => {

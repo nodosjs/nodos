@@ -9,7 +9,7 @@ const detectRouteType = (currentName) => {
   return names.find(name => name === currentName);
 };
 
-const routesDefaultOnly = ['index', 'new', 'create', 'show', 'edit', 'update', 'destroy'];
+const routesDefaultOnly = ['index', 'build', 'create', 'show', 'edit', 'update', 'destroy'];
 const routesDefaultExcept = [];
 
 const buildHandlerNames = (routeItem) => {
@@ -54,9 +54,9 @@ const types = {
         url: urlJoin(path, routeItem.name),
       },
       {
-        name: 'new',
+        name: 'build',
         method: 'get',
-        url: urlJoin(path, routeItem.name, '/new'),
+        url: urlJoin(path, routeItem.name, '/build'),
       },
       {
         name: 'create',
@@ -106,9 +106,9 @@ const types = {
 
     const handlers = [
       {
-        name: 'new',
+        name: 'build',
         method: 'get',
-        url: urlJoin(path, routeItem.name, '/new'),
+        url: urlJoin(path, routeItem.name, '/build'),
       },
       {
         name: 'show',
