@@ -1,6 +1,6 @@
 
 export default class Application {
-  defaultOptions = { headers: {}, params: {} };
+  defaultOptions = { headers: {}, params: null };
 
   constructor({ fastify, config, router }) {
     this.fastify = fastify;

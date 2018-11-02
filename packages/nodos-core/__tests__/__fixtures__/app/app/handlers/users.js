@@ -5,9 +5,10 @@ const users = [
 export const index = (request, response) => response.render({ users });
 
 export const show = (request, response) => {
-  const user = users.find(u => u.id === Number(request.params.id));
+  const user = users.find(u => Number(u.id) === Number(request.params.id));
   if (!user) {
     response.head(404);
+    return;
   }
 
   response.render({ user });
@@ -15,7 +16,7 @@ export const show = (request, response) => {
 
 export const create = (request, response) => {
   const { user } = request.body;
-  if (user instanceof Object) { // validation
+  if (user.name) { // validation
     users.push(user);
     response.redirectTo('/users');
     return;

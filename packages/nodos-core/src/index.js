@@ -1,7 +1,9 @@
 import path from 'path';
 import fastify from 'fastify';
+import fastifyCookie from 'fastify-cookie';
+import fastifyFormBody from 'fastify-formbody';
 import fastifyErrorPage from 'fastify-error-page';
-// import fastifySensible from 'fastify-sensible';
+import fastifySensible from 'fastify-sensible';
 import pointOfView from 'point-of-view';
 import pug from 'pug';
 // import debug from 'debug';
@@ -11,9 +13,6 @@ import binTest from './binTest';
 import Application from './Application';
 import Response from './http/Response';
 import log from './logger';
-
-const nodosEnv = process.env.NODOS_ENV || 'development';
-
 
 const bin = { nodos: binNodos, test: binTest };
 export { bin };
@@ -55,7 +54,9 @@ const buildFastify = async (config, router) => {
     logger: true,
   });
   // app.register(fastifySensible);
-  if (nodosEnv === 'development') {
+  app.register(fastifyCookie);
+  app.register(fastifyFormBody);
+  if (config.env === 'development') {
     app.register(fastifyErrorPage);
   }
   app.register(pointOfView, {
@@ -63,6 +64,21 @@ const buildFastify = async (config, router) => {
     includeViewExtension: true,
     templates: config.paths.templates,
   });
+
+  app.after(console.log);
+  app.ready(console.log);
+
+  // // console.log(router.scopes);
+  // const scopePromises = router.scopes.map(async (scope) => {
+  //   const promises = scope.middlewares.map(name => fetchMiddleware(config, name));
+  //   const middlewares = await Promise.all(promises);
+  //   // console.log(middlewares);
+  //   middlewares.forEach((middleware) => {
+  //     console.log(scope, middlewares);
+  //     app.register(middleware, { prefix: scope.path });
+  //   });
+  // });
+  // await Promise.all(scopePromises);
 
   app.get('/', (request, reply) => {
     request.log.info('Some info about the current request');
@@ -72,8 +88,8 @@ const buildFastify = async (config, router) => {
   // console.log(router);
   const promises = router.routes.map(async (route) => {
     const pathToHandler = path.join(config.paths.handlers, route.resourceName);
-    const middlewaresPromises = route.middlewares.map(fetchMiddleware.bind(null, config));
-    const middlewares = await Promise.all(middlewaresPromises);
+    const middlewarePromises = route.middlewares.map(fetchMiddleware.bind(null, config));
+    const middlewares = await Promise.all(middlewarePromises);
     const opts = {
       beforeHandler: middlewares,
     };
@@ -95,6 +111,7 @@ const buildFastify = async (config, router) => {
 const buildConfig = async (projectRootPath) => {
   const join = path.join.bind(null, projectRootPath);
   const config = {
+    env: process.env.NODOS_ENV || 'development',
     paths: {
       routes: join('config', 'routes.yml'),
       application: join('config', 'application'),
@@ -107,7 +124,7 @@ const buildConfig = async (projectRootPath) => {
   };
 
   const configureForApp = await import(config.paths.application);
-  const pathToConfigForCurrentStage = path.join(config.paths.environments, `${nodosEnv}.js`);
+  const pathToConfigForCurrentStage = path.join(config.paths.environments, `${config.env}.js`);
   const configureForStage = await import(pathToConfigForCurrentStage);
   // FIXME: remove default
   configureForApp.default(config);
@@ -118,6 +135,6 @@ const buildConfig = async (projectRootPath) => {
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
   const router = await buildRouter(config);
-  const fstf = await buildFastify(config, router);
-  return new Application({ config, fastify: fstf, router });
+  const fastifyInstance = await buildFastify(config, router);
+  return new Application({ config, fastify: fastifyInstance, router });
 };

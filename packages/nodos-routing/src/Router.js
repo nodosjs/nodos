@@ -163,6 +163,11 @@ export default class Router {
     validate(routeMap);
 
     this.routeMap = routeMap;
+    // console.log(routeMap);
+    this.scopes = routeMap.scopes.map(scope => ({
+      path: scope.path,
+      middlewares: routeMap.pipelines[scope.pipeline],
+    }));
     this.routes = routeMap.scopes.map(scope => buildScope(scope, routeMap.pipelines))
       |> _.flattenDeep;
   }

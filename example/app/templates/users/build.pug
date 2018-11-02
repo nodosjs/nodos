@@ -1,0 +1,11 @@
+form(action="/users" method="post")
+  div
+    label Name
+    input(type="text" name="user[name]")
+  div
+    label About
+    textarea(type="text" name="user[about]")
+  div
+    input(type="submit")
+
+a(href="/users") Users

@@ -4,6 +4,7 @@ pipelines:
 
   browser:
     - checkMigrations
+    # - fastify-cookie
     # - accepts
     # - setLocale
     # - fetchSession

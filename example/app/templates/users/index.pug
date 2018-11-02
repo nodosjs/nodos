@@ -1,1 +1,7 @@
-h1= name
+if users.length > 0
+  table
+    each user in users
+      tr
+        td= user.name
+
+a(href="/users/build") New user
