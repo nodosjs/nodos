@@ -1,8 +1,19 @@
 ---
 
-production:
-  name: app_production
+default: &default
+  adapter: postgresql
+  # encoding: unicode
+
 development:
-  name: app_development
+  <<: *default
+  database: example_development
+
 test:
-  name: app_test
+  <<: *default
+  database: example_test
+  username: postgres
+  password: password
+
+# production:
+#   <<: *default
+#   url: <%= ENV['DATABASE_URL'] %>

@@ -1,14 +1,47 @@
-const users = [
-  { id: 1, name: 'tom' },
-];
+// import 'reflect-metadata';
+// import sqlite from 'sqlite3';
+import { createConnection } from 'typeorm';
+import User from '../entities/User';
 
-export const index = (request, response) => response.render({ users });
+const getConnection = () => createConnection({
+  type: 'postgres',
+  username: 'postgres',
+  password: 'password',
+  database: 'example',
+  hostname: 'db',
+  synchronize: true,
+  logging: true,
+  // entities: [
+  //   '../entities/**/*.js',
+  // ],
+  entities: [
+    User,
+  ],
+  migrations: [
+    '../../db/migrations/**/*.js',
+  ],
+});
+
+export const index = async (request, response) => {
+  const connection = await getConnection();
+  const users = await connection
+    .getRepository(User)
+    .find();
+
+  response.render({ users });
+};
 
 export const build = (request, response) => {
 };
 
-export const show = (request, response) => {
-  const user = users.find(u => u.id === Number(request.params.id));
+export const edit = (request, response) => {
+};
+
+export const show = async (request, response) => {
+  const connection = await getConnection();
+  const user = await connection
+    .getRepository(User)
+    .findOne(request.params.id);
   if (!user) {
     response.head(404);
   }
@@ -16,10 +49,14 @@ export const show = (request, response) => {
   response.render({ user });
 };
 
-export const create = (request, response) => {
-  const { user } = request.body;
+export const create = async (request, response) => {
+  const connection = await getConnection();
+  const user = new User(request.body.user);
+
   if (user instanceof Object) { // validation
-    users.push(user);
+    await connection
+      .manager
+      .save(user);
     response.redirectTo('/users');
     return;
   }
@@ -30,7 +67,6 @@ export const create = (request, response) => {
 export const destroy = (request, response) => {
   const { id: userId } = request.params;
   if (userId) { // validation
-    users.pop();
   }
 
   response.redirectTo('/users');

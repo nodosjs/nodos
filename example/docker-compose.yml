@@ -1,0 +1,14 @@
+---
+
+version: '3.1'
+services:
+  db:
+    image: postgres
+  app:
+    image: node:10
+    command: make server
+    working_dir: /code
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/code

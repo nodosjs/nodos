@@ -3,3 +3,4 @@ dist
 *.marko.js
 *.log
 *.tgz
+*.sqlite3

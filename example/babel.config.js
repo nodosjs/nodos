@@ -3,13 +3,13 @@ module.exports = {
     ['@babel/preset-env',
       {
         targets: {
-          node: '8',
+          node: 'current',
         },
       },
     ],
   ],
   plugins: [
-    'dynamic-import-node',
-    '@babel/plugin-proposal-class-properties',
+    ['@babel/plugin-proposal-decorators', { DecoratorsBeforeExport: true, legacy: true }],
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
   ],
 };
