@@ -42,10 +42,20 @@ export default (container, done) => [
   {
     command: 'server',
     describe: 'run server',
+    builder: yargs => yargs
+      .default('s', '127.0.0.1')
+      .alias('s', 'server')
+      .default('p', 3000)
+      .alias('p', 'port'),
     handler: async (argv) => {
       const nodosItem = _.get(container, 'nodos', nodos);
       const app = await nodosItem(argv.projectRoot);
-      app.listen(3000, () => {
+      app.listen(argv.port, argv.server, (err, address) => {
+        if (err) {
+          console.error(err);
+          process.exit(1);
+        }
+        // console.log(address);
         done();
       });
     },

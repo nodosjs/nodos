@@ -17,7 +17,7 @@ test('nodos/binNodos/console', (done) => {
 });
 
 test('nodos/binNodos/server', (done) => {
-  const fillResult = (port, cb) => {
+  const fillResult = (port, address, cb) => {
     cb();
   };
   const container = {
