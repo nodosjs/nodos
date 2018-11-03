@@ -1,4 +1,3 @@
-
 export default class Application {
   defaultOptions = { headers: {}, params: null };
 
@@ -14,21 +13,13 @@ export default class Application {
 
   get = url => this.request('GET', url)
 
-  post(url, options = {}) {
-    return this.request('POST', url, options);
-  }
+  post = (url, options = {}) => this.request('POST', url, options)
 
-  put(url, options = {}) {
-    return this.request('PUT', url, options);
-  }
+  put = (url, options = {}) => this.request('PUT', url, options)
 
-  patch(url, options = {}) {
-    return this.request('PATCH', url, options);
-  }
+  patch = (url, options = {}) => this.request('PATCH', url, options)
 
-  delete(url) {
-    return this.request('DELETE', url);
-  }
+  delete = url => this.request('DELETE', url)
 
   request(method, url, options) {
     const { params, headers } = { ...this.defaultOptions, ...options };
