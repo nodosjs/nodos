@@ -1,14 +1,14 @@
 import path from 'path';
-import { bin } from '../src';
+import { cli } from '../src';
 
-test('nodos/binNodos/console', (done) => {
+test('nodos/cli/console', (done) => {
   const replServer = { context: {} };
   const container = {
     repl: {
       start: () => replServer,
     },
   };
-  bin.nodos(
+  cli(
     ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'console'],
     { container, done, exitProcess: false },
   );
@@ -16,25 +16,25 @@ test('nodos/binNodos/console', (done) => {
   expect(replServer.context).toHaveProperty('app');
 });
 
-test('nodos/binNodos/server', (done) => {
+test('nodos/cli/server', (done) => {
   const fillResult = (port, address, cb) => {
     cb();
   };
   const container = {
     nodos: () => Promise.resolve({ listen: fillResult }),
   };
-  bin.nodos(
+  cli(
     ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'server'],
     { container, done, exitProcess: false },
   );
 });
 
-describe('nodos/binNodos/routes', () => {
+describe('nodos/cli/routes', () => {
   test('return valid routes presentation', (done) => {
     const container = {
       print: (output) => { expect(output).toMatchSnapshot(); },
     };
-    bin.nodos(
+    cli(
       ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
       { container, done },
     );
@@ -47,7 +47,7 @@ describe('nodos/binNodos/routes', () => {
       }),
       print: (output) => { expect(output).toMatchSnapshot(); },
     };
-    bin.nodos(
+    cli(
       ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
       { container, done },
     );

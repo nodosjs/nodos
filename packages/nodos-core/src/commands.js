@@ -2,28 +2,23 @@ import _ from 'lodash';
 import repl from 'repl';
 import columnify from 'columnify';
 import { nodos } from '.';
-// import buildRoutes from './routes';
-
-// export default (projectRoot, gulp) => {
-//   gulp.task('default', (done) => {
-//     console.log('hello from The Nodos!');
-//     done();
-//   });
-//   gulp.task('server', async () => {
-//     const app = await nodos(projectRoot);
-//     app.listen(3000, () => {
-//     });
-//   });
-
-//   gulp.task('routes', async () => {
-//     const router = buildRoutes(projectRoot);
-//     router.routes.forEach((route) => {
-//       console.log(route.name, route.method);
-//     });
-//   });
-// };
 
 export default (container, done) => [
+  {
+    command: 'db',
+    describe: 'run db subcommands',
+    builder: {},
+    handler: async (argv) => {
+      const replItem = _.get(container, 'repl', repl);
+      const nodosItem = _.get(container, 'nodos', nodos);
+      const replServer = replItem.start({
+        prompt: '> ',
+      });
+      const app = nodosItem(argv.projectRoot);
+      replServer.context.app = app;
+      done();
+    },
+  },
   {
     command: 'console',
     describe: 'run console',
@@ -43,8 +38,8 @@ export default (container, done) => [
     command: 'server',
     describe: 'run server',
     builder: yargs => yargs
-      .default('s', '127.0.0.1')
-      .alias('s', 'server')
+      .default('h', '127.0.0.1')
+      .alias('h', 'host')
       .default('p', 3000)
       .alias('p', 'port'),
     handler: async (argv) => {
@@ -55,7 +50,7 @@ export default (container, done) => [
           console.error(err);
           process.exit(1);
         }
-        // console.log(address);
+        console.log(address);
         done();
       });
     },

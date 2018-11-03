@@ -8,7 +8,7 @@ const getConnection = () => createConnection({
   username: 'postgres',
   password: 'password',
   database: 'example',
-  hostname: 'db',
+  host: 'db',
   synchronize: true,
   logging: true,
   // entities: [

@@ -1,7 +1,14 @@
 server:
-	bin/nodos server -h 0.0.0.0
+	bin/nodos server -s 0.0.0.0
+
 test:
 	bin/test
+
+compose-update:
+	docker-compose run app npm update
+
+compose-setup:
+	docker-compose run app npm install
 
 compose:
 	docker-compose up

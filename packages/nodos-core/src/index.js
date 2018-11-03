@@ -1,21 +1,20 @@
+import '@babel/register';
 import path from 'path';
 import fastify from 'fastify';
 import fastifyCookie from 'fastify-cookie';
 import fastifyFormBody from 'fastify-formbody';
 import fastifyErrorPage from 'fastify-error-page';
-import fastifySensible from 'fastify-sensible';
+// import fastifySensible from 'fastify-sensible';
 import pointOfView from 'point-of-view';
 import pug from 'pug';
 // import debug from 'debug';
 import buildRouter from './routes';
-import binNodos from './binNodos';
-import binTest from './binTest';
+import cli from './cli';
 import Application from './Application';
 import Response from './http/Response';
 import log from './logger';
 
-const bin = { nodos: binNodos, test: binTest };
-export { bin };
+export { cli };
 
 const fetchMiddleware = async (config, middlewareName) => {
   const middleware = await import(path.join(config.paths.middlewares, middlewareName))

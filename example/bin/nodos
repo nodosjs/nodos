@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
 require('@babel/register');
-const { bin } = require('@nodosjs/core');
+const { cli } = require('@nodosjs/core');
 
-bin.nodos();
+cli();

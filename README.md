@@ -11,12 +11,15 @@ $ npm i -g @nodosjs/cli
 $ nodos new MyBlog
 $ cd MyBlog
 $ bin/nodos server
+# commands: bin/nodos --help
 ```
 
-### Commands
+### Example
 
 ```sh
-bin/nodos --help
+$ cd example
+$ bin/nodos tests
+$ bin/nodos server
 ```
 
 ### Development
