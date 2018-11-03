@@ -1,5 +1,5 @@
 server:
-	bin/nodos server -s 0.0.0.0
+	bin/nodos server -h 0.0.0.0
 
 test:
 	bin/test
