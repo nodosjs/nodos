@@ -10,7 +10,13 @@ Node.js framework for humans
 $ npm i -g @nodosjs/cli
 $ nodos new MyBlog
 $ cd MyBlog
-$ npx gulp server
+$ bin/nodos server
+```
+
+### Commands
+
+```sh
+bin/nodos --help
 ```
 
 ### Development
@@ -25,21 +31,3 @@ $ make test
 ```
 
 How to start (https://github.com/nodosjs/nodos/wiki). Russian version only.
-
-### Tasks
-
-- [x] Рабочий MVP
-- [ ] @nodos/routing
-    - [ ] root (из рельсового роутинга)
-    - [ ] Вложенные ресурсы
-    - [ ] npx gulp routes (распечатывает роуты как рельсы)
-    - [ ] Pipeline (из феникса)
-- [ ] @nodos/cli
-    - [ ] Генератор приложения (типа rails new MyBlog)
-- [ ] @nodos
-    - [ ] Возможность писать тесты
-    - [x] Шаблоны
-- [ ] @nodos/generators
-    - resource generator
-    - action generator
-    - handlers module generator
