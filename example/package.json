@@ -3,12 +3,8 @@
     "test": "bin/test"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.1.0",
-    "@nodosjs/core": "^0.0.22",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
+    "@nodosjs/core": "^0.0.23",
     "jest": "^23.6.0",
-    "jest-cli": "^23.6.0",
     "pg": "^7.6.0",
     "reflect-metadata": "^0.1.12",
     "typeorm": "^0.2.8"
