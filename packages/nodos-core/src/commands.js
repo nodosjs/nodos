@@ -45,7 +45,7 @@ export default (container, done) => [
     handler: async (argv) => {
       const nodosItem = _.get(container, 'nodos', nodos);
       const app = await nodosItem(argv.projectRoot);
-      app.listen(argv.port, argv.server, (err, address) => {
+      app.listen(argv.port, argv.host, (err, address) => {
         if (err) {
           console.error(err);
           process.exit(1);
