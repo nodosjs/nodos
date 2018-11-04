@@ -16,6 +16,19 @@ test('nodos/cli/console', (done) => {
   expect(replServer.context).toHaveProperty('app');
 });
 
+test('nodos/cli/test', (done) => {
+  const run = jest.fn();
+  const container = {
+    jest: { run },
+  };
+  cli(
+    ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'test'],
+    { container, done },
+  );
+
+  // expect(replServer.context).toHaveProperty('app');
+});
+
 test('nodos/cli/server', (done) => {
   const fillResult = (port, address, cb) => {
     cb();

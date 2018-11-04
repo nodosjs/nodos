@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import jest from 'jest';
 import repl from 'repl';
 import columnify from 'columnify';
 import { nodos } from '.';
@@ -23,8 +24,11 @@ export default (container, done) => [
     command: 'test',
     describe: 'run tests',
     builder: {},
-    handler: async (argv) => {
-      jest.run(['--testPathPattern', '/tests/', ...argv]);
+    handler: (argv) => {
+      process.env.NODOS_ENV = 'test';
+      const options = argv._.slice(1);
+      const jestItem = _.get(container, 'jest', jest);
+      jestItem.run(['--testPathPattern', '/tests/', options]);
       done();
     },
   },
