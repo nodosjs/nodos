@@ -4,6 +4,10 @@
 
 Node.js framework for humans
 
+### Requirements
+
+* Nodejs >= 10
+
 ### Install
 
 ```sh
@@ -24,7 +28,7 @@ $ bin/nodos server
 
 ### Development
 
-We use https://lernajs.io
+We use https://lernajs.io and yarn
 
 ```sh
 $ git clone # to nodos
