@@ -6,21 +6,6 @@ import { nodos } from '.';
 
 export default (container, done) => [
   {
-    command: 'db',
-    describe: 'run db subcommands',
-    builder: {},
-    handler: async (argv) => {
-      const replItem = _.get(container, 'repl', repl);
-      const nodosItem = _.get(container, 'nodos', nodos);
-      const replServer = replItem.start({
-        prompt: '> ',
-      });
-      const app = nodosItem(argv.projectRoot);
-      replServer.context.app = app;
-      done();
-    },
-  },
-  {
     command: 'test',
     describe: 'run tests',
     builder: {},

@@ -1,6 +1,5 @@
 import _ from 'lodash';
 // import 'reflect-metadata';
-import sqlite from 'sqlite3';
 import { promises as fs } from 'fs';
 import { createConnection } from 'typeorm';
 import yaml from 'js-yaml';

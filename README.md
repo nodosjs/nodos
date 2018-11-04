@@ -22,6 +22,7 @@ $ bin/nodos server
 
 ```sh
 $ cd example
+$ make setup
 $ bin/nodos tests
 $ bin/nodos server
 ```

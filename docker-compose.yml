@@ -13,6 +13,8 @@ services:
     volumes:
       - yarn:/usr/local/share/.cache/yarn/v1
       - .:/code
+    depends_on:
+      - db
 
 volumes:
   yarn:

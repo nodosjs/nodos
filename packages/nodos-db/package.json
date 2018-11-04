@@ -10,6 +10,7 @@
     "src"
   ],
   "dependencies": {
-    "@babel/core": "^7.1.2"
+    "reflect-metadata": "^0.1.12",
+    "typeorm": "^0.2.8"
   }
 }

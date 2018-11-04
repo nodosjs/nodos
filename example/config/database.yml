@@ -3,6 +3,7 @@
 default: &default
   type: postgres
   host: db
+  username: postgres
   # encoding: unicode
 
 development:
@@ -12,8 +13,8 @@ development:
 
 test:
   <<: *default
-  type: sqlite
-  database: db/production.sqlite3
+  type: postgres
+  database: example_test
 
 # production:
 #   <<: *default

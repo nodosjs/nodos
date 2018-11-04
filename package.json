@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
@@ -34,9 +35,13 @@
     "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
-    "lerna": "^3.4.3"
+    "lerna": "^3.4.3",
+    "pg": "^7.6.0",
+    "sql.js": "^0.5.0",
+    "sqlite3": "^4.0.3"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "engines": {
     "node": ">=10"
   }
