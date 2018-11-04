@@ -20,6 +20,15 @@ export default (container, done) => [
     },
   },
   {
+    command: 'test',
+    describe: 'run tests',
+    builder: {},
+    handler: async (argv) => {
+      jest.run(['--testPathPattern', '/tests/', ...argv]);
+      done();
+    },
+  },
+  {
     command: 'console',
     describe: 'run console',
     builder: {},

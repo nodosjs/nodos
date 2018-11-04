@@ -35,12 +35,12 @@ export default class extends Generator {
       'bin/test',
       'bin/nodos',
       'app/entities/User.js',
-      'app/handlers/users.js',
+      'app/controllers/users.js',
       'app/middlewares/setLocale.js',
       'app/templates/layouts/application.pug.html',
       'app/templates/users/index.marko',
       'app/templates/users/show.marko',
-      '__tests__/handlers/users.test.js',
+      'tests/controllers/users.test.js',
     ];
 
     fileNames.forEach((fileName) => {

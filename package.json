@@ -11,7 +11,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/__fixtures__/",
-      "/config/",
+      "/templates/",
       "example"
     ]
   },
@@ -29,10 +29,10 @@
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-babel": "^5.2.0",
-    "eslint-plugin-flowtype": "^3.1.1",
+    "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.26.2",
-    "flow-bin": "^0.83",
+    "eslint-plugin-jest": "^21.27.1",
+    "flow-bin": "^0.85",
     "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",

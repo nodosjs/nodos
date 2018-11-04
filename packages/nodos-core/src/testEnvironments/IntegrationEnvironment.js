@@ -10,7 +10,7 @@ class IntegrationEnvironment extends NodeEnvironment {
   async setup() {
     const app = await nodos(this.config.rootDir);
     ['get', 'post', 'put', 'patch', 'delete'].forEach((verb) => {
-      this.global[verb] = app[verb];
+      this.global[verb] = (...args) => app[verb](...args);
     });
   }
 }

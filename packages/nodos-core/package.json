@@ -5,10 +5,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",

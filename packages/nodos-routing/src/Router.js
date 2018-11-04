@@ -12,7 +12,7 @@ const detectRouteType = (currentName) => {
 const routesDefaultOnly = ['index', 'build', 'create', 'show', 'edit', 'update', 'destroy'];
 const routesDefaultExcept = [];
 
-const buildHandlerNames = (routeItem) => {
+const buildActionNames = (routeItem) => {
   const onlyNames = _.get(routeItem, 'only', routesDefaultOnly);
   const exceptNames = _.get(routeItem, 'except', routesDefaultExcept);
   return _.difference(onlyNames, exceptNames);
@@ -24,14 +24,14 @@ const normalizeRouteItem = (valueOrValues) => {
 
   return {
     ...routeItem,
-    handlerNames: buildHandlerNames(routeItem),
+    actionNames: buildActionNames(routeItem),
     routes,
   };
 };
 
-const selectRequestedHandlers = (routeItem, handlers) => {
-  const { handlerNames } = routeItem;
-  return handlers.filter(handler => handlerNames.includes(handler.name));
+const selectRequestedActions = (routeItem, actions) => {
+  const { actionNames } = routeItem;
+  return actions.filter(action => actionNames.includes(action.name));
 };
 
 const getForeignKey = (resourceName) => {
@@ -47,7 +47,7 @@ const types = {
       pipeline,
     };
 
-    const handlers = [
+    const actions = [
       {
         name: 'index',
         method: 'get',
@@ -90,9 +90,9 @@ const types = {
       },
     ];
 
-    const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
+    const requestedActions = selectRequestedActions(routeItem, actions);
 
-    const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
+    const routes = requestedActions.map(options => new Route({ ...options, ...sharedData }));
     const nestedPath = urlJoin(path, routeItem.name, getForeignKey(routeItem.name));
     const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
     return [...routes, ...nestedRoutes];
@@ -104,7 +104,7 @@ const types = {
       pipeline,
     };
 
-    const handlers = [
+    const actions = [
       {
         name: 'build',
         method: 'get',
@@ -137,9 +137,9 @@ const types = {
       },
     ];
 
-    const requestedHandlers = selectRequestedHandlers(routeItem, handlers);
+    const requestedActions = selectRequestedActions(routeItem, actions);
 
-    const routes = requestedHandlers.map(options => new Route({ ...options, ...sharedData }));
+    const routes = requestedActions.map(options => new Route({ ...options, ...sharedData }));
     const nestedPath = urlJoin(path, routeItem.name);
     const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
     return [...routes, ...nestedRoutes];

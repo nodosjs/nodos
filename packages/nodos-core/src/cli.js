@@ -21,5 +21,3 @@ export default (args = process.argv.slice(2), options = {}) => {
   commands.forEach(command => parser.command(command));
   return parser.argv;
 };
-
-// jest.run(['--testPathPattern', '/__tests__/', ...args]);

@@ -12,9 +12,9 @@
     "url-join": "^4.0.0"
   },
   "files": [
-    "files/*",
-    "dist/**",
-    "src/**"
+    "files",
+    "dist",
+    "src"
   ],
   "devDependencies": {
     "js-yaml": "^3.12.0"

@@ -1,0 +1,15 @@
+{
+  "name": "@nodosjs/db",
+  "version": "0.0.25",
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.1.2"
+  }
+}

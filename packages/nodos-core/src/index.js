@@ -86,7 +86,7 @@ const buildFastify = async (config, router) => {
 
   // console.log(router);
   const promises = router.routes.map(async (route) => {
-    const pathToHandler = path.join(config.paths.handlers, route.resourceName);
+    const pathToController = path.join(config.paths.controllers, route.resourceName);
     const middlewarePromises = route.middlewares.map(fetchMiddleware.bind(null, config));
     const middlewares = await Promise.all(middlewarePromises);
     const opts = {
@@ -94,11 +94,11 @@ const buildFastify = async (config, router) => {
     };
     app[route.method](route.url, opts, async (request, reply) => {
       // FIXME: enable only for development environment
-      // FIXME: enable only for handlers and they deps
+      // FIXME: enable only for controllers and they deps
       Object.keys(require.cache).forEach((item) => { delete require.cache[item]; });
-      const handlers = await import(pathToHandler);
+      const controllers = await import(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.name });
-      await handlers[route.name](request, response);
+      await controllers[route.name](request, response);
       sendResponse(response, reply);
     });
   });
@@ -117,7 +117,7 @@ const buildConfig = async (projectRootPath) => {
       config: join('config'),
       environments: join('config/environments'),
       templates: join('app', 'templates'),
-      handlers: join('app', 'handlers'),
+      controllers: join('app', 'controllers'),
       middlewares: join('app', 'middlewares'),
     },
   };

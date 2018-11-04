@@ -1,4 +1,5 @@
 server:
 	bin/nodos server
+
 test:
-	npx jest
+	bin/nodos test
