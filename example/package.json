@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "test": "bin/test"
+    "test": "bin/nodos test"
   },
   "dependencies": {
-    "@nodosjs/core": "^0.0.25",
-    "jest": "^23.6.0",
+    "@nodosjs/core": "../packages/nodos-core/",
+    "@nodosjs/routing": "../packages/nodos-routing/",
     "pg": "^7.6.0",
     "reflect-metadata": "^0.1.12",
     "typeorm": "^0.2.8"

@@ -1,11 +1,9 @@
 {
   "name": "nodos-monorepo",
-  "main": "dist/index.js",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "jest",
-    "build": "NODE_ENV=production lerna exec --parallel -- babel src -d dist",
-    "prepublishOnly": "npm run build"
+    "test": "jest"
   },
   "jest": {
     "testPathIgnorePatterns": [

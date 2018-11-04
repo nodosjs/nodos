@@ -13,7 +13,7 @@ publish:
 	npx lerna publish
 
 build:
-	npm run-script build
+	NODE_ENV=production npx lerna exec --parallel -- babel src -d dist
 
 lint:
 	npx eslint .
