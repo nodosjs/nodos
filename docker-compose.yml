@@ -5,10 +5,14 @@ services:
   db:
     image: postgres
   app:
-    image: node:10
+    image: node:10.13
     command: make server
-    working_dir: /code
+    working_dir: /code/example
     ports:
       - "3000:3000"
     volumes:
+      - yarn:/usr/local/share/.cache/yarn/v1
       - .:/code
+
+volumes:
+  yarn:

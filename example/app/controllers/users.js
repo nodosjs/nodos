@@ -1,26 +1,30 @@
+import _ from 'lodash';
 // import 'reflect-metadata';
-// import sqlite from 'sqlite3';
+import sqlite from 'sqlite3';
+import { promises as fs } from 'fs';
 import { createConnection } from 'typeorm';
+import yaml from 'js-yaml';
 import User from '../entities/User';
 
-const getConnection = () => createConnection({
-  type: 'postgres',
-  username: 'postgres',
-  password: 'password',
-  database: 'example',
-  host: 'db',
-  synchronize: true,
-  logging: true,
-  // entities: [
-  //   '../entities/**/*.js',
-  // ],
-  entities: [
-    User,
-  ],
-  migrations: [
-    '../../db/migrations/**/*.js',
-  ],
-});
+const getConnection = async () => {
+  const rawData = await fs.readFile(`${__dirname}/../../config/database.yml`);
+  const dbConfigs = yaml.safeLoad(rawData);
+  const baseConfig = {
+    host: 'localhost',
+    synchronize: true,
+    logging: true,
+    // entities: [
+    //   '../entities/**/*.js',
+    // ],
+    entities: [
+      User,
+    ],
+    migrations: [
+      '../../db/migrations/**/*.js',
+    ],
+  };
+  return createConnection(_.merge(baseConfig, dbConfigs[process.env.NODOS_ENV]));
+};
 
 export const index = async (request, response) => {
   const connection = await getConnection();

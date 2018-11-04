@@ -1,18 +1,19 @@
 ---
 
 default: &default
-  adapter: postgresql
+  type: postgres
+  host: db
   # encoding: unicode
 
 development:
   <<: *default
-  database: example_development
+  type: sqlite
+  database: db/development.sqlite3
 
 test:
   <<: *default
-  database: example_test
-  username: postgres
-  password: password
+  type: sqlite
+  database: db/production.sqlite3
 
 # production:
 #   <<: *default

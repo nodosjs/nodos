@@ -4,7 +4,7 @@ test:
 setup: install bootstrap build
 
 install:
-	npm i
+	yarn
 
 bootstrap:
 	npx lerna bootstrap
@@ -26,3 +26,21 @@ lint-ci:
 
 what-to-do:
 	git grep FIXME
+
+compose-update:
+	docker-compose run app yarn update
+
+compose-setup:
+	docker-compose run app yarn install
+
+compose:
+	docker-compose up
+
+compose-test:
+	docker-compose run app make test
+
+compose-server:
+	docker-compose run app make server
+
+compose-bash:
+	docker-compose run app bash
