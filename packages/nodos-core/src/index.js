@@ -92,13 +92,12 @@ const buildFastify = async (config, router) => {
     };
     app[route.method](route.url, opts, async (request, reply) => {
       // FIXME: enable only for development environment
-      // FIXME: enable only for controllers and they deps
+      const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/));
+      appCacheKeys.forEach((item) => { delete require.cache[item]; });
       const controllers = await import(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.name });
       await controllers[route.name](request, response);
       sendResponse(response, reply);
-      const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/));
-      appCacheKeys.forEach((item) => { delete require.cache[item]; });
     });
   });
   await Promise.all(promises);
