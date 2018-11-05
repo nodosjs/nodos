@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 export default (config) => {
-  config.log_level = 'debug';
+  config.logLevel = 'debug';
   config.extensions.push(
     import('@nodosjs/db'),
   );

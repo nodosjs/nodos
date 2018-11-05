@@ -6,7 +6,6 @@
     "@nodosjs/core": "../packages/nodos-core/",
     "@nodosjs/routing": "../packages/nodos-routing/",
     "reflect-metadata": "^0.1.12",
-    "sqlite3": "^4.0.3",
-    "typeorm": "^0.2.8"
+    "sqlite3": "^4.0.3"
   }
 }

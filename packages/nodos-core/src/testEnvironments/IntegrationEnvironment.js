@@ -8,10 +8,14 @@ class IntegrationEnvironment extends NodeEnvironment {
   }
 
   async setup() {
-    const app = await nodos(this.config.rootDir);
+    this.app = await nodos(this.config.rootDir);
     ['get', 'post', 'put', 'patch', 'delete'].forEach((verb) => {
-      this.global[verb] = (...args) => app[verb](...args);
+      this.global[verb] = (...args) => this.app[verb](...args);
     });
+  }
+
+  async tearDown() {
+    await this.app.stop();
   }
 }
 

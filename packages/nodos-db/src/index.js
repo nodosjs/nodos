@@ -1,6 +1,16 @@
 import commandBuilder from './commands';
-// import generators from './generators';
+import Db from './Db';
 
-export default (context) => {
-  context.commandBuilders.push(commandBuilder);
+export default async (config) => {
+  const db = new Db(config.db);
+  await db.connect();
+  return {
+    commandBuilders: [commandBuilder],
+    context: { db },
+    hooks: {
+      async close() {
+        await db.close();
+      },
+    },
+  };
 };

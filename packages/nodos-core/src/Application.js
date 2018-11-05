@@ -6,16 +6,22 @@ export default class Application {
   generatorBuilders = []
 
   constructor({
-    commandBuilders, fastify, config, router,
+    commandBuilders, fastify, config, router, container, hooks,
   }) {
     this.commandBuilders = commandBuilders;
     this.fastify = fastify;
     this.config = config;
     this.router = router;
+    this.container = container;
+    this.hooks = hooks;
   }
 
   listen(...args) {
     return this.fastify.listen(...args);
+  }
+
+  close() {
+    this.hooks.forEach(h => h.close && h.close());
   }
 
   get = url => this.request('GET', url)

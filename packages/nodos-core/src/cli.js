@@ -26,5 +26,6 @@ export default async (args = process.argv.slice(2), options = {}) => {
   const commands = app.commandBuilders.map(build => build({ app, container, done }));
   console.log(commands);
   commands.forEach(c => parser.command(c));
-  return parser.argv;
+  await parser.argv;
+  await app.close();
 };

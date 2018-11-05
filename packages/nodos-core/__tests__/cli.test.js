@@ -44,6 +44,7 @@ test('nodos/cli/server', (done) => {
   };
   const container = {
     nodos: () => ({
+      close: jest.fn(),
       listen: fillResult,
       commandBuilders: [commandBuilders.serverCommand],
     }),
@@ -73,6 +74,7 @@ describe('nodos/cli/routes', () => {
     const container = {
       nodos: () => Promise.resolve({
         router: { routes: [] },
+        close: jest.fn(),
         commandBuilders: [commandBuilders.routesCommand],
       }),
       print: (output) => { expect(output).toMatchSnapshot(); },
@@ -87,19 +89,19 @@ describe('nodos/cli/routes', () => {
 });
 
 // FIXME: нужно перенести этот тест в пакет nodos-db, но cli.js находится здесь. Пока не понятно как построить архитектуру. Debatable.
-test('nodos/cli/db', (done) => {
-  const replServer = { context: {} };
-  const container = {
-    repl: {
-      start: () => replServer,
-    },
-  };
-  cli(
-    ['db'],
-    {
-      container, done, projectRoot, exitProcess: false,
-    },
-  );
+// test('nodos/cli/db', (done) => {
+//   const replServer = { context: {} };
+//   const container = {
+//     repl: {
+//       start: () => replServer,
+//     },
+//   };
+//   cli(
+//     ['db'],
+//     {
+//       container, done, projectRoot, exitProcess: false,
+//     },
+//   );
 
-  // expect(replServer.context).toHaveProperty('app');
-});
+//   // expect(replServer.context).toHaveProperty('app');
+// });

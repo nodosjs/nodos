@@ -47,7 +47,7 @@ const sendResponse = (response, reply) => {
   }
 };
 
-const buildFastify = async (config, router) => {
+const buildFastify = async (config, router, container) => {
   const app = fastify({
     logger: true,
   });
@@ -96,7 +96,7 @@ const buildFastify = async (config, router) => {
       appCacheKeys.forEach((item) => { delete require.cache[item]; });
       const controllers = await import(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.name });
-      await controllers[route.name](request, response);
+      await controllers[route.name](request, response, container);
       sendResponse(response, reply);
     });
   });
@@ -134,19 +134,28 @@ const buildConfig = async (projectRootPath) => {
 const loadExtensions = async (config) => {
   const extensionModules = await Promise.all(config.extensions);
   const extensions = extensionModules.map(m => m.default);
-  const context = { commandBuilders: [] };
-  await Promise.all(extensions.map(e => e(context)));
-  return context;
+  // console.log(extensions);
+  const data = await Promise.all(extensions.map(e => e(config)));
+  const commandBuilders = _.flatten(data.map((item => item.commandBuilders)));
+  const hooks = _.flatten(data.map((item => item.hooks)));
+  const container = data.map(item => item.context)
+    .reduce((acc, context) => ({ ...acc, ...context }), {});
+  return { container, commandBuilders, hooks };
 };
 
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
   const router = await buildRouter(config);
-  const fastifyInstance = await buildFastify(config, router);
   const extensionsData = await loadExtensions(config);
-  const commandBuilders = Object.values(localCommandBuilders).concat(extensionsData.commandBuilders);
-  console.log(commandBuilders);
+  const commandBuilders = Object.values(localCommandBuilders)
+    .concat(extensionsData.commandBuilders);
+  const fastifyInstance = await buildFastify(config, router, extensionsData.container);
   return new Application({
-    config, commandBuilders, fastify: fastifyInstance, router,
+    config,
+    commandBuilders,
+    router,
+    hooks: extensionsData.hooks,
+    fastify: fastifyInstance,
+    container: extensionsData.container,
   });
 };
