@@ -2,7 +2,6 @@ const Generator = require('yeoman-generator');
 const path = require('path');
 
 export default class extends Generator {
-
   constructor(args, opts) {
     super(args, opts);
 

@@ -22,7 +22,7 @@ lint-fix:
 	npx eslint . --fix
 
 lint-ci:
-	npx eslint --ignore-pattern app --ignore-pattern example .
+	npx eslint --ignore-pattern app --ignore-pattern example --ignore-pattern templates .
 
 what-to-do:
 	git grep FIXME
