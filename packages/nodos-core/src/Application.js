@@ -1,7 +1,14 @@
 export default class Application {
-  defaultOptions = { headers: {}, params: null };
+  defaultRequestOptions = { headers: {}, params: null };
 
-  constructor({ fastify, config, router }) {
+  commandBuilders = []
+
+  generatorBuilders = []
+
+  constructor({
+    commandBuilders, fastify, config, router,
+  }) {
+    this.commandBuilders = commandBuilders;
     this.fastify = fastify;
     this.config = config;
     this.router = router;
@@ -22,7 +29,7 @@ export default class Application {
   delete = url => this.request('DELETE', url)
 
   request(method, url, options) {
-    const { params, headers } = { ...this.defaultOptions, ...options };
+    const { params, headers } = { ...this.defaultRequestOptions, ...options };
 
     return this.fastify.inject({
       method,

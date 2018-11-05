@@ -1,10 +1,15 @@
 import _ from 'lodash';
 import yargs from 'yargs';
-import commandsBuilder from './commands';
+import { nodos } from '.';
+import log from './logger';
 
-export default (args = process.argv.slice(2), options = {}) => {
-  const { exitProcess = true, container = {}, done = _.noop } = options;
-  const commands = commandsBuilder(container, done);
+export default async (args = process.argv.slice(2), options = {}) => {
+  const {
+    exitProcess = true,
+    projectRoot = process.cwd(),
+    container = {},
+    done = _.noop, // FIXME: hack for testing purposes
+  } = options;
   const parser = yargs(args);
   parser.exitProcess(exitProcess);
   // parser.fail(done.fail);
@@ -12,12 +17,14 @@ export default (args = process.argv.slice(2), options = {}) => {
   parser.recommendCommands();
   parser.strict();
   parser.showHelpOnFail(true);
-  parser.option('projectRoot', {
-    alias: 'r',
-    default: process.cwd(),
-  });
+  const nodosItem = _.get(container, 'nodos', nodos);
+  const app = await nodosItem(projectRoot);
   // .epilog(help.trim())
   // .example(example.trim())
-  commands.forEach(command => parser.command(command));
+  // console.log(app);
+  // console.log(app.commandBuilders);
+  const commands = app.commandBuilders.map(build => build({ app, container, done }));
+  console.log(commands);
+  commands.forEach(c => parser.command(c));
   return parser.argv;
 };

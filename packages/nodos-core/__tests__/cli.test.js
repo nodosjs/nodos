@@ -1,5 +1,10 @@
 import path from 'path';
 import { cli } from '../src';
+import * as commandBuilders from '../src/commands';
+
+const projectRoot = path.join(__dirname, '__fixtures__/app');
+
+// FIXME: Несмотря на то что хандлеры поддерживают асинки, сам вызов yargs (через наш cli) нельзя вызвать через async. Это приводит к тому что приходится прокидывать `done` и явно вызывать его внутри. Соответственно если хандлер асинхронный, то невозможно выполнить expect. Надо найти способ вызывать yargs через async, тогда все сильно упроститься в том числе интерфейсы взаимодействия с командами.
 
 test('nodos/cli/console', (done) => {
   const replServer = { context: {} };
@@ -9,11 +14,13 @@ test('nodos/cli/console', (done) => {
     },
   };
   cli(
-    ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'console'],
-    { container, done, exitProcess: false },
+    ['console'],
+    {
+      container, done, projectRoot, exitProcess: false,
+    },
   );
 
-  expect(replServer.context).toHaveProperty('app');
+  // expect(replServer.context).toHaveProperty('app');
 });
 
 test('nodos/cli/test', (done) => {
@@ -22,8 +29,10 @@ test('nodos/cli/test', (done) => {
     jest: { run },
   };
   cli(
-    ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'test'],
-    { container, done },
+    ['test'],
+    {
+      container, done, projectRoot, exitProcess: false,
+    },
   );
 
   // expect(replServer.context).toHaveProperty('app');
@@ -34,11 +43,16 @@ test('nodos/cli/server', (done) => {
     cb();
   };
   const container = {
-    nodos: () => Promise.resolve({ listen: fillResult }),
+    nodos: () => ({
+      listen: fillResult,
+      commandBuilders: [commandBuilders.serverCommand],
+    }),
   };
   cli(
-    ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'server'],
-    { container, done, exitProcess: false },
+    ['server'],
+    {
+      container, done, projectRoot, exitProcess: false,
+    },
   );
 });
 
@@ -48,8 +62,10 @@ describe('nodos/cli/routes', () => {
       print: (output) => { expect(output).toMatchSnapshot(); },
     };
     cli(
-      ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
-      { container, done },
+      ['routes'],
+      {
+        container, done, projectRoot, exitProcess: false,
+      },
     );
   });
 
@@ -57,12 +73,33 @@ describe('nodos/cli/routes', () => {
     const container = {
       nodos: () => Promise.resolve({
         router: { routes: [] },
+        commandBuilders: [commandBuilders.routesCommand],
       }),
       print: (output) => { expect(output).toMatchSnapshot(); },
     };
     cli(
-      ['--projectRoot', path.join(__dirname, '__fixtures__/app'), 'routes'],
-      { container, done },
+      ['routes'],
+      {
+        container, done, projectRoot, exitProcess: false,
+      },
     );
   });
+});
+
+// FIXME: нужно перенести этот тест в пакет nodos-db, но cli.js находится здесь. Пока не понятно как построить архитектуру. Debatable.
+test('nodos/cli/db', (done) => {
+  const replServer = { context: {} };
+  const container = {
+    repl: {
+      start: () => replServer,
+    },
+  };
+  cli(
+    ['db'],
+    {
+      container, done, projectRoot, exitProcess: false,
+    },
+  );
+
+  // expect(replServer.context).toHaveProperty('app');
 });

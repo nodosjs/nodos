@@ -1,10 +1,7 @@
-import '@babel/register';
+// import '@babel/register';
 import path from 'path';
 import fastify from 'fastify';
-import fastifyCookie from 'fastify-cookie';
-import fastifyFormBody from 'fastify-formbody';
-import fastifyErrorPage from 'fastify-error-page';
-// import fastifySensible from 'fastify-sensible';
+import fastifySensible from 'fastify-sensible';
 import pointOfView from 'point-of-view';
 import pug from 'pug';
 // import debug from 'debug';
@@ -13,6 +10,7 @@ import cli from './cli';
 import Application from './Application';
 import Response from './http/Response';
 import log from './logger';
+import * as localCommandBuilders from './commands';
 
 export { cli };
 
@@ -52,12 +50,10 @@ const buildFastify = async (config, router) => {
   const app = fastify({
     logger: true,
   });
-  // app.register(fastifySensible);
-  app.register(fastifyCookie);
-  app.register(fastifyFormBody);
-  if (config.env === 'development') {
-    app.register(fastifyErrorPage);
-  }
+  app.register(fastifySensible);
+  const plugins = await Promise.all(config.plugins);
+  plugins.map(p => p.default).forEach(app.register);
+  // FIXME: move to nodos-templates
   app.register(pointOfView, {
     engine: { pug },
     includeViewExtension: true,
@@ -79,6 +75,7 @@ const buildFastify = async (config, router) => {
   // });
   // await Promise.all(scopePromises);
 
+  // FIXME: implement root in nodos-routing
   app.get('/', (request, reply) => {
     request.log.info('Some info about the current request');
     reply.send({ hello: 'world' });
@@ -110,6 +107,8 @@ const buildFastify = async (config, router) => {
 const buildConfig = async (projectRootPath) => {
   const join = path.join.bind(null, projectRootPath);
   const config = {
+    plugins: [],
+    extensions: [],
     env: process.env.NODOS_ENV || 'development',
     paths: {
       routes: join('config', 'routes.yml'),
@@ -131,9 +130,22 @@ const buildConfig = async (projectRootPath) => {
   return config;
 };
 
+const loadExtensions = async (config) => {
+  const extensionModules = await Promise.all(config.extensions);
+  const extensions = extensionModules.map(m => m.default);
+  const context = { commandBuilders: [] };
+  await Promise.all(extensions.map(e => e(context)));
+  return context;
+};
+
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
   const router = await buildRouter(config);
   const fastifyInstance = await buildFastify(config, router);
-  return new Application({ config, fastify: fastifyInstance, router });
+  const extensionsData = await loadExtensions(config);
+  const commandBuilders = Object.values(localCommandBuilders).concat(extensionsData.commandBuilders);
+  console.log(commandBuilders);
+  return new Application({
+    config, commandBuilders, fastify: fastifyInstance, router,
+  });
 };
