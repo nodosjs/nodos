@@ -9,7 +9,8 @@ const getConnection = async () => {
   const rawData = await fs.readFile(`${__dirname}/../../config/database.yml`);
   const dbConfigs = yaml.safeLoad(rawData);
   const baseConfig = {
-    host: 'localhost',
+    type: 'sqlite',
+    database: 'db/development.sqlite3',
     synchronize: true,
     logging: true,
     // entities: [
@@ -22,7 +23,9 @@ const getConnection = async () => {
       '../../db/migrations/**/*.js',
     ],
   };
-  return createConnection(_.merge(baseConfig, dbConfigs[process.env.NODOS_ENV]));
+  const options = _.merge(baseConfig, dbConfigs[process.env.NODOS_ENV]);
+  console.log(options);
+  return createConnection(options);
 };
 
 export const index = async (request, response) => {
