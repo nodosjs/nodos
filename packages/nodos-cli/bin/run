@@ -5,6 +5,7 @@ const yeoman = require('yeoman-environment');
 const env = yeoman.createEnv();
 
 env.register(require.resolve('../dist/'), 'newapp');
+env.register(require.resolve('../../nodos-generators/dist/tasks'), 'create');
 
 const commands = {
   new: {
@@ -16,6 +17,21 @@ const commands = {
     },
     handler: (argv) => {
       env.run(`newapp ${argv.appPath}`);
+    },
+  },
+  create: {
+    command: 'generate <type> <name>',
+    type: 'array',
+    builder: (command) => {
+      command.positional('type', {
+        describe: 'what you need to create (right now works only for controller)',
+      });
+      command.positional('name', {
+        describe: 'name of entity',
+      });
+    },
+    handler: ({ type, name }) => {
+      env.run(`create ${type} ${name}`);
     },
   },
 };
@@ -37,6 +53,7 @@ yargs // eslint-disabled no-unused-expressions
   .strict()
   .showHelpOnFail(true)
   .command(commands.new)
+  .command(commands.create)
   .option('verbose', {
     alias: 'v',
     default: false,

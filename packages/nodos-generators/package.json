@@ -4,6 +4,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "dependencies": {
+    "yeoman-environment": "^2.3.3",
+    "yeoman-generator": "^3.1.1"
+  },
   "main": "./dist/index.js",
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }
