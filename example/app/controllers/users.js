@@ -1,7 +1,6 @@
 import _ from 'lodash';
 // import 'reflect-metadata';
 import { promises as fs } from 'fs';
-import sqlite3 from 'sqlite3';
 import { createConnection } from 'typeorm';
 import yaml from 'js-yaml';
 import User from '../entities/User';
@@ -32,6 +31,7 @@ export const index = async (request, response) => {
     .getRepository(User)
     .find();
 
+  await connection.close();
   response.render({ users });
 };
 
@@ -50,6 +50,7 @@ export const show = async (request, response) => {
     response.head(404);
   }
 
+  await connection.close();
   response.render({ user });
 };
 
