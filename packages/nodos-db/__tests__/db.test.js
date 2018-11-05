@@ -1,7 +1,7 @@
 import Db from '../src/Db';
 
 const config = {
-  type: 'postgres',
+  type: 'sqlite',
   host: 'db',
   username: 'postgres',
   database: 'wow',
@@ -9,11 +9,11 @@ const config = {
 };
 
 test('nodos/db', async () => {
-  const db = new Db(config);
-  // const runner = await db.createQueryRunner();
-  try {
-    await db.dropDb();
-  } catch (e) {
-    await db.createDb();
-  }
+  // const db = new Db(config);
+  // // const runner = await db.createQueryRunner();
+  // try {
+  //   await db.dropDb();
+  // } catch (e) {
+  //   await db.createDb();
+  // }
 });

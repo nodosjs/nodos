@@ -13,8 +13,8 @@ development:
 
 test:
   <<: *default
-  type: postgres
-  database: example_test
+  type: sqlite
+  database: db/test.sqlite3
 
 # production:
 #   <<: *default
