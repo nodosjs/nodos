@@ -640,6 +640,7 @@
     "@babel/plugin-proposal-decorators" "^7.1.2"
     "@babel/preset-env" "^7.1.0"
     "@babel/register" "^7.0.0"
+    "@nodosjs/db" "^0.0.26"
     "@nodosjs/routing" "^0.0.26"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.6.0"
@@ -662,6 +663,13 @@
     reflect-metadata "^0.1.12"
     statuses "^1.5.0"
     yargs "^12.0.3-candidate.0"
+
+"@nodosjs/db@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@nodosjs/db/-/db-0.0.26.tgz#9b0152035b6728b810d20b37e2ea786d0d7eb0fd"
+  integrity sha512-Yl7BHCQAyzNug1CXkm/4G/GhRZWtRvUrNgOTmXkmZuPhfWeU958rTpupFiUrBMVzTIJD7yedFIx7NdpuL/6rsw==
+  dependencies:
+    "@babel/core" "^7.1.2"
 
 "@nodosjs/routing@../packages/nodos-routing/":
   version "0.0.26"

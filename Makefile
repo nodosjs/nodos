@@ -31,9 +31,15 @@ compose-update:
 	docker-compose run app yarn update
 
 compose-setup:
-	docker-compose run app yarn install
+	docker-compose run app make setup
 
-compose:
+compose-example-setup: compose-setup
+	docker-compose run app bash -c 'cd example && make setup'
+
+compose-example-bash:
+	docker-compose run -w /code/example app bash
+
+compose-example:
 	docker-compose up
 
 compose-test:
