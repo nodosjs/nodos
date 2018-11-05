@@ -7,7 +7,6 @@ Node.js framework for humans
 ### Requirements
 
 * Nodejs >= 10
-* Docker (for developing nodos)
 
 ### Install
 
@@ -25,14 +24,10 @@ $ bin/nodos server
 # Setup
 $ git clone <this repo>
 $ cd nodos
-$ make compose-setup-example
-
-# Run server
-$ make compose-example # then open localhost:3000
-
-# Run tests
-$ make compose-example-bash
-$ bin/nodos tests
+$ make setup
+$ cd example
+$ make setup
+$ bin/nodos test
 $ bin/nodos server
 ```
 
@@ -41,9 +36,9 @@ $ bin/nodos server
 We use https://lernajs.io and yarn
 
 ```sh
-$ git clone # to nodos
-$ make compose-setup
-$ make compose-bash
+$ git clone <this repo>
+$ cd nodos
+$ make setup
 $ make test
 ```
 
