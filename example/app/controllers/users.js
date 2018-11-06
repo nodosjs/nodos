@@ -4,6 +4,8 @@ export const index = async (request, response, { db }) => {
   const users = await db.connection
     .getRepository(User)
     .find();
+  // console.log(db.connection);
+  // const users = [];
 
   response.render({ users });
 };

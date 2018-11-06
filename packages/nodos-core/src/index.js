@@ -33,14 +33,11 @@ const sendResponse = (response, reply) => {
 
   switch (response.responseType) {
     case 'code':
-      reply.code(response.code).send();
-      break;
+      return reply.code(response.code).send();
     case 'rendering':
-      reply.view(response.template(), response.locals);
-      break;
+      return reply.view(response.template(), response.locals);
     case 'redirect':
-      reply.code(response.code).redirect(response.redirectUrl);
-      break;
+      return reply.code(response.code).redirect(response.redirectUrl);
 
     default:
       throw new Error(`Unknown responseType: ${response.responseType}`);
@@ -98,7 +95,7 @@ const buildFastify = async (config, router, container) => {
       const controllers = await import(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.name });
       await controllers[route.name](request, response, container);
-      sendResponse(response, reply);
+      return sendResponse(response, reply);
     });
   });
   await Promise.all(promises);

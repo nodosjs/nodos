@@ -27,5 +27,5 @@ export default async (args = process.argv.slice(2), options = {}) => {
   console.log(commands);
   commands.forEach(c => parser.command(c));
   await parser.argv;
-  await app.close();
+  return app;
 };
