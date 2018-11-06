@@ -1,0 +1,30 @@
+{
+  "name": "@nodosjs/application",
+  "version": "0.0.26",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "> TODO: description",
+  "author": "Kirill Mokevnin <mokevnin@gmail.com>",
+  "homepage": "https://github.com/nodosjs/nodos#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodosjs/nodos.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/nodosjs/nodos/issues"
+  }
+}

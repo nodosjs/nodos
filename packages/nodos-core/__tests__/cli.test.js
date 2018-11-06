@@ -1,6 +1,6 @@
 import path from 'path';
-import { cli } from '../src';
-import * as commandBuilders from '../src/commands';
+import { cli } from '../lib';
+import * as commands from '../lib/commands';
 
 const projectRoot = path.join(__dirname, '__fixtures__/app');
 
@@ -19,7 +19,7 @@ test('nodos/cli/console', async (done) => {
       container, done, projectRoot, exitProcess: false,
     },
   );
-  await app.close();
+  await app.stop();
 
   // expect(replServer.context).toHaveProperty('app');
 });
@@ -35,7 +35,7 @@ test('nodos/cli/test', async (done) => {
       container, done, projectRoot, exitProcess: false,
     },
   );
-  await app.close();
+  await app.stop();
 
   // expect(replServer.context).toHaveProperty('app');
 });
@@ -46,8 +46,9 @@ test('nodos/cli/server', async (done) => {
   };
   const container = {
     nodos: () => ({
+      boot: jest.fn(),
       listen: fillResult,
-      commandBuilders: [commandBuilders.serverCommand],
+      commands: [commands.serverCommand],
     }),
   };
   const app = await cli(
@@ -74,8 +75,9 @@ describe('nodos/cli/routes', () => {
   test('return valid presentation when no routes defined', async (done) => {
     const container = {
       nodos: () => Promise.resolve({
+        boot: jest.fn(),
         router: { routes: [] },
-        commandBuilders: [commandBuilders.routesCommand],
+        commands: [commands.routesCommand],
       }),
       print: (output) => { expect(output).toMatchSnapshot(); },
     };

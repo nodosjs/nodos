@@ -1,12 +1,14 @@
 /* eslint-disable no-param-reassign */
 
-export default (config) => {
-  config.logLevel = 'debug';
-  config.extensions.push(
-    import('@nodosjs/db'),
-  );
-  config.plugins.push(
-    import('fastify-cookie'),
-    import('fastify-formbody'),
-  );
-};
+import BaseApplication from '@nodosjs/application';
+import fastifyCookie from 'fastify-cookie';
+import fastifyFormbody from 'fastify-formbody';
+import nodosDb from '@nodosjs/db';
+
+export default class Application extends BaseApplication {
+  init() {
+    this.addExtension(nodosDb);
+    this.addPlugin(fastifyCookie);
+    this.addPlugin(fastifyFormbody);
+  }
+}

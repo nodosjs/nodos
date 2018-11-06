@@ -1,6 +1,6 @@
 import {
   textFieldTag, labelTag, submitTag, form, Form,
-} from '../src/form';
+} from '../lib/form';
 
 describe('text field tag', () => {
   test('default', () => {

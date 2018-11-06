@@ -13,7 +13,7 @@ publish:
 	npx lerna publish
 
 build:
-	NODE_ENV=production npx lerna exec --parallel -- babel src -d dist
+	NODE_ENV=production npx lerna exec --parallel -- babel lib -d dist
 
 lint:
 	npx eslint .

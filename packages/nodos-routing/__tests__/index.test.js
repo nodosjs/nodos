@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import _ from 'lodash';
 import yml from 'js-yaml';
-import Router from '../src';
+import Router from '../lib';
 
 test('nodos-routing', async () => {
   const routesData = await fs.readFile(`${__dirname}/__fixtures__/routes.yml`);
