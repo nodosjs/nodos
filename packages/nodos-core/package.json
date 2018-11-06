@@ -17,7 +17,7 @@
     "babel-jest": "^23.6.0",
     "columnify": "^1.5.4",
     "debug": "^4.1.0",
-    "fastify": "^1.13.0",
+    "fastify": "https://github.com/fastify/fastify.git",
     "fastify-cookie": "^2.0.2",
     "fastify-error-page": "^2.0.0",
     "fastify-formbody": "^2.0.1",

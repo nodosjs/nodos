@@ -22,8 +22,8 @@
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
-    "@babel/plugin-proposal-decorators": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
     "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
@@ -46,8 +46,7 @@
     "sql.js": "^0.5.0",
     "sqlite3": "^4.0.3"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "engines": {
     "node": ">=10"
   }
