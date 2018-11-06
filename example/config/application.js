@@ -8,13 +8,4 @@ export default (config) => {
     import('fastify-cookie'),
     import('fastify-formbody'),
   );
-  config.db = {
-    type: 'sqlite',
-    synchronize: true,
-    logging: true,
-    database: 'db/test.sqlite3',
-    entities: [
-      `${__dirname}/../app/entities/*.js`,
-    ],
-  };
 };

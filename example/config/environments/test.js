@@ -9,7 +9,7 @@ export default (config) => {
     logging: true,
     database: 'db/test.sqlite3',
     entities: [
-      `${__dirname}/../app/entities/*.js`,
+      `${__dirname}/../../app/entities/*.js`,
     ],
   };
 };

@@ -15,4 +15,4 @@ server:
 	bin/nodos server -h 0.0.0.0
 
 test:
-	bin/nodos test
+	NODOS_ENV=test DEBUG=nodos bin/nodos test
