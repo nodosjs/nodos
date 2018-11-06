@@ -89,7 +89,8 @@ const buildFastify = async (config, router, container) => {
     };
     app[route.method](route.url, opts, async (request, reply) => {
       if (!config.cacheModules) {
-        const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/));
+        const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/))
+          .filter(p => p.match(/controllers/));
         appCacheKeys.forEach((item) => { delete require.cache[item]; });
       }
       const controllers = await import(pathToController);

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 export default (config) => {
-  config.cacheModules = true;
+  config.cacheModules = false;
   config.logLevel = 'debug';
   config.db = {
     type: 'sqlite',
