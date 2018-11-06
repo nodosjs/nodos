@@ -46,7 +46,6 @@ test('nodos/cli/server', async (done) => {
   };
   const container = {
     nodos: () => ({
-      close: jest.fn(),
       listen: fillResult,
       commandBuilders: [commandBuilders.serverCommand],
     }),
@@ -57,7 +56,6 @@ test('nodos/cli/server', async (done) => {
       container, done, projectRoot, exitProcess: false,
     },
   );
-  await app.close();
 });
 
 describe('nodos/cli/routes', () => {
@@ -77,7 +75,6 @@ describe('nodos/cli/routes', () => {
     const container = {
       nodos: () => Promise.resolve({
         router: { routes: [] },
-        close: jest.fn(),
         commandBuilders: [commandBuilders.routesCommand],
       }),
       print: (output) => { expect(output).toMatchSnapshot(); },
@@ -88,7 +85,6 @@ describe('nodos/cli/routes', () => {
         container, done, projectRoot, exitProcess: false,
       },
     );
-    await app.close();
   });
 });
 

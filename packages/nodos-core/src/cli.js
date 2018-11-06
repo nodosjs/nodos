@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import yargs from 'yargs';
+import '@babel/register';
 import { nodos } from '.';
 import log from './logger';
 

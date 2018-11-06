@@ -2,17 +2,25 @@ import _ from 'lodash';
 import jest from 'jest';
 import repl from 'repl';
 import columnify from 'columnify';
+import log from './logger';
 
 export const testCommand = ({ container, done }) => ({
-  command: 'test',
+  command: 'test [file]',
   describe: 'run tests',
   builder: {},
   handler: (argv) => {
     // FIXME: not working
     process.env.NODOS_ENV = 'test';
-    const options = argv._.slice(1);
+    // const rest = argv._.slice(1);
+    const options = [];
+    if (argv.file) {
+      options.push('-f', argv.file);
+    } else {
+      options.push('--testPathPattern', '/tests/');
+    }
     const jestItem = _.get(container, 'jest', jest);
-    jestItem.run(['--testPathPattern', '/tests/', options]);
+    log(options);
+    jestItem.run(options);
     done();
   },
 });
