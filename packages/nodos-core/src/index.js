@@ -91,9 +91,10 @@ const buildFastify = async (config, router, container) => {
       beforeHandler: middlewares,
     };
     app[route.method](route.url, opts, async (request, reply) => {
-      // FIXME: enable only for development environment
-      const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/));
-      appCacheKeys.forEach((item) => { delete require.cache[item]; });
+      if (!config.cacheModules) {
+        const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/));
+        appCacheKeys.forEach((item) => { delete require.cache[item]; });
+      }
       const controllers = await import(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.name });
       await controllers[route.name](request, response, container);
@@ -145,8 +146,10 @@ const loadExtensions = async (config) => {
 
 export const nodos = async (projectRootPath) => {
   const config = await buildConfig(projectRootPath);
+  log(config);
   const router = await buildRouter(config);
   const extensionsData = await loadExtensions(config);
+  log(extensionsData);
   const commandBuilders = Object.values(localCommandBuilders)
     .concat(extensionsData.commandBuilders);
   const fastifyInstance = await buildFastify(config, router, extensionsData.container);

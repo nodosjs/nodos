@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import commandBuilder from './commands';
 import Db from './Db';
 

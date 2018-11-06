@@ -8,6 +8,7 @@ export const testCommand = ({ container, done }) => ({
   describe: 'run tests',
   builder: {},
   handler: (argv) => {
+    // FIXME: not working
     process.env.NODOS_ENV = 'test';
     const options = argv._.slice(1);
     const jestItem = _.get(container, 'jest', jest);
