@@ -56,6 +56,8 @@ export default class BaseApplication {
     };
   }
 
+  init() { }
+
   async start() {
     await this.init();
     this.router = await buildRouter(this.config.paths.routes);
