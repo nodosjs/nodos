@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import Application from '../Application';
 
 export default class Test extends Application {

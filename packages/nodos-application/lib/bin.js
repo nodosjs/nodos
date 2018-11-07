@@ -27,6 +27,5 @@ export default async (projectRoot, args = process.argv.slice(2), options = {}) =
   log(commands);
   commands.forEach(c => parser.command(c));
   await parser.argv;
-  await app.stop();
   return app;
 };

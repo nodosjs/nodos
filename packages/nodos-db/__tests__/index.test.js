@@ -1,6 +1,7 @@
 import { BaseApplication } from '@nodosjs/application';
 import getExtensionData from '../lib';
 
+// TODO: create app in fixtures
 class MyApplication extends BaseApplication {
   init() {
     this.config.db = {

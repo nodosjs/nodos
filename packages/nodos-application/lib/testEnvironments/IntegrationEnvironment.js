@@ -1,5 +1,6 @@
 import NodeEnvironment from 'jest-environment-node';
 import { nodos } from '..';
+import '@babel/register';
 
 class IntegrationEnvironment extends NodeEnvironment {
   constructor(config) {
@@ -9,6 +10,7 @@ class IntegrationEnvironment extends NodeEnvironment {
 
   async setup() {
     this.app = await nodos(this.config.rootDir);
+    await this.app.start();
     ['get', 'post', 'put', 'patch', 'delete'].forEach((verb) => {
       this.global[verb] = (...args) => this.app[verb](...args);
     });

@@ -1,5 +1,5 @@
 /**
- * @jest-environment @nodosjs/core/dist/testEnvironments/IntegrationEnvironment
+ * @jest-environment @nodosjs/application/dist/testEnvironments/IntegrationEnvironment
  */
 
 test('example/posts/comments', async () => {

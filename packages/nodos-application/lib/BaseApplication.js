@@ -1,6 +1,7 @@
 import path from 'path';
 import buildRouter from './builders/routes';
 import buildFastify from './builders/fastify';
+import log from './logger';
 
 export default class BaseApplication {
   defaultRequestOptions = { headers: {}, params: null };

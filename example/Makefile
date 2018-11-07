@@ -14,7 +14,7 @@ links:
 	yarn link @nodosjs/routing
 
 server:
-	DEBUG=nodos bin/nodos server -h 0.0.0.0
+	DEBUG=nodos:* bin/nodos server -h 0.0.0.0
 
 test:
 	NODOS_ENV=test DEBUG=nodos bin/nodos test

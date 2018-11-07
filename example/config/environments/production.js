@@ -1,6 +1,7 @@
-/* eslint-disable no-param-reassign */
-
-export default (config) => {
-  config.logLevel = 'info';
-  config.cacheModules = true;
-};
+export default class Production extends Application {
+  init() {
+    super.init();
+    this.config.logLevel = 'info';
+    this.config.cacheModules = true;
+  }
+}

@@ -43,13 +43,13 @@ export default async (app) => {
     logger: true,
   });
   fastifyApp.register(fastifySensible);
-  app.plugins.forEach(([plugin, options]) => fastifyApp.register(plugin, options));
   // FIXME: move to nodos-templates
   fastifyApp.register(pointOfView, {
     engine: { pug },
     includeViewExtension: true,
     templates: app.config.paths.templates,
   });
+  app.plugins.forEach(([plugin, options]) => fastifyApp.register(plugin, options));
 
   fastifyApp.after(console.log);
   fastifyApp.ready(console.log);

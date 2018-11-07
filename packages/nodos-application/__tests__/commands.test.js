@@ -18,6 +18,7 @@ test('nodos/bin/console', async () => {
       container,
     },
   );
+  await app.stop();
 
   // expect(replServer.context).toHaveProperty('app');
 });
@@ -34,6 +35,7 @@ test('nodos/bin/test', async () => {
       container,
     },
   );
+  await app.stop();
 
   // expect(replServer.context).toHaveProperty('app');
 });
@@ -57,6 +59,7 @@ test('nodos/bin/server', async () => {
       container,
     },
   );
+  await app.stop();
 });
 
 describe('nodos/bin/routes', () => {
@@ -71,6 +74,7 @@ describe('nodos/bin/routes', () => {
         container,
       },
     );
+    await app.stop();
   });
 
   test('return valid presentation when no routes defined', async () => {
@@ -90,5 +94,6 @@ describe('nodos/bin/routes', () => {
         container,
       },
     );
+    await app.stop();
   });
 });
