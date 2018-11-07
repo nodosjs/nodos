@@ -1,4 +1,4 @@
-import BaseApplication from '@nodosjs/application';
+import { BaseApplication } from '@nodosjs/application';
 import getExtensionData from '../lib';
 
 class MyApplication extends BaseApplication {

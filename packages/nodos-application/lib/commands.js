@@ -4,7 +4,7 @@ import repl from 'repl';
 import columnify from 'columnify';
 import log from './logger';
 
-export const testCommand = ({ container, done }) => ({
+export const testCommand = ({ container }) => ({
   command: 'test [file]',
   describe: 'run tests',
   builder: {},
@@ -21,11 +21,10 @@ export const testCommand = ({ container, done }) => ({
     const jestItem = _.get(container, 'jest', jest);
     log(options);
     jestItem.run(options);
-    done();
   },
 });
 
-export const consoleCommand = ({ app, container, done }) => ({
+export const consoleCommand = ({ app, container }) => ({
   command: 'console',
   describe: 'run console',
   builder: {},
@@ -35,11 +34,10 @@ export const consoleCommand = ({ app, container, done }) => ({
       prompt: '> ',
     });
     replServer.context.app = app;
-    done();
   },
 });
 
-export const serverCommand = ({ app, done }) => ({
+export const serverCommand = ({ app }) => ({
   command: 'server',
   describe: 'run server',
   builder: yargs => yargs
@@ -54,12 +52,11 @@ export const serverCommand = ({ app, done }) => ({
         process.exit(1);
       }
       console.log(address);
-      done();
     });
   },
 });
 
-export const routesCommand = ({ app, container, done }) => ({
+export const routesCommand = ({ app, container }) => ({
   command: 'routes',
   describe: 'display routes',
   handler: async () => {
@@ -91,6 +88,5 @@ export const routesCommand = ({ app, container, done }) => ({
       );
       print(formattedRoutes);
     }
-    done();
   },
 });

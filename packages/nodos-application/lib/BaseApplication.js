@@ -56,7 +56,7 @@ export default class BaseApplication {
     };
   }
 
-  async boot() {
+  async start() {
     await this.init();
     this.router = await buildRouter(this.config.paths.routes);
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));

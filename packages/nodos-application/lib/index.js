@@ -1,3 +1,5 @@
 import BaseApplication from './BaseApplication';
+import nodos from './nodos';
+import bin from './bin';
 
-export default BaseApplication;
+export { BaseApplication, nodos, bin };

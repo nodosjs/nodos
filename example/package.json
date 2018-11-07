@@ -5,6 +5,8 @@
   },
   "dependencies": {
     "@nodosjs/core": "../packages/nodos-core/",
+    "@nodosjs/db": "../packages/nodos-db/",
+    "@nodosjs/application": "../packages/nodos-application/",
     "@nodosjs/routing": "../packages/nodos-routing/",
     "bootstrap": "^4.1.3",
     "jquery-ujs": "^1.2.2",

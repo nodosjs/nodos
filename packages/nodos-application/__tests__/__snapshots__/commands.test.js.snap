@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`nodos/cli/routes return valid presentation when no routes defined 1`] = `
+exports[`nodos/bin/routes return valid presentation when no routes defined 1`] = `
 "You don't have any routes defined!
 
 Please add some routes in config/routes.yml."
 `;
 
-exports[`nodos/cli/routes return valid routes presentation 1`] = `
+exports[`nodos/bin/routes return valid routes presentation 1`] = `
 "Verb   URI Pattern                             Pipeline
 GET    /api/users                              browser 
 GET    /api/users/build                        browser 
