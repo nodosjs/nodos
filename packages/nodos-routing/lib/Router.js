@@ -64,12 +64,12 @@ const getUrl = (path, prefix, parent, resourceName, postfix = '') => {
   return urlJoin(path, prefix, parentUrl, resourceName, postfix);
 };
 
-const mapResourcesToUrl = (url, resources) => {
-  const idGenerator = function* (objects) {
-    yield* resources;
+const mapResourcesToUrl = (url, params) => {
+  const idGenerator = function* (arr) {
+    yield* arr;
   };
 
-  const ids = idGenerator(resources);
+  const ids = idGenerator(params);
   return url.replace(/:\w+/g, () => ids.next().value);
 };
 
@@ -248,12 +248,12 @@ export default class Router {
   // recognize(request) {
   // }
 
-  routePath(name, ...resources) {
+  routePath(name, ...params) {
     const route = this.routes.find(r => r.name === name);
-    return mapResourcesToUrl(route.url, resources);
+    return mapResourcesToUrl(route.url, params);
   }
 
-  routeUrl(name, ...resources) {
-    return urlJoin(this.host, this.routePath(name, ...resources));
+  routeUrl(name, ...params) {
+    return urlJoin(this.host, this.routePath(name, ...params));
   }
 }
