@@ -33,6 +33,7 @@ PATCH  /posts/:id                              browser
 PUT    /posts/:id                              browser 
 DELETE /posts/:id                              browser 
 GET    /session/build                          browser 
+POST   /session                                browser 
 GET    /session                                browser 
 GET    /session/edit                           browser 
 PATCH  /session                                browser 
