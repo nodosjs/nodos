@@ -65,11 +65,7 @@ const getUrl = (path, prefix, parent, resourceName, postfix = '') => {
 };
 
 const mapResourcesToUrl = (url, params) => {
-  const idGenerator = function* (arr) {
-    yield* arr;
-  };
-
-  const ids = idGenerator(params);
+  const ids = params[Symbol.iterator]();
   return url.replace(/:\w+/g, () => ids.next().value);
 };
 
