@@ -71,8 +71,11 @@ export const routesCommand = ({ app, container }) => ({
       const formattedRoutes = columnify(
         routes,
         {
-          columns: ['method', 'url', 'pipeline'],
+          columns: ['name', 'method', 'url', 'pipeline'],
           config: {
+            name: {
+              headingTransform: () => 'Name',
+            },
             method: {
               headingTransform: () => 'Verb',
               dataTransform: _.toUpper,
