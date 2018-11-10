@@ -17,12 +17,12 @@ pipelines:
 
 scopes:
 
-  - path: '/api'
+  - name: 'api'
     pipeline: browser
     routes:
       - resources: users
 
-  - path: '/'
+  - name: '/'
     pipeline: browser
     routes:
       - resources: users

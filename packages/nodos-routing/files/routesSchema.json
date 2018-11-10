@@ -14,7 +14,7 @@
       "items": {
           "type": "object",
           "properties": {
-            "path": { "type": "string" },
+            "name": { "type": "string" },
             "pipeline": { "type": "string" },
             "routes": {
               "type": "array",

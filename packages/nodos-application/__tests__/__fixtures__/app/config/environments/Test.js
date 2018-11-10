@@ -7,6 +7,7 @@ export default class Test extends Application {
     super.init();
     this.config.logLevel = 'debug';
     this.config.cacheModules = true;
+    this.config.host = 'http://example.com';
     this.config.db = {
       type: 'sqlite',
       synchronize: true,

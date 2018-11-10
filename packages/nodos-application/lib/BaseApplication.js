@@ -61,7 +61,7 @@ export default class BaseApplication {
 
   async start() {
     await this.init();
-    this.router = await buildRouter(this.config.paths.routes);
+    this.router = await buildRouter(this.config.paths.routes, { host: this.config.host });
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
     // TODO: pass only data, not application
     this.fastify = await buildFastify(this);

@@ -87,8 +87,8 @@ export default async (app) => {
         appCacheKeys.forEach((item) => { delete require.cache[item]; });
       }
       const controllers = await import(pathToController);
-      const response = new Response({ templateDir: route.resourceName, templateName: route.name });
-      await controllers[route.name](request, response, app.container);
+      const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
+      await controllers[route.actionName](request, response, app.container);
       return sendResponse(response, reply);
     });
   });

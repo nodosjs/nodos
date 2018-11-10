@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import urlJoin from 'url-join';
-import { singularize, foreignKey } from 'inflected';
+import {
+  singularize, foreignKey, pluralize, camelize,
+} from 'inflected';
 import Route from './Route';
 import validate from './validator';
 
@@ -18,6 +20,17 @@ const buildActionNames = (routeItem) => {
   return _.difference(onlyNames, exceptNames);
 };
 
+const normalizeScope = (scope) => {
+  const path = scope.name.startsWith('/') ? scope.name : '/';
+  const prefix = scope.name.startsWith('/') ? '' : scope.name;
+
+  return {
+    ...scope,
+    path,
+    prefix,
+  };
+};
+
 const normalizeRouteItem = (valueOrValues) => {
   const routeItem = _.isObject(valueOrValues) ? valueOrValues : { name: valueOrValues };
   const routes = routeItem.routes || [];
@@ -29,122 +42,175 @@ const normalizeRouteItem = (valueOrValues) => {
   };
 };
 
-const selectRequestedActions = (routeItem, actions) => {
-  const { actionNames } = routeItem;
-  return actions.filter(action => actionNames.includes(action.name));
-};
-
 const getForeignKey = (resourceName) => {
   const key = resourceName |> singularize |> foreignKey;
   return `:${key}`;
 };
 
+const getName = (prefix, parent, resourceName, actionName, actionPrefix = '') => {
+  const prepareResourceName = (resourceName, actionName) => {
+    const shouldBePlural = ['index', 'create'];
+    return resourceName |> (shouldBePlural.includes(actionName) ? pluralize : singularize);
+  };
+
+  const parentPrefix = parent ? parent.resourceName |> singularize : '';
+  const preparedResourceName = prepareResourceName(resourceName, actionName);
+  const words = [actionPrefix, prefix, parentPrefix, preparedResourceName].filter(w => w).join('_');
+  return camelize(words, false);
+};
+
+const getUrl = (path, prefix, parent, resourceName, postfix = '') => {
+  const parentUrl = parent ? urlJoin(parent.resourceName, getForeignKey(parent.resourceName)) : '';
+  return urlJoin(path, prefix, parentUrl, resourceName, postfix);
+};
+
+const mapResourcesToUrl = (url, params) => {
+  const ids = params[Symbol.iterator]();
+  return url.replace(/:\w+/g, () => ids.next().value);
+};
+
+const selectRequestedActions = (routeItem, actions) => {
+  const { actionNames } = routeItem;
+  return actions.filter(action => actionNames.includes(action.actionName));
+};
+
 const types = {
-  resources: (routeItem, rec, { path, middlewares, pipeline }) => {
+  resources: (routeItem, rec, {
+    path, prefix, middlewares, pipeline, parent,
+  }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
       pipeline,
+      path,
+      prefix,
+      parent,
     };
 
     const actions = [
       {
-        name: 'index',
+        actionName: 'index',
         method: 'get',
-        url: urlJoin(path, routeItem.name),
+        url: getUrl(path, prefix, parent, routeItem.name),
+        name: getName(prefix, parent, routeItem.name, 'index'),
       },
       {
-        name: 'build',
+        actionName: 'build',
         method: 'get',
-        url: urlJoin(path, routeItem.name, '/build'),
+        url: getUrl(path, prefix, parent, routeItem.name, '/build'),
+        name: getName(prefix, parent, routeItem.name, 'build', 'build'),
       },
       {
-        name: 'create',
+        actionName: 'create',
         method: 'post',
-        url: urlJoin(path, routeItem.name),
+        url: getUrl(path, prefix, parent, routeItem.name),
+        name: getName(prefix, parent, routeItem.name, 'create'),
       },
       {
-        name: 'show',
+        actionName: 'show',
         method: 'get',
-        url: urlJoin(path, routeItem.name, '/:id'),
+        url: getUrl(path, prefix, parent, routeItem.name, ':id'),
+        name: getName(prefix, parent, routeItem.name, 'show'),
       },
       {
-        name: 'edit',
+        actionName: 'edit',
         method: 'get',
-        url: urlJoin(path, routeItem.name, '/:id/edit'),
+        url: getUrl(path, prefix, parent, routeItem.name, ':id/edit'),
+        name: getName(prefix, parent, routeItem.name, 'edit', 'edit'),
       },
       {
-        name: 'update',
+        actionName: 'update',
         method: 'patch',
-        url: urlJoin(path, routeItem.name, '/:id'),
+        url: getUrl(path, prefix, parent, routeItem.name, ':id'),
+        name: getName(prefix, parent, routeItem.name, 'update'),
       },
       {
-        name: 'update',
+        actionName: 'update',
         method: 'put',
-        url: urlJoin(path, routeItem.name, '/:id'),
+        url: getUrl(path, prefix, parent, routeItem.name, ':id'),
+        name: getName(prefix, parent, routeItem.name, 'update'),
       },
       {
-        name: 'destroy',
+        actionName: 'destroy',
         method: 'delete',
-        url: urlJoin(path, routeItem.name, '/:id'),
+        url: getUrl(path, prefix, parent, routeItem.name, ':id'),
+        name: getName(prefix, parent, routeItem.name, 'destroy'),
       },
     ];
 
     const requestedActions = selectRequestedActions(routeItem, actions);
 
     const routes = requestedActions.map(options => new Route({ ...options, ...sharedData }));
-    const nestedPath = urlJoin(path, routeItem.name, getForeignKey(routeItem.name));
-    const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
+    const nestedRoutes = rec(routeItem.routes, {
+      path, prefix, middlewares, pipeline, parent: routes.find(r => r.actionName === 'show'),
+    });
     return [...routes, ...nestedRoutes];
   },
-  resource: (routeItem, rec, { path, middlewares, pipeline }) => {
+  resource: (routeItem, rec, {
+    path, prefix, middlewares, pipeline, parent,
+  }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
       pipeline,
+      path,
+      prefix,
+      parent,
     };
 
     const actions = [
       {
-        name: 'build',
+        actionName: 'build',
         method: 'get',
-        url: urlJoin(path, routeItem.name, '/build'),
+        url: getUrl(path, prefix, parent, routeItem.name, '/build'),
+        name: getName(prefix, parent, routeItem.name, 'build', 'build'),
       },
       {
-        name: 'show',
-        method: 'get',
-        url: urlJoin(path, routeItem.name),
+        actionName: 'create',
+        method: 'post',
+        url: getUrl(path, prefix, parent, routeItem.name),
+        name: getName(prefix, parent, routeItem.name, 'create'),
       },
       {
-        name: 'edit',
+        actionName: 'show',
         method: 'get',
-        url: urlJoin(path, routeItem.name, '/edit'),
+        url: getUrl(path, prefix, parent, routeItem.name),
+        name: getName(prefix, parent, routeItem.name, 'show'),
       },
       {
-        name: 'update',
+        actionName: 'edit',
+        method: 'get',
+        url: getUrl(path, prefix, parent, routeItem.name, '/edit'),
+        name: getName(prefix, parent, routeItem.name, 'edit', 'edit'),
+      },
+      {
+        actionName: 'update',
         method: 'patch',
-        url: urlJoin(path, routeItem.name),
+        url: getUrl(path, prefix, parent, routeItem.name),
+        name: getName(prefix, parent, routeItem.name, 'update'),
       },
       {
-        name: 'update',
+        actionName: 'update',
         method: 'put',
-        url: urlJoin(path, routeItem.name),
+        url: getUrl(path, prefix, parent, routeItem.name),
+        name: getName(prefix, parent, routeItem.name, 'update'),
       },
       {
-        name: 'destroy',
+        actionName: 'destroy',
         method: 'delete',
-        url: urlJoin(path, routeItem.name),
+        url: getUrl(path, prefix, parent, routeItem.name),
+        name: getName(prefix, parent, routeItem.name, 'destroy'),
       },
     ];
 
     const requestedActions = selectRequestedActions(routeItem, actions);
 
     const routes = requestedActions.map(options => new Route({ ...options, ...sharedData }));
-    const nestedPath = urlJoin(path, routeItem.name);
-    const nestedRoutes = rec(routeItem.routes, { path: nestedPath, middlewares, pipeline });
+    const nestedRoutes = rec(routeItem.routes, {
+      path, prefix: routeItem.name, middlewares, pipeline,
+    });
     return [...routes, ...nestedRoutes];
   },
-
 };
 
 const buildRoutes = (routes, options) => routes.map((item) => {
@@ -153,25 +219,37 @@ const buildRoutes = (routes, options) => routes.map((item) => {
   return types[typeName](routeItem, buildRoutes, options);
 });
 
-const buildScope = ({ routes, path, pipeline }, pipelines) => {
-  const result = buildRoutes(routes, { path, middlewares: pipelines[pipeline], pipeline });
-  return result;
-};
+const buildScope = ({
+  routes, path, prefix, pipeline,
+}, pipelines) => buildRoutes(routes, {
+  path, prefix, middlewares: pipelines[pipeline], pipeline,
+});
 
 export default class Router {
-  constructor(routeMap) {
+  constructor(routeMap, options) {
     validate(routeMap);
 
+    this.host = options.host;
     this.routeMap = routeMap;
-    // console.log(routeMap);
-    this.scopes = routeMap.scopes.map(scope => ({
-      path: scope.path,
-      middlewares: routeMap.pipelines[scope.pipeline],
+    this.scopes = routeMap.scopes.map(({ name, pipeline }) => ({
+      name,
+      middlewares: routeMap.pipelines[pipeline],
     }));
-    this.routes = routeMap.scopes.map(scope => buildScope(scope, routeMap.pipelines))
+    this.routes = routeMap.scopes
+      .map(scope => normalizeScope(scope))
+      .map(scope => buildScope(scope, routeMap.pipelines))
       |> _.flattenDeep;
   }
 
   // recognize(request) {
   // }
+
+  routePath(name, ...params) {
+    const route = this.routes.find(r => r.name === name);
+    return mapResourcesToUrl(route.url, params);
+  }
+
+  routeUrl(name, ...params) {
+    return urlJoin(this.host, this.routePath(name, ...params));
+  }
 }
