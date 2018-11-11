@@ -1,13 +1,13 @@
 {
   "name": "@nodosjs/db",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "main": "./dist/index.js",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
+    "@nodosjs/application": "^0.0.27",
     "reflect-metadata": "^0.1.12",
-    "typeorm": "^0.2.8",
-    "@nodosjs/application": "^0.0.26"
+    "typeorm": "^0.2.8"
   }
 }
