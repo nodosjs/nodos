@@ -632,13 +632,8 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@nodosjs/application@../packages/nodos-application/":
+"@nodosjs/application@../packages/nodos-application/", "@nodosjs/application@^0.0.27":
   version "0.0.27"
-
-"@nodosjs/application@^0.0.27":
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/@nodosjs/application/-/application-0.0.27.tgz#687ec09fceb64137cb97c382e5660eb273ddd264"
-  integrity sha512-xVdVZaHioPP+7LB5vcotFtruJI6K8Dw2SzFc02MQUo4nHhtpMNWkX+cdAfw0afcIxUqhiE93T5koPgFoABX1oQ==
 
 "@nodosjs/core@../packages/nodos-core/":
   version "0.0.27"
@@ -1269,6 +1264,16 @@ babel-jest@^23.6.0:
   dependencies:
     babel-plugin-istanbul "^4.1.6"
     babel-preset-jest "^23.2.0"
+
+babel-loader@^8.0.4:
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.4.tgz#7bbf20cbe4560629e2e41534147692d3fecbdce6"
+  integrity sha512-fhBhNkUToJcW9nV46v8w87AJOwAJDz84c1CL57n3Stj73FANM/b9TbCUK4YhdOwEyZ+OxhYpdeZDNzSI29Firw==
+  dependencies:
+    find-cache-dir "^1.0.0"
+    loader-utils "^1.0.2"
+    mkdirp "^0.5.1"
+    util.promisify "^1.0.0"
 
 babel-messages@^6.23.0:
   version "6.23.0"
@@ -4077,7 +4082,7 @@ loader-runner@^2.3.0:
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.3.1.tgz#026f12fe7c3115992896ac02ba022ba92971b979"
   integrity sha512-By6ZFY7ETWOc9RFaAIb23IjJVcM4dvJC/N57nmdz9RSkMXvAXGI7SyVlAw3v8vjtDRlqThgVDVmTnr9fqMlxkw==
 
-loader-utils@^1.1.0:
+loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   integrity sha1-yYrvSIvM7aL/teLeZG1qdUQp9c0=
@@ -4946,6 +4951,11 @@ point-of-view@^2.0.0:
   dependencies:
     fastify-plugin "^1.2.0"
     hashlru "^2.2.1"
+
+popper.js@^1.14.5:
+  version "1.14.5"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.5.tgz#98abcce7c7c34c4ee47fcbc6b3da8af2c0a127bc"
+  integrity sha512-fs4Sd8bZLgEzrk8aS7Em1qh+wcawtE87kRUJQhK6+LndyV1HerX7+LURzAylVaTyWIn5NTB/lyjnWqw/AZ6Yrw==
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
