@@ -14,7 +14,7 @@
   "files": [
     "files",
     "dist",
-    "src"
+    "lib"
   ],
   "devDependencies": {
     "js-yaml": "^3.12.0"
