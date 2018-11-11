@@ -75,7 +75,7 @@ export default class BaseApplication {
     this.hooks.onStop.forEach(h => h());
   }
 
-  get = url => this.request('GET', url)
+  get = (url, options = {}) => this.request('GET', url, options)
 
   post = (url, options = {}) => this.request('POST', url, options)
 

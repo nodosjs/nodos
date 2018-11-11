@@ -11,13 +11,14 @@ export const show = (request, response) => {
     return;
   }
 
-  response.render({ user });
+  response.render({ user, notice: request.flash('notice') }, 'show');
 };
 
 export const create = (request, response) => {
   const { user } = request.body;
   if (user.name) { // validation
     users.push(user);
+    request.flash('notice', 'User created!');
     response.redirectTo('/users');
     return;
   }
