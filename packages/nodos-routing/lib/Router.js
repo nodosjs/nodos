@@ -7,7 +7,7 @@ import Route from './Route';
 import validate from './validator';
 
 const detectRouteType = (currentName) => {
-  const names = ['resources', 'resource'];
+  const names = ['resources', 'resource','root'];
   return names.find(name => name === currentName);
 };
 
@@ -75,6 +75,27 @@ const selectRequestedActions = (routeItem, actions) => {
 };
 
 const types = {
+  root: (routeItem, rec, {
+    path, prefix, middlewares, pipeline, parent,
+  }) => {
+    const sharedData = {
+      resourceName: routeItem.name,
+      middlewares,
+      pipeline,
+      path,
+      prefix,
+      parent,
+    };
+    const action =
+      {
+        actionName: 'index',
+        method: 'get',
+        url: getUrl(path, prefix, parent, '') || '/',
+        name: getName(prefix, parent, routeItem.name),
+      };
+
+    return new Route({ ...action, ...sharedData });
+  },
   resources: (routeItem, rec, {
     path, prefix, middlewares, pipeline, parent,
   }) => {
@@ -213,17 +234,22 @@ const types = {
   },
 };
 
-const buildRoutes = (routes, options) => routes.map((item) => {
-  const typeName = detectRouteType(Object.keys(item)[0]);
-  const routeItem = normalizeRouteItem(item[typeName]);
+const buildRoot = (root, options) => (root ? [buildRoute({root: 'root'}, options)] : []);
+
+const buildRoutes = (routes, options) => routes.map((item) => buildRoute(item, options));
+
+const buildRoute = (route, options) => {
+  const typeName = detectRouteType(Object.keys(route)[0]);
+  const routeItem = normalizeRouteItem(route[typeName]);
   return types[typeName](routeItem, buildRoutes, options);
-});
+};
 
 const buildScope = ({
-  routes, path, prefix, pipeline,
-}, pipelines) => buildRoutes(routes, {
-  path, prefix, middlewares: pipelines[pipeline], pipeline,
-});
+  root, routes, path, prefix, pipeline,
+}, pipelines) => {
+  const options = { path, prefix, middlewares: pipelines[pipeline], pipeline };
+  return [buildRoot(root, options), buildRoutes(routes, options)];
+};
 
 export default class Router {
   constructor(routeMap, options) {

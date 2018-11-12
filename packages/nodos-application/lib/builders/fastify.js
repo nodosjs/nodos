@@ -66,12 +66,6 @@ export default async (app) => {
   // });
   // await Promise.all(scopePromises);
 
-  // FIXME: implement root in nodos-routing
-  fastifyApp.get('/', (request, reply) => {
-    request.log.info('Some info about the current request');
-    reply.send({ hello: 'world' });
-  });
-
   // console.log(router);
   const promises = app.router.routes.map(async (route) => {
     const pathToController = path.join(app.config.paths.controllers, route.resourceName);

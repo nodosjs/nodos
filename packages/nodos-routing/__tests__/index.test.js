@@ -14,6 +14,7 @@ test('nodos-routing', async () => {
   const { routes } = new Router(routesMap, { host: 'http://site.com' });
 
   const expectedRoutes = [
+    { actionName: 'index', url: '/', method: 'get' },
     { actionName: 'index', url: '/api/users', method: 'get' },
     { actionName: 'build', url: '/api/users/build', method: 'get' },
     { actionName: 'create', url: '/api/users', method: 'post' },
@@ -58,6 +59,14 @@ test('nodos-routing route helpers should return correct url', async () => {
   const router = new Router(routesMap, { host: 'http://site.com' });
   const article = { id: 123 };
   const comment = { id: 321 };
+
+  const rootPath = router.routePath('root');
+  const expectedRootPath = '/';
+  expect(rootPath).toBe(expectedRootPath);
+
+  const apiRootPath = router.routePath('apiRoot');
+  const expectedApiRootPath = '/api';
+  expect(apiRootPath).toBe(expectedApiRootPath);
 
   const apiUsersPath = router.routePath('apiUsers');
   const expectedApiUsersPath = '/api/users';
