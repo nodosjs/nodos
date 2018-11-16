@@ -11,8 +11,7 @@ export default class Application extends BaseApplication {
     this.addPlugin(
       fastifySession,
       {
-        // FIXME: move secret to appropriate place
-        secret: 'flying spaghetti monster is among us',
+        secret: this.config.secretKeyBase,
         cookie: {
           secure: false,
         },
