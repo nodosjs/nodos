@@ -19,11 +19,11 @@ test('POST /users success', async () => {
     '/users/5',
     { headers: { cookie } },
   );
-  expect(result2).toMatchObject({ body: '<span>User created!</span><h3>Flash</h3>' });
+  expect(result2.body).toContain('User created!');
 
   const result3 = await app.get(
     '/users/5',
     { headers: { cookie } },
   );
-  expect(result3).toMatchObject({ body: '<h3>Flash</h3>' });
+  expect(result3.body).not.toContain('User created!');
 });
