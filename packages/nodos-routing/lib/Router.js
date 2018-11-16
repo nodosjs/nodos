@@ -7,7 +7,7 @@ import Route from './Route';
 import validate from './validator';
 
 const detectRouteType = (currentName) => {
-  const names = ['resources', 'resource','root'];
+  const names = ['resources', 'resource', 'root'];
   return names.find(name => name === currentName);
 };
 
@@ -77,25 +77,18 @@ const selectRequestedActions = (routeItem, actions) => {
 const types = {
   root: (routeItem, rec, {
     path, prefix, middlewares, pipeline, parent,
-  }) => {
-    const sharedData = {
-      resourceName: routeItem.name,
-      middlewares,
-      pipeline,
-      path,
-      prefix,
-      parent,
-    };
-    const action =
-      {
-        actionName: 'index',
-        method: 'get',
-        url: getUrl(path, prefix, parent, '') || '/',
-        name: getName(prefix, parent, routeItem.name),
-      };
-
-    return new Route({ ...action, ...sharedData });
-  },
+  }) => new Route({
+    resourceName: routeItem.name,
+    middlewares,
+    pipeline,
+    path,
+    prefix,
+    parent,
+    actionName: 'index',
+    method: 'get',
+    url: getUrl(path, prefix, parent, '') || '/',
+    name: getName(prefix, parent, routeItem.name),
+  }),
   resources: (routeItem, rec, {
     path, prefix, middlewares, pipeline, parent,
   }) => {
@@ -234,20 +227,22 @@ const types = {
   },
 };
 
-const buildRoot = (root, options) => (root ? [buildRoute({root: 'root'}, options)] : []);
-
-const buildRoutes = (routes, options) => routes.map((item) => buildRoute(item, options));
-
 const buildRoute = (route, options) => {
   const typeName = detectRouteType(Object.keys(route)[0]);
   const routeItem = normalizeRouteItem(route[typeName]);
   return types[typeName](routeItem, buildRoutes, options);
 };
 
+const buildRoot = (root, options) => (root ? buildRoute({ root: 'root' }, options) : []);
+
+const buildRoutes = (routes, options) => routes.map(item => buildRoute(item, options));
+
 const buildScope = ({
   root, routes, path, prefix, pipeline,
 }, pipelines) => {
-  const options = { path, prefix, middlewares: pipelines[pipeline], pipeline };
+  const options = {
+    path, prefix, middlewares: pipelines[pipeline], pipeline,
+  };
   return [buildRoot(root, options), buildRoutes(routes, options)];
 };
 

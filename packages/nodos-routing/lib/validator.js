@@ -11,7 +11,7 @@ export default (routeMap) => {
   const valid = validate(routeMap);
 
   if (!valid) {
-    throw new TypeError('Routes schema is invalid: ' + ajv.errorsText(validate.errors));
+    throw new TypeError(`Routes schema is invalid: ${ajv.errorsText(validate.errors)}`);
   }
 
   return true;
