@@ -15,6 +15,7 @@
           "type": "object",
           "properties": {
             "name": { "type": "string" },
+            "root": { "type": "boolean" },
             "pipeline": { "type": "string" },
             "routes": {
               "type": "array",
