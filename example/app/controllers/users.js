@@ -27,24 +27,28 @@ export const show = async (request, response, { db }) => {
   response.render({ user });
 };
 
-export const create = async (request, response, { db }) => {
+export const create = async (request, response, { db, router }) => {
   const user = new User(request.body.user);
 
   if (user instanceof Object) { // validation
     await db.connection
       .manager
       .save(user);
-    response.redirectTo('/users');
+    response.redirectTo(router.routePath('users'));
     return;
   }
 
   response.render({ user }, 'build');
 };
 
-export const destroy = (request, response) => {
+export const destroy = async (request, response, { db, router }) => {
   const { id: userId } = request.params;
   if (userId) { // validation
   }
 
-  response.redirectTo('/users');
+  await db.connection
+    .getRepository(User)
+    .delete(userId);
+
+  response.redirectTo(router.routePath('users'));
 };
