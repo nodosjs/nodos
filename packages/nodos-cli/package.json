@@ -16,7 +16,7 @@
     "yeoman-generator": "^4.0.2"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "homepage": "https://github.com/nodosjs/nodos",
   "license": "MIT",
