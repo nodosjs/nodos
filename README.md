@@ -33,7 +33,7 @@ $ bin/nodos server
 
 ### Development
 
-We use https://lernajs.io and yarn
+We use https://lerna.js.org and yarn
 
 ```sh
 $ git clone <this repo>
