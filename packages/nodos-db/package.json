@@ -5,9 +5,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "test": "jest --colors"
+  },
   "dependencies": {
-    "@nodosjs/application": "^0.0.27",
-    "reflect-metadata": "^0.1.12",
-    "typeorm": "^0.2.8"
+    "@nodosjs/core": "^0.0.27",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.19"
   }
 }

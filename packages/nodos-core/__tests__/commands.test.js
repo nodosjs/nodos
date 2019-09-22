@@ -2,7 +2,7 @@ import path from 'path';
 import { bin } from '../lib';
 import * as commands from '../lib/commands';
 
-const projectRoot = path.join(__dirname, '__fixtures__/app');
+const projectRoot = path.join(__dirname, '../__fixtures__/app');
 
 test('nodos/bin/console', async () => {
   const replServer = { context: {} };

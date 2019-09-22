@@ -5,7 +5,7 @@ services:
   db:
     image: postgres
   app:
-    image: node:10.13
+    image: node:12.10
     command: bash -c 'cd example && make server'
     working_dir: /code
     ports:

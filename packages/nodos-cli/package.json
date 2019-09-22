@@ -11,9 +11,9 @@
   "bugs": "https://github.com/nodosjs/nodos/issues",
   "dependencies": {
     "mkdirp": "^0.5.1",
-    "yargs": "^12.0.3-candidate.0",
-    "yeoman-environment": "^2.3.3",
-    "yeoman-generator": "^3.1.1"
+    "yargs": "^14.0.0",
+    "yeoman-environment": "^2.4.0",
+    "yeoman-generator": "^4.0.2"
   },
   "engines": {
     "node": ">=10"
@@ -22,6 +22,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "repository": "nodosjs/nodos",
-  "scripts": {},
+  "scripts": {
+    "test": "jest --colors"
+  },
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }

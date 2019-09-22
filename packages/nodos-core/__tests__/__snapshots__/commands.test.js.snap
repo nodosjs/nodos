@@ -16,6 +16,7 @@ editApiUser         GET    /api/users/:id/edit                     browser
 apiUser             PATCH  /api/users/:id                          browser 
 apiUser             PUT    /api/users/:id                          browser 
 apiUser             DELETE /api/users/:id                          browser 
+root                GET    /                                       browser 
 users               GET    /users                                  browser 
 buildUser           GET    /users/build                            browser 
 users               POST   /users                                  browser 

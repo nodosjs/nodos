@@ -13,11 +13,13 @@ pipelines:
 scopes:
   - name: 'api'
     pipeline: browser
+    root: true
     routes:
       - resources: users
 
   - name: '/'
     pipeline: browser
+    root: true
     routes:
       - resources:
           name: users

@@ -1,6 +1,6 @@
 import NodeEnvironment from 'jest-environment-node';
 import { nodos } from '..';
-import '@babel/register';
+// import '@babel/register';
 
 class IntegrationEnvironment extends NodeEnvironment {
   constructor(config) {

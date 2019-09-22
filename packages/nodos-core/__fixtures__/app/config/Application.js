@@ -1,4 +1,4 @@
-import { BaseApplication } from '@nodosjs/application';
+import { BaseApplication } from '../../../lib';
 import fastifyCookie from 'fastify-cookie';
 import fastifyFormbody from 'fastify-formbody';
 

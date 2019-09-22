@@ -1,11 +1,10 @@
-/* eslint-disable no-param-reassign */
-
 import Application from '../Application';
 
-export default class Test extends Application {
+export default class extends Application {
   init() {
     super.init();
     this.config.logLevel = 'debug';
+    this.config.errorHandler = true;
     this.config.cacheModules = true;
     this.config.host = 'http://example.com';
     this.config.db = {

@@ -42,7 +42,8 @@ export default async (app) => {
   const fastifyApp = fastify({
     logger: true,
   });
-  fastifyApp.register(fastifySensible);
+  // throw 'asdf';
+  fastifyApp.register(fastifySensible, { errorHandler: app.config.errorHandler });
   // FIXME: move to nodos-templates
   fastifyApp.register(pointOfView, {
     engine: { pug },
@@ -51,8 +52,8 @@ export default async (app) => {
   });
   app.plugins.forEach(([plugin, options]) => fastifyApp.register(plugin, options));
 
-  fastifyApp.after(console.log);
-  fastifyApp.ready(console.log);
+  // fastifyApp.after(console.log);
+  // fastifyApp.ready(console.log);
 
   // // console.log(router.scopes);
   // const scopePromises = router.scopes.map(async (scope) => {
@@ -65,6 +66,11 @@ export default async (app) => {
   //   });
   // });
   // await Promise.all(scopePromises);
+
+  // FIXME: enable only if option specified
+  // fastifyApp.setErrorHandler((error, request, reply) => {
+  //   throw error;
+  // });
 
   // console.log(router);
   const promises = app.router.routes.map(async (route) => {
@@ -80,9 +86,11 @@ export default async (app) => {
           .filter(p => p.match(/controllers/));
         appCacheKeys.forEach((item) => { delete require.cache[item]; });
       }
-      const controllers = await import(pathToController);
+      log(pathToController);
+      const actions = await import(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
-      await controllers[route.actionName](request, response, app.container);
+      log([actions, route.actionName]);
+      await actions[route.actionName](request, response, app.container);
       return sendResponse(response, reply);
     });
   });

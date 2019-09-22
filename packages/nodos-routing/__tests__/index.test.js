@@ -6,11 +6,13 @@ import Router from '../lib';
 let routesMap;
 
 beforeAll(async () => {
-  const routesData = await fs.readFile(`${__dirname}/__fixtures__/routes.yml`);
+  const routesData = await fs.readFile(`${__dirname}/../__fixtures__/routes.yml`);
   routesMap = yml.safeLoad(routesData);
 });
 
 test('nodos-routing', async () => {
+  const compare = (a, b) => a.url.localeCompare(b.url);
+
   const { routes } = new Router(routesMap, { host: 'http://site.com' });
 
   const expectedRoutes = [
@@ -27,11 +29,12 @@ test('nodos-routing', async () => {
     { actionName: 'index', url: '/articles/:article_id/comments', method: 'get' },
     { actionName: 'show', url: '/articles/:article_id/comments/:id', method: 'get' },
     { actionName: 'create', url: '/articles/:article_id/metadata', method: 'post' },
-  ];
+  ].sort(compare);
 
   const actualRoutes = routes
     .map(({ actionName, url, method }) => ({ actionName, url, method }))
-    .filter(r => expectedRoutes.find(e => _.isEqual(e, r)));
+    .filter((r) => expectedRoutes.find(e => _.isEqual(e, r)))
+    .sort(compare);
 
   expect(actualRoutes).toEqual(expectedRoutes);
 });
@@ -90,8 +93,8 @@ test('nodos-routing route helpers should return correct url', async () => {
 });
 
 test('nodos-routing throws an error if schema is invalid', async () => {
-  const routesData = await fs.readFile(`${__dirname}/__fixtures__/routesWithInvalidSchema.yml`);
+  const routesData = await fs.readFile(`${__dirname}/../__fixtures__/routesWithInvalidSchema.yml`);
   const invalidRoutesMap = yml.safeLoad(routesData);
 
-  expect(() => new Router(invalidRoutesMap)).toThrowErrorMatchingSnapshot();
+  expect(() => new Router(invalidRoutesMap)).toThrow(/Routes schema is invalid/);
 });

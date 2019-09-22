@@ -84,7 +84,7 @@ const types = {
     path,
     prefix,
     parent,
-    actionName: 'index',
+    actionName: 'default',
     method: 'get',
     url: getUrl(path, prefix, parent, '') || '/',
     name: getName(prefix, parent, routeItem.name),
@@ -228,7 +228,7 @@ const types = {
 };
 
 const buildRoute = (route, options) => {
-  const typeName = detectRouteType(Object.keys(route)[0]);
+  const typeName = detectRouteType(_.first(Object.keys(route)));
   const routeItem = normalizeRouteItem(route[typeName]);
   return types[typeName](routeItem, buildRoutes, options);
 };

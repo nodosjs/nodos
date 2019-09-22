@@ -1,5 +1,4 @@
-import BaseApplication from './BaseApplication';
-import nodos from './nodos';
-import bin from './bin';
+// import '@babel/register';
+import { bin, nodos, BaseApplication } from '@nodosjs/core';
 
-export { BaseApplication, nodos, bin };
+export { bin, nodos, BaseApplication };

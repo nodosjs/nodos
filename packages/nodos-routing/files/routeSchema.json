@@ -21,7 +21,6 @@
         }
       ]
     },
-
     "resource": {
       "oneOf": [
         { "type": "string" },
