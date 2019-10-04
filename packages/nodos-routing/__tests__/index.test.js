@@ -11,12 +11,12 @@ beforeAll(async () => {
 });
 
 test('nodos-routing', async () => {
-  const compare = (a, b) => a.url.localeCompare(b.url);
+  const compare = (a, b) => `${a.actionName}${a.url}`.localeCompare(`${b.actionName}${b.url}`);
 
   const { routes } = new Router(routesMap, { host: 'http://site.com' });
 
   const expectedRoutes = [
-    { actionName: 'index', url: '/', method: 'get' },
+    { actionName: 'default', url: '/', method: 'get' },
     { actionName: 'index', url: '/api/users', method: 'get' },
     { actionName: 'build', url: '/api/users/build', method: 'get' },
     { actionName: 'create', url: '/api/users', method: 'post' },
