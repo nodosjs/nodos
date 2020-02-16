@@ -1,5 +1,5 @@
 test:
-	NODE_ENV=development NODOS_ENV=test DEBUG=nodos npx jest
+	NODE_ENV=development NODOS_ENV=test DEBUG=nodos:* npx jest
 
 setup: install bootstrap build
 
