@@ -1,3 +1,3 @@
-export const index = async (request, response) => {
+export default async (request, response) => {
 
 };
