@@ -57,7 +57,7 @@ export default class BaseApplication {
     };
   }
 
-  init() { }
+  async init() { }
 
   async start() {
     await this.init();

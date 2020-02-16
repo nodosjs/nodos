@@ -5,8 +5,8 @@ import getExtensionData from '../lib';
 class MyApplication extends BaseApplication {
   init() {
     this.config.db = {
-      type: 'sqlite',
-      database: '/tmp/test.sqlite3',
+      type: 'sql.js',
+      // database: '/tmp/test.sqlite3',
       logging: false,
     };
   }
