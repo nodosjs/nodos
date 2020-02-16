@@ -1,5 +1,5 @@
 // import '@babel/register';
-// import _ from 'lodash';
+import _ from 'lodash';
 import path from 'path';
 import fastify from 'fastify';
 import fastifySensible from 'fastify-sensible';
@@ -19,8 +19,8 @@ const fetchMiddleware = async (app, middlewareName) => {
   return middleware.default;
 };
 
-const sendResponse = (response, reply) => {
-  log(response);
+const sendResponse = async (fastifyApp, response, reply) => {
+  log('response', response);
   Object.keys(response.headers).forEach((name) => {
     reply.header(name, response.headers[name]);
   });
@@ -29,7 +29,12 @@ const sendResponse = (response, reply) => {
     case 'code':
       return reply.code(response.code).send();
     case 'rendering':
-      return reply.view(response.template(), response.locals);
+      const pathToTemplate = response.template();
+      log('template', pathToTemplate);
+      const body = await fastifyApp.view(pathToTemplate, response.locals);
+      return reply.code(response.code)
+        .header('Content-Type', 'text/html; charset=utf-8')
+        .send(body);
     case 'redirect':
       return reply.code(response.code).redirect(response.redirectUrl);
 
@@ -72,7 +77,6 @@ export default async (app) => {
   //   throw error;
   // });
 
-  // console.log(router);
   const promises = app.router.routes.map(async (route) => {
     const pathToController = path.join(app.config.paths.controllers, route.resourceName);
     const middlewarePromises = route.middlewares.map(fetchMiddleware.bind(null, app));
@@ -89,9 +93,12 @@ export default async (app) => {
       log(pathToController);
       const actions = await import(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
-      log([actions, route.actionName]);
+      log('actions', [actions, route.actionName]);
+      if (!_.has(actions, route.actionName)) {
+        throw new Error(`Unknown action name: ${route.actionName}. Route: ${route}`);
+      }
       await actions[route.actionName](request, response, app.container);
-      return sendResponse(response, reply);
+      return sendResponse(fastifyApp, response, reply);
     });
   });
   await Promise.all(promises);

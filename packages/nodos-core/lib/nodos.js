@@ -10,5 +10,6 @@ export default async (projectRoot, env = process.env.NODOS_ENV || 'development')
   log(appModule);
   const app = new appModule.default(projectRoot, env);
   Object.values(localCommands).forEach(app.addCommand);
+  log(app.config);
   return app;
 };

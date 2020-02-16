@@ -2,7 +2,7 @@ const users = [
   { id: 1, name: 'tom' },
 ];
 
-export const index = (request, response) => response.render({ users });
+export const index = (_request, response) => response.render({ users });
 
 export const show = (request, response) => {
   const user = users.find(u => Number(u.id) === Number(request.params.id));
