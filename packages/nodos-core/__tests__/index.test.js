@@ -52,8 +52,7 @@ test('GET /articles', async () => {
 
 test('GET /posts', async () => {
   const result = await app.get('/posts');
-  // expect(result).toMatchObject({ statusCode: 500 });
-  expect(result.body).toContain('errno');
+  expect(result).toMatchObject({ statusCode: 500 });
 });
 
 afterEach(async () => {

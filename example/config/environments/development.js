@@ -13,7 +13,7 @@ export default class Development extends Application {
     this.config.logLevel = 'debug';
     this.config.cacheModules = true;
     this.config.db = {
-      type: 'sql.js',
+      type: 'sqljs',
       synchronize: true,
       logging: true,
       // database: 'db/development.sqlite3',
