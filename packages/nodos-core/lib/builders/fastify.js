@@ -78,7 +78,7 @@ export default async (app) => {
     const middlewarePromises = route.middlewares.map(fetchMiddleware.bind(null, app));
     const middlewares = await Promise.all(middlewarePromises);
     const opts = {
-      beforeHandler: middlewares,
+      preHandler: middlewares,
     };
     fastifyApp[route.method](route.url, opts, async (request, reply) => {
       if (!app.config.cacheModules) {
