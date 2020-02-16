@@ -11,12 +11,11 @@ beforeAll(async () => {
 });
 
 test('nodos-routing', async () => {
-  const compare = (a, b) => a.url.localeCompare(b.url);
-
+  const sortRoutes = routes => _.sortBy(routes, ['actionName', 'url']);
   const { routes } = new Router(routesMap, { host: 'http://site.com' });
 
   const expectedRoutes = [
-    { actionName: 'index', url: '/', method: 'get' },
+    { actionName: 'default', url: '/', method: 'get' },
     { actionName: 'index', url: '/api/users', method: 'get' },
     { actionName: 'build', url: '/api/users/build', method: 'get' },
     { actionName: 'create', url: '/api/users', method: 'post' },
@@ -29,14 +28,13 @@ test('nodos-routing', async () => {
     { actionName: 'index', url: '/articles/:article_id/comments', method: 'get' },
     { actionName: 'show', url: '/articles/:article_id/comments/:id', method: 'get' },
     { actionName: 'create', url: '/articles/:article_id/metadata', method: 'post' },
-  ].sort(compare);
+  ];
 
   const actualRoutes = routes
     .map(({ actionName, url, method }) => ({ actionName, url, method }))
-    .filter((r) => expectedRoutes.find(e => _.isEqual(e, r)))
-    .sort(compare);
+    .filter(r => expectedRoutes.find(e => _.isEqual(e, r)));
 
-  expect(actualRoutes).toEqual(expectedRoutes);
+  expect(sortRoutes(actualRoutes)).toEqual(sortRoutes(expectedRoutes));
 });
 
 test('nodos-routing check only', async () => {
