@@ -1,6 +1,6 @@
-// import _ from 'lodash';
+// const _ = require('lodash');
 
-export const dbCommand = ({ container }) => ({
+const dbCommand = ({ container }) => ({
   command: 'db',
   describe: 'run db subcommands',
   builder: {},
@@ -9,3 +9,5 @@ export const dbCommand = ({ container }) => ({
     // const app = container.nodos(argv.projectRoot);
   },
 });
+
+module.exports = { dbCommand }

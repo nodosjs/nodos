@@ -1,3 +1,3 @@
-import debug from 'debug';
+const debug = require('debug');
 
-export default debug('nodos:core');
+module.exports = debug('nodos:core');

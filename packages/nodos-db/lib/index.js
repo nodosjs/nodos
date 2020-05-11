@@ -1,8 +1,8 @@
-import 'reflect-metadata';
-import * as commands from './commands';
-import Db from './Db';
+require('reflect-metadata');
+const commands = require('./commands');
+const Db = require('./Db');
 
-export default async (app) => {
+module.exports = async (app) => {
   const db = new Db(app.config.db);
   await db.connect();
   Object.values(commands).forEach(app.addCommand);

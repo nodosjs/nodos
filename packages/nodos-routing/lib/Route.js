@@ -1,4 +1,4 @@
-export default class Route {
+class Route {
   constructor(options) {
     this.parent = options.parent;
     this.actionName = options.actionName;
@@ -10,3 +10,5 @@ export default class Route {
     this.method = options.method;
   }
 }
+
+module.exports = Route;

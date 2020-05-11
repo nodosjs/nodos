@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/nodosjs/nodos",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "repository": "nodosjs/nodos",
   "scripts": {
     "test": "jest --colors"

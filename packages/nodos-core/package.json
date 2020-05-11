@@ -8,7 +8,7 @@
   "author": "Kirill Mokevnin <mokevnin@gmail.com>",
   "homepage": "https://github.com/nodosjs/nodos#readme",
   "license": "ISC",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nodosjs/nodos.git"

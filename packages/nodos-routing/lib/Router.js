@@ -1,10 +1,8 @@
-import _ from 'lodash';
-import urlJoin from 'url-join';
-import {
-  singularize, foreignKey, pluralize, camelize,
-} from 'inflected';
-import Route from './Route';
-import validate from './validator';
+const _ = require('lodash');
+const urlJoin = require('url-join');
+const { singularize, foreignKey, pluralize, camelize } = require('inflected');
+const Route = require('./Route');
+const validate = require('./validator');
 
 const detectRouteType = (currentName) => {
   const names = ['resources', 'resource', 'root'];
@@ -43,17 +41,18 @@ const normalizeRouteItem = (valueOrValues) => {
 };
 
 const getForeignKey = (resourceName) => {
-  const key = resourceName |> singularize |> foreignKey;
+  const key = foreignKey(singularize(resourceName));
   return `:${key}`;
 };
 
 const getName = (prefix, parent, resourceName, actionName, actionPrefix = '') => {
   const prepareResourceName = (resourceName, actionName) => {
     const shouldBePlural = ['index', 'create'];
-    return resourceName |> (shouldBePlural.includes(actionName) ? pluralize : singularize);
+    const modifier = shouldBePlural.includes(actionName) ? pluralize : singularize;
+    return modifier(resourceName);
   };
 
-  const parentPrefix = parent ? parent.resourceName |> singularize : '';
+  const parentPrefix = parent ? singularize(parent.resourceName) : '';
   const preparedResourceName = prepareResourceName(resourceName, actionName);
   const words = [actionPrefix, prefix, parentPrefix, preparedResourceName].filter(w => w).join('_');
   return camelize(words, false);
@@ -246,7 +245,7 @@ const buildScope = ({
   return [buildRoot(root, options), buildRoutes(routes, options)];
 };
 
-export default class Router {
+class Router {
   constructor(routeMap, options) {
     validate(routeMap);
 
@@ -259,7 +258,7 @@ export default class Router {
     this.routes = routeMap.scopes
       .map(scope => normalizeScope(scope))
       .map(scope => buildScope(scope, routeMap.pipelines))
-      |> _.flattenDeep;
+      .flat(Infinity);
   }
 
   // recognize(request) {
@@ -274,3 +273,5 @@ export default class Router {
     return urlJoin(this.host, this.routePath(name, ...params));
   }
 }
+
+module.exports = Router
