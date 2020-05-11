@@ -1,6 +1,6 @@
-import { createConnection } from 'typeorm';
+const { createConnection } = require('typeorm');
 
-export default class Db {
+class Db {
   constructor(config) {
     this.config = config;
   }
@@ -44,3 +44,5 @@ export default class Db {
   //   }
   // };
 }
+
+module.exports = Db;

@@ -11,13 +11,13 @@ pipelines:
     # - protectFromForgery
 
   api:
-    - accepts
+    # - accepts
     - setLocale
 
 scopes:
 
   - name: 'api'
-    pipeline: browser
+    pipeline: api
     routes:
       - resources: users
 

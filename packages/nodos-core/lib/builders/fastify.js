@@ -1,22 +1,30 @@
 // import '@babel/register';
-import _ from 'lodash';
-import path from 'path';
-import fastify from 'fastify';
-import fastifySensible from 'fastify-sensible';
-import pointOfView from 'point-of-view';
-import pug from 'pug';
-// import debug from 'debug';
-import Response from '../http/Response';
-import log from '../logger';
+const _ = require('lodash');
+const path = require('path');
+const fastify = require('fastify');
+const fastifySensible = require('fastify-sensible');
+const pointOfView = require('point-of-view');
+const pug = require('pug');
+// const debug = require('debug');
+const Response = require('../http/Response');
+const log = require('../logger');
 
 const fetchMiddleware = async (app, middlewareName) => {
-  const middleware = await import(path.join(app.config.paths.middlewares, middlewareName))
-    .catch(() => import(path.join(__dirname, '..', 'middlewares', middlewareName)))
-    .catch(() => import(middlewareName))
-    .catch(() => {
-      throw new Error(`Middleware '${middlewareName}' is absent.`);
-    });
-  return middleware.default;
+  const paths = [
+    path.join(app.config.paths.middlewares, middlewareName),
+    path.join(__dirname, '..', 'middlewares', middlewareName),
+    path.resolve(middlewareName)
+  ];
+
+  return Promise.all(paths.map(async path => {
+      try {
+        return await require(path);
+      } catch (e) {
+        return e;
+      }
+    }))
+    .then(res => res.find(e => !(e instanceof Error)))
+    .then(e => e.default ? e.default : e);
 };
 
 const sendResponse = async (fastifyApp, response, reply) => {
@@ -43,7 +51,7 @@ const sendResponse = async (fastifyApp, response, reply) => {
   }
 };
 
-export default async (app) => {
+module.exports = async (app) => {
   const fastifyApp = fastify({
     logger: true,
   });
@@ -91,7 +99,7 @@ export default async (app) => {
         appCacheKeys.forEach((item) => { delete require.cache[item]; });
       }
       log(pathToController);
-      const actions = await import(pathToController);
+      const actions = await require(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
       log('actions', [actions, route.actionName]);
       if (!_.has(actions, route.actionName)) {

@@ -1,13 +1,13 @@
-import Ajv from 'ajv';
-import routesSchema from '../files/routesSchema.json';
-import routeSchema from '../files/routeSchema.json';
-import routeOnlyExceptSchema from '../files/routeOnlyExceptSchema.json';
+const Ajv = require('ajv');
+const routesSchema = require('../files/routesSchema.json');
+const routeSchema = require('../files/routeSchema.json');
+const routeOnlyExceptSchema = require('../files/routeOnlyExceptSchema.json');
 
 const ajv = new Ajv({ allErrors: true });
 
 const validate = ajv.addSchema(routeSchema).addSchema(routeOnlyExceptSchema).compile(routesSchema);
 
-export default (routeMap) => {
+module.exports = (routeMap) => {
   const valid = validate(routeMap);
 
   if (!valid) {

@@ -1,9 +1,9 @@
-import _ from 'lodash';
-import yargs from 'yargs';
-import log from './logger';
-import nodos from './nodos';
+const _ = require('lodash');
+const yargs = require('yargs');
+const log = require('./logger');
+const nodos = require('./nodos');
 
-export default async (projectRoot, args = process.argv.slice(2), options = {}) => {
+module.exports = async (projectRoot, args = process.argv.slice(2), options = {}) => {
   const {
     // exitProcess = true,
     container = {},

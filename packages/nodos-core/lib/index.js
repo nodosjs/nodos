@@ -1,5 +1,5 @@
-import BaseApplication from './BaseApplication';
-import nodos from './nodos';
-import bin from './bin';
+const BaseApplication = require('./BaseApplication');
+const nodos = require('./nodos');
+const bin = require('./bin');
 
-export { BaseApplication, nodos, bin };
+module.exports = { BaseApplication, nodos, bin };

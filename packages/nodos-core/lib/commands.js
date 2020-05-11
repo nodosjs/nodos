@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import jest from 'jest';
-import repl from 'repl';
-import columnify from 'columnify';
-import log from './logger';
+const _ = require('lodash');
+const jest = require('jest');
+const repl = require('repl');
+const columnify = require('columnify');
+const log = require('./logger');
 
-export const testCommand = ({ container }) => ({
+const testCommand = ({ container }) => ({
   command: 'test [file]',
   describe: 'run tests',
   builder: {},
@@ -24,7 +24,7 @@ export const testCommand = ({ container }) => ({
   },
 });
 
-export const consoleCommand = ({ app, container }) => ({
+const consoleCommand = ({ app, container }) => ({
   command: 'console',
   describe: 'run console',
   builder: {},
@@ -37,7 +37,7 @@ export const consoleCommand = ({ app, container }) => ({
   },
 });
 
-export const serverCommand = ({ app }) => ({
+const serverCommand = ({ app }) => ({
   command: 'server',
   describe: 'run server',
   builder: yargs => yargs
@@ -56,7 +56,7 @@ export const serverCommand = ({ app }) => ({
   },
 });
 
-export const routesCommand = ({ app, container }) => ({
+const routesCommand = ({ app, container }) => ({
   command: 'routes',
   describe: 'display routes',
   handler: async () => {
@@ -93,3 +93,5 @@ export const routesCommand = ({ app, container }) => ({
     }
   },
 });
+
+module.exports = { testCommand, consoleCommand, serverCommand, routesCommand }

@@ -1,7 +1,7 @@
-import path from 'path';
-import status from 'statuses';
+const path = require('path');
+const status = require('statuses');
 
-export default class Response {
+class Response {
   responseType = 'rendering';
 
   headers = {}
@@ -39,3 +39,5 @@ export default class Response {
     return path.join(this.templateDir, this.templateName);
   }
 }
+
+module.exports = Response;

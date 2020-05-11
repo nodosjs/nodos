@@ -1,9 +1,9 @@
-import path from 'path';
-import buildRouter from './builders/routes';
-import buildFastify from './builders/fastify';
-import log from './logger';
+const path = require('path');
+const buildRouter = require('./builders/routes');
+const buildFastify = require('./builders/fastify');
+const log = require('./logger');
 
-export default class BaseApplication {
+class BaseApplication {
   defaultRequestOptions = { headers: {}, params: null };
 
   commands = [];
@@ -97,3 +97,5 @@ export default class BaseApplication {
     });
   }
 }
+
+module.exports = BaseApplication;
