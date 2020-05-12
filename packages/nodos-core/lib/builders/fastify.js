@@ -53,6 +53,12 @@ const sendResponse = async (fastifyApp, response, reply) => {
       log('template', pathToTemplate);
       const html = await fastifyApp.view(pathToTemplate, response.locals);
       // TODO point-of-view send errors as a normal html
+      if (_.isObject(html)) {
+        reply.code(500)
+          .type('text/html')
+          .send(html.toString());
+        return reply;
+      }
       reply.code(response.code)
         .type('text/html')
         .send(html);
