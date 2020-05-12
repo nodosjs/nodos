@@ -23,8 +23,8 @@ scopes:
       - resources: users
 
   - name: '/'
-    root: true
     pipeline: browser
+    root: true
     routes:
       - resources: users
       - resources: posts

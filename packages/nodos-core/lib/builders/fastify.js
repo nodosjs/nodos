@@ -42,16 +42,23 @@ const sendResponse = async (fastifyApp, response, reply) => {
 
   switch (response.responseType) {
     case 'code':
-      return reply.code(response.code).send();
+      reply.code(response.code).send();
+      return reply;
+    case 'sending':
+      reply.send(response.body);
+      return reply;
     case 'rendering':
       const pathToTemplate = response.template();
       log('template', pathToTemplate);
-      const body = await fastifyApp.view(pathToTemplate, response.locals);
-      return reply.code(response.code)
-        .header('Content-Type', 'text/html; charset=utf-8')
-        .send(body);
+      const html = await fastifyApp.view(pathToTemplate, response.locals);
+      // TODO point-of-view send errors as a normal html
+      reply.code(response.code)
+        .type('text/html')
+        .send(html);
+      return reply;
     case 'redirect':
-      return reply.code(response.code).redirect(response.redirectUrl);
+      reply.redirect(response.code, response.redirectUrl);
+      return reply;
 
     default:
       throw new Error(`Unknown responseType: ${response.responseType}`);
@@ -96,7 +103,6 @@ module.exports = async (app) => {
     const pathToController = path.join(app.config.paths.controllers, route.resourceName);
     const middlewarePromises = route.middlewares.map((middleware) => fetchMiddleware(app, middleware));
     const middlewares = await Promise.all(middlewarePromises);
-    console.log('!!!', middlewares);
 
     const handler = async (request, reply) => {
       if (!app.config.cacheModules) {
@@ -112,7 +118,8 @@ module.exports = async (app) => {
         throw new Error(`Unknown action name: ${route.actionName}. Route: ${route}`);
       }
       await actions[route.actionName](request, response, app.container);
-      return sendResponse(fastifyApp, response, reply);
+      await sendResponse(fastifyApp, response, reply);
+      return reply;
     };
 
     const opts = {

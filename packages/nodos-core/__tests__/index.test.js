@@ -47,7 +47,7 @@ test('DELETE /users success', async () => {
 
 test('GET /articles', async () => {
   const result = await app.get('/articles');
-  expect(result).toMatchObject({ statusCode: 200, body: '<h2>hello</h2>' });
+  expect(result).toMatchObject({ statusCode: 200, body: 'articles' });
 });
 
 test('GET /posts', async () => {

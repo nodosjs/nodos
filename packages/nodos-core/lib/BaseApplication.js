@@ -60,6 +60,7 @@ class BaseApplication {
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
     // TODO: pass only data, not application
     this.fastify = await buildFastify(this);
+    log('CONFIG', this.config);
   }
 
   listen(...args) {

@@ -10,4 +10,4 @@ const dbCommand = ({ container }) => ({
   },
 });
 
-module.exports = { dbCommand }
+module.exports = { dbCommand };

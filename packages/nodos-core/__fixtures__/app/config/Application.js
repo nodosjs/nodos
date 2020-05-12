@@ -3,7 +3,7 @@ import fastifyCookie from 'fastify-cookie';
 import fastifyFormbody from 'fastify-formbody';
 
 export default class Application extends BaseApplication {
-  init() {
+  async init() {
     this.addPlugin(fastifyCookie);
     this.addPlugin(fastifyFormbody);
   }

@@ -5,15 +5,22 @@ class Response {
   constructor({ templateName, templateDir }) {
     this.templateName = templateName;
     this.templateDir = templateDir;
-    this.responseType = 'rendering';
+    this.responseType = null;
     this.headers = {}
     this.locals = {};
     this.code = 200;
+    this.body = null;
 
   }
 
   head(value) {
+    this.responseType = 'code';
     this.code = status(value);
+  }
+
+  send(body) {
+    this.responseType = 'sending';
+    this.body = body;
   }
 
   redirectTo(url, codeOrName = 302) {

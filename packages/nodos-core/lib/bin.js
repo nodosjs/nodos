@@ -23,7 +23,7 @@ module.exports = async (projectRoot, args = process.argv.slice(2), options = {})
   // .example(example.trim())
   // console.log(app);
   // console.log(app.commandBuilders);
-  const commands = app.commands.map(build => build({ app, container }));
+  const commands = app.commands.map((build) => build({ app, container }));
   log(commands);
   commands.forEach(c => parser.command(c));
   await parser.argv;
