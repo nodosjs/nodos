@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/generators",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "publishConfig": {
     "access": "public"
   },
