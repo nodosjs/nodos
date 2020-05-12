@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-require('@babel/register');
 const { bin } = require('@nodosjs/core');
 
 bin(`${__dirname}/..`);

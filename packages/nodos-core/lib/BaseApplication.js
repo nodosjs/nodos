@@ -1,4 +1,6 @@
 const path = require('path');
+const fastifyCookie = require('fastify-cookie');
+const fastifyFormbody = require('fastify-formbody');
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
 const log = require('./logger');
@@ -39,6 +41,7 @@ class BaseApplication {
     this.config = {
       env,
       projectRoot,
+      errorHandler: false,
       paths: {
         routes: join('config', 'routes.yml'),
         application: join('config', 'application'),
@@ -49,6 +52,9 @@ class BaseApplication {
         middlewares: join('app', 'middlewares'),
       },
     };
+
+    this.addPlugin(fastifyCookie);
+    this.addPlugin(fastifyFormbody);
   }
 
   async init() { }

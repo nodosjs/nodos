@@ -1,7 +1,7 @@
 import Application from '../Application';
 
 export default class Test extends Application {
-  init() {
+  async init() {
     super.init();
     this.config.logLevel = 'debug';
     this.config.cacheModules = true;

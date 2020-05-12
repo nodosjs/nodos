@@ -31,7 +31,8 @@ const fetchMiddleware = async (app, middlewareName) => {
     throw new Error(`Cannot find middleware: ${middlewareName}. Paths: ${paths.join(', ')}`);
   }
 
-  return require(filepath);
+  const module = require(filepath);
+  return module.default ? module.default : module;
 };
 
 const sendResponse = async (fastifyApp, response, reply) => {

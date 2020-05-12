@@ -4,18 +4,16 @@
     "start": "bin/nodos server"
   },
   "dependencies": {
+    "@babel/node": "^7.8.7",
     "@nodosjs/application": "../packages/nodos-application/",
-    "@nodosjs/core": "../packages/nodos-core/",
-    "@nodosjs/db": "../packages/nodos-db/",
-    "@nodosjs/routing": "../packages/nodos-routing/",
     "bootstrap": "^4.4.1",
     "jquery-ujs": "^1.2.2",
     "popper.js": "^1.16.1",
-    "sql.js": "^1.1.0"
+    "sql.js": "^1.2.2"
   },
   "devDependencies": {
-    "babel-loader": "^8.0.6",
-    "fastify-webpack-hmr": "^2.1.0",
-    "webpack": "^4.41.6"
+    "babel-loader": "^8.1.0",
+    "fastify-webpack-hmr": "^2.2.0",
+    "webpack": "^4.43.0"
   }
 }

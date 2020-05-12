@@ -5,7 +5,7 @@ class Response {
   constructor({ templateName, templateDir }) {
     this.templateName = templateName;
     this.templateDir = templateDir;
-    this.responseType = null;
+    this.responseType = 'rendering';
     this.headers = {}
     this.locals = {};
     this.code = 200;
@@ -15,7 +15,7 @@ class Response {
 
   head(value) {
     this.responseType = 'code';
-    this.code = status(value);
+    this.code = Number.isInteger(value) ? value : status(value);
   }
 
   send(body) {

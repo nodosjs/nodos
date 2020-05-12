@@ -7,11 +7,11 @@ import webpackConfig from '../../webpack.config';
 const compiler = webpack(webpackConfig);
 
 export default class Development extends Application {
-  init() {
+  async init() {
     super.init();
     this.addPlugin(hmr, { compiler });
     this.config.logLevel = 'debug';
-    this.config.cacheModules = true;
+    this.config.cacheModules = false;
     this.config.db = {
       type: 'sqljs',
       synchronize: true,
