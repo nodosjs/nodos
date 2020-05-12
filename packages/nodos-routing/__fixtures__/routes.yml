@@ -17,9 +17,6 @@ scopes:
     routes:
       - resources: users
 
-  - name: 'test'
-    pipeline: api
-
   - name: '/'
     pipeline: browser
     root: true
