@@ -28,6 +28,7 @@ test('nodos-routing', async () => {
     { actionName: 'index', url: '/articles/:article_id/comments', method: 'get' },
     { actionName: 'show', url: '/articles/:article_id/comments/:id', method: 'get' },
     { actionName: 'create', url: '/articles/:article_id/metadata', method: 'post' },
+    { actionName: 'show', url: '/test', method: 'get' },
   ];
 
   const actualRoutes = routes

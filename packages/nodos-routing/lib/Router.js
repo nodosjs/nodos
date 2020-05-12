@@ -5,7 +5,7 @@ const Route = require('./Route');
 const validate = require('./validator');
 
 const detectRouteType = (currentName) => {
-  const names = ['resources', 'resource', 'root'];
+  const names = ['resources', 'resource', 'root', 'single'];
   return names.find(name => name === currentName);
 };
 
@@ -21,9 +21,11 @@ const buildActionNames = (routeItem) => {
 const normalizeScope = (scope) => {
   const path = scope.name.startsWith('/') ? scope.name : '/';
   const prefix = scope.name.startsWith('/') ? '' : scope.name;
+  const routes = scope.routes ? scope.routes : [{ single: scope.name }];
 
   return {
     ...scope,
+    routes,
     path,
     prefix,
   };
@@ -74,9 +76,7 @@ const selectRequestedActions = (routeItem, actions) => {
 };
 
 const types = {
-  root: (routeItem, rec, {
-    path, prefix, middlewares, pipeline, parent,
-  }) => new Route({
+  root: (routeItem, rec, { path, prefix, middlewares, pipeline, parent }) => new Route({
     resourceName: routeItem.name,
     middlewares,
     pipeline,
@@ -88,9 +88,19 @@ const types = {
     url: getUrl(path, prefix, parent, '') || '/',
     name: getName(prefix, parent, routeItem.name),
   }),
-  resources: (routeItem, rec, {
-    path, prefix, middlewares, pipeline, parent,
-  }) => {
+  single: (routeItem, rec, { path, prefix, middlewares, pipeline, parent }) => new Route({
+    resourceName: routeItem.name,
+    middlewares,
+    pipeline,
+    path,
+    prefix,
+    parent,
+    actionName: 'show',
+    method: 'get',
+    url: getUrl(path, prefix, parent, '') || '/',
+    name: getName(prefix, parent, routeItem.name),
+  }),
+  resources: (routeItem, rec, { path, prefix, middlewares, pipeline, parent, }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
@@ -159,9 +169,7 @@ const types = {
     });
     return [...routes, ...nestedRoutes];
   },
-  resource: (routeItem, rec, {
-    path, prefix, middlewares, pipeline, parent,
-  }) => {
+  resource: (routeItem, rec, { path, prefix, middlewares, pipeline, parent, }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
