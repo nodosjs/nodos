@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import { BaseApplication } from '@nodosjs/application';
 import nodosDb from '@nodosjs/db';
 

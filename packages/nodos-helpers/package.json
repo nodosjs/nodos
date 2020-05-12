@@ -8,8 +8,5 @@
   "dependencies": {
     "create-html-element": "^3.0.0"
   },
-  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
-  "devDependencies": {
-    "jest-circus": "^26.0.1"
-  }
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }

@@ -36,11 +36,11 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.10.0",
     "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
     "jest-cli": "^26.0.1",
     "lerna": "^3.20.2",
     "sql.js": "^1.2.2"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=12"
   }
