@@ -14,7 +14,9 @@ class Db {
     return localRunner.query(...args);
   }
 
-  close = () => this.connection.close()
+  close() {
+    return this.connection.close()
+  }
 
   // createDb = async () => {
   //   // FIXME implement for every db

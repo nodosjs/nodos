@@ -1,7 +1,4 @@
-test:
-	NODE_ENV=development NODOS_ENV=test DEBUG=nodos:* npx jest
-
-setup: install bootstrap build
+setup: install bootstrap
 
 install:
 	yarn
@@ -9,11 +6,8 @@ install:
 bootstrap:
 	npx lerna bootstrap
 
-publish:
-	npx lerna publish
-
-build:
-	NODE_ENV=production npx lerna exec --parallel -- babel lib -d dist
+test:
+	NODOS_ENV=test DEBUG=nodos:* npx jest
 
 lint:
 	npx eslint .
@@ -21,32 +15,38 @@ lint:
 lint-fix:
 	npx eslint . --fix
 
+publish:
+	npx lerna publish
+
+# test:
+# 	npx lerna run test
+
 lint-ci:
 	npx eslint --ignore-pattern app --ignore-pattern example .
 
 what-to-do:
 	git grep FIXME
 
-compose-update:
-	docker-compose run app yarn update
+# compose-update:
+# 	docker-compose run app yarn update
 
-compose-setup:
-	docker-compose run app make setup
+# compose-setup:
+# 	docker-compose run app make setup
 
-compose-example-setup: compose-setup
-	docker-compose run app bash -c 'cd example && make setup'
+# compose-example-setup: compose-setup
+# 	docker-compose run app make -C example setup
 
-compose-example-bash:
-	docker-compose run -w /code/example app bash
+# compose-example-bash:
+# 	docker-compose run -w /code/example app bash
 
-compose-example:
-	docker-compose up
+# compose-example:
+# 	docker-compose up
 
-compose-test:
-	docker-compose run app make test
+# compose-test:
+# 	docker-compose run app make test
 
-compose-server:
-	docker-compose run app make server
+# compose-server:
+# 	docker-compose run app make server
 
-compose-bash:
-	docker-compose run app bash
+# compose-bash:
+# 	docker-compose run app bash

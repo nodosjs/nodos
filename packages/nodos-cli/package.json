@@ -10,20 +10,17 @@
   },
   "bugs": "https://github.com/nodosjs/nodos/issues",
   "dependencies": {
-    "mkdirp": "^0.5.1",
-    "yargs": "^14.0.0",
-    "yeoman-environment": "^2.4.0",
-    "yeoman-generator": "^4.0.2"
-  },
-  "engines": {
-    "node": ">=10"
+    "mkdirp": "^1.0.4",
+    "yargs": "^15.3.1",
+    "yeoman-environment": "^2.10.0",
+    "yeoman-generator": "^4.10.1"
   },
   "homepage": "https://github.com/nodosjs/nodos",
   "license": "MIT",
   "main": "lib/index.js",
   "repository": "nodosjs/nodos",
-  "scripts": {
-    "test": "jest --colors"
-  },
-  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
+  "devDependencies": {
+    "jest-circus": "^26.0.1"
+  }
 }

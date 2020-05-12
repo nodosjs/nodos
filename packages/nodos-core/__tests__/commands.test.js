@@ -23,22 +23,22 @@ test('nodos/bin/console', async () => {
   // expect(replServer.context).toHaveProperty('app');
 });
 
-test('nodos/bin/test', async () => {
-  const run = jest.fn();
-  const container = {
-    jest: { run },
-  };
-  const app = await bin(
-    projectRoot,
-    ['test'],
-    {
-      container,
-    },
-  );
-  await app.stop();
+// test('nodos/bin/test', async () => {
+//   const run = jest.fn();
+//   const container = {
+//     jest: { run },
+//   };
+//   const app = await bin(
+//     projectRoot,
+//     ['test'],
+//     {
+//       container,
+//     },
+//   );
+//   await app.stop();
 
-  // expect(replServer.context).toHaveProperty('app');
-});
+//   // expect(replServer.context).toHaveProperty('app');
+// });
 
 test('nodos/bin/server', async () => {
   const fillResult = (port, address, cb) => {

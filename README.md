@@ -4,11 +4,11 @@
 
 Node.js framework for humans
 
-### Requirements
+## Requirements
 
-* Nodejs >= 10
+* Nodejs >= 12
 
-### Install
+## Install
 
 ```sh
 $ npm i -g @nodosjs/cli
@@ -18,7 +18,7 @@ $ bin/nodos server
 # commands: bin/nodos --help
 ```
 
-### Example
+## Setup and Run example
 
 ```sh
 # Setup
@@ -31,7 +31,7 @@ $ bin/nodos test
 $ bin/nodos server
 ```
 
-### Development
+## Development
 
 We use https://lernajs.io and yarn
 
@@ -40,6 +40,9 @@ $ git clone <this repo>
 $ cd nodos
 $ make setup
 $ make test
+
+# test single package
+$ npx jest packages/nodes-routing
 ```
 
 How to start (https://github.com/nodosjs/nodos/wiki). Russian version only.

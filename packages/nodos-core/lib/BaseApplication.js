@@ -4,43 +4,37 @@ const buildFastify = require('./builders/fastify');
 const log = require('./logger');
 
 class BaseApplication {
-  defaultRequestOptions = { headers: {}, params: null };
-
-  commands = [];
-
-  extensions = [];
-
-  generators = [];
-
-  plugins = []
-
-  hooks = {
-    onStop: [],
-  };
-
-  container = {};
-
-  addCommand = (command) => {
+  addCommand(command) {
     this.commands.push(command);
   }
 
-  addPlugin = (plugin, options = {}) => {
+  addPlugin(plugin, options = {}) {
     this.plugins.push([plugin, options]);
   }
 
-  addDependency = (name, value) => {
+  addDependency(name, value) {
     this.container[name] = value;
   }
 
-  addExtension = (extension, options = {}) => {
+  addExtension(extension, options = {}) {
     this.extensions.push([extension, options]);
   }
 
-  addHook = (name, value) => {
+  addHook(name, value) {
     this.hooks[name].push(value);
   }
 
   constructor(projectRoot, env) {
+    this.defaultRequestOptions = { headers: {}, params: null };
+    this.commands = [];
+    this.extensions = [];
+    this.generators = [];
+    this.container = {};
+    this.plugins = []
+    this.hooks = {
+      onStop: [],
+    };
+
     const join = path.join.bind(null, projectRoot);
     this.config = {
       env,
@@ -76,17 +70,27 @@ class BaseApplication {
     this.hooks.onStop.forEach(h => h());
   }
 
-  get = url => this.request('GET', url)
+  get(url) {
+    return this.request('GET', url);
+  }
 
-  post = (url, options = {}) => this.request('POST', url, options)
+  post(url, options = {}) {
+    return this.request('POST', url, options);
+  }
 
-  put = (url, options = {}) => this.request('PUT', url, options)
+  put(url, options = {}) {
+    this.request('PUT', url, options);
+  }
 
-  patch = (url, options = {}) => this.request('PATCH', url, options)
+  patch(url, options = {}) {
+    this.request('PATCH', url, options);
+  }
 
-  delete = url => this.request('DELETE', url)
+  delete(url) {
+    return this.request('DELETE', url);
+  }
 
-  request = (method, url, options) => {
+  request(method, url, options) {
     const { params, headers } = { ...this.defaultRequestOptions, ...options };
 
     return this.fastify.inject({

@@ -2,17 +2,14 @@ const path = require('path');
 const status = require('statuses');
 
 class Response {
-  responseType = 'rendering';
-
-  headers = {}
-
-  locals = {};
-
-  code = 200;
-
   constructor({ templateName, templateDir }) {
     this.templateName = templateName;
     this.templateDir = templateDir;
+    this.responseType = 'rendering';
+    this.headers = {}
+    this.locals = {};
+    this.code = 200;
+
   }
 
   head(value) {

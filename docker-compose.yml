@@ -5,8 +5,8 @@ services:
   db:
     image: postgres
   app:
-    image: node:12.10
-    command: bash -c 'cd example && make server'
+    image: node:12.16.3
+    command: make -C example server
     working_dir: /code
     ports:
       - "3000:3000"

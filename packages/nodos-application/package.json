@@ -5,30 +5,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-decorators": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/register": "^7.8.3",
-    "babel-jest": "^25.1.0",
-    "columnify": "^1.5.4",
-    "debug": "^4.1.1",
-    "fastify": "^2.12.0",
-    "fastify-cookie": "^3.6.0",
-    "fastify-error-page": "^3.0.0",
-    "fastify-formbody": "^3.1.0",
-    "fastify-sensible": "^2.1.1",
-    "jest": "^25.1.0",
-    "jest-cli": "^25.1.0",
-    "jest-environment-node": "^25.1.0",
-    "js-yaml": "^3.13.1",
-    "lodash": "^4.17.15",
-    "marko": "^4.18.46",
-    "point-of-view": "^3.7.1",
-    "pug": "^2.0.4",
-    "qs": "^6.9.1",
-    "statuses": "^1.5.0"
-  },
-  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
+  "devDependencies": {
+    "jest-circus": "^26.0.1"
+  }
 }

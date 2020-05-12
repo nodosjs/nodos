@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import _ from 'lodash';
 import yml from 'js-yaml';
-import Router from '../lib';
+import Router from '../index.js';
 
 let routesMap;
 

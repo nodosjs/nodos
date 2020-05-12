@@ -1,5 +1,5 @@
-// import '@babel/register';
 const _ = require('lodash');
+const fs = require('fs');
 const path = require('path');
 const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
@@ -16,15 +16,22 @@ const fetchMiddleware = async (app, middlewareName) => {
     path.resolve(middlewareName)
   ];
 
-  return Promise.all(paths.map(async path => {
-      try {
-        return await require(path);
-      } catch (e) {
-        return e;
-      }
-    }))
-    .then(res => res.find(e => !(e instanceof Error)))
-    .then(e => e.default ? e.default : e);
+  const promises = paths.map(async (p) => {
+    try {
+      await fs.promises.stat(`${p}.js`);
+      return p;
+    } catch (e) {
+      return null;
+    }
+  });
+  const filepaths = await Promise.all(promises)
+  const filepath = filepaths.find(_.identity);
+
+  if (!filepath) {
+    throw new Error(`Cannot find middleware: ${middlewareName}. Paths: ${paths.join(', ')}`);
+  }
+
+  return require(filepath);
 };
 
 const sendResponse = async (fastifyApp, response, reply) => {
@@ -87,19 +94,18 @@ module.exports = async (app) => {
 
   const promises = app.router.routes.map(async (route) => {
     const pathToController = path.join(app.config.paths.controllers, route.resourceName);
-    const middlewarePromises = route.middlewares.map(fetchMiddleware.bind(null, app));
+    const middlewarePromises = route.middlewares.map((middleware) => fetchMiddleware(app, middleware));
     const middlewares = await Promise.all(middlewarePromises);
-    const opts = {
-      preHandler: middlewares,
-    };
-    fastifyApp[route.method](route.url, opts, async (request, reply) => {
+    console.log('!!!', middlewares);
+
+    const handler = async (request, reply) => {
       if (!app.config.cacheModules) {
         const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/))
           .filter(p => p.match(/controllers/));
         appCacheKeys.forEach((item) => { delete require.cache[item]; });
       }
       log(pathToController);
-      const actions = await require(pathToController);
+      const actions = require(pathToController);
       const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
       log('actions', [actions, route.actionName]);
       if (!_.has(actions, route.actionName)) {
@@ -107,7 +113,15 @@ module.exports = async (app) => {
       }
       await actions[route.actionName](request, response, app.container);
       return sendResponse(fastifyApp, response, reply);
-    });
+    };
+
+    const opts = {
+      handler,
+      url: route.url,
+      method: route.method.toUpperCase(),
+      preHandler: middlewares,
+    };
+    fastifyApp.route(opts);
   });
   await Promise.all(promises);
 

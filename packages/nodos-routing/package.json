@@ -1,15 +1,11 @@
 {
   "name": "@nodosjs/routing",
   "version": "0.0.27",
-  "main": "./lib/index.js",
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "test": "jest --colors"
-  },
   "dependencies": {
-    "ajv": "^6.10.2",
+    "ajv": "^6.12.2",
     "inflected": "^2.0.4",
     "lodash": "^4.17.15",
     "url-join": "^4.0.1"
@@ -19,8 +15,8 @@
     "dist",
     "lib"
   ],
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "devDependencies": {
-    "js-yaml": "^3.13.1"
-  },
-  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
+    "jest-circus": "^26.0.1"
+  }
 }
