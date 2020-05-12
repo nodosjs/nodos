@@ -5,7 +5,7 @@ const Route = require('./Route');
 const validate = require('./validator');
 
 const detectRouteType = (currentName) => {
-  const names = ['resources', 'resource', 'root', 'single'];
+  const names = ['resources', 'resource', 'root'];
   return names.find(name => name === currentName);
 };
 
@@ -21,10 +21,11 @@ const buildActionNames = (routeItem) => {
 const normalizeScope = (scope) => {
   const path = scope.name.startsWith('/') ? scope.name : '/';
   const prefix = scope.name.startsWith('/') ? '' : scope.name;
-  const routes = scope.routes ? scope.routes : [{ single: scope.name }];
+  const [root, routes] = _.has(scope, 'routes') ? [scope.root, scope.routes] : [true, []];
 
   return {
     ...scope,
+    root,
     routes,
     path,
     prefix,
@@ -84,18 +85,6 @@ const types = {
     prefix,
     parent,
     actionName: 'default',
-    method: 'get',
-    url: getUrl(path, prefix, parent, '') || '/',
-    name: getName(prefix, parent, routeItem.name),
-  }),
-  single: (routeItem, rec, { path, prefix, middlewares, pipeline, parent }) => new Route({
-    resourceName: routeItem.name,
-    middlewares,
-    pipeline,
-    path,
-    prefix,
-    parent,
-    actionName: 'show',
     method: 'get',
     url: getUrl(path, prefix, parent, '') || '/',
     name: getName(prefix, parent, routeItem.name),
@@ -244,12 +233,8 @@ const buildRoot = (root, options) => (root ? buildRoute({ root: 'root' }, option
 
 const buildRoutes = (routes, options) => routes.map(item => buildRoute(item, options));
 
-const buildScope = ({
-  root, routes, path, prefix, pipeline,
-}, pipelines) => {
-  const options = {
-    path, prefix, middlewares: pipelines[pipeline], pipeline,
-  };
+const buildScope = ({ root, routes, path, prefix, pipeline, }, pipelines) => {
+  const options = { path, prefix, middlewares: pipelines[pipeline], pipeline };
   return [buildRoot(root, options), buildRoutes(routes, options)];
 };
 
