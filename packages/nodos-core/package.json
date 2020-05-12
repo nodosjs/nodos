@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/core",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "publishConfig": {
     "access": "public"
   },
@@ -17,8 +17,8 @@
     "url": "https://github.com/nodosjs/nodos/issues"
   },
   "dependencies": {
-    "@nodosjs/helpers": "^0.0.28",
-    "@nodosjs/routing": "^0.0.28",
+    "@nodosjs/helpers": "^0.0.29",
+    "@nodosjs/routing": "^0.0.29",
     "columnify": "^1.5.4",
     "debug": "^4.1.1",
     "fastify": "^2.14.1",

@@ -1,14 +1,14 @@
 {
   "name": "@nodosjs/application",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "main": "./lib/index.js",
   "publishConfig": {
     "access": "public"
   },
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "dependencies": {
-    "@nodosjs/cli": "^0.0.28",
-    "@nodosjs/core": "^0.0.28",
-    "@nodosjs/generators": "^0.0.28"
+    "@nodosjs/cli": "^0.0.29",
+    "@nodosjs/core": "^0.0.29",
+    "@nodosjs/generators": "^0.0.29"
   }
 }
