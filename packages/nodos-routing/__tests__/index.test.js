@@ -101,5 +101,5 @@ test('nodos-routing throws an error if routes key is missing', async () => {
   const routesData = await fs.readFile(`${__dirname}/../__fixtures__/scopeWithoutRoutes.yml`);
   const invalidRoutesMap = yml.safeLoad(routesData);
 
-  expect(() => new Router(invalidRoutesMap, { host: 'http://site.com' })).toThrow(/Missing routes in/);
+  expect(() => new Router(invalidRoutesMap, { host: 'http://site.com' })).toThrow(/Routes schema is invalid/);
 });

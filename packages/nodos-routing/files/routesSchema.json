@@ -22,7 +22,10 @@
               "items": { "$ref": "routeSchema" }
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "if": { "properties": { "root": false } },
+          "then": { "required": ["routes"] },
+          "else": { "required": ["root"] }
         }
     }
   },

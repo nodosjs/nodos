@@ -21,13 +21,11 @@ const buildActionNames = (routeItem) => {
 const normalizeScope = (scope) => {
   const path = scope.name.startsWith('/') ? scope.name : '/';
   const prefix = scope.name.startsWith('/') ? '' : scope.name;
-
-  if (!_.has(scope, 'routes')) {
-    throw new Error(`Missing routes key in ${scope.name} scope. If you want to make root route, please add "root: true" into scope.`);
-  }
+  const routes = _.has(scope, 'routes') ? scope.routes : [];
 
   return {
     ...scope,
+    routes,
     path,
     prefix,
   };
