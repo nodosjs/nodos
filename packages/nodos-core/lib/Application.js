@@ -4,8 +4,9 @@ const fastifyFormbody = require('fastify-formbody');
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
 const log = require('./logger');
+const { requireDefaultFunction } = require('./utils.js');
 
-class BaseApplication {
+class Application {
   addCommand(command) {
     this.commands.push(command);
   }
@@ -44,9 +45,9 @@ class BaseApplication {
       errorHandler: false,
       paths: {
         routes: join('config', 'routes.yml'),
-        application: join('config', 'application'),
+        application: join('config', 'application.js'),
         config: join('config'),
-        environments: join('config/environments'),
+        environment: join(`config/environments/${env}.js`),
         templates: join('app', 'templates'),
         controllers: join('app', 'controllers'),
         middlewares: join('app', 'middlewares'),
@@ -57,10 +58,13 @@ class BaseApplication {
     this.addPlugin(fastifyFormbody);
   }
 
-  async init() { }
-
   async start() {
-    await this.init();
+    const fillByApp = requireDefaultFunction(this.config.paths.application);
+    const fillByEnv = requireDefaultFunction(this.config.paths.environment);
+
+    fillByApp(this);
+    fillByEnv(this);
+
     this.router = await buildRouter(this.config.paths.routes, { host: this.config.host });
     this.addDependency('router', this.router);
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
@@ -109,4 +113,4 @@ class BaseApplication {
   }
 }
 
-module.exports = BaseApplication;
+module.exports = Application;

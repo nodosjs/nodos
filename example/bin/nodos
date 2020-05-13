@@ -1,5 +1,0 @@
-#!/usr/bin/env node
-
-const { bin } = require('@nodosjs/core');
-
-bin(`${__dirname}/..`);

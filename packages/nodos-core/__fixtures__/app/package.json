@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "test": "bin/test"
-  },
-  "dependencies": {
-    "@babel/node": "^7.8.7",
-    "@nodosjs/core": "../../"
-  }
-}

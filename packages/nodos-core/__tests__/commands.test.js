@@ -1,6 +1,6 @@
 const path = require('path');
-const { bin } = require('../lib');
-const commands = require('../lib/commands');
+const { bin } = require('../index.js');
+const commands = require('../lib/commands.js');
 
 const projectRoot = path.join(__dirname, '../__fixtures__/app');
 

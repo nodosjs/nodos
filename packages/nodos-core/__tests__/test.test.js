@@ -1,4 +1,4 @@
-import IntegrationEnvironment from '../lib/testEnvironments/IntegrationEnvironment';
+import IntegrationEnvironment from '../lib/testEnvironments/IntegrationEnvironment.js';
 
 test('nodos/testEnvironment', async () => {
   const config = {

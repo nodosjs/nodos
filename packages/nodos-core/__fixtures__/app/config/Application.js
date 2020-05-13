@@ -1,7 +1,3 @@
-import { BaseApplication } from '../../../lib';
+export default (app) => {
 
-export default class Application extends BaseApplication {
-  async init() {
-    // init
-  }
-}
+};

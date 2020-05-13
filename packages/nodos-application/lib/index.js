@@ -1,4 +1,4 @@
 // @ts-check
-const { bin, nodos, BaseApplication } = require('@nodosjs/core');
+const { bin, nodos } = require('@nodosjs/core');
 
-module.exports = { bin, nodos, BaseApplication };
+module.exports = { bin, nodos };

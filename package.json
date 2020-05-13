@@ -6,11 +6,12 @@
     "test": "jest"
   },
   "jest": {
+    "testRunner": "jest-circus/runner",
+    "bail": true,
+    "rootDir": "packages",
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "__fixtures__",
-      "/templates/",
-      "example"
+      "/__fixtures__/"
     ]
   },
   "workspaces": {

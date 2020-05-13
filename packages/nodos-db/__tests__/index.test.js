@@ -1,5 +1,5 @@
 // import { BaseApplication } from '@nodosjs/application';
-import getExtensionData from '../lib';
+import getExtensionData from '../lib/index.js';
 
 // TODO: create app in fixtures
 // class MyApplication extends BaseApplication {

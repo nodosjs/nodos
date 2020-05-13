@@ -1,4 +1,4 @@
-require('reflect-metadata');
+// require('reflect-metadata');
 const commands = require('./commands');
 const Db = require('./Db');
 

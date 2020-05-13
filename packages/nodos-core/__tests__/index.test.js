@@ -1,5 +1,5 @@
 import qs from 'qs';
-import nodos from '../lib/nodos';
+import { nodos } from '../index.js';
 
 let app;
 
