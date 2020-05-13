@@ -19,7 +19,6 @@ scopes:
 
   - name: 'test'
     pipeline: api
-    root: true
 
   - name: '/'
     pipeline: browser

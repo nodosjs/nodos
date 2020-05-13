@@ -21,9 +21,11 @@ const buildActionNames = (routeItem) => {
 const normalizeScope = (scope) => {
   const path = scope.name.startsWith('/') ? scope.name : '/';
   const prefix = scope.name.startsWith('/') ? '' : scope.name;
+  const routes = _.has(scope, 'routes') ? scope.routes : [];
 
   return {
     ...scope,
+    routes,
     path,
     prefix,
   };
@@ -74,9 +76,7 @@ const selectRequestedActions = (routeItem, actions) => {
 };
 
 const types = {
-  root: (routeItem, rec, {
-    path, prefix, middlewares, pipeline, parent,
-  }) => new Route({
+  root: (routeItem, rec, { path, prefix, middlewares, pipeline, parent }) => new Route({
     resourceName: routeItem.name,
     middlewares,
     pipeline,
@@ -88,9 +88,7 @@ const types = {
     url: getUrl(path, prefix, parent, '') || '/',
     name: getName(prefix, parent, routeItem.name),
   }),
-  resources: (routeItem, rec, {
-    path, prefix, middlewares, pipeline, parent,
-  }) => {
+  resources: (routeItem, rec, { path, prefix, middlewares, pipeline, parent, }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
@@ -159,9 +157,7 @@ const types = {
     });
     return [...routes, ...nestedRoutes];
   },
-  resource: (routeItem, rec, {
-    path, prefix, middlewares, pipeline, parent,
-  }) => {
+  resource: (routeItem, rec, { path, prefix, middlewares, pipeline, parent, }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
@@ -236,12 +232,8 @@ const buildRoot = (root, options) => (root ? buildRoute({ root: 'root' }, option
 
 const buildRoutes = (routes, options) => routes.map(item => buildRoute(item, options));
 
-const buildScope = ({
-  root, routes, path, prefix, pipeline,
-}, pipelines) => {
-  const options = {
-    path, prefix, middlewares: pipelines[pipeline], pipeline,
-  };
+const buildScope = ({ root, routes, path, prefix, pipeline, }, pipelines) => {
+  const options = { path, prefix, middlewares: pipelines[pipeline], pipeline };
   return [buildRoot(root, options), buildRoutes(routes, options)];
 };
 

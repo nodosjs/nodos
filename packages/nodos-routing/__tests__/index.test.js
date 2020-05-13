@@ -28,6 +28,7 @@ test('nodos-routing', async () => {
     { actionName: 'index', url: '/articles/:article_id/comments', method: 'get' },
     { actionName: 'show', url: '/articles/:article_id/comments/:id', method: 'get' },
     { actionName: 'create', url: '/articles/:article_id/metadata', method: 'post' },
+    { actionName: 'default', url: '/test', method: 'get' },
   ];
 
   const actualRoutes = routes
@@ -95,4 +96,11 @@ test('nodos-routing throws an error if schema is invalid', async () => {
   const invalidRoutesMap = yml.safeLoad(routesData);
 
   expect(() => new Router(invalidRoutesMap)).toThrow(/Routes schema is invalid/);
+});
+
+test('nodos-routing throws an error if routes key is missing', async () => {
+  const routesData = await fs.readFile(`${__dirname}/../__fixtures__/scopeWithoutRoutes.yml`);
+  const invalidRoutesMap = yml.safeLoad(routesData);
+
+  expect(() => new Router(invalidRoutesMap, { host: 'http://site.com' })).toThrow(/Routes schema is invalid/);
 });
