@@ -1,4 +1,4 @@
-setup: link install
+setup: install link
 
 install:
 	yarn
