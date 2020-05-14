@@ -1,5 +1,5 @@
-// import nodosDb from '@nodosjs/db';
+import nodosDb from '@nodosjs/db';
 
 export default (app) => {
-  // app.addExtension(nodosDb);
+  app.addExtension(nodosDb);
 }
