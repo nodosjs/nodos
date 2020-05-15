@@ -1,7 +1,3 @@
-/**
- * @jest-environment @nodosjs/application/lib/testEnvironments/IntegrationEnvironment
- */
-
 test('example/users', async () => {
   const response = await get('/users');
   expect(response).toMatchObject({ statusCode: 200 });

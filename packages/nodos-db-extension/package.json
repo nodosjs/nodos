@@ -1,5 +1,5 @@
 {
-  "name": "@nodosjs/db",
+  "name": "@nodosjs/db-extension",
   "version": "0.0.30",
   "main": "./lib/index.js",
   "publishConfig": {

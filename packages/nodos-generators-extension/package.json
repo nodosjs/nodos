@@ -1,5 +1,5 @@
 {
-  "name": "@nodosjs/generators",
+  "name": "@nodosjs/generators-extension",
   "version": "0.0.30",
   "publishConfig": {
     "access": "public"

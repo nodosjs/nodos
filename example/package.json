@@ -3,9 +3,13 @@
     "test": "bin/nodos test",
     "start": "bin/nodos server"
   },
+  "jest": {
+    "testEnvironment": "@nodosjs/jest-environment"
+  },
   "dependencies": {
     "@babel/node": "^7.8.7",
     "@nodosjs/application": "../packages/nodos-application/",
+    "@nodosjs/db-extension": "../packages/nodos-db-extension/",
     "bootstrap": "^4.4.1",
     "jquery-ujs": "^1.2.2",
     "popper.js": "^1.16.1",

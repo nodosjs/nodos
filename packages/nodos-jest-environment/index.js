@@ -1,5 +1,5 @@
-import NodeEnvironment from 'jest-environment-node';
-import nodos from '../nodos.js';
+const NodeEnvironment = require('jest-environment-node');
+const { nodos } = require('@nodosjs/core');
 
 class IntegrationEnvironment extends NodeEnvironment {
   constructor(config) {
@@ -20,5 +20,5 @@ class IntegrationEnvironment extends NodeEnvironment {
   }
 }
 
-export default IntegrationEnvironment;
 module.exports = IntegrationEnvironment;
+
