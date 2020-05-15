@@ -1,7 +1,7 @@
 import hmr from 'fastify-webpack-hmr';
 import webpack from 'webpack';
 
-import webpackConfig from '../../webpack.config';
+import webpackConfig from '../../webpack.config.js';
 
 const compiler = webpack(webpackConfig);
 
