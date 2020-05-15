@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test": "jest",
-    "start": "npx nodos server"
+    "start": "npx nodos server",
+    "start:prod": "npm start"
   },
   "jest": {
     "testEnvironment": "@nodosjs/jest-environment",
