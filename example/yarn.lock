@@ -233,7 +233,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
-"@babel/register@^7.8.3":
+"@babel/register@^7.8.3", "@babel/register@^7.9.0":
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.9.0.tgz#02464ede57548bddbb5e9f705d263b7c3f43d48b"
   integrity sha512-Tv8Zyi2J2VRR8g7pC5gTeIN8Ihultbmk0ocyNz8H2nEZbmhp1N6q0A1UGsQbDvGP/sNinQKUHf3SqXwqjtFv4Q==
@@ -471,19 +471,12 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@nodosjs/application@../packages/nodos-application/":
-  version "0.0.32"
+"@nodosjs/core@../packages/nodos-core/", "@nodosjs/core@^0.0.33":
+  version "0.0.33"
   dependencies:
-    "@nodosjs/core" "^0.0.32"
-    "@nodosjs/jest-environment" "^0.0.32"
-
-"@nodosjs/core@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@nodosjs/core/-/core-0.0.32.tgz#1a591c91edf2fa76dfd3825437921bf9b3e7b67a"
-  integrity sha512-wHuRKkKl5HYlLNcA6gWGOKCvlRVCjJhy3NiNY5ygqCfD4jk5RPeP45Fsh8O3MhlyegORdGjn0LZkgkIn0nL+tw==
-  dependencies:
-    "@nodosjs/helpers" "^0.0.32"
-    "@nodosjs/routing" "^0.0.32"
+    "@babel/register" "^7.9.0"
+    "@nodosjs/helpers" "^0.0.33"
+    "@nodosjs/routing" "^0.0.33"
     columnify "^1.5.4"
     debug "^4.1.1"
     fastify "^2.14.1"
@@ -500,32 +493,31 @@
     statuses "^2.0.0"
 
 "@nodosjs/db-extension@../packages/nodos-db-extension/":
-  version "0.0.32"
+  version "0.0.33"
   dependencies:
     reflect-metadata "^0.1.13"
     typeorm "^0.2.24"
 
-"@nodosjs/helpers@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@nodosjs/helpers/-/helpers-0.0.32.tgz#c9ae931dd6f5516cfd06b33f0d7d6ed7fd65f568"
-  integrity sha512-s+YGBjhneM1a3/IvKF6MFVy2CEMVZLQLIjGWSVao+4Z+FBquLrWFv/VIUb9bTemcuA+EyqUvV4/AL1Qf12RE5A==
+"@nodosjs/helpers@^0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@nodosjs/helpers/-/helpers-0.0.33.tgz#90bc81b728f2e2408951fd8724e0bbdf869d46fa"
+  integrity sha512-w3Z5zVQRi7qFuiLPeM9Wj9SAu/6oPLkAOIUxEGg/OSILTYXiz6phIqcneaKimt2ArOZ71aGHr3CWgbPxidpASg==
   dependencies:
     create-html-element "^3.0.0"
 
-"@nodosjs/jest-environment@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@nodosjs/jest-environment/-/jest-environment-0.0.32.tgz#f725fe5e96e081ae3c57bb0dd238aaf6ad8e7d47"
-  integrity sha512-aJnRsSi5Mo80KXCt34wICeLQoSKZCTCaxGnK+6C8b5ioy32dK+eSzx6eBdzyLbfK53aOJ/8R/DKExbG1RLtd3Q==
+"@nodosjs/jest-environment@../packages/nodos-jest-environment/":
+  version "0.0.33"
   dependencies:
-    "@nodosjs/core" "^0.0.32"
+    "@nodosjs/core" "^0.0.33"
+    babel-jest "^26.0.1"
     jest "^26.0.1"
     jest-cli "^26.0.1"
     jest-environment-node "^26.0.1"
 
-"@nodosjs/routing@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@nodosjs/routing/-/routing-0.0.32.tgz#6f8eeff0decfb7f47526aee839206574783e05f2"
-  integrity sha512-ozIMrTCl8E+7XmSLk3HkvQHg7fVZ1xvyhunG7OpbHwQ6Z/3hsq48MyH/J4ehYhQ5YvOVZs+hzRIeRtWs8cAuHA==
+"@nodosjs/routing@^0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@nodosjs/routing/-/routing-0.0.33.tgz#08939d5dc1119170976abe30e21ef72f62a292e4"
+  integrity sha512-5LX/YoSON04OMSLmm4Zmq4Dj+yxM5OvOW9KjnvBUTL8c1Jo24JVmqARDCIHkIXe+UUoe+mCsu1mAlYWym+sfdQ==
   dependencies:
     ajv "^6.12.2"
     inflected "^2.0.4"
