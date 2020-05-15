@@ -50,3 +50,9 @@ what-to-do:
 
 # compose-bash:
 # 	docker-compose run app bash
+#
+docs-start:
+	cd docs; npm start
+
+docs-deploy:
+	cd docs; GIT_USER=$(U) npm run deploy
