@@ -18,10 +18,10 @@ join:
 	npm link @nodosjs/routing
 
 start:
-	DEBUG=nodos:* npx babel-node node_modules/.bin/nodos server -h 0.0.0.0
+	DEBUG=nodos:* npm start
 
 routes:
-	DEBUG=nodos:* npx babel-node node_modules/.bin/nodos routes
+	DEBUG=nodos:* npx nodos routes
 
 test:
 	DEBUG=nodos:* npm test
