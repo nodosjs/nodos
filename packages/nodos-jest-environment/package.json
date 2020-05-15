@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@nodosjs/core": "^0.0.32",
+    "babel-jest": "^26.0.1",
     "jest": "^26.0.1",
     "jest-cli": "^26.0.1",
     "jest-environment-node": "^26.0.1"

@@ -19,6 +19,7 @@
     "url": "https://github.com/nodosjs/nodos/issues"
   },
   "dependencies": {
+    "@babel/register": "^7.9.0",
     "@nodosjs/helpers": "^0.0.32",
     "@nodosjs/routing": "^0.0.32",
     "columnify": "^1.5.4",

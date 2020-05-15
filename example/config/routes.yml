@@ -2,8 +2,8 @@
 
 pipelines:
 
-  browser:
-    - checkMigrations
+  browser: []
+    # - checkMigrations
     # - accepts
     # - setLocale
     # - fetchSession

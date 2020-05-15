@@ -24,4 +24,4 @@ routes:
 	DEBUG=nodos:* npx babel-node node_modules/.bin/nodos routes
 
 test:
-	DEBUG=nodos:* npx jest
+	DEBUG=nodos:* npm test
