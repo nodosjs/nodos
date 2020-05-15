@@ -1,13 +1,13 @@
 {
   "name": "@nodosjs/application",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "main": "./lib/index.js",
   "publishConfig": {
     "access": "public"
   },
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "dependencies": {
-    "@nodosjs/core": "^0.0.33",
-    "@nodosjs/jest-environment": "^0.0.33"
+    "@nodosjs/core": "^0.0.34",
+    "@nodosjs/jest-environment": "^0.0.34"
   }
 }
