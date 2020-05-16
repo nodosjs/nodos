@@ -1,4 +1,5 @@
 node_modules
 dist
-flow-typed
-*.marko.js
+example
+docs
+generator/templates

@@ -1,4 +1,4 @@
 test('example/', async () => {
-  const response = await get('/');
+  const response = await app.get('/');
   expect(response).toMatchObject({ statusCode: 200 });
 });

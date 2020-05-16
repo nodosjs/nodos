@@ -12,9 +12,13 @@ env:
 # https://github.com/babel/babel-eslint
 parser: babel-eslint
 
+globals:
+  app: readonly
+
 extends:
-  - 'airbnb-base'
+  - 'eslint:recommended'
   - 'plugin:jest/recommended'
 
 rules:
   no-console: 0
+

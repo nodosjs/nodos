@@ -1,10 +1,10 @@
 test('example/users', async () => {
-  const response = await get('/users');
+  const response = await app.get('/users');
   expect(response).toMatchObject({ statusCode: 200 });
 });
 
 test('example/users/build', async () => {
-  const response = await get('/users/build');
+  const response = await app.get('/users/build');
   expect(response).toMatchObject({ statusCode: 200 });
 });
 
@@ -16,6 +16,6 @@ test('example/users/create', async () => {
 
 test('example/users/edit', async () => {
   const user = { id: 3 };
-  const response = await get(`/users/${user.id}/edit`);
+  const response = await app.get(`/users/${user.id}/edit`);
   expect(response).toMatchObject({ statusCode: 200 });
 });
