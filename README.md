@@ -1,3 +1,4 @@
+![Build status](https://github.com/nodosjs/nodos/workflows/push/badge.svg)
 
 # Nodos
 
