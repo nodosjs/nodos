@@ -6,21 +6,29 @@
   },
   "jest": {
     "testEnvironment": "@nodosjs/jest-environment",
-    "testMatch": [ "**/tests/**/*.[jt]s?(x)"]
+    "testMatch": [
+      "**/tests/**/*.[jt]s?(x)"
+    ]
   },
   "dependencies": {
+    "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
     "@nodosjs/core": "../packages/nodos-core/",
     "@nodosjs/db-extension": "../packages/nodos-db-extension/",
-    "@nodosjs/jest-environment": "../packages/nodos-jest-environment/",
-    "bootstrap": "^4.4.1",
+    "@popperjs/core": "^2.4.0",
+    "bootstrap": "^4.5.0",
     "jquery-ujs": "^1.2.2",
-    "popper.js": "^1.16.1",
     "sql.js": "^1.2.2"
   },
   "devDependencies": {
+    "@nodosjs/jest-environment": "../packages/nodos-jest-environment/",
     "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
     "fastify-webpack-hmr": "^2.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
     "webpack": "^4.43.0"
   }
 }
