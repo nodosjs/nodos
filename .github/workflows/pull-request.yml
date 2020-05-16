@@ -1,0 +1,21 @@
+name: On Pull Request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install deps
+        run: |
+          make setup
+      - name: Run lint
+        run: |
+          make lint-ci
+      - name: Run tests
+        run: |
+          make test
