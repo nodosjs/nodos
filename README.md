@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/nodosjs/nodos.svg?branch=master)](https://travis-ci.com/nodosjs/nodos)
 
 # Nodos
 
