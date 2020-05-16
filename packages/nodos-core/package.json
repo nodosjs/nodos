@@ -29,6 +29,7 @@
     "fastify-error-page": "^3.0.0",
     "fastify-formbody": "^3.2.0",
     "fastify-sensible": "^2.1.1",
+    "fastify-static": "^2.7.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "marko": "^4.21.8",

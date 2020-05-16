@@ -53,6 +53,7 @@ class Application {
       projectRoot,
       errorHandler: false,
       paths: {
+        publicPath: join('public'),
         routesPath: join('config', 'routes.yml'),
         applicationPath: join('config', 'application.js'),
         configPath: join('config'),

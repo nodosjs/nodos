@@ -1,3 +1,4 @@
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -8,6 +9,7 @@ module.exports = {
   ],
   output: {
     publicPath: '/assets',
+    path: path.resolve(__dirname, 'public/assets'),
   },
   module: {
     rules: [

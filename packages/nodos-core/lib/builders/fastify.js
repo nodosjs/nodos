@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
+const fastifyStatic = require('fastify-static');
 const pointOfView = require('point-of-view');
 const pug = require('pug');
 // const debug = require('debug');
@@ -89,6 +90,10 @@ module.exports = async (app) => {
       cache: app.isProduction(),
     },
   });
+  fastifyApp.register(fastifyStatic, {
+    root: app.config.paths.publicPath,
+    // prefix: '/public/', // optional: default '/'
+  })
   app.plugins.forEach(([plugin, options]) => fastifyApp.register(plugin, options));
 
   // fastifyApp.after(console.log);
