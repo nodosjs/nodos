@@ -27,7 +27,16 @@ class Application {
     this.hooks[name].push(value);
   }
 
-  constructor(projectRoot, env) {
+  isDevelopment() {
+    return this.env === 'development';
+  }
+
+  isProduction() {
+    return this.env === 'production';
+  }
+
+  constructor(projectRoot, env = 'development') {
+    this.env = env;
     this.defaultRequestOptions = { headers: {}, params: null };
     this.commands = [];
     this.extensions = [];
@@ -44,13 +53,13 @@ class Application {
       projectRoot,
       errorHandler: false,
       paths: {
-        routes: join('config', 'routes.yml'),
-        application: join('config', 'application.js'),
-        config: join('config'),
-        environment: join(`config/environments/${env}.js`),
-        templates: join('app', 'templates'),
-        controllers: join('app', 'controllers'),
-        middlewares: join('app', 'middlewares'),
+        routesPath: join('config', 'routes.yml'),
+        applicationPath: join('config', 'application.js'),
+        configPath: join('config'),
+        environmentPath: join(`config/environments/${env}.js`),
+        templatesPath: join('app', 'templates'),
+        controllersPath: join('app', 'controllers'),
+        middlewaresPath: join('app', 'middlewares'),
       },
     };
 
@@ -59,13 +68,13 @@ class Application {
   }
 
   async start() {
-    const fillByApp = requireDefaultFunction(this.config.paths.application);
-    const fillByEnv = requireDefaultFunction(this.config.paths.environment);
+    const fillByApp = requireDefaultFunction(this.config.paths.applicationPath);
+    const fillByEnv = requireDefaultFunction(this.config.paths.environmentPath);
 
     fillByApp(this);
     fillByEnv(this);
 
-    this.router = await buildRouter(this.config.paths.routes, { host: this.config.host });
+    this.router = await buildRouter(this.config.paths.routesPath, { host: this.config.host });
     this.addDependency('router', this.router);
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
     // TODO: pass only data, not application

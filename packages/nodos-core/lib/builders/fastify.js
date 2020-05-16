@@ -11,7 +11,7 @@ const log = require('../logger');
 
 const fetchMiddleware = async (app, middlewareName) => {
   const paths = [
-    path.join(app.config.paths.middlewares, middlewareName),
+    path.join(app.config.paths.middlewaresPath, middlewareName),
     path.join(__dirname, '..', 'middlewares', middlewareName),
     path.resolve(middlewareName)
   ];
@@ -82,7 +82,12 @@ module.exports = async (app) => {
   fastifyApp.register(pointOfView, {
     engine: { pug },
     includeViewExtension: true,
-    templates: app.config.paths.templates,
+    root: app.config.paths.templatesPath,
+    options: {
+      basedir: app.config.paths.templatesPath,
+      debug: app.isDevelopment(),
+      cache: app.isProduction(),
+    },
   });
   app.plugins.forEach(([plugin, options]) => fastifyApp.register(plugin, options));
 
@@ -107,7 +112,7 @@ module.exports = async (app) => {
   // });
 
   const promises = app.router.routes.map(async (route) => {
-    const pathToController = path.join(app.config.paths.controllers, route.resourceName);
+    const pathToController = path.join(app.config.paths.controllersPath, route.resourceName);
     const middlewarePromises = route.middlewares.map((middleware) => fetchMiddleware(app, middleware));
     const middlewares = await Promise.all(middlewarePromises);
 

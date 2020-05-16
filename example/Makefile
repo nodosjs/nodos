@@ -1,7 +1,7 @@
 setup: link install join
 
 install:
-	yarn
+	npm install
 
 link:
 	cd ../packages/nodos-jest-environment; npm link
