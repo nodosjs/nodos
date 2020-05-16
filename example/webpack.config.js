@@ -8,11 +8,18 @@ module.exports = {
     './app/javascript/application.js',
   ],
   output: {
-    publicPath: '/assets',
+    publicPath: '/assets/',
     path: path.resolve(__dirname, 'public/assets'),
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader' },
+        ],
+      },
       {
         test: /\.s[ac]ss$/i,
         use: [
