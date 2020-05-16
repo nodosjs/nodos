@@ -1,0 +1,22 @@
+name: On Push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    if: github.repository == 'nodosjs/nodos'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install deps
+        run: |
+          make setup
+      - name: Run lint
+        run: |
+          make lint-ci
+      - name: Run tests
+        run: |
+          make test
