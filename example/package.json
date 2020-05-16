@@ -13,6 +13,7 @@
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
     "@nodosjs/core": "../packages/nodos-core/",
     "@nodosjs/db-extension": "../packages/nodos-db-extension/",
     "@popperjs/core": "^2.4.0",
