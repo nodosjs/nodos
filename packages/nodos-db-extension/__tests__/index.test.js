@@ -1,21 +1,20 @@
 // import { BaseApplication } from '@nodosjs/application';
-// import getExtensionData from '../lib/index.js';
+// import _ from 'lodash';
+import path from 'path';
+import { nodos } from '@nodosjs/core';
+import buildExtension from '../index.js';
 
-// TODO: create app in fixtures
-// class MyApplication extends BaseApplication {
-//   init() {
-//     this.config.db = {
-//       type: 'sqljs',
-//       // database: '/tmp/test.sqlite3',
-//       logging: false,
-//     };
-//   }
-// }
-
+const projectRoot = path.join(__dirname, '__fixtures__/application');
 
 test('nodos/db', async () => {
-  expect(true).toBe(true);
-  // const app = new MyApplication('.');
-  // await app.init();
-  // await getExtensionData(app);
+  const app = nodos(projectRoot);
+  const extension = buildExtension();
+
+  await extension(app);
+
+  expect(app).toMatchObject({
+    container: {
+      db: expect.any(Object),
+    },
+  });
 });

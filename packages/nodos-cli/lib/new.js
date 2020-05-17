@@ -1,10 +1,10 @@
 const yargs = require('yargs');
 const yeoman = require('yeoman-environment');
 
-module.export = () => {
+module.exports = async () => {
   const env = yeoman.createEnv();
 
-  env.register(require.resolve('generators/Newapp.js'), 'newapp');
+  env.register(require.resolve('./generators/Newapp.js'), 'newapp');
 
   const commands = {
     new: {
@@ -31,7 +31,7 @@ nodos new ~/Code/Node/weblog
 This generates a skeletal Nodos installation in ~/Code/Nodos/weblog.
 `;
 
-  yargs // eslint-disabled no-unused-expressions
+  const parser = yargs
     .demandCommand()
     .recommendCommands()
     .strict()
@@ -42,7 +42,6 @@ This generates a skeletal Nodos installation in ~/Code/Nodos/weblog.
       default: false,
     })
     .epilog(help.trim())
-    .example(example.trim())
-    .argv;
-
+    .example(example.trim());
+  await parser.argv;
 };

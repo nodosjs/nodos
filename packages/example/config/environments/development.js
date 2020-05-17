@@ -7,6 +7,7 @@ const compiler = webpack(webpackConfig);
 
 export default (app) => {
   app.addPlugin(hmr, { compiler });
+
   app.config.logLevel = 'debug';
   app.config.cacheModules = false;
 };

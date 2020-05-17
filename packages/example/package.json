@@ -18,13 +18,16 @@
     "@nodosjs/cli": "^0.0.36",
     "@nodosjs/core": "^0.0.36",
     "@nodosjs/db-extension": "^0.0.36",
+    "@nodosjs/jest-environment": "^0.0.36",
     "@popperjs/core": "^2.4.0",
+    "babel-jest": "^26.0.1",
     "bootstrap": "^4.5.0",
+    "jest": "^26.0.1",
+    "jest-cli": "^26.0.1",
     "jquery-ujs": "^1.2.2",
     "sql.js": "^1.2.2"
   },
   "devDependencies": {
-    "@nodosjs/jest-environment": "^0.0.36",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "eslint": "^7.0.0",

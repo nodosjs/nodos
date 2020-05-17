@@ -1,11 +1,18 @@
+const importFrom = require('import-from');
 const runCurrent = require('./lib/current.js');
 const runNew = require('./lib/new.js');
 
-module.exports = async (projectRoot, args = process.argv.slice(2), options = {}) => {
-  // if inside nodos project
-  if (true) {
-    runCurrent(projectRoot);
-  } else {
-    runNew();
-  }
+module.exports = {
+  runNew,
+  runCurrent,
+  run(projectRoot) {
+    const core = importFrom.silent(projectRoot, '@nodosjs/core');
+
+    if (core) {
+      const app = core.nodos(projectRoot);
+      runCurrent(app);
+    } else {
+      runNew();
+    }
+  },
 };

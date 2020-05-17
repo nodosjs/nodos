@@ -3,7 +3,7 @@ const _ = require('lodash');
 const repl = require('repl');
 const columnify = require('columnify');
 // const log = require('./logger');
-const generator = require('./generator');
+// const generator = require('./generator');
 
 // const testCommand = ({ container }) => ({
 //   command: 'test [file]',
@@ -25,7 +25,7 @@ const generator = require('./generator');
 //   },
 // });
 
-const consoleCommandBuilder = ({ app, container }) => ({
+const buildConsoleCommand = ({ app, container }) => ({
   command: 'console',
   describe: 'run console',
   builder: {},
@@ -38,7 +38,7 @@ const consoleCommandBuilder = ({ app, container }) => ({
   },
 });
 
-const serverCommandBuilder = ({ app }) => ({
+const buildServerCommand = ({ app }) => ({
   command: 'server',
   describe: 'run server',
   builder: (yargs) => yargs
@@ -57,7 +57,7 @@ const serverCommandBuilder = ({ app }) => ({
   },
 });
 
-const routesCommandBuilder = ({ app, container }) => ({
+const buildRoutesCommand = ({ app, container }) => ({
   command: 'routes',
   describe: 'display routes',
   handler: async () => {
@@ -95,7 +95,7 @@ const routesCommandBuilder = ({ app, container }) => ({
   },
 });
 
-const generatorsCommandBuilder = () => ({
+const buildGeneratorsCommand = () => ({
   command: 'generate <type> <name>',
   type: 'array',
   builder: (command) => {
@@ -106,11 +106,11 @@ const generatorsCommandBuilder = () => ({
       describe: 'name of entity',
     });
   },
-  handler: (args) => {
-    generator.run(`generate ${args.type} ${args.name}`);
+  handler: () => {
+    // generator.run(`generate ${args.type} ${args.name}`);
   },
 });
 
 module.exports = {
-  consoleCommandBuilder, serverCommandBuilder, routesCommandBuilder, generatorsCommandBuilder,
+  buildConsoleCommand, buildServerCommand, buildRoutesCommand, buildGeneratorsCommand,
 };

@@ -1,7 +1,10 @@
-if users.length > 0
-  table
-    each user in users
-      tr
-        td= user.name
+extends /layouts/application.pug
 
-a(href="/users/build") New user
+block content
+  if users.length > 0
+    table
+      each user in users
+        tr
+          td= user.name
+
+  a(href="/users/build") New user

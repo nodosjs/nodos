@@ -10,9 +10,12 @@
   },
   "bugs": "https://github.com/nodosjs/nodos/issues",
   "dependencies": {
-    "import-cwd": "^3.0.0",
+    "import-from": "^3.0.0",
     "mkdirp": "^1.0.4",
+    "debug": "^4.1.1",
+    "lodash": "^4.17.15",
     "yargs": "^15.3.1",
+    "columnify": "^1.5.4",
     "yeoman-environment": "^2.10.2",
     "yeoman-generator": "^4.10.1"
   },
@@ -22,6 +25,6 @@
   "repository": "nodosjs/nodos",
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "devDependencies": {
-    "jest-circus": "^26.0.1"
+    "@nodosjs/core": "^0.0.36"
   }
 }

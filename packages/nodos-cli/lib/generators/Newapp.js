@@ -50,6 +50,6 @@ class Newapp extends Generator {
       );
     });
   }
-};
+}
 
 module.exports = Newapp;

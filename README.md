@@ -14,28 +14,16 @@ Node.js framework for humans
 $ npm i -g @nodosjs/cli
 $ nodos new MyBlog
 $ cd MyBlog
-$ bin/nodos server
-# commands: bin/nodos --help
-```
-
-## Setup and Run example
-
-```sh
-# Setup
-$ git clone <this repo>
-$ cd nodos
-$ make setup
-$ cd example
-$ make setup
-$ bin/nodos test
-$ bin/nodos server
+$ nodos server
+# commands: nodos --help
 ```
 
 ## Development
 
-We use https://lernajs.io and yarn
+We use https://lernajs.io
 
 ```sh
+# Setup
 $ git clone <this repo>
 $ cd nodos
 $ make setup
@@ -45,4 +33,11 @@ $ make test
 $ npx jest packages/nodes-routing
 ```
 
-How to start (https://github.com/nodosjs/nodos/wiki). Russian version only.
+### Example project
+
+
+```sh
+$ cd nodos/packages/example
+$ make test
+$ make start
+```

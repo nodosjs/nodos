@@ -22,6 +22,7 @@ export const show = async (request, response, { db }) => {
     .findOne(request.params.id);
   if (!user) {
     response.head(404);
+    return;
   }
 
   response.render({ user });

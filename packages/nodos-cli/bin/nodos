@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const run = require('../index.js');
+const { run } = require('../index.js');
 
 run(process.cwd());

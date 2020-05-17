@@ -1,23 +1,15 @@
 // import _ from 'lodash';
-// import path from 'path';
-// import { bin } from '@nodosjs/core';
-// import commandBuilders from '../lib/commands';
+import path from 'path';
+import { nodos } from '@nodosjs/core';
+import { runCurrent } from '@nodosjs/cli';
+import buildExtension from '../index.js';
 
-// const projectRoot = path.join(__dirname, '__fixtures__/app');
+const projectRoot = path.join(__dirname, '../__fixtures__/application');
 
-test('nodos/cli/console', async () => {
+test('nodos/server', async () => {
+  const app = nodos(projectRoot);
+  const extension = buildExtension();
+  await extension(app);
+  await runCurrent(app, { args: ['db'] });
   expect(true).toBe(true);
-  // const nodos = () => {
-  //   const app = {
-  //     start: _.noop,
-  //     stop: _.noop,
-  //     commandBuilders: Object.values(commandBuilders),
-  //   };
-  //   return app;
-  // };
-  // const container = {
-  //   nodos,
-  // };
-  // await bin(projectRoot, ['db'], { container });
-  // expect(replServer.context).toHaveProperty('app');
 });

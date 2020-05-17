@@ -11,11 +11,11 @@
     "rootDir": "packages",
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/__fixtures__/"
+      "/__fixtures__/",
+      "/example/"
     ]
   },
   "devDependencies": {
-    "js-yaml": "^3.13.1",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -34,6 +34,7 @@
     "jest": "^26.0.1",
     "jest-circus": "^26.0.1",
     "jest-cli": "^26.0.1",
+    "js-yaml": "^3.13.1",
     "lerna": "^3.21.0",
     "sql.js": "^1.2.2"
   },

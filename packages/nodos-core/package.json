@@ -20,7 +20,6 @@
     "@babel/register": "^7.9.0",
     "@nodosjs/helpers": "^0.0.36",
     "@nodosjs/routing": "^0.0.36",
-    "columnify": "^1.5.4",
     "debug": "^4.1.1",
     "fastify": "^2.14.1",
     "fastify-cookie": "^3.6.1",
@@ -33,9 +32,6 @@
     "point-of-view": "^3.8.0",
     "pug": "^2.0.4",
     "qs": "^6.9.4",
-    "statuses": "^2.0.0",
-    "yargs": "^15.3.1",
-    "yeoman-environment": "^2.10.2",
-    "yeoman-generator": "^4.10.1"
+    "statuses": "^2.0.0"
   }
 }
