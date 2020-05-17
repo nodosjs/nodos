@@ -4,7 +4,7 @@ const yeoman = require('yeoman-environment');
 module.export = () => {
   const env = yeoman.createEnv();
 
-  env.register(require.resolve('genrators/Newapp.js'), 'newapp');
+  env.register(require.resolve('generators/Newapp.js'), 'newapp');
 
   const commands = {
     new: {
