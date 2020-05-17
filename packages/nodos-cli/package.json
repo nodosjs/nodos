@@ -6,10 +6,11 @@
     "access": "public"
   },
   "bin": {
-    "nodos": "./bin/run"
+    "nodos": "./bin/nodos"
   },
   "bugs": "https://github.com/nodosjs/nodos/issues",
   "dependencies": {
+    "import-cwd": "^3.0.0",
     "mkdirp": "^1.0.4",
     "yargs": "^15.3.1",
     "yeoman-environment": "^2.10.2",

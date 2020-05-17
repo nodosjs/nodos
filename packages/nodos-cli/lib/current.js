@@ -1,16 +1,18 @@
+const importCwd = require('import-cwd');
 const _ = require('lodash');
 const yargs = require('yargs');
-const log = require('./logger');
-const nodos = require('./nodos');
+// const log = require('./logger');
+
+const { nodos } = importCwd('@nodosjs/core');
 
 module.exports = async (projectRoot, args = process.argv.slice(2), options = {}) => {
   const {
-    // exitProcess = true,
+    exitProcess = true,
     container = {},
     // done = _.noop, // FIXME: hack for testing purposes
   } = options;
   const parser = yargs(args);
-  parser.exitProcess(false);
+  parser.exitProcess(options.exitProcess);
   // parser.fail(console.log);
   parser.demandCommand();
   parser.recommendCommands();
@@ -24,8 +26,7 @@ module.exports = async (projectRoot, args = process.argv.slice(2), options = {})
   // console.log(app);
   // console.log(app.commandBuilders);
   const commands = app.commandBuilders.map((build) => build({ app, container }));
-  log(commands);
+  // log(commands);
   commands.forEach((c) => parser.command(c));
   await parser.argv;
-  return app;
 };

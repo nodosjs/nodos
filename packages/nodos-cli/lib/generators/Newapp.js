@@ -1,8 +1,8 @@
 const Generator = require('yeoman-generator');
-const mkdirp = require('mkdirp');
+const fs = require('fs');
 const path = require('path');
 
-export default class extends Generator {
+class Newapp extends Generator {
   // The name `constructor` is important here
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
@@ -14,8 +14,8 @@ export default class extends Generator {
   default() {
     const { appPath } = this.options;
 
-    mkdirp(appPath);
-    this.sourceRoot(path.resolve(__dirname, '../src/templates'));
+    fs.mkdirSync(appPath);
+    this.sourceRoot(path.resolve(__dirname, 'templates'));
     this.destinationRoot(this.destinationPath(appPath));
   }
 
@@ -50,4 +50,6 @@ export default class extends Generator {
       );
     });
   }
-}
+};
+
+module.exports = Newapp;

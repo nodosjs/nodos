@@ -3,9 +3,6 @@ setup: bootstrap
 bootstrap:
 	npx lerna bootstrap --hoist
 
-# install:
-# 	npm install
-
 update-deps:
 	npx lerna exec ncu -- -u
 
@@ -20,9 +17,6 @@ lint:
 
 lint-fix:
 	npx eslint . --fix
-
-link:
-	npx lerna publish
 
 publish:
 	npx lerna publish

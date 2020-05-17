@@ -4,9 +4,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "bin": {
-    "nodos": "bin/nodos.js"
-  },
   "description": "> TODO: description",
   "author": "Kirill Mokevnin <mokevnin@gmail.com>",
   "homepage": "https://github.com/nodosjs/nodos#readme",
