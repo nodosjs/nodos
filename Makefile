@@ -4,6 +4,7 @@ bootstrap:
 	npx lerna bootstrap --hoist
 
 update-deps:
+	ncu -u
 	npx lerna exec ncu -- -u
 
 clean:
