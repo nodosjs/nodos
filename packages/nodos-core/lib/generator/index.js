@@ -1,5 +1,5 @@
 // const yargs = require('yargs');
-const yeoman = require('yeoman-environment');
+// const yeoman = require('yeoman-environment');
 
 // FIXME TypeError: console.Console is not a constructor
 // const env = yeoman.createEnv();
