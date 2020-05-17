@@ -1,36 +1,19 @@
 const path = require('path');
 const { bin } = require('../index.js');
-const commands = require('../lib/commands.js');
+const commandBuilders = require('../lib/commands.js');
 
 const projectRoot = path.join(__dirname, '../__fixtures__/app');
 
-test('nodos/bin/console', async () => {
-  const replServer = { context: {} };
-  const container = {
-    repl: {
-      start: () => replServer,
-    },
-  };
-  const app = await bin(
-    projectRoot,
-    ['console'],
-    {
-      container,
-    },
-  );
-  await app.stop();
-
-  // expect(replServer.context).toHaveProperty('app');
-});
-
-// test('nodos/bin/test', async () => {
-//   const run = jest.fn();
+// test('nodos/bin/console', async () => {
+//   const replServer = { context: {} };
 //   const container = {
-//     jest: { run },
+//     repl: {
+//       start: () => replServer,
+//     },
 //   };
 //   const app = await bin(
 //     projectRoot,
-//     ['test'],
+//     ['console'],
 //     {
 //       container,
 //     },
@@ -49,7 +32,7 @@ test('nodos/bin/server', async () => {
       start: jest.fn(),
       stop: jest.fn(),
       listen: fillResult,
-      commands: [commands.serverCommand],
+      commandBuilders: [commandBuilders.serverCommandBuilder],
     }),
   };
   const app = await bin(
@@ -60,6 +43,7 @@ test('nodos/bin/server', async () => {
     },
   );
   await app.stop();
+  expect(true).toBe(true);
 });
 
 describe('nodos/bin/routes', () => {
@@ -83,7 +67,7 @@ describe('nodos/bin/routes', () => {
         start: jest.fn(),
         stop: jest.fn(),
         router: { routes: [] },
-        commands: [commands.routesCommand],
+        commandBuilders: [commandBuilders.routesCommandBuilder],
       }),
       print: (output) => { expect(output).toMatchSnapshot(); },
     };

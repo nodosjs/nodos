@@ -1,3 +1,3 @@
 export default (request, response) => {
-  response.send('Hey!')
-}
+  response.send('Hey!');
+};

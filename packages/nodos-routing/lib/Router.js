@@ -1,12 +1,14 @@
 const _ = require('lodash');
 const urlJoin = require('url-join');
-const { singularize, foreignKey, pluralize, camelize } = require('inflected');
+const {
+  singularize, foreignKey, pluralize, camelize,
+} = require('inflected');
 const Route = require('./Route');
 const validate = require('./validator');
 
 const detectRouteType = (currentName) => {
   const names = ['resources', 'resource', 'root'];
-  return names.find(name => name === currentName);
+  return names.find((name) => name === currentName);
 };
 
 const routesDefaultOnly = ['index', 'build', 'create', 'show', 'edit', 'update', 'destroy'];
@@ -47,16 +49,16 @@ const getForeignKey = (resourceName) => {
   return `:${key}`;
 };
 
-const getName = (prefix, parent, resourceName, actionName, actionPrefix = '') => {
-  const prepareResourceName = (resourceName, actionName) => {
-    const shouldBePlural = ['index', 'create'];
-    const modifier = shouldBePlural.includes(actionName) ? pluralize : singularize;
-    return modifier(resourceName);
-  };
+const prepareResourceName = (resourceName, actionName) => {
+  const shouldBePlural = ['index', 'create'];
+  const modify = shouldBePlural.includes(actionName) ? pluralize : singularize;
+  return modify(resourceName);
+};
 
+const getName = (prefix, parent, resourceName, actionName, actionPrefix = '') => {
   const parentPrefix = parent ? singularize(parent.resourceName) : '';
   const preparedResourceName = prepareResourceName(resourceName, actionName);
-  const words = [actionPrefix, prefix, parentPrefix, preparedResourceName].filter(w => w).join('_');
+  const words = [actionPrefix, prefix, parentPrefix, preparedResourceName].filter((w) => w).join('_');
   return camelize(words, false);
 };
 
@@ -72,11 +74,13 @@ const mapResourcesToUrl = (url, params) => {
 
 const selectRequestedActions = (routeItem, actions) => {
   const { actionNames } = routeItem;
-  return actions.filter(action => actionNames.includes(action.actionName));
+  return actions.filter((action) => actionNames.includes(action.actionName));
 };
 
 const types = {
-  root: (routeItem, rec, { path, prefix, middlewares, pipeline, parent }) => new Route({
+  root: (routeItem, rec, {
+    path, prefix, middlewares, pipeline, parent,
+  }) => new Route({
     resourceName: routeItem.name,
     middlewares,
     pipeline,
@@ -88,7 +92,9 @@ const types = {
     url: getUrl(path, prefix, parent, '') || '/',
     name: getName(prefix, parent, routeItem.name),
   }),
-  resources: (routeItem, rec, { path, prefix, middlewares, pipeline, parent, }) => {
+  resources: (routeItem, rec, {
+    path, prefix, middlewares, pipeline, parent,
+  }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
@@ -151,13 +157,15 @@ const types = {
 
     const requestedActions = selectRequestedActions(routeItem, actions);
 
-    const routes = requestedActions.map(options => new Route({ ...options, ...sharedData }));
+    const routes = requestedActions.map((options) => new Route({ ...options, ...sharedData }));
     const nestedRoutes = rec(routeItem.routes, {
-      path, prefix, middlewares, pipeline, parent: routes.find(r => r.actionName === 'show'),
+      path, prefix, middlewares, pipeline, parent: routes.find((r) => r.actionName === 'show'),
     });
     return [...routes, ...nestedRoutes];
   },
-  resource: (routeItem, rec, { path, prefix, middlewares, pipeline, parent, }) => {
+  resource: (routeItem, rec, {
+    path, prefix, middlewares, pipeline, parent,
+  }) => {
     const sharedData = {
       resourceName: routeItem.name,
       middlewares,
@@ -214,7 +222,7 @@ const types = {
 
     const requestedActions = selectRequestedActions(routeItem, actions);
 
-    const routes = requestedActions.map(options => new Route({ ...options, ...sharedData }));
+    const routes = requestedActions.map((options) => new Route({ ...options, ...sharedData }));
     const nestedRoutes = rec(routeItem.routes, {
       path, prefix: routeItem.name, middlewares, pipeline,
     });
@@ -222,18 +230,22 @@ const types = {
   },
 };
 
-const buildRoute = (route, options) => {
+const buildRoute = (route, options, iter) => {
   const typeName = detectRouteType(_.first(Object.keys(route)));
   const routeItem = normalizeRouteItem(route[typeName]);
-  return types[typeName](routeItem, buildRoutes, options);
+  return types[typeName](routeItem, iter, options);
 };
 
 const buildRoot = (root, options) => (root ? buildRoute({ root: 'root' }, options) : []);
 
-const buildRoutes = (routes, options) => routes.map(item => buildRoute(item, options));
+const buildRoutes = (routes, options) => routes.map((item) => buildRoute(item, options, buildRoutes));
 
-const buildScope = ({ root, routes, path, prefix, pipeline, }, pipelines) => {
-  const options = { path, prefix, middlewares: pipelines[pipeline], pipeline };
+const buildScope = ({
+  root, routes, path, prefix, pipeline,
+}, pipelines) => {
+  const options = {
+    path, prefix, middlewares: pipelines[pipeline], pipeline,
+  };
   return [buildRoot(root, options), buildRoutes(routes, options)];
 };
 
@@ -248,8 +260,8 @@ class Router {
       middlewares: routeMap.pipelines[pipeline],
     }));
     this.routes = routeMap.scopes
-      .map(scope => normalizeScope(scope))
-      .map(scope => buildScope(scope, routeMap.pipelines))
+      .map((scope) => normalizeScope(scope))
+      .map((scope) => buildScope(scope, routeMap.pipelines))
       .flat(Infinity);
   }
 
@@ -257,7 +269,7 @@ class Router {
   // }
 
   routePath(name, ...params) {
-    const route = this.routes.find(r => r.name === name);
+    const route = this.routes.find((r) => r.name === name);
     return mapResourcesToUrl(route.url, params);
   }
 
@@ -266,4 +278,4 @@ class Router {
   }
 }
 
-module.exports = Router
+module.exports = Router;

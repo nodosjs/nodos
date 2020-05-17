@@ -19,6 +19,7 @@
     "url": "https://github.com/nodosjs/nodos/issues"
   },
   "dependencies": {
+    "js-yaml": "^3.13.1",
     "@babel/register": "^7.9.0",
     "@nodosjs/helpers": "^0.0.36",
     "@nodosjs/routing": "^0.0.36",
@@ -30,13 +31,14 @@
     "fastify-formbody": "^3.2.0",
     "fastify-sensible": "^2.1.1",
     "fastify-static": "^2.7.0",
-    "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-    "marko": "^4.21.8",
+    "marko": "^4.21.9",
     "point-of-view": "^3.8.0",
     "pug": "^2.0.4",
     "qs": "^6.9.4",
     "statuses": "^2.0.0",
-    "yargs": "^15.3.1"
+    "yargs": "^15.3.1",
+    "yeoman-environment": "^2.10.2",
+    "yeoman-generator": "^4.10.1"
   }
 }

@@ -6,11 +6,10 @@ class Response {
     this.templateName = templateName;
     this.templateDir = templateDir;
     this.responseType = 'rendering';
-    this.headers = {}
+    this.headers = {};
     this.locals = {};
     this.code = 200;
     this.body = null;
-
   }
 
   head(value) {

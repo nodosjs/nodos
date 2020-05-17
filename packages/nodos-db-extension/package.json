@@ -6,7 +6,11 @@
     "access": "public"
   },
   "dependencies": {
+    "lodash": "^4.17.15",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.24"
+  },
+  "devDependencies": {
+    "@nodosjs/core": "^0.0.36"
   }
 }

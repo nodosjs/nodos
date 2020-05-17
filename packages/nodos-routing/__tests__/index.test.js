@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import _ from 'lodash';
-import yml from 'js-yaml';
+import yml from 'js-yaml'; // eslint-disable-line
 import Router from '../index.js';
 
 let routesMap;
@@ -11,7 +11,7 @@ beforeAll(async () => {
 });
 
 test('nodos-routing', async () => {
-  const sortRoutes = routes => _.sortBy(routes, ['actionName', 'url']);
+  const sortRoutes = (routes) => _.sortBy(routes, ['actionName', 'url']);
   const { routes } = new Router(routesMap, { host: 'http://site.com' });
 
   const expectedRoutes = [
@@ -33,14 +33,14 @@ test('nodos-routing', async () => {
 
   const actualRoutes = routes
     .map(({ actionName, url, method }) => ({ actionName, url, method }))
-    .filter(r => expectedRoutes.find(e => _.isEqual(e, r)));
+    .filter((r) => expectedRoutes.find((e) => _.isEqual(e, r)));
 
   expect(sortRoutes(actualRoutes)).toEqual(sortRoutes(expectedRoutes));
 });
 
 test('nodos-routing check only', async () => {
   const { routes } = new Router(routesMap, { host: 'http://site.com' });
-  const userRootRoutes = routes.filter(route => route.url.startsWith('/users'));
+  const userRootRoutes = routes.filter((route) => route.url.startsWith('/users'));
 
   expect(userRootRoutes).toHaveLength(1);
   expect(userRootRoutes[0]).toMatchObject({

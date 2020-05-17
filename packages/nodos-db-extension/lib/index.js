@@ -1,11 +1,11 @@
-const commands = require('./commands');
+require('reflect-metadata');
+const commandBuilders = require('./commands');
 const Db = require('./Db');
 
 module.exports = async (app) => {
-  require('reflect-metadata');
   const db = new Db(app.config.db);
   await db.connect();
-  Object.values(commands).forEach((command) => app.addCommand(command));
+  Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
   app.addDependency('db', db);
   app.addHook('onStop', db.close);
 };

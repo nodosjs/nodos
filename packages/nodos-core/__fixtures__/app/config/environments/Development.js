@@ -12,4 +12,4 @@ export default (app) => {
   //     `${__dirname}/../../app/entities/*.js`,
   //   ],
   // };
-}
+};

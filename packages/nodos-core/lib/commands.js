@@ -2,8 +2,8 @@ const _ = require('lodash');
 // const jest = require('jest');
 const repl = require('repl');
 const columnify = require('columnify');
-const log = require('./logger');
-const generator = require('./generator')
+// const log = require('./logger');
+const generator = require('./generator');
 
 // const testCommand = ({ container }) => ({
 //   command: 'test [file]',
@@ -25,23 +25,23 @@ const generator = require('./generator')
 //   },
 // });
 
-const consoleCommand = ({ app, container }) => ({
+const consoleCommandBuilder = ({ app, container }) => ({
   command: 'console',
   describe: 'run console',
   builder: {},
   handler: async () => {
-    const replItem = _.get(container, 'repl', repl);
-    const replServer = replItem.start({
+    const actualRepl = _.get(container, 'repl', repl);
+    const replServer = actualRepl.start({
       prompt: '> ',
     });
     replServer.context.app = app;
   },
 });
 
-const serverCommand = ({ app }) => ({
+const serverCommandBuilder = ({ app }) => ({
   command: 'server',
   describe: 'run server',
-  builder: yargs => yargs
+  builder: (yargs) => yargs
     .default('h', '127.0.0.1')
     .alias('h', 'host')
     .default('p', Number(process.env.PORT) || 3000)
@@ -57,7 +57,7 @@ const serverCommand = ({ app }) => ({
   },
 });
 
-const routesCommand = ({ app, container }) => ({
+const routesCommandBuilder = ({ app, container }) => ({
   command: 'routes',
   describe: 'display routes',
   handler: async () => {
@@ -95,7 +95,7 @@ const routesCommand = ({ app, container }) => ({
   },
 });
 
-const generatorsCommand = ({ app, container }) => ({
+const generatorsCommandBuilder = () => ({
   command: 'generate <type> <name>',
   type: 'array',
   builder: (command) => {
@@ -111,4 +111,6 @@ const generatorsCommand = ({ app, container }) => ({
   },
 });
 
-module.exports = { consoleCommand, serverCommand, routesCommand, generatorsCommand }
+module.exports = {
+  consoleCommandBuilder, serverCommandBuilder, routesCommandBuilder, generatorsCommandBuilder,
+};

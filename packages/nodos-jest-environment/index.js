@@ -21,4 +21,3 @@ class IntegrationEnvironment extends NodeEnvironment {
 }
 
 module.exports = IntegrationEnvironment;
-

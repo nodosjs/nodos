@@ -14,7 +14,7 @@ const fetchMiddleware = async (app, middlewareName) => {
   const paths = [
     path.join(app.config.paths.middlewaresPath, middlewareName),
     path.join(__dirname, '..', 'middlewares', middlewareName),
-    path.resolve(middlewareName)
+    path.resolve(middlewareName),
   ];
 
   const promises = paths.map(async (p) => {
@@ -25,14 +25,14 @@ const fetchMiddleware = async (app, middlewareName) => {
       return null;
     }
   });
-  const filepaths = await Promise.all(promises)
+  const filepaths = await Promise.all(promises);
   const filepath = filepaths.find(_.identity);
 
   if (!filepath) {
     throw new Error(`Cannot find middleware: ${middlewareName}. Paths: ${paths.join(', ')}`);
   }
 
-  const module = require(filepath);
+  const module = require(filepath); // eslint-disable-line
   return module.default ? module.default : module;
 };
 
@@ -49,7 +49,7 @@ const sendResponse = async (fastifyApp, response, reply) => {
     case 'sending':
       reply.send(response.body);
       return reply;
-    case 'rendering':
+    case 'rendering': {
       const pathToTemplate = response.template();
       log('template', pathToTemplate);
       const html = await fastifyApp.view(pathToTemplate, response.locals);
@@ -64,6 +64,7 @@ const sendResponse = async (fastifyApp, response, reply) => {
         .type('text/html')
         .send(html);
       return reply;
+    }
     case 'redirect':
       reply.redirect(response.code, response.redirectUrl);
       return reply;
@@ -93,7 +94,7 @@ module.exports = async (app) => {
   fastifyApp.register(fastifyStatic, {
     root: app.config.paths.publicPath,
     // prefix: '/public/', // optional: default '/'
-  })
+  });
   app.plugins.forEach(([plugin, options]) => fastifyApp.register(plugin, options));
 
   // fastifyApp.after(console.log);
@@ -123,12 +124,12 @@ module.exports = async (app) => {
 
     const handler = async (request, reply) => {
       if (!app.config.cacheModules) {
-        const appCacheKeys = Object.keys(require.cache).filter(p => !p.match(/node_modules/))
-          .filter(p => p.match(/controllers/));
+        const appCacheKeys = Object.keys(require.cache).filter((p) => !p.match(/node_modules/))
+          .filter((p) => p.match(/controllers/));
         appCacheKeys.forEach((item) => { delete require.cache[item]; });
       }
       log(pathToController);
-      const actions = require(pathToController);
+      const actions = require(pathToController); // eslint-disable-line
       const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
       log('actions', [actions, route.actionName]);
       if (!_.has(actions, route.actionName)) {

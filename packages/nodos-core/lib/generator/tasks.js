@@ -1,7 +1,7 @@
-const Generator = require('yeoman-generator');
+const Base = require('yeoman-generator');
 const path = require('path');
 
-module.exports = class extends Generator {
+module.exports = class Generator extends Base {
   constructor(args, opts) {
     super(args, opts);
 
@@ -21,4 +21,4 @@ module.exports = class extends Generator {
       this.destinationPath(`./app/${type}s/${name}s.js`),
     );
   }
-}
+};

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`form class default 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"post\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"></form>"`;
+
+exports[`form class form with scope 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/posts\\" data-remote=\\"true\\" method=\\"post\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"><input id=\\"post[title]\\" name=\\"post[title]\\" type=\\"text\\" value=\\"\\"></form>"`;
+
+exports[`form class html with class 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"get\\" class=\\"admin\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"><p class=\\"admin\\"><label for=\\"post[q]\\" class=\\"admin\\">Search for:</label><input id=\\"post[q]\\" name=\\"post[q]\\" type=\\"text\\" value=\\"\\" class=\\"admin\\"></p><p><input name=\\"commit\\" type=\\"submit\\" value=\\"Search\\" class=\\"admin\\"></p></form>"`;
+
+exports[`form class method delete 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"post\\"><input id=\\"_method\\" name=\\"_method\\" type=\\"hidden\\" value=\\"delete\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"></form>"`;
+
+exports[`form class method patch 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"post\\"><input id=\\"_method\\" name=\\"_method\\" type=\\"hidden\\" value=\\"patch\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"></form>"`;
+
+exports[`form class method put 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"post\\"><input id=\\"_method\\" name=\\"_method\\" type=\\"hidden\\" value=\\"put\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"></form>"`;
+
+exports[`form class with class 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"post\\" class=\\"admin\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"></form>"`;
+
+exports[`form class with html 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"get\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"><p><label for=\\"q\\">Search for:</label><input id=\\"q\\" name=\\"q\\" type=\\"text\\" value=\\"\\"></p><p><input name=\\"commit\\" type=\\"submit\\" value=\\"Search\\"></p></form>"`;
+
+exports[`form class with params 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"get\\"><input id=\\"authenticity_token\\" name=\\"authenticity_token\\" type=\\"hidden\\" value=\\"key\\"></form>"`;
+
+exports[`form function html with class 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"get\\" class=\\"admin\\"><p class=\\"admin\\"><label for=\\"q\\" class=\\"admin\\">Search for:</label><input id=\\"q\\" name=\\"q\\" type=\\"text\\" value=\\"\\" class=\\"admin\\"></p><p><input name=\\"commit\\" type=\\"submit\\" value=\\"Search\\" class=\\"admin\\"></p></form>"`;
+
+exports[`form function with class 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"post\\" class=\\"admin\\"></form>"`;
+
+exports[`form function with html 1`] = `"<form accept-charset=\\"UTF-8\\" action=\\"/search\\" data-remote=\\"true\\" method=\\"get\\"><p><label for=\\"q\\">Search for:</label><input id=\\"q\\" name=\\"q\\" type=\\"text\\" value=\\"\\"></p><p><input name=\\"commit\\" type=\\"submit\\" value=\\"Search\\"></p></form>"`;
+
+exports[`submit tag having data disable with string 1`] = `"<input name=\\"commit\\" type=\\"submit\\" value=\\"Save\\" data-disable-with=\\"Processing...\\" data-confirm=\\"Are you sure?\\">"`;
+
+exports[`text field tag with placeholder option 1`] = `"<input id=\\"title\\" name=\\"title\\" type=\\"text\\" value=\\"Hello!\\" placeholder=\\"Enter search term...\\">"`;

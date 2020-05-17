@@ -7,8 +7,8 @@ const log = require('./logger');
 const { requireDefaultFunction } = require('./utils.js');
 
 class Application {
-  addCommand(command) {
-    this.commands.push(command);
+  addCommandBuilder(buildComand) {
+    this.commandBuilders.push(buildComand);
   }
 
   addPlugin(plugin, options = {}) {
@@ -38,11 +38,11 @@ class Application {
   constructor(projectRoot, env = 'development') {
     this.env = env;
     this.defaultRequestOptions = { headers: {}, params: null };
-    this.commands = [];
+    this.commandBuilders = [];
     this.extensions = [];
     this.generators = [];
     this.container = {};
-    this.plugins = []
+    this.plugins = [];
     this.hooks = {
       onStop: [],
     };
@@ -88,7 +88,7 @@ class Application {
   }
 
   stop() {
-    this.hooks.onStop.forEach(h => h());
+    this.hooks.onStop.forEach((h) => h());
   }
 
   get(url) {
