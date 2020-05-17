@@ -4,7 +4,7 @@ bootstrap:
 	npx lerna bootstrap
 
 test:
-	NODOS_ENV=test DEBUG=nodos:* npx jest
+	DEBUG=nodos:* npx jest
 
 lint:
 	npx eslint .
