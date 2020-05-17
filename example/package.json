@@ -14,15 +14,15 @@
     "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.6",
-    "@nodosjs/core": "file:../packages/nodos-core/",
-    "@nodosjs/db-extension": "file:../packages/nodos-db-extension/",
+    "@nodosjs/core": "*",
+    "@nodosjs/db-extension": "*",
     "@popperjs/core": "^2.4.0",
     "bootstrap": "^4.5.0",
     "jquery-ujs": "^1.2.2",
     "sql.js": "^1.2.2"
   },
   "devDependencies": {
-    "@nodosjs/jest-environment": "file:../packages/nodos-jest-environment/",
+    "@nodosjs/jest-environment": "*",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "eslint": "^7.0.0",

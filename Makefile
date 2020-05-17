@@ -1,10 +1,16 @@
-setup: install bootstrap
+setup: bootstrap
 
 bootstrap:
-	npx lerna bootstrap
+	npx lerna bootstrap --hoist
 
-install:
-	npm i
+# install:
+# 	npm install
+
+update-deps:
+	npx lerna exec ncu -- -u
+
+clean:
+	npx lerna clean
 
 test:
 	DEBUG=nodos:* npx jest
@@ -15,42 +21,15 @@ lint:
 lint-fix:
 	npx eslint . --fix
 
-publish:
+link:
 	npx lerna publish
 
-# test:
-# 	npx lerna run test
-
-lint-ci:
-	npx eslint --ignore-pattern app --ignore-pattern example .
+publish:
+	npx lerna publish
 
 what-to-do:
 	git grep FIXME
 
-# compose-update:
-# 	docker-compose run app yarn update
-
-# compose-setup:
-# 	docker-compose run app make setup
-
-# compose-example-setup: compose-setup
-# 	docker-compose run app make -C example setup
-
-# compose-example-bash:
-# 	docker-compose run -w /code/example app bash
-
-# compose-example:
-# 	docker-compose up
-
-# compose-test:
-# 	docker-compose run app make test
-
-# compose-server:
-# 	docker-compose run app make server
-
-# compose-bash:
-# 	docker-compose run app bash
-#
 docs-start:
 	cd docs; npm start
 
