@@ -1,7 +1,10 @@
-setup: bootstrap
+setup: install bootstrap
 
 bootstrap:
 	npx lerna bootstrap
+
+install:
+	npm i
 
 test:
 	DEBUG=nodos:* npx jest

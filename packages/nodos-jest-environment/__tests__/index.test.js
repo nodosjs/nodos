@@ -8,6 +8,6 @@ test('nodos/testEnvironment', async () => {
   };
   const env = new IntegrationEnvironment(config);
   await env.setup();
-  expect(env.global.get).not.toBeUndefined();
+  expect(env.global.app).not.toBeUndefined();
   await env.teardown();
 });
