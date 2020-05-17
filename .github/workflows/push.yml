@@ -16,7 +16,7 @@ jobs:
           make setup
       - name: Run lint
         run: |
-          make lint-ci
+          make lint
       - name: Run tests
         run: |
           make test
