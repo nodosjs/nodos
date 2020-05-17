@@ -4,4 +4,3 @@ dist
 *.log
 *.tgz
 *.sqlite3
-package-lock.json

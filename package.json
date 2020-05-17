@@ -1,5 +1,5 @@
 {
-  "name": "nodos-monorepo",
+  "name": "root",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,12 +13,6 @@
       "/node_modules/",
       "/__fixtures__/"
     ]
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoist": []
   },
   "devDependencies": {
     "js-yaml": "^3.13.1",
