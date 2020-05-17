@@ -1,7 +1,4 @@
-setup: install bootstrap
-
-install:
-	yarn
+setup: bootstrap
 
 bootstrap:
 	npx lerna bootstrap
