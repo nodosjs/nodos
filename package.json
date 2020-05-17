@@ -12,7 +12,8 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/__fixtures__/",
-      "/example/"
+      "/example/",
+      "/generators/"
     ]
   },
   "devDependencies": {

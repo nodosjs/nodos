@@ -13,34 +13,34 @@ class Newapp extends Generator {
 
   default() {
     const { appPath } = this.options;
-
     fs.mkdirSync(appPath);
-    this.sourceRoot(path.resolve(__dirname, 'templates'));
+
+    this.sourceRoot(path.resolve(__dirname, 'NewappTemplates'));
     this.destinationRoot(this.destinationPath(appPath));
   }
 
   writing() {
     const fileNames = [
-      'babel.config.js',
-      '.gitignore',
-      'Makefile',
+      // 'babel.config.js',
+      // '.gitignore',
+      // 'Makefile',
       'package.json',
-      'package-lock.json',
-      'config/database.yml',
+      // 'package-lock.json',
+      // 'config/database.yml',
       'config/routes.yml',
       'config/application.js',
       'config/environments/test.js',
       'config/environments/production.js',
       'config/environments/development.js',
-      'bin/test',
-      'bin/nodos',
-      'app/entities/User.js',
-      'app/controllers/users.js',
-      'app/middlewares/setLocale.js',
-      'app/templates/layouts/application.pug.html',
-      'app/templates/users/index.marko',
-      'app/templates/users/show.marko',
-      'tests/controllers/users.test.js',
+      // 'bin/test',
+      // 'bin/nodos',
+      // 'app/entities/User.js',
+      // 'app/controllers/users.js',
+      // 'app/middlewares/setLocale.js',
+      // 'app/templates/layouts/application.pug.html',
+      // 'app/templates/users/index.marko',
+      // 'app/templates/users/show.marko',
+      // 'tests/controllers/users.test.js',
     ];
 
     fileNames.forEach((fileName) => {

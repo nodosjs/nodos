@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nodos/routes 1`] = `
+"Name Verb URI Pattern Pipeline
+root GET  /           browser "
+`;

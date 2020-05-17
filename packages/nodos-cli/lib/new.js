@@ -1,7 +1,14 @@
+const path = require('path');
 const yargs = require('yargs');
 const yeoman = require('yeoman-environment');
+const log = require('./logger.js');
 
-module.exports = async () => {
+module.exports = async (options = {}) => {
+  const {
+    args = process.argv.slice(2),
+    exitProcess = true,
+  } = options;
+
   const env = yeoman.createEnv();
 
   env.register(require.resolve('./generators/Newapp.js'), 'newapp');
@@ -11,11 +18,13 @@ module.exports = async () => {
       command: 'new <appPath>',
       builder: (command) => {
         command.positional('appPath', {
-          describe: 'Path to the application',
+          type: 'string',
+          describe: 'Project Root Directory',
         });
       },
-      handler: (argv) => {
-        env.run(`newapp ${argv.appPath}`);
+      handler: ({ appPath }) => {
+        log('APP_PATH', appPath);
+        env.run(`newapp ${appPath}`);
       },
     },
   };
@@ -26,22 +35,24 @@ directory structure and configuration at the path you specify.
 `;
 
   const example = `
-nodos new ~/Code/Node/weblog
+nodos new projects/myBlog
 
-This generates a skeletal Nodos installation in ~/Code/Nodos/weblog.
+This generates a skeletal Nodos installation in ./projects/myBlog
 `;
 
-  const parser = yargs
-    .demandCommand()
-    .recommendCommands()
+  const parser = yargs(args);
+  parser.exitProcess(exitProcess)
+  // .recommendCommands()
     .strict()
     .showHelpOnFail(true)
     .command(commands.new)
-    .option('verbose', {
-      alias: 'v',
-      default: false,
-    })
+  // .option('verbose', {
+  //   alias: 'v',
+  //   default: false,
+  // })
+    .demandCommand()
+    .example(example.trim())
     .epilog(help.trim())
-    .example(example.trim());
+    .help();
   await parser.argv;
 };

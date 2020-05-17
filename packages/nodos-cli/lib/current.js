@@ -9,7 +9,6 @@ module.exports = async (app, options = {}) => {
     args = process.argv.slice(2),
     exitProcess = true,
     container = {},
-    // done = _.noop, // FIXME: hack for testing purposes
   } = options;
   const parser = yargs(args);
   parser.exitProcess(exitProcess);
