@@ -4,6 +4,9 @@
 
 Node.js framework for humans
 
+* [site (under development)](https://nodosjs.github.io)
+* [api documentation](https://nodosjs.github.io/nodos/)
+
 ## Requirements
 
 * Nodejs >= 12
