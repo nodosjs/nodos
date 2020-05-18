@@ -41,3 +41,12 @@ $ cd nodos/packages/example
 $ make test
 $ make start
 ```
+
+## TODO
+
+* integrate dotenv to the core. https://github.com/motdotla/dotenv
+* replace yeoman by https://github.com/jondot/hygen
+* implement Request object
+* add documentationjs everywhere
+* add guides to the site
+* run `make what-to-do`

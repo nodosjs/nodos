@@ -1,16 +1,33 @@
 const path = require('path');
 const fastifyCookie = require('fastify-cookie');
 const fastifyFormbody = require('fastify-formbody');
+
+const { FastifyPlugin } = require('fastify');
+
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
 const log = require('./logger');
 const { requireDefaultFunction } = require('./utils.js');
 
+/**
+ * A nodos application object
+ * @param {string} projectRoot
+ * @param {string} env
+ */
 class Application {
   addCommandBuilder(buildComand) {
     this.commandBuilders.push(buildComand);
   }
 
+  /**
+   * Add fastify builder
+   *
+   * @param {FastifyPlugin} plugin
+   * @param {Object} options Plugin options
+   * @example
+   * import formbody from 'fastify-formbody';
+   * app.addPlugin(formbody);
+   */
   addPlugin(plugin, options = {}) {
     this.plugins.push([plugin, options]);
   }
@@ -32,7 +49,7 @@ class Application {
   }
 
   isProduction() {
-    return this.env === 'production';
+    return this.env !== 'development';
   }
 
   constructor(projectRoot, env = 'development') {
