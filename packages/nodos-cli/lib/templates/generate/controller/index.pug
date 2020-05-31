@@ -1,0 +1,4 @@
+---
+to: "<%= actions.includes('index') ? './app/templates/' + h.inflection.pluralize(name) + '/index.pug' : null %>"
+---
+<%= h.inflection.capitalize(h.inflection.pluralize(name)) %>#index

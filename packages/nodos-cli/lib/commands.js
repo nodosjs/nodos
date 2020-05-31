@@ -3,7 +3,7 @@ const _ = require('lodash');
 const repl = require('repl');
 const columnify = require('columnify');
 // const log = require('./logger');
-// const generator = require('./generator');
+const generator = require('./generator');
 
 // const testCommand = ({ container }) => ({
 //   command: 'test [file]',
@@ -96,8 +96,7 @@ const buildRoutesCommand = ({ app, container }) => ({
 });
 
 const buildGeneratorsCommand = () => ({
-  command: 'generate <type> <name>',
-  type: 'array',
+  command: 'generate <type> <name> [actions...]',
   builder: (command) => {
     command.positional('type', {
       describe: 'what you need to create (right now works only for controller)',
@@ -105,9 +104,13 @@ const buildGeneratorsCommand = () => ({
     command.positional('name', {
       describe: 'name of entity',
     });
+    command.positional('actions', {
+      describe: 'list of actions that you want in your controller',
+    });
   },
-  handler: () => {
-    // generator.run(`generate ${args.type} ${args.name}`);
+  handler: (args) => {
+    console.log(args);
+    generator(args);
   },
 });
 
