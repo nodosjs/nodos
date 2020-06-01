@@ -1,0 +1,5 @@
+---
+to: "<%= actions.includes('edit') ? './app/templates/' + h.inflection.pluralize(name) + '/edit.pug' : null %>"
+---
+<%= h.inflection.capitalize(h.inflection.pluralize(name)) %>#edit
+

@@ -1,0 +1,4 @@
+---
+to: "<%= actions.includes('build') ? './app/templates/' + h.inflection.pluralize(name) + '/build.pug' : null %>"
+---
+<%= h.inflection.capitalize(h.inflection.pluralize(name)) %>#build
