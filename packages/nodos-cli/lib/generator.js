@@ -28,7 +28,7 @@ module.exports = ({ type, name, actions }) => {
     createPrompter: () => require('enquirer'),
     exec: (action, body) => {
       const opts = body && body.length > 0 ? { input: body } : {};
-      return require('execa').shell(action, opts)
+      return require('execa').shell(action, opts);
     },
     debug: !!process.env.DEBUG,
   });

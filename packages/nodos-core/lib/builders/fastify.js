@@ -75,9 +75,8 @@ const sendResponse = async (fastifyApp, response, reply) => {
 };
 
 module.exports = async (app) => {
-  const fastifyApp = fastify({
-    logger: true,
-  });
+  const fastifyApp = fastify({ logger: true, });
+  const { routePath, routeUrl } = app.router;
   // throw 'asdf';
   fastifyApp.register(fastifySensible, { errorHandler: app.config.errorHandler });
   // FIXME: move to nodos-templates
@@ -89,6 +88,10 @@ module.exports = async (app) => {
       basedir: app.config.paths.templatesPath,
       debug: app.isDevelopment(),
       cache: app.isProduction(),
+    },
+    defaultContext: {
+      routePath: routePath.bind(app.router),
+      routeUrl: routeUrl.bind(app.router),
     },
   });
   fastifyApp.register(fastifyStatic, {
