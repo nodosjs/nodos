@@ -1,8 +1,8 @@
 const _ = require('lodash');
-// const jest = require('jest');
+const jest = require('jest');
 const repl = require('repl');
 const columnify = require('columnify');
-// const log = require('./logger');
+const log = require('./logger');
 const generator = require('./generator');
 
 const testCommand = ({ container }) => ({
@@ -115,5 +115,5 @@ const buildGeneratorsCommand = () => ({
 });
 
 module.exports = {
-  buildConsoleCommand, buildServerCommand, buildRoutesCommand, buildGeneratorsCommand,
+  testCommand, buildConsoleCommand, buildServerCommand, buildRoutesCommand, buildGeneratorsCommand,
 };
