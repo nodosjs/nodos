@@ -48,7 +48,6 @@ $ make start
 ## TODO
 
 * integrate dotenv to the core. https://github.com/motdotla/dotenv
-* replace yeoman by https://github.com/jondot/hygen
 * implement Request object
 * add documentationjs everywhere
 * add guides to the site

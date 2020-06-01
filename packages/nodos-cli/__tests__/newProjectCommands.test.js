@@ -10,7 +10,8 @@ beforeEach(async () => {
 });
 
 test('nodos/new', async () => {
-  await runNew({ args: ['new', 'app', dir] });
-  const fileNames = await fs.readDirectory(dir);
+  const appName = 'app';
+  await runNew({ args: ['new', appName, dir] });
+  const fileNames = await fs.readdir(path.join(dir, appName));
   expect(fileNames).toMatchSnapshot();
 });

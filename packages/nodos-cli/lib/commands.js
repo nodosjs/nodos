@@ -5,25 +5,25 @@ const columnify = require('columnify');
 // const log = require('./logger');
 const generator = require('./generator');
 
-// const testCommand = ({ container }) => ({
-//   command: 'test [file]',
-//   describe: 'run tests',
-//   builder: {},
-//   handler: (argv) => {
-//     // FIXME: not working
-//     process.env.NODOS_ENV = 'test';
-//     // const rest = argv._.slice(1);
-//     const options = [];
-//     if (argv.file) {
-//       options.push('-f', argv.file);
-//     } else {
-//       options.push('--testPathPattern', '/tests/');
-//     }
-//     const jestItem = _.get(container, 'jest', jest);
-//     log(options);
-//     jestItem.run(options);
-//   },
-// });
+const testCommand = ({ container }) => ({
+  command: 'test [file]',
+  describe: 'run tests',
+  builder: {},
+  handler: (argv) => {
+    // FIXME: not working
+    process.env.NODOS_ENV = 'test';
+    // const rest = argv._.slice(1);
+    const options = [];
+    if (argv.file) {
+      options.push('-f', argv.file);
+    } else {
+      options.push('--testPathPattern', '/tests/');
+    }
+    const jestItem = _.get(container, 'jest', jest);
+    log(options);
+    jestItem.run(options);
+  },
+});
 
 const buildConsoleCommand = ({ app, container }) => ({
   command: 'console',
