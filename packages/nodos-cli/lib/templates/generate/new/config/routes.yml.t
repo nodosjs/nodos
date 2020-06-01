@@ -1,0 +1,33 @@
+---
+to: './<%= name %>/config/routes.yml'
+---
+pipelines:
+
+  browser:
+    - checkMigrations
+    # - accepts
+    # - setLocale
+    # - fetchSession
+    # - fetchFlash
+    # - protectFromForgery
+
+  api:
+    - accepts
+    - setLocale
+
+scopes:
+
+  - name: 'api'
+    pipeline: browser
+    routes:
+      - resources: users
+
+  - name: '/'
+    pipeline: browser
+    routes:
+      - resources: users
+      - resource: session
+      - resources:
+          name: articles
+          routes:
+            - resources: comments

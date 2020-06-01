@@ -1,58 +1,23 @@
+const { runner } = require('hygen');
+const Logger = require('hygen/lib/logger');
 const path = require('path');
-const yargs = require('yargs');
-const yeoman = require('yeoman-environment');
-const log = require('./logger.js');
+
+const defaultTemplates = path.join(__dirname, 'templates');
 
 module.exports = async (options = {}) => {
-  const {
-    args = process.argv.slice(2),
-    exitProcess = true,
-  } = options;
+  const { args = process.argv.slice(2) } = options;
+  const [command, appName, dir] = args;
+  const cwd = dir || process.cwd();
 
-  const env = yeoman.createEnv();
-
-  env.register(require.resolve('./generators/Newapp.js'), 'newapp');
-
-  const commands = {
-    new: {
-      command: 'new <appPath>',
-      builder: (command) => {
-        command.positional('appPath', {
-          type: 'string',
-          describe: 'Project Root Directory',
-        });
-      },
-      handler: ({ appPath }) => {
-        log('APP_PATH', appPath);
-        env.run(`newapp ${appPath}`);
-      },
+  await runner(['generate', command, appName], {
+    templates: defaultTemplates,
+    cwd,
+    logger: new Logger(console.log.bind(console)),
+    createPrompter: () => require('enquirer'),
+    exec: (action, body) => {
+      const opts = body && body.length > 0 ? { input: body } : {};
+      return require('execa').shell(action, opts)
     },
-  };
-
-  const help = `
-The 'nodos new' command creates a new Nodos application with a default
-directory structure and configuration at the path you specify.
-`;
-
-  const example = `
-nodos new projects/myBlog
-
-This generates a skeletal Nodos installation in ./projects/myBlog
-`;
-
-  const parser = yargs(args);
-  parser.exitProcess(exitProcess)
-  // .recommendCommands()
-    .strict()
-    .showHelpOnFail(true)
-    .command(commands.new)
-  // .option('verbose', {
-  //   alias: 'v',
-  //   default: false,
-  // })
-    .demandCommand()
-    .example(example.trim())
-    .epilog(help.trim())
-    .help();
-  await parser.argv;
+    debug: !!process.env.DEBUG,
+  });
 };

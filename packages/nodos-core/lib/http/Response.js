@@ -50,7 +50,7 @@ class Response {
    * @example res.redirectTo('https://ru.hexlet.io', 301);
    */
   redirectTo(url, code = 302) {
-    this.head(codeOrName);
+    this.head(code);
     this.redirectUrl = url;
     this.responseType = 'redirect';
   }
