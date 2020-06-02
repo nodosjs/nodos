@@ -47,7 +47,6 @@ $ make start
 
 ## TODO
 
-* integrate dotenv to the core. https://github.com/motdotla/dotenv
 * implement Request object
 * add documentationjs everywhere
 * add guides to the site
