@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/db-extension",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "publishConfig": {
     "access": "public"
   },
@@ -10,7 +10,7 @@
     "typeorm": "^0.2.24"
   },
   "devDependencies": {
-    "@nodosjs/core": "^0.0.36",
-    "@nodosjs/cli": "^0.0.36"
+    "@nodosjs/cli": "^0.0.37",
+    "@nodosjs/core": "^0.0.37"
   }
 }
