@@ -4,6 +4,7 @@ const path = require('path');
 const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
+const fastifyExpress = require('fastify-express');
 const pointOfView = require('point-of-view');
 const pug = require('pug');
 // const debug = require('debug');
@@ -75,12 +76,16 @@ const sendResponse = async (fastifyApp, response, reply) => {
 };
 
 module.exports = async (app) => {
-  const fastifyApp = fastify({ logger: true, });
+  const fastifyApp = fastify({ logger: true });
+
   const { routePath, routeUrl } = app.router;
   // throw 'asdf';
-  fastifyApp.register(fastifySensible, { errorHandler: app.config.errorHandler });
+
+  await fastifyApp.register(fastifyExpress);
+
+  await fastifyApp.register(fastifySensible, { errorHandler: app.config.errorHandler });
   // FIXME: move to nodos-templates
-  fastifyApp.register(pointOfView, {
+  await fastifyApp.register(pointOfView, {
     engine: { pug },
     includeViewExtension: true,
     root: app.config.paths.templatesPath,
@@ -94,14 +99,14 @@ module.exports = async (app) => {
       routeUrl: routeUrl.bind(app.router),
     },
   });
-  fastifyApp.register(fastifyStatic, {
+  await fastifyApp.register(fastifyStatic, {
     root: app.config.paths.publicPath,
     // prefix: '/public/', // optional: default '/'
   });
-  app.plugins.forEach(([plugin, options]) => fastifyApp.register(plugin, options));
+  const pluginPromises = app.plugins.map(([plugin, options]) => fastifyApp.register(plugin, options));
+  await Promise.all(pluginPromises);
 
   // fastifyApp.after(console.log);
-  // fastifyApp.ready(console.log);
 
   // // console.log(router.scopes);
   // const scopePromises = router.scopes.map(async (scope) => {
@@ -152,6 +157,10 @@ module.exports = async (app) => {
     fastifyApp.route(opts);
   });
   await Promise.all(promises);
+  // without calling ready() method fastify app instance keeps to be thenable object
+  // in this state instance will have bounded then method which returns only undefined
+  // when you call builder with thenable instance you will always get undefined
+  await fastifyApp.ready();
 
   return fastifyApp;
 };
