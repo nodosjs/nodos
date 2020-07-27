@@ -1,14 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Model } from 'objection';
 
-@Entity()
-export default class User {
-  @PrimaryGeneratedColumn()
-  id = null;
-
-  @Column('varchar')
-  name = '';
-
-  constructor(attrs = {}) {
-    this.name = attrs.name;
+export default class User extends Model {
+  static get tableName() {
+    return 'users';
   }
+
+  static get jsonSchema() {
+      return {
+        type: 'object',
+        required: ['email', 'password'],
+        properties: {
+          id: { type: 'integer' },
+          email: { type: 'string', format: 'email' },
+          password: { type: 'string', minLength: 3 },
+        },
+      };
+    }
 }
