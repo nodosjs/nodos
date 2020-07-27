@@ -4,4 +4,5 @@ dist
 *.log
 *.tgz
 *.sqlite3
+*.sqlite
 tmp
