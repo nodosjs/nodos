@@ -89,8 +89,8 @@ class Application {
     const fillByApp = requireDefaultFunction(this.config.paths.applicationPath);
     const fillByEnv = requireDefaultFunction(this.config.paths.environmentPath);
 
-    fillByApp(this);
     fillByEnv(this);
+    fillByApp(this);
 
     this.router = await buildRouter(this.config.paths.routesPath, { host: this.config.host });
     this.addDependency('router', this.router);

@@ -5,13 +5,14 @@ const Db = require('./lib/Db.js');
 
 module.exports = (config = {}) => async (app) => {
   const defaultConfig = {
-    dialect: 'sqlite',
+    client: 'sqlite3',
     entities: path.join(app.config.projectRoot, '/app/entities'),
+    connection: path.join(app.config.projectRoot, '/db/development.sqlite3'),
     migrations: {
       directory: path.join(app.config.projectRoot, '/db/migrations/'),
     },
   };
-  console.log(defaultConfig);
+  console.log({ config });
   const db = new Db({ ...defaultConfig, ...config });
   // TODO make it lazy
   await db.connect(app);
