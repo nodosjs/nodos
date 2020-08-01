@@ -1,7 +1,6 @@
 // const _ = require('lodash');
 
 // TODO add generators (model, migrations)
-// TODO add commands (migration, rollback, reset)
 const knex = require('knex');
 
 const migrateHandler = async (knexClient) => {

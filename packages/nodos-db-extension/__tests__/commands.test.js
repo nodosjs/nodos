@@ -10,6 +10,6 @@ test('nodos/server', async () => {
   const app = nodos(projectRoot);
   const extension = buildExtension();
   await extension(app);
-  await runCurrent(app, { args: ['db'] });
+  await runCurrent(app, { args: ['db', 'migrate'] });
   expect(true).toBe(true);
 });
