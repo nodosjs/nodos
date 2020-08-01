@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import crypto from 'crypto';
 
 export default class User extends Model {
   static get tableName() {
@@ -16,4 +17,10 @@ export default class User extends Model {
         },
       };
     }
+
+  set password(value) {
+    this.passwordDigest = crypto.createHash('sha256')
+      .update(value)
+      .digest('hex');
+  }
 }
