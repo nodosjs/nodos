@@ -1,6 +1,8 @@
 const { runner } = require('hygen');
 const Logger = require('hygen/lib/logger');
 const path = require('path');
+const enquirer = require('enquirer');
+const execa = require('execa');
 
 const defaultTemplates = path.join(__dirname, 'templates');
 
@@ -13,10 +15,10 @@ module.exports = async (options = {}) => {
     templates: defaultTemplates,
     cwd,
     logger: new Logger(console.log.bind(console)),
-    createPrompter: () => require('enquirer'),
+    createPrompter: () => enquirer,
     exec: (action, body) => {
       const opts = body && body.length > 0 ? { input: body } : {};
-      return require('execa').shell(action, opts);
+      return execa.shell(action, opts);
     },
     debug: !!process.env.DEBUG,
   });

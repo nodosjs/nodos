@@ -1,5 +1,6 @@
 ---
 
+root: true
 plugins:
   - jest
   - babel
@@ -15,6 +16,9 @@ parser: babel-eslint
 extends:
   - 'airbnb-base'
   - 'plugin:jest/recommended'
+
+ignorePatterns:
+  - '**/site/*'
 
 rules:
   no-console: 0

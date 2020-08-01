@@ -6,7 +6,7 @@ class Db {
   }
 
   async connect(app) {
-    const models = require(this.config.entities).default;
+    const models = require(this.config.entities).default; // eslint-disable-line
     app.plugins.push([fastifyObjectionjs, { knexConfig: this.config, models }]);
   }
 

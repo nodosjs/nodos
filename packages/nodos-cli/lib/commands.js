@@ -2,7 +2,6 @@ const _ = require('lodash');
 // const jest = require('jest');
 const repl = require('repl');
 const columnify = require('columnify');
-const log = require('./logger');
 const generator = require('./generator');
 
 // const testCommand = ({ container }) => ({
@@ -109,7 +108,6 @@ const buildGeneratorsCommand = () => ({
     });
   },
   handler: (args) => {
-    console.log(args);
     generator(args);
   },
 });

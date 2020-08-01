@@ -1,15 +1,15 @@
 import User from '../entities/User';
 
-export const index = async (request, response) => {
+export const index = async (_request, response) => {
   const users = await User.query();
 
   response.render({ users });
 };
 
-export const build = (request, response) => {
+export const build = () => {
 };
 
-export const edit = (request, response) => {
+export const edit = () => {
 };
 
 export const show = async (request, response) => {
