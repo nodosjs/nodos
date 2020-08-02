@@ -1,20 +1,21 @@
 require('reflect-metadata');
+const path = require('path');
 const commandBuilders = require('./lib/commands.js');
 const Db = require('./lib/Db.js');
 
 module.exports = (config = {}) => async (app) => {
   const defaultConfig = {
-    type: 'sqljs',
-    synchronize: true,
-    logging: true,
-    entities: [
-      `${app.config.projectRoot}/app/entities/*.js`,
-    ],
+    client: 'sqlite3',
+    entities: path.join(app.config.projectRoot, '/app/entities'),
+    connection: path.join(app.config.projectRoot, '/db/development.sqlite3'),
+    migrations: {
+      directory: path.join(app.config.projectRoot, '/db/migrations/'),
+    },
   };
-  console.log(defaultConfig);
+  console.log({ config });
   const db = new Db({ ...defaultConfig, ...config });
   // TODO make it lazy
-  await db.connect();
+  await db.connect(app);
   Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
   app.addDependency('db', db);
   app.addHook('onStop', db.close);

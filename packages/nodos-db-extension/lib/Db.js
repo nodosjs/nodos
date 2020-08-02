@@ -1,17 +1,17 @@
-const { createConnection } = require('typeorm');
+const fastifyObjectionjs = require('fastify-objectionjs');
 
 class Db {
   constructor(config) {
     this.config = config;
   }
 
-  async connect() {
-    this.connection = await createConnection(this.config);
+  async connect(app) {
+    const models = require(this.config.entities).default; // eslint-disable-line
+    app.plugins.push([fastifyObjectionjs, { knexConfig: this.config, models }]);
   }
 
   async query(...args) {
-    const localRunner = this.connection.createQueryRunner();
-    return localRunner.query(...args);
+    return this.connection.query(...args);
   }
 
   close() {

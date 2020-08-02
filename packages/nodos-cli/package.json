@@ -12,6 +12,8 @@
   "dependencies": {
     "columnify": "^1.5.4",
     "debug": "^4.1.1",
+    "enquirer": "^2.3.6",
+    "execa": "^4.0.3",
     "hygen": "^5.0.3",
     "import-from": "^3.0.0",
     "lodash": "^4.17.15",

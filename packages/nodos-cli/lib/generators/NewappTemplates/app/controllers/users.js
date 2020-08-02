@@ -1,3 +1,4 @@
-export const index = (request, reply) => ({});
+export const index = () => ({});
 
-export const show = (request, reply) => ({});
+
+export const show = () => ({});

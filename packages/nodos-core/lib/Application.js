@@ -1,9 +1,6 @@
 const path = require('path');
 const fastifyCookie = require('fastify-cookie');
 const fastifyFormbody = require('fastify-formbody');
-
-const { FastifyPlugin } = require('fastify');
-
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
 const log = require('./logger');
@@ -89,8 +86,8 @@ class Application {
     const fillByApp = requireDefaultFunction(this.config.paths.applicationPath);
     const fillByEnv = requireDefaultFunction(this.config.paths.environmentPath);
 
-    fillByApp(this);
     fillByEnv(this);
+    fillByApp(this);
 
     this.router = await buildRouter(this.config.paths.routesPath, { host: this.config.host });
     this.addDependency('router', this.router);

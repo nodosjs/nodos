@@ -1,25 +1,19 @@
 import User from '../entities/User';
 
-export const index = async (request, response, { db }) => {
-  const users = await db.connection
-    .getRepository(User)
-    .find();
-  // console.log(db.connection);
-  // const users = [];
+export const index = async (_request, response) => {
+  const users = await User.query();
 
   response.render({ users });
 };
 
-export const build = (request, response) => {
+export const build = () => {
 };
 
-export const edit = (request, response) => {
+export const edit = () => {
 };
 
-export const show = async (request, response, { db }) => {
-  const user = await db.connection
-    .getRepository(User)
-    .findOne(request.params.id);
+export const show = async (request, response) => {
+  const user = await User.query().findById(request.params.id);
   if (!user) {
     response.head(404);
     return;
@@ -28,13 +22,10 @@ export const show = async (request, response, { db }) => {
   response.render({ user });
 };
 
-export const create = async (request, response, { db, router }) => {
-  const user = new User(request.body.user);
+export const create = async (request, response, { router }) => {
+  const user = await User.query().insert(request.body.user);
 
-  if (user instanceof Object) { // validation
-    await db.connection
-      .manager
-      .save(user);
+  if (user instanceof User) { // validation
     response.redirectTo(router.routePath('users'));
     return;
   }
@@ -42,14 +33,12 @@ export const create = async (request, response, { db, router }) => {
   response.render({ user }, 'build');
 };
 
-export const destroy = async (request, response, { db, router }) => {
+export const destroy = async (request, response, { router }) => {
   const { id: userId } = request.params;
   if (userId) { // validation
   }
 
-  await db.connection
-    .getRepository(User)
-    .delete(userId);
+  await User.query().deleteById(id);
 
   response.redirectTo(router.routePath('users'));
 };

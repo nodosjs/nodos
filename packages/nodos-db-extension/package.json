@@ -5,9 +5,12 @@
     "access": "public"
   },
   "dependencies": {
+    "fastify-objectionjs": "^0.2.2",
+    "knex": "^0.21.2",
     "lodash": "^4.17.15",
+    "objection": "^2.2.1",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.24"
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "@nodosjs/cli": "^0.0.37",

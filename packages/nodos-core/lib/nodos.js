@@ -1,5 +1,5 @@
 require('@babel/register');
-require('dotenv').config()
+require('dotenv').config();
 // const _ = require('lodash');
 // const path = require('path');
 const log = require('./logger');
