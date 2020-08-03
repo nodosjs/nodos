@@ -20,8 +20,8 @@ const buildCommand = (type, name, actions) => {
   ].join(' ');
 };
 
-module.exports = ({ type, name, actions }) => {
-  const command = buildCommand(type, name, actions);
+const generatorHandler = ({ type, name, params }) => {
+  const command = buildCommand(type, name, params);
 
   runner(command, {
     templates: defaultTemplates,
@@ -35,3 +35,5 @@ module.exports = ({ type, name, actions }) => {
     debug: !!process.env.DEBUG,
   });
 };
+
+module.exports = [{ type: 'controller', handler: generatorHandler }];

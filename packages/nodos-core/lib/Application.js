@@ -41,6 +41,10 @@ class Application {
     this.hooks[name].push(value);
   }
 
+  addGenerator(generator) {
+    this.generators.push(generator);
+  }
+
   isDevelopment() {
     return this.env === 'development';
   }
