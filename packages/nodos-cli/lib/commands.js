@@ -2,7 +2,6 @@ const _ = require('lodash');
 // const jest = require('jest');
 const repl = require('repl');
 const columnify = require('columnify');
-const generator = require('./generator');
 
 // const testCommand = ({ container }) => ({
 //   command: 'test [file]',
@@ -94,7 +93,7 @@ const buildRoutesCommand = ({ app, container }) => ({
   },
 });
 
-const buildGeneratorsCommand = () => ({
+const buildGeneratorsCommand = ({ app }) => ({
   command: 'generate <type> <name> [actions...]',
   builder: (command) => {
     command.positional('type', {
@@ -108,7 +107,8 @@ const buildGeneratorsCommand = () => ({
     });
   },
   handler: (args) => {
-    generator(args);
+    const { handler } = app.generators.find((generator) => generator.type === args.type);
+    handler({ app, ...args });
   },
 });
 

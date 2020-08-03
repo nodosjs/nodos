@@ -5,7 +5,10 @@
     "access": "public"
   },
   "dependencies": {
+    "enquirer": "^2.3.6",
+    "execa": "^4.0.3",
     "fastify-objectionjs": "^0.2.2",
+    "hygen": "^6.0.4",
     "knex": "^0.21.2",
     "lodash": "^4.17.15",
     "objection": "^2.2.1",

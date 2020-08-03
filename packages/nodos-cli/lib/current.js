@@ -2,6 +2,7 @@
 const yargs = require('yargs');
 const commandBuilders = require('./commands.js');
 const log = require('./logger.js');
+const generators = require('./generators.js');
 // const log = require('./logger');
 
 module.exports = async (app, options = {}) => {
@@ -21,8 +22,8 @@ module.exports = async (app, options = {}) => {
   // .epilog(help.trim())
   // .example(example.trim())
   // console.log(app);
-  // console.log(app.commandBuilders);
   Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
+  generators.forEach((generator) => app.addGenerator(generator));
   const commands = app.commandBuilders.map((build) => build({ app, container }));
   log(commands);
   commands.forEach((c) => parser.command(c));
