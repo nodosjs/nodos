@@ -20,8 +20,8 @@ const buildCommand = (type, name, actions) => {
   ].join(' ');
 };
 
-const generatorHandler = ({ type, name, actions }) => {
-  const command = buildCommand(type, name, actions);
+const generatorHandler = ({ type, name, params }) => {
+  const command = buildCommand(type, name, params);
 
   runner(command, {
     templates: defaultTemplates,

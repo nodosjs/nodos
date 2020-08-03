@@ -94,21 +94,21 @@ const buildRoutesCommand = ({ app, container }) => ({
 });
 
 const buildGeneratorsCommand = ({ app }) => ({
-  command: 'generate <type> <name> [actions...]',
+  command: 'generate <type> <name> [params...]',
   builder: (command) => {
     command.positional('type', {
-      describe: 'what you need to create (right now works only for controller)',
+      describe: 'what you need to create [controller model migration]',
     });
     command.positional('name', {
       describe: 'name of entity',
     });
-    command.positional('actions', {
-      describe: 'list of actions that you want in your controller',
+    command.positional('params', {
+      describe: 'list of params that you want apply to your generator',
     });
   },
-  handler: (args) => {
-    const { handler } = app.generators.find((generator) => generator.type === args.type);
-    handler({ app, ...args });
+  handler: ({ type, name, params }) => {
+    const { handler } = app.generators.find((generator) => generator.type === type);
+    handler({ app, name, params });
   },
 });
 
