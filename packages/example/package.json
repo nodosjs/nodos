@@ -15,10 +15,10 @@
     "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.6",
-    "@nodosjs/cli": "^0.0.37",
-    "@nodosjs/core": "^0.0.37",
-    "@nodosjs/db-extension": "^0.0.37",
-    "@nodosjs/jest-environment": "^0.0.37",
+    "@nodosjs/cli": "^0.0.38",
+    "@nodosjs/core": "^0.0.38",
+    "@nodosjs/db-extension": "^0.0.38",
+    "@nodosjs/jest-environment": "^0.0.38",
     "@popperjs/core": "^2.4.0",
     "babel-jest": "^26.0.1",
     "bootstrap": "^4.5.0",
@@ -41,5 +41,5 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
-  "version": "0.0.37"
+  "version": "0.0.38"
 }

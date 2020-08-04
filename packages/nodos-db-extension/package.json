@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/db-extension",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "publishConfig": {
     "access": "public"
   },
@@ -16,7 +16,7 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "@nodosjs/cli": "^0.0.37",
-    "@nodosjs/core": "^0.0.37"
+    "@nodosjs/cli": "^0.0.38",
+    "@nodosjs/core": "^0.0.38"
   }
 }
