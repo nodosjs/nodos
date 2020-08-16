@@ -1,4 +1,13 @@
 extends /layouts/application.pug
 
 block content
-  h1 -- You are onboard!
+  h1 Nodos Project
+  if currentUser.isGuest
+    h3 You are not logged in
+
+    a(href=routePath('buildSession')) Login
+  else
+    h3 You are logged in as #{currentUser.email}
+    form(action=routePath('session') method="post")
+      input(type="hidden" name="_method" value="DELETE")
+      input(type="submit" value="Logout")

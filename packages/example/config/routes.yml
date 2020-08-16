@@ -2,7 +2,8 @@
 
 pipelines:
 
-  browser: []
+  browser:
+    - setCurrentUser
     # - checkMigrations
     # - accepts
     # - setLocale

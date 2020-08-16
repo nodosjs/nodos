@@ -23,4 +23,8 @@ export default class User extends Model {
       .update(value)
       .digest('hex');
   }
+
+  get isGuest() {
+    return false;
+  }
 }

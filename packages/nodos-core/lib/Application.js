@@ -1,6 +1,7 @@
 const path = require('path');
 const fastifyCookie = require('fastify-cookie');
 const fastifyFormbody = require('fastify-formbody');
+const fastifyMethodOverride = require('fastify-method-override');
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
 const log = require('./logger');
