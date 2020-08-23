@@ -1,11 +1,14 @@
-form(action="/users" method="post")
-  div
-    label Email
-    input(type="text" name="user[email]")
-  div
-    label Password
-    input(type="password" name="user[password]")
-  div
-    input(type="submit")
+extends /layouts/application.pug
 
-a(href="/users") Users
+block content
+  form(action="/users" method="post")
+    div
+      label Email
+      input(type="text" name="user[email]")
+    div
+      label Password
+      input(type="password" name="user[password]")
+    div
+      input(type="submit")
+
+  a(href="/users") Users
