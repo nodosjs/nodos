@@ -6,7 +6,7 @@ import webpackConfig from '../../webpack.config.js';
 
 const compiler = webpack(webpackConfig);
 
-export default (app) => {
+export default async (app) => {
   // TODO: We need to think how to run webpack conditionally, because currently it runs every time when you db subcommands
   // the only thing that you can do now is just comment this line
   app.addPlugin(hmr, { compiler });
