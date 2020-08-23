@@ -1,6 +1,6 @@
 extends /layouts/application.pug
 block content
-  form(action=routePath('sessions') method="post")
+  form(action=buildPath('sessions') method="post")
     div
       label Email
       input(type="text" name="user[email]")
@@ -10,4 +10,4 @@ block content
     div
       input(type="submit")
 
-  a(href=routePath('root')) Main page
+  a(href=buildPath('root')) Main page

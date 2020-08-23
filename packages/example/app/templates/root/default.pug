@@ -5,9 +5,9 @@ block content
   if currentUser.isGuest
     h3 You are not logged in
 
-    a(href=routePath('buildSession')) Login
+    a(href=buildPath('buildSession')) Login
   else
     h3 You are logged in as #{currentUser.email}
-    form(action=routePath('session') method="post")
+    form(action=buildPath('session') method="post")
       input(type="hidden" name="_method" value="DELETE")
       input(type="submit" value="Logout")

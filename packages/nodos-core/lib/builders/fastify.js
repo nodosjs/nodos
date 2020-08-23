@@ -81,7 +81,7 @@ const sendResponse = async (fastifyApp, response, reply) => {
 module.exports = async (app) => {
   const fastifyApp = fastify({ logger: true });
 
-  const { routePath, routeUrl } = app.router;
+  const { buildPath, buildUrl } = app.router;
   // throw 'asdf';
 
   await fastifyApp.register(fastifyExpress);
@@ -97,8 +97,8 @@ module.exports = async (app) => {
       cache: app.isProduction(),
     },
     defaultContext: {
-      routePath: routePath.bind(app.router),
-      routeUrl: routeUrl.bind(app.router),
+      buildPath: buildPath.bind(app.router),
+      buildUrl: buildUrl.bind(app.router),
     },
   });
   await fastifyApp.register(fastifyStatic, {

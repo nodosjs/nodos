@@ -7,25 +7,25 @@ export const create = async (request, response, { router }) => {
   try {
     const user = await User.query()
       .findOne({ email })
-      .throwIfNotFound({ message: 'User not found', statusCode: 404 });
+      .throwIfNotFound();
 
     const isPasswordValid = await user.verifyPassword(password);
 
     if (!isPasswordValid) {
       response.head(422);
-      response.redirectTo(router.routePath('buildSession'));
+      response.redirectTo(router.buildPath('buildSession'));
       return;
     }
 
     request.session.userId = user.id;
-    response.redirectTo(router.routePath('root'));
-  } catch ({ statusCode, message }) {
+    response.redirectTo(router.buildPath('root'));
+  } catch ({ statusCode, data: { message } }) {
     response.head(statusCode);
-    response.redirectTo(router.routePath('buildSession'));
+    response.redirectTo(router.buildPath('buildSession'));
   }
 };
 
 export const destroy = async (request, response, { router }) => {
-  request.destroySession(() => response.redirectTo(router.routePath('root')));
+  request.destroySession(() => response.redirectTo(router.buildPath('root')));
 };
 
