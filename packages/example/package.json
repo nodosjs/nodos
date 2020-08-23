@@ -7,16 +7,19 @@
   },
   "jest": {
     "testEnvironment": "@nodosjs/jest-environment",
-    "testPathIgnorePatterns": ["/config/", "/node_modules/"]
+    "testPathIgnorePatterns": [
+      "/config/",
+      "/node_modules/"
+    ]
   },
   "dependencies": {
     "@babel/core": "^7.11.4",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.0",
-    "@nodosjs/cli": "^0.0.38",
-    "@nodosjs/core": "^0.0.38",
-    "@nodosjs/db-extension": "^0.0.38",
-    "@nodosjs/jest-environment": "^0.0.38",
+    "@nodosjs/cli": "^0.0.39",
+    "@nodosjs/core": "^0.0.39",
+    "@nodosjs/db-extension": "^0.0.39",
+    "@nodosjs/jest-environment": "^0.0.39",
     "@popperjs/core": "^2.4.4",
     "babel-jest": "^26.3.0",
     "bootstrap": "^4.5.2",
@@ -40,5 +43,5 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
-  "version": "0.0.38"
+  "version": "0.0.39"
 }
