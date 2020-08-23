@@ -5,6 +5,9 @@ const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
+// fastify-method-override is ES6 module, that's why we need to require 'default'
+const fastifyMethodOverride = require('fastify-method-override').default;
+const fastifySession = require('fastify-session');
 const pointOfView = require('point-of-view');
 const pug = require('pug');
 // const debug = require('debug');
@@ -78,11 +81,10 @@ const sendResponse = async (fastifyApp, response, reply) => {
 module.exports = async (app) => {
   const fastifyApp = fastify({ logger: true });
 
-  const { routePath, routeUrl } = app.router;
+  const { buildPath, buildUrl } = app.router;
   // throw 'asdf';
 
   await fastifyApp.register(fastifyExpress);
-
   await fastifyApp.register(fastifySensible, { errorHandler: app.config.errorHandler });
   // FIXME: move to nodos-templates
   await fastifyApp.register(pointOfView, {
@@ -95,8 +97,8 @@ module.exports = async (app) => {
       cache: app.isProduction(),
     },
     defaultContext: {
-      routePath: routePath.bind(app.router),
-      routeUrl: routeUrl.bind(app.router),
+      buildPath: buildPath.bind(app.router),
+      buildUrl: buildUrl.bind(app.router),
     },
   });
   await fastifyApp.register(fastifyStatic, {
@@ -105,17 +107,24 @@ module.exports = async (app) => {
   });
   const pluginPromises = app.plugins.map(([plugin, options]) => fastifyApp.register(plugin, options));
   await Promise.all(pluginPromises);
+  await fastifyApp.register(fastifyMethodOverride);
+  await fastifyApp.register(fastifySession, {
+    cookieName: 'sessionId',
+    secret: 'a secret with minimum length of 32 characters',
+    cookie: { secure: false },
+    expires: 1800000,
+  });
 
   // fastifyApp.after(console.log);
 
-  // // console.log(router.scopes);
-  // const scopePromises = router.scopes.map(async (scope) => {
-  //   const promises = scope.middlewares.map(name => fetchMiddleware(config, name));
+  // console.log(router.scopes);
+  // const scopePromises = app.router.scopes.map(async (scope) => {
+  //   const promises = scope.middlewares.map((name) => fetchMiddleware(app, name));
   //   const middlewares = await Promise.all(promises);
   //   // console.log(middlewares);
   //   middlewares.forEach((middleware) => {
   //     console.log(scope, middlewares);
-  //     app.register(middleware, { prefix: scope.path });
+  //     fastifyApp.register(middleware, { prefix: scope.path });
   //   });
   // });
   // await Promise.all(scopePromises);

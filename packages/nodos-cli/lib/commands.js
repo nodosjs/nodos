@@ -108,7 +108,12 @@ const buildGeneratorsCommand = ({ app }) => ({
   },
   handler: ({ type, name, params }) => {
     const { handler } = app.generators.find((generator) => generator.type === type);
-    handler({ app, type, name, params });
+    handler({
+      app,
+      type,
+      name,
+      params,
+    });
   },
 });
 

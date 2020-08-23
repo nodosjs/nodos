@@ -5,7 +5,6 @@ const enquirer = require('enquirer');
 const execa = require('execa');
 const path = require('path');
 
-
 const migrationHandler = async ({ app, name }) => {
   const knexClient = knex(app.container.db.config);
 

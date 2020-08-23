@@ -3,9 +3,11 @@ html
     title Nodos
     block scripts
       link(href='/assets/main.css', rel='stylesheet')
-  body
+  body.container.p-3
     block content
+    hr
     block foot
       #footer
-        p some footer content
+        h5 Nodos Project
+        a(href='https://github.com/nodosjs/nodos') GitHub
     script(src='/assets/main.js')

@@ -1,0 +1,13 @@
+extends /layouts/application.pug
+block content
+  form(action=buildPath('sessions') method="post")
+    div
+      label Email
+      input(type="text" name="user[email]")
+    div
+      label Password
+      input(type="password" name="user[password]")
+    div
+      input(type="submit")
+
+  a(href=buildPath('root')) Main page

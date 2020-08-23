@@ -268,13 +268,13 @@ class Router {
   // recognize(request) {
   // }
 
-  routePath(name, ...params) {
+  buildPath(name, ...params) {
     const route = this.routes.find((r) => r.name === name);
     return mapResourcesToUrl(route.url, params);
   }
 
-  routeUrl(name, ...params) {
-    return urlJoin(this.host, this.routePath(name, ...params));
+  buildUrl(name, ...params) {
+    return urlJoin(this.host, this.buildPath(name, ...params));
   }
 }
 

@@ -62,31 +62,31 @@ test('nodos-routing route helpers should return correct url', async () => {
   const article = { id: 123 };
   const comment = { id: 321 };
 
-  const rootPath = router.routePath('root');
+  const rootPath = router.buildPath('root');
   const expectedRootPath = '/';
   expect(rootPath).toBe(expectedRootPath);
 
-  const apiRootPath = router.routePath('apiRoot');
+  const apiRootPath = router.buildPath('apiRoot');
   const expectedApiRootPath = '/api';
   expect(apiRootPath).toBe(expectedApiRootPath);
 
-  const apiUsersPath = router.routePath('apiUsers');
+  const apiUsersPath = router.buildPath('apiUsers');
   const expectedApiUsersPath = '/api/users';
   expect(apiUsersPath).toBe(expectedApiUsersPath);
 
-  const buildArticlesPath = router.routePath('buildArticle');
+  const buildArticlesPath = router.buildPath('buildArticle');
   const expectedBuildArticlesPath = '/articles/build';
   expect(buildArticlesPath).toBe(expectedBuildArticlesPath);
 
-  const articleCommentsPath = router.routePath('articleComments', article.id);
+  const articleCommentsPath = router.buildPath('articleComments', article.id);
   const expectedArticleCommentsPath = `/articles/${article.id}/comments`;
   expect(articleCommentsPath).toBe(expectedArticleCommentsPath);
 
-  const articleCommentPath = router.routePath('articleComment', article.id, comment.id);
+  const articleCommentPath = router.buildPath('articleComment', article.id, comment.id);
   const expectedArticleCommentPath = `/articles/${article.id}/comments/${comment.id}`;
   expect(articleCommentPath).toBe(expectedArticleCommentPath);
 
-  const articleCommentUrl = router.routeUrl('articleComment', article.id, comment.id);
+  const articleCommentUrl = router.buildUrl('articleComment', article.id, comment.id);
   const expectedArticleCommentUrl = `http://site.com/articles/${article.id}/comments/${comment.id}`;
   expect(articleCommentUrl).toBe(expectedArticleCommentUrl);
 });
