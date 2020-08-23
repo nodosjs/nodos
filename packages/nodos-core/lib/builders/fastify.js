@@ -93,7 +93,7 @@ module.exports = async (app) => {
     root: app.config.paths.templatesPath,
     options: {
       basedir: app.config.paths.templatesPath,
-      debug: app.isDevelopment(),
+      debug: false,
       cache: app.isProduction(),
     },
     defaultContext: {
