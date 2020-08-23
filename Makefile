@@ -12,6 +12,7 @@ clean:
 
 test:
 	DEBUG=nodos:* npx jest
+	DEBUG=nodos:* cd packages/example && npx jest
 
 lint:
 	npx eslint .
