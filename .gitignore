@@ -7,3 +7,4 @@ dist
 *.sqlite
 tmp
 *.lerna_backup
+packages/**/package-lock.json
