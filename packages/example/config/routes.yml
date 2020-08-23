@@ -3,6 +3,7 @@
 pipelines:
 
   browser:
+    - handleErrors
     - setCurrentUser
     # - checkMigrations
     # - accepts

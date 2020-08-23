@@ -18,12 +18,14 @@ module.exports = async (app, options = {}) => {
   parser.recommendCommands();
   parser.strict();
   parser.showHelpOnFail(true);
-  await app.start();
+  // await app.start();
   // .epilog(help.trim())
   // .example(example.trim())
   // console.log(app);
+
   Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
   generators.forEach((generator) => app.addGenerator(generator));
+  await app.initApp();
   const commands = app.commandBuilders.map((build) => build({ app, container }));
   log(commands);
   commands.forEach((c) => parser.command(c));

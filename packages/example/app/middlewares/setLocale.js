@@ -1,1 +1,1 @@
-export default (req, res, done) => done();
+export default (action) => action();

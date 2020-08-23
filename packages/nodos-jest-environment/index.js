@@ -15,7 +15,8 @@ class IntegrationEnvironment extends NodeEnvironment {
 
   async setup() {
     this.app = nodos(this.config.rootDir);
-    await this.app.start();
+    await this.app.initApp();
+    await this.app.initServer();
     this.global.app = this.app;
   }
 

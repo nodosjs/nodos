@@ -1,3 +1,5 @@
+// @ts-check
+
 const yml = require('js-yaml');
 // const debug = require('debug');
 const { promises: fs } = require('fs');

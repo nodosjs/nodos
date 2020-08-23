@@ -1,3 +1,5 @@
+// @ts-check
+
 const _ = require('lodash');
 
 const requireDefaultFunction = (path) => {

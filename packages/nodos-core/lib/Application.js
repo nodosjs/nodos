@@ -1,6 +1,6 @@
+// @ts-check
+
 const path = require('path');
-const fastifyCookie = require('fastify-cookie');
-const fastifyFormbody = require('fastify-formbody');
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
 const log = require('./logger');
@@ -81,12 +81,9 @@ class Application {
         middlewaresPath: join('app', 'middlewares'),
       },
     };
-
-    this.addPlugin(fastifyCookie);
-    this.addPlugin(fastifyFormbody);
   }
 
-  async start() {
+  async initApp() {
     const fillByApp = requireDefaultFunction(this.config.paths.applicationPath);
     const fillByEnv = requireDefaultFunction(this.config.paths.environmentPath);
 
@@ -96,13 +93,16 @@ class Application {
     this.router = await buildRouter(this.config.paths.routesPath, { host: this.config.host });
     this.addDependency('router', this.router);
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
-    // TODO: pass only data, not application
+  }
+
+  async initServer() {
     this.fastify = await buildFastify(this);
     log('CONFIG', this.config);
   }
 
-  listen(...args) {
-    return this.fastify.listen(...args);
+  async listen(...args) {
+    log('CONFIG', this.config);
+    await this.fastify.listen(...args);
   }
 
   stop() {

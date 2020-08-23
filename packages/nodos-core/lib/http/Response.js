@@ -1,3 +1,6 @@
+// @ts-check
+
+const _ = require('lodash');
 const path = require('path');
 const status = require('statuses');
 
@@ -26,8 +29,9 @@ class Response {
    * @example res.head(200);
    * @example res.head('forbidden');
    */
-  head(code) {
+  head(code, body = '') {
     this.responseType = 'code';
+    this.body = body;
     this.code = Number.isInteger(code) ? code : status(code);
   }
 
@@ -66,6 +70,13 @@ class Response {
     this.headers[key.toLowerCase()] = value;
   }
 
+  addLocal(key, value) {
+    if (_.has(this.locals, key)) {
+      throw new Error(`'${key}: ${this.locals[key]}' already in the locals`);
+    }
+    this.locals[key] = value;
+  }
+
   /**
    * Render template and send it as a body of http response
    *
@@ -75,7 +86,8 @@ class Response {
    */
   render(locals = {}, template = this.templateName) {
     this.responseType = 'rendering';
-    this.locals = locals;
+    // FIXME: check if property already exists
+    Object.assign(this.locals, locals);
     this.templateName = template;
   }
 

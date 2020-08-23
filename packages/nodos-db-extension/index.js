@@ -3,6 +3,7 @@ const path = require('path');
 const commandBuilders = require('./lib/commands.js');
 const generators = require('./lib/generators.js');
 const Db = require('./lib/Db.js');
+const log = require('./lib/logger.js');
 
 module.exports = (config = {}) => async (app) => {
   const defaultConfig = {
@@ -13,6 +14,7 @@ module.exports = (config = {}) => async (app) => {
       directory: path.join(app.config.projectRoot, '/db/migrations/'),
     },
   };
+  log('init db extension', defaultConfig);
   const db = new Db({ ...defaultConfig, ...config });
   // TODO make it lazy
   await db.connect(app);

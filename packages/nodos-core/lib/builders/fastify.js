@@ -1,3 +1,5 @@
+// @ts-check
+
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
@@ -5,6 +7,8 @@ const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
+const fastifyCookie = require('fastify-cookie');
+const fastifyFormbody = require('fastify-formbody');
 // fastify-method-override is ES6 module, that's why we need to require 'default'
 const fastifyMethodOverride = require('fastify-method-override').default;
 const fastifySession = require('fastify-session');
@@ -37,6 +41,7 @@ const fetchMiddleware = async (app, middlewareName) => {
   }
 
   const module = require(filepath); // eslint-disable-line
+  delete require.cache[require.resolve(filepath)]; // FIXME not for production
   return module.default ? module.default : module;
 };
 
@@ -48,7 +53,7 @@ const sendResponse = async (fastifyApp, response, reply) => {
 
   switch (response.responseType) {
     case 'code':
-      reply.code(response.code).send();
+      reply.code(response.code).send(response.body);
       return reply;
     case 'sending':
       reply.send(response.body);
@@ -105,8 +110,8 @@ module.exports = async (app) => {
     root: app.config.paths.publicPath,
     // prefix: '/public/', // optional: default '/'
   });
-  const pluginPromises = app.plugins.map(([plugin, options]) => fastifyApp.register(plugin, options));
-  await Promise.all(pluginPromises);
+  await fastifyApp.register(fastifyCookie);
+  await fastifyApp.register(fastifyFormbody);
   await fastifyApp.register(fastifyMethodOverride);
   await fastifyApp.register(fastifySession, {
     cookieName: 'sessionId',
@@ -115,30 +120,11 @@ module.exports = async (app) => {
     expires: 1800000,
   });
 
-  // fastifyApp.after(console.log);
-
-  // console.log(router.scopes);
-  // const scopePromises = app.router.scopes.map(async (scope) => {
-  //   const promises = scope.middlewares.map((name) => fetchMiddleware(app, name));
-  //   const middlewares = await Promise.all(promises);
-  //   // console.log(middlewares);
-  //   middlewares.forEach((middleware) => {
-  //     console.log(scope, middlewares);
-  //     fastifyApp.register(middleware, { prefix: scope.path });
-  //   });
-  // });
-  // await Promise.all(scopePromises);
-
-  // FIXME: enable only if option specified
-  // fastifyApp.setErrorHandler((error, request, reply) => {
-  //   throw error;
-  // });
+  const pluginPromises = app.plugins.map(([plugin, options]) => fastifyApp.register(plugin, options));
+  await Promise.all(pluginPromises);
 
   const promises = app.router.routes.map(async (route) => {
     const pathToController = path.join(app.config.paths.controllersPath, route.resourceName);
-    const middlewarePromises = route.middlewares.map((middleware) => fetchMiddleware(app, middleware));
-    const middlewares = await Promise.all(middlewarePromises);
-
     const handler = async (request, reply) => {
       if (!app.config.cacheModules) {
         const appCacheKeys = Object.keys(require.cache).filter((p) => !p.match(/node_modules/))
@@ -152,7 +138,19 @@ module.exports = async (app) => {
       if (!_.has(actions, route.actionName)) {
         throw new Error(`Unknown action name: ${route.actionName}. Route: ${route}`);
       }
-      await actions[route.actionName](request, response, app.container);
+
+      // TODO read all middlewares before mapping routes (only for production)
+      const middlewarePromises = route.middlewares.map((middleware) => fetchMiddleware(app, middleware));
+      const middlewares = await Promise.all(middlewarePromises);
+
+      // FIXME: wrap fastify's request with nodos request
+      const currentAction = actions[route.actionName];
+      const actionWithMiddlewares = middlewares
+        .reduce((acc, middleware) => {
+          const wrappedAction = (...args) => middleware(() => acc(request, response, app.container), ...args);
+          return wrappedAction;
+        }, currentAction);
+      await actionWithMiddlewares(request, response, app.container);
       await sendResponse(fastifyApp, response, reply);
       return reply;
     };
@@ -161,7 +159,7 @@ module.exports = async (app) => {
       handler,
       url: route.url,
       method: route.method.toUpperCase(),
-      preHandler: middlewares,
+      // preHandler: middlewares,
     };
     fastifyApp.route(opts);
   });

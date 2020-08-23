@@ -1,1 +1,1 @@
-module.exports = (request, reply, done) => done();
+module.exports = (action) => action();

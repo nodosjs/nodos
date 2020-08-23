@@ -2,6 +2,7 @@ const _ = require('lodash');
 // const jest = require('jest');
 const repl = require('repl');
 const columnify = require('columnify');
+const log = require('./logger.js');
 
 // const testCommand = ({ container }) => ({
 //   command: 'test [file]',
@@ -45,13 +46,15 @@ const buildServerCommand = ({ app }) => ({
     .default('p', Number(process.env.PORT) || 3000)
     .alias('p', 'port'),
   handler: async (argv) => {
-    app.listen(argv.port, argv.host, (err, address) => {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-      console.log(address);
-    });
+    // NOTE without try/catch yargs performs retries (how to disable it?)
+    try {
+      await app.initServer();
+      await app.listen(argv.port, argv.host);
+    } catch (e) {
+      log(e);
+      console.error(e);
+      process.exit(1);
+    }
   },
 });
 

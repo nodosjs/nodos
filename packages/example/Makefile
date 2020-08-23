@@ -1,4 +1,7 @@
-setup: install
+setup: install migrate
+
+migrate:
+	npx nodos db migrate
 
 install:
 	npm install
