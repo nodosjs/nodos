@@ -117,14 +117,14 @@ module.exports = async (app) => {
 
   // fastifyApp.after(console.log);
 
-  // // console.log(router.scopes);
-  // const scopePromises = router.scopes.map(async (scope) => {
-  //   const promises = scope.middlewares.map(name => fetchMiddleware(config, name));
+  // console.log(router.scopes);
+  // const scopePromises = app.router.scopes.map(async (scope) => {
+  //   const promises = scope.middlewares.map((name) => fetchMiddleware(app, name));
   //   const middlewares = await Promise.all(promises);
   //   // console.log(middlewares);
   //   middlewares.forEach((middleware) => {
   //     console.log(scope, middlewares);
-  //     app.register(middleware, { prefix: scope.path });
+  //     fastifyApp.register(middleware, { prefix: scope.path });
   //   });
   // });
   // await Promise.all(scopePromises);

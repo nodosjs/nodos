@@ -25,6 +25,7 @@
     "jest": "^26.0.1",
     "jest-cli": "^26.0.1",
     "jquery-ujs": "^1.2.2",
+    "objection-password": "^2.0.0",
     "sql.js": "^1.2.2"
   },
   "devDependencies": {

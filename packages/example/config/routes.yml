@@ -16,7 +16,6 @@ pipelines:
     - setLocale
 
 scopes:
-
   - name: 'api'
     pipeline: api
     routes:
