@@ -4,9 +4,20 @@ html
     block scripts
       link(href='/assets/main.css', rel='stylesheet')
   body.container.p-3
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand(href=buildPath('root')) Nodos Project
+      button.navbar-toggler("aria-controls"="navbarSupportedContent" "data-target"="#navbarSupportedContent" "data-toggle"="collapse" type="button")
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item.active
+          a.nav-link(href=buildPath('users')) Users
+            span.sr-only (current)
+        li.nav-item
+          a.nav-link(href="#") Link
     block content
     hr
-    block foot
+    block footer
       #footer
         h5 Nodos Project
         a(href='https://github.com/nodosjs/nodos') GitHub

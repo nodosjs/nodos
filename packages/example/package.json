@@ -2,14 +2,11 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "start": "npx nodos server",
+    "start": "nodos server",
     "build": "webpack -p"
   },
   "jest": {
-    "testEnvironment": "@nodosjs/jest-environment",
-    "testMatch": [
-      "**/tests/**/*.[jt]s?(x)"
-    ]
+    "testEnvironment": "@nodosjs/jest-environment"
   },
   "dependencies": {
     "@babel/core": "^7.11.4",
