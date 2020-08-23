@@ -9,7 +9,7 @@ test('example/users/build', async () => {
 });
 
 test('example/users/create', async () => {
-  const params = { user: { name: 'jopa' } };
+  const params = { user: { email: 'test@test.com', password: 'password' } };
   const response = await app.post('/users', { params });
   expect(response).toMatchObject({ statusCode: 302 });
 });
