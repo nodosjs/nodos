@@ -7,7 +7,7 @@ export const create = async (request, response, { router }) => {
   try {
     const user = await User.query()
       .findOne({ email })
-      .throwIfNotFound({ message: 'User not found' });
+      .throwIfNotFound({ message: 'User not found', statusCode: 404 });
 
     const isPasswordValid = await user.verifyPassword(password);
 
