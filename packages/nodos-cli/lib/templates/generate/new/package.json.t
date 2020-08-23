@@ -6,6 +6,6 @@ to: './<%= name %>/package.json'
     "test": "bin/test"
   },
   "dependencies": {
-    "@nodosjs/core": "0.0.25"
+    "@nodosjs/core": "^0.0.28"
   }
 }
