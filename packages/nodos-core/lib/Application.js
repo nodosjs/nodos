@@ -91,7 +91,6 @@ class Application {
     await fillByApp(this);
 
     this.router = await buildRouter(this.config.paths.routesPath, { host: this.config.host });
-    this.addDependency('router', this.router);
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
   }
 

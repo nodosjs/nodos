@@ -147,10 +147,10 @@ module.exports = async (app) => {
       const currentAction = actions[route.actionName];
       const actionWithMiddlewares = middlewares
         .reduce((acc, middleware) => {
-          const wrappedAction = (...args) => middleware(() => acc(request, response, app.container), ...args);
+          const wrappedAction = (...args) => middleware(() => acc(request, response, app), ...args);
           return wrappedAction;
         }, currentAction);
-      await actionWithMiddlewares(request, response, app.container);
+      await actionWithMiddlewares(request, response, app);
       await sendResponse(fastifyApp, response, reply);
       return reply;
     };

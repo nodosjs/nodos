@@ -9,14 +9,13 @@ const { NotFoundError } = require('objection');
  * @param {Request} request
  * @param {Response} response
  */
-module.exports = async (action, request, response) => {
+module.exports = async (action, request, response, app) => {
   try {
     await action();
   } catch (e) {
-    // FIXME only for production
-    // if (!container.app.isProduction) {
-    //   throw e;
-    // }
+    if (!app.isProduction()) {
+      throw e;
+    }
 
     if (e instanceof NotFoundError) {
       response.head(404, 'Page not found!');
