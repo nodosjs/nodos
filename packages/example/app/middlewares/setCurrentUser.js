@@ -1,12 +1,11 @@
 import User from '../entities/User';
 import Guest from '../entities/Guest';
 
-export default async (request, _response, done) => {
-  const { currentUser } = request.session;
-  const renewUser = currentUser && !currentUser.isGuest
-    ? await User.query().findById(currentUser.id)
+export default async (request, _response) => {
+  const { userId } = request.session;
+  const currentUser = userId
+    ? await User.query().findById(userId)
     : new Guest();
 
-  request.session.currentUser = renewUser;
-  done();
+  request.currentUser = currentUser;
 };
