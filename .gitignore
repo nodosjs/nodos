@@ -6,3 +6,4 @@ dist
 *.sqlite3
 *.sqlite
 tmp
+*.lerna_backup
