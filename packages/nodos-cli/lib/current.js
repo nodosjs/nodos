@@ -1,5 +1,5 @@
 // const _ = require('lodash');
-const yargs = require('yargs');
+const parser = require('yargs');
 const commandBuilders = require('./commands.js');
 const log = require('./logger.js');
 const generators = require('./generators.js');
@@ -11,7 +11,6 @@ module.exports = async (app, options = {}) => {
     exitProcess = true,
     container = {},
   } = options;
-  const parser = yargs(args);
   parser.exitProcess(exitProcess);
   // parser.fail(console.log);
   parser.demandCommand();
@@ -29,5 +28,6 @@ module.exports = async (app, options = {}) => {
   const commands = app.commandBuilders.map((build) => build({ app, container }));
   log(commands);
   commands.forEach((c) => parser.command(c));
-  await parser.argv;
+
+  await parser.parse(args);
 };

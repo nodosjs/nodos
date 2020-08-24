@@ -26,6 +26,7 @@
   "repository": "nodosjs/nodos",
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "devDependencies": {
-    "@nodosjs/core": "^0.0.39"
+    "@nodosjs/core": "^0.0.39",
+    "nanodelay": "^1.0.3"
   }
 }

@@ -40,6 +40,7 @@ const buildConsoleCommand = ({ app, container }) => ({
 const buildServerCommand = ({ app }) => ({
   command: 'server',
   describe: 'run server',
+  aliases: ['s'],
   builder: (yargs) => yargs
     .default('h', '127.0.0.1')
     .alias('h', 'host')
