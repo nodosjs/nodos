@@ -1,13 +1,6 @@
-const fastifyObjectionjs = require('fastify-objectionjs');
-
 class Db {
   constructor(config) {
     this.config = config;
-  }
-
-  async connect(app) {
-    const models = require(this.config.entities).default; // eslint-disable-line
-    app.plugins.push([fastifyObjectionjs, { knexConfig: this.config, models }]);
   }
 
   async query(...args) {

@@ -5,13 +5,13 @@ const { NotFoundError } = require('objection');
 
 /**
  *
- * @param {function} action
+ * @param {function} next
  * @param {Request} request
  * @param {Response} response
  */
-module.exports = async (action, request, response, app) => {
+module.exports = async (next, request, response, app) => {
   try {
-    await action();
+    await next();
   } catch (e) {
     if (!app.isProduction()) {
       throw e;
@@ -22,3 +22,5 @@ module.exports = async (action, request, response, app) => {
     }
   }
 };
+
+

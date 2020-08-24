@@ -2,7 +2,7 @@ import path from 'path';
 import { nodos } from '@nodosjs/core';
 import runCurrent from '../lib/current.js';
 
-const projectRoot = path.join(__dirname, '../__fixtures__/application');
+const projectRoot = path.join(__dirname, '../__fixtures__/site');
 
 test('nodos/console', async () => {
   const replServer = { context: {} };

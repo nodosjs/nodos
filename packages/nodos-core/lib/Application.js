@@ -1,5 +1,6 @@
 // @ts-check
 
+const fs = require('fs');
 const path = require('path');
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
@@ -26,14 +27,25 @@ class Application {
    * app.addPlugin(formbody);
    */
   addPlugin(plugin, options = {}) {
+    log('addPlugin', plugin);
     this.plugins.push([plugin, options]);
   }
 
   addDependency(name, value) {
+    log('addDependency', name);
     this.container[name] = value;
   }
 
+  addMiddleware(filepath) {
+    const filename = path.basename(filepath);
+    const middlewareName = filename.replace(path.extname(filename), '');
+    log('addMiddleware', middlewareName, filepath);
+    // FIXME: check uniqueness
+    this.middlewares[middlewareName] = filepath;
+  }
+
   addExtension(extension, options = {}) {
+    log('addExtension', extension);
     this.extensions.push([extension, options]);
   }
 
@@ -58,6 +70,7 @@ class Application {
     this.defaultRequestOptions = { headers: {}, params: null };
     this.commandBuilders = [];
     this.extensions = [];
+    this.middlewares = [];
     this.generators = [];
     this.container = {};
     this.plugins = [];
@@ -92,6 +105,11 @@ class Application {
 
     this.router = await buildRouter(this.config.paths.routesPath, { host: this.config.host });
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
+
+    const { middlewaresPath } = this.config.paths;
+    const filenames = await fs.promises.readdir(middlewaresPath);
+    const filepaths = filenames.map((filename) => path.resolve(middlewaresPath, filename));
+    filepaths.forEach((filepath) => this.addMiddleware(filepath));
   }
 
   async initServer() {

@@ -19,29 +19,15 @@ const Response = require('../http/Response');
 const log = require('../logger');
 
 const fetchMiddleware = async (app, middlewareName) => {
-  const paths = [
-    path.join(app.config.paths.middlewaresPath, middlewareName),
-    path.join(__dirname, '..', 'middlewares', middlewareName),
-    path.resolve(middlewareName),
-  ];
-
-  const promises = paths.map(async (p) => {
-    try {
-      await fs.promises.stat(`${p}.js`);
-      return p;
-    } catch (e) {
-      return null;
-    }
-  });
-  const filepaths = await Promise.all(promises);
-  const filepath = filepaths.find(_.identity);
-
+  const filepath = app.middlewares[middlewareName];
   if (!filepath) {
-    throw new Error(`Cannot find middleware: ${middlewareName}. Paths: ${paths.join(', ')}`);
+    throw new Error(`Cannot find middleware: ${middlewareName}. Middlewares: ${app.middlewares.join(', ')}`);
   }
 
   const module = require(filepath); // eslint-disable-line
-  delete require.cache[require.resolve(filepath)]; // FIXME not for production
+  if (!app.config.cacheModules) {
+    delete require.cache[filepath];
+  }
   return module.default ? module.default : module;
 };
 
@@ -99,7 +85,7 @@ module.exports = async (app) => {
     options: {
       basedir: app.config.paths.templatesPath,
       debug: false,
-      cache: app.isProduction(),
+      cache: app.config.cacheModules,
     },
     defaultContext: {
       buildPath: buildPath.bind(app.router),

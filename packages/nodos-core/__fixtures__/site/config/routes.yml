@@ -3,7 +3,8 @@
 pipelines:
 
   browser:
-    - checkMigrations
+    - setLocale
+    # - checkMigrations
     # - fastify-cookie
     # - accepts
     # - setLocale

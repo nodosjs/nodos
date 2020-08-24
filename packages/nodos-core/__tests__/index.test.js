@@ -4,7 +4,7 @@ import { nodos } from '../index.js';
 let app;
 
 beforeEach(async () => {
-  app = await nodos(`${__dirname}/../__fixtures__/app`, 'test');
+  app = await nodos(`${__dirname}/../__fixtures__/site`, 'test');
   await app.initApp();
   await app.initServer();
 });
