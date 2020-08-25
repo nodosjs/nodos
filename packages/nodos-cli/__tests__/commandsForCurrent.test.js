@@ -19,7 +19,6 @@ test('nodos/console', async () => {
   expect(replServer.context).toHaveProperty('app');
 });
 
-// FIXME fix test
 test('nodos/server', async () => {
   const app = nodos(projectRoot);
   app.listen = jest.fn().mockResolvedValue();
