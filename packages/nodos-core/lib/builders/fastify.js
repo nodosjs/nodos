@@ -1,7 +1,6 @@
 // @ts-check
 
 const _ = require('lodash');
-const fs = require('fs');
 const path = require('path');
 const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
