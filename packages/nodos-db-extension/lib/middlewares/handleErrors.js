@@ -22,5 +22,3 @@ module.exports = async (next, request, response, app) => {
     }
   }
 };
-
-
