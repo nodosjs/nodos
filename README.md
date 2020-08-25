@@ -23,7 +23,7 @@ $ nodos server
 
 ## Development
 
-We use https://lernajs.io
+We use https://lerna.js.org
 
 ```sh
 # Setup
