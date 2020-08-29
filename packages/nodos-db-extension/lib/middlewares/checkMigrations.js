@@ -1,8 +1,6 @@
-const knex = require('knex');
-
 module.exports = async (action, _request, response, { container }) => {
-  const knexClient = knex(container.db.config);
-  const [, pendingMigraions] = await knexClient.migrate.list();
+  const { connection } = container.db;
+  const [, pendingMigraions] = await connection.migrate.list();
   if (pendingMigraions.length > 0) {
     const migrationsList = pendingMigraions.map((m) => `- ${m.file}`);
     const message = [
