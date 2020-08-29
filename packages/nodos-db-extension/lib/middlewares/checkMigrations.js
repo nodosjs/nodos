@@ -9,6 +9,7 @@ module.exports = async (action, _request, response, { container }) => {
     ].join('\n');
 
     response.head(404, message);
+    return;
   }
 
   await action();
