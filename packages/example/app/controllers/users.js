@@ -15,7 +15,7 @@ export const edit = () => {
 export const show = async (request, response) => {
   const user = await User.query()
     .findById(request.params.id)
-  .throwIfNotFound();
+    .throwIfNotFound();
 
   response.render({ user });
 };

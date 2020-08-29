@@ -2,8 +2,8 @@
 
 pipelines:
 
-  browser:
-    - checkMigrations
+  browser: []
+    # - checkMigrations
     # - fastify-cookie
     # - accepts
     # - setLocale

@@ -5,7 +5,7 @@ pipelines:
   browser:
     - handleErrors
     - setCurrentUser
-    # - checkMigrations
+    - checkMigrations
     # - accepts
     # - setLocale
     # - fetchSession
