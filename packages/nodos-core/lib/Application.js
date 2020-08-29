@@ -76,6 +76,7 @@ class Application {
     this.plugins = [];
     this.hooks = {
       onStop: [],
+      onReady: [],
     };
 
     const join = path.join.bind(null, projectRoot);
@@ -114,6 +115,7 @@ class Application {
 
   async initServer() {
     this.fastify = await buildFastify(this);
+    this.hooks.onReady.forEach((h) => h());
     log('CONFIG', this.config);
   }
 
