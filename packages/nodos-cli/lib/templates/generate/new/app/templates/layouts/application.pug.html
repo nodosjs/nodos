@@ -1,3 +1,17 @@
 ---
 to: './<%= name %>/app/templates/layouts/application.pug'
 ---
+html
+  head
+    title Nodos
+    block scripts
+      link(href='/assets/main.css', rel='stylesheet')
+  body.container.p-3
+    .container.p-3
+      block content
+    hr
+    block footer
+      #footer
+        h5 Nodos Project
+        a(href='https://github.com/nodosjs/nodos') GitHub
+    script(src='/assets/main.js')
