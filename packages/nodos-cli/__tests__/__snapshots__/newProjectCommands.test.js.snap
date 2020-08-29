@@ -4,6 +4,7 @@ exports[`nodos/new 1`] = `
 Array [
   "Makefile",
   "app",
+  "babel.config.js",
   "config",
   "package.json",
   "tests",

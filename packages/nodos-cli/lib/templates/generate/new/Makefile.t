@@ -2,7 +2,7 @@
 to: './<%= name %>/Makefile'
 ---
 server:
-	bin/nodos server
+	npx nodos server
 
 test:
-	bin/nodos test
+	npx nodos test
