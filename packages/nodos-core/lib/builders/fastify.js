@@ -13,6 +13,7 @@ const fastifyMethodOverride = require('fastify-method-override').default;
 const fastifySession = require('fastify-session');
 const pointOfView = require('point-of-view');
 const pug = require('pug');
+const qs = require('qs');
 // const debug = require('debug');
 const Response = require('../http/Response');
 const log = require('../logger');
@@ -76,7 +77,7 @@ module.exports = async (app) => {
 
   await fastifyApp.register(fastifyExpress);
   await fastifyApp.register(fastifySensible, { errorHandler: app.config.errorHandler });
-  // FIXME: move to nodos-templates
+  // TODO: move to nodos-templates
   await fastifyApp.register(pointOfView, {
     engine: { pug },
     includeViewExtension: true,
@@ -96,7 +97,7 @@ module.exports = async (app) => {
     // prefix: '/public/', // optional: default '/'
   });
   await fastifyApp.register(fastifyCookie);
-  await fastifyApp.register(fastifyFormbody);
+  await fastifyApp.register(fastifyFormbody, { parser: (s) => qs.parse(s) });
   await fastifyApp.register(fastifyMethodOverride);
   await fastifyApp.register(fastifySession, {
     cookieName: 'sessionId',
