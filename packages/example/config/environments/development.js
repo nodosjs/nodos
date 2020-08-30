@@ -1,14 +1,6 @@
-import hmr from 'fastify-webpack-hmr';
-import webpack from 'webpack';
 import path from 'path';
 
-import webpackConfig from '../../webpack.config.js';
-
-const compiler = webpack(webpackConfig);
-
 export default async (app) => {
-  app.addPlugin(hmr, { compiler });
-
   app.config.logLevel = 'debug';
   app.config.cacheModules = false;
   app.config.db = {
