@@ -1,15 +1,16 @@
 ---
 to: './<%= name %>/config/webpack/common.js'
 ---
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default ({
+  context: path.resolve(__dirname, '../..'),
   entry: [
-    path.resolve(__dirname, '../../app/assets/stylesheets/application.scss'),
-    path.resolve(__dirname, '../..//app/javascript/application.js'),
+    './app/assets/stylesheets/application.scss',
+    './app/javascript/application.js',
   ],
   output: {
     publicPath: '/assets/',
     path: path.resolve(__dirname, '../../public/assets'),
   },
-};
+});

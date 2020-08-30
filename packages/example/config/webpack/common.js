@@ -2,9 +2,10 @@ import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export default ({
+  context: path.resolve(__dirname, '../..'),
   entry: [
-    path.resolve(__dirname, '../../app/assets/stylesheets/application.scss'),
-    path.resolve(__dirname, '../../app/javascript/application.js'),
+    './app/assets/stylesheets/application.scss',
+    './app/javascript/application.js',
   ],
   output: {
     publicPath: '/assets/',

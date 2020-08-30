@@ -1,9 +1,14 @@
 ---
 to: './<%= name %>/config/webpack/production.js'
 ---
-const { merge } = require('webpack-merge');
-const common = require('./common.js');
+import TerserPlugin from 'terser-webpack-plugin';
+import { merge } from 'webpack-merge';
+import common from './common.js';
 
-module.exports = merge(common, {
-  mode: 'production'
+export default merge(common, {
+  mode: 'production',
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  }
 });
