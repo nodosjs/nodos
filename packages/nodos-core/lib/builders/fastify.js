@@ -1,4 +1,5 @@
 // @ts-check
+/** @typedef { import('../Application') } Application */
 
 const _ = require('lodash');
 const path = require('path');
@@ -69,6 +70,11 @@ const sendResponse = async (fastifyApp, response, reply) => {
   }
 };
 
+/**
+ * Builds fastify app
+ *
+ * @param {Application} app
+ */
 module.exports = async (app) => {
   const fastifyApp = fastify({ logger: true });
 
