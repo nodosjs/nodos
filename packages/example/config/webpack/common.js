@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: [
     path.resolve(__dirname, '../../app/assets/stylesheets/application.scss'),
-    path.resolve(__dirname, '../..//app/javascript/application.js'),
+    path.resolve(__dirname, '../../app/javascript/application.js'),
   ],
   output: {
     publicPath: '/assets/',
