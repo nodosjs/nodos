@@ -19,6 +19,8 @@ to: './<%= name %>/package.json'
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.0",
     "@nodosjs/core": "^<%= version %>"
+    "@nodosjs/jest-environment": "^<%= version %>"
+    "@nodosjs/webpacker": "^<%= version %>"
   },
   "devDependencies": {
     "mini-css-extract-plugin": "^0.11.0",
