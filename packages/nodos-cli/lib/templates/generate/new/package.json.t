@@ -21,11 +21,5 @@ to: './<%= name %>/package.json'
     "@nodosjs/core": "^<%= version %>"
     "@nodosjs/jest-environment": "^<%= version %>"
     "@nodosjs/webpacker": "^<%= version %>"
-  },
-  "devDependencies": {
-    "mini-css-extract-plugin": "^0.11.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.1.3"
   }
 }

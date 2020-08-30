@@ -1,7 +1,7 @@
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export default {
+export default ({
   entry: [
     path.resolve(__dirname, '../../app/assets/stylesheets/application.scss'),
     path.resolve(__dirname, '../../app/javascript/application.js'),
@@ -39,4 +39,4 @@ export default {
   plugins: [
     new MiniCssExtractPlugin(),
   ],
-};
+});
