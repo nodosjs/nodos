@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const fastifyWebpackHMR = require('fastify-webpack-hmr');
 const buildRouter = require('./builders/routes');
 const buildFastify = require('./builders/fastify');
 const log = require('./logger');
@@ -115,13 +114,6 @@ class Application {
   }
 
   async initServer() {
-    if (this.isDevelopment()) {
-      const webpackConfigPath = path.join(this.config.paths.configPath, 'webpack/development.js');
-      const webpackConfig = require(webpackConfigPath); // eslint-disable-line
-
-      this.addPlugin(fastifyWebpackHMR, { config: webpackConfig });
-    }
-
     this.fastify = await buildFastify(this);
     this.hooks.onReady.forEach((h) => h());
     log('CONFIG', this.config);
