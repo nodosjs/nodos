@@ -16,11 +16,11 @@
     "@babel/core": "^7.11.4",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.0",
-    "@nodosjs/cli": "^0.0.40",
-    "@nodosjs/core": "^0.0.40",
-    "@nodosjs/db-extension": "^0.0.40",
-    "@nodosjs/jest-environment": "^0.0.40",
-    "@nodosjs/webpacker": "^0.0.40",
+    "@nodosjs/cli": "^0.0.41",
+    "@nodosjs/core": "^0.0.41",
+    "@nodosjs/db-extension": "^0.0.41",
+    "@nodosjs/jest-environment": "^0.0.41",
+    "@nodosjs/webpacker": "^0.0.41",
     "@popperjs/core": "^2.4.4",
     "babel-jest": "^26.3.0",
     "bootstrap": "^4.5.2",
@@ -40,5 +40,5 @@
     "sass": "^1.26.10",
     "sass-loader": "^10.0.1"
   },
-  "version": "0.0.40"
+  "version": "0.0.41"
 }
