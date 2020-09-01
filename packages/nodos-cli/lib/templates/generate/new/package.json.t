@@ -23,5 +23,10 @@ to: './<%= name %>/package.json'
     "@nodosjs/db-extension": "<%= version %>",
     "@nodosjs/jest-environment": "^<%= version %>",
     "@nodosjs/webpacker": "^<%= version %>"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-jest": "^23.20.0"
   }
 }
