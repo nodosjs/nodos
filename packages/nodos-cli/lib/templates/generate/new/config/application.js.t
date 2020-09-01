@@ -1,8 +1,11 @@
 ---
 to: './<%= name %>/config/application.js'
 ---
-/* eslint-disable no-param-reassign */
+import buildNodosDbExtension from '@nodosjs/db-extension';
+import webpacker from '@nodosjs/webpacker';
 
-export default (config) => {
-  config.log_level = 'debug';
+export default async (app) => {
+  const db = await buildNodosDbExtension(app.config.db);
+  app.addExtension(db);
+  app.addExtension(webpacker);
 };

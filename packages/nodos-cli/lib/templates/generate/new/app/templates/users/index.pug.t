@@ -1,4 +1,7 @@
 ---
 to: './<%= name %>/app/templates/users/index.pug'
 ---
-h1 -- Users#index
+extends /layouts/application.pug
+
+block content
+  h1 -- Users#index

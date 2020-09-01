@@ -3,7 +3,7 @@ to: './<%= name %>/config/routes.yml'
 ---
 pipelines:
   browser:
-    - checkMigrations
+    - setLocale
 
 scopes:
   - name: '/'

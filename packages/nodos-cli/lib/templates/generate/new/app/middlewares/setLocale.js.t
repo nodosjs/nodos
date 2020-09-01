@@ -1,4 +1,4 @@
 ---
-to: './<%= name %>/app/middleware/setLocale.js'
+to: './<%= name %>/app/middlewares/setLocale.js'
 ---
 export default (next, request, response, app) => next();

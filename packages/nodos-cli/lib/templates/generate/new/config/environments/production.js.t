@@ -1,9 +1,7 @@
 ---
 to: './<%= name %>/config/environments/production.js'
 ---
-/* eslint-disable no-param-reassign */
-
-export default (config) => {
-  config.logLevel = 'info';
-  config.cacheModules = true;
-};
+export default async (app) => {
+  app.config.logLevel = 'info';
+  app.config.cacheModules = true;
+}
