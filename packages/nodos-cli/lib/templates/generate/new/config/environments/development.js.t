@@ -1,6 +1,8 @@
 ---
 to: './<%= name %>/config/environments/development.js'
 ---
+/* eslint-disable no-param-reassign */
+
 import path from 'path';
 
 export default async (app) => {
