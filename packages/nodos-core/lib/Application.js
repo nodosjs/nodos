@@ -119,9 +119,13 @@ class Application {
     log('CONFIG', this.config);
   }
 
-  async listen(...args) {
+  listen(...args) {
     log('CONFIG', this.config);
-    await this.fastify.listen(...args);
+    return this.fastify.listen(...args);
+  }
+
+  close(...args) {
+    return this.fastify.close(...args);
   }
 
   stop() {

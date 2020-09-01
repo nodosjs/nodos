@@ -13,7 +13,8 @@
       "/node_modules/",
       "/__fixtures__/",
       "/example/",
-      "/generators/"
+      "/generators/",
+      "/application-tests/"
     ]
   },
   "devDependencies": {

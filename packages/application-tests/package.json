@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "application-tests",
+  "version": "0.0.41",
+  "author": "Kirill Mokevnin @mokevnin",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testRunner": "jest-circus/runner",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__applications__/.*/config/",
+      "/tests/"
+    ]
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "bugs": "https://github.com/nodosjs/nodos-application/issues",
+  "dependencies": {
+    "@nodosjs/cli": "^0.0.41",
+    "@nodosjs/core": "^0.0.41",
+    "@nodosjs/db-extension": "^0.0.41",
+    "@nodosjs/webpack-extension": "^0.0.41",
+    "execa": "^4.0.3"
+  },
+  "homepage": "https://github.com/nodosjs/nodos",
+  "license": "MIT",
+  "repository": "nodosjs/nodos",
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
+  "devDependencies": {}
+}

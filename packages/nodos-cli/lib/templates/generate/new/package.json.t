@@ -15,14 +15,17 @@ to: './<%= name %>/package.json'
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.11.4",
+    "@babel/core": "^7.11.5",
     "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.11.0",
-    "bootstrap": "^4.5.2",
+    "@babel/preset-env": "^7.11.5",
     "@nodosjs/core": "^<%= version %>",
     "@nodosjs/db-extension": "<%= version %>",
     "@nodosjs/jest-environment": "^<%= version %>",
-    "@nodosjs/webpacker": "^<%= version %>"
+    "@nodosjs/webpack-extension": "^<%= version %>",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2",
+    "jest-cli": "^26.4.2",
+    "sql.js": "^1.3.0"
   },
   "devDependencies": {
     "eslint": "^7.7.0",

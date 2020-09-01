@@ -6,6 +6,9 @@ migrate:
 install:
 	npm install
 
+lint:
+	npx eslint
+
 start:
 	DEBUG=nodos:* npm start
 
