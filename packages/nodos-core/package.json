@@ -16,7 +16,7 @@
     "url": "https://github.com/nodosjs/nodos/issues"
   },
   "dependencies": {
-    "@babel/register": "^7.10.5",
+    "@babel/register": "^7.11.5",
     "@nodosjs/helpers": "^0.0.41",
     "@nodosjs/routing": "^0.0.41",
     "debug": "^4.1.1",
@@ -34,7 +34,7 @@
     "lodash": "^4.17.20",
     "marko": "^4.23.2",
     "middie": "^5.1.0",
-    "point-of-view": "^4.4.0",
+    "point-of-view": "^4.5.0",
     "pug": "^3.0.0",
     "qs": "^6.9.4",
     "statuses": "^2.0.0"
