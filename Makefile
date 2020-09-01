@@ -14,6 +14,10 @@ test:
 	DEBUG=nodos:* npx jest
 	# DEBUG=nodos:* cd packages/example && npx jest
 
+test-ci: test
+	cd packages/application-tests && make test
+	cd packages/example && make test
+
 lint:
 	npx eslint .
 
