@@ -1,11 +1,11 @@
 {
   "name": "@nodosjs/jest-environment",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@nodosjs/core": "^0.0.41",
+    "@nodosjs/core": "^0.0.42",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.2",
     "jest-cli": "^26.4.2",

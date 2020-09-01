@@ -16,10 +16,10 @@
     "@babel/core": "^7.11.5",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
-    "@nodosjs/core": "^0.0.41",
-    "@nodosjs/cli": "^0.0.41",
-    "@nodosjs/jest-environment": "^0.0.41",
-    "@nodosjs/db-extension": "^0.0.41",
+    "@nodosjs/cli": "^0.0.42",
+    "@nodosjs/core": "^0.0.42",
+    "@nodosjs/db-extension": "^0.0.42",
+    "@nodosjs/jest-environment": "^0.0.42",
     "@nodosjs/webpack-extension": "^0.0.41",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.2",
@@ -31,5 +31,5 @@
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-jest": "^23.20.0"
   },
-  "version": "0.0.41"
+  "version": "0.0.42"
 }

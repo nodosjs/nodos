@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/helpers",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "main": "./lib/index.js",
   "publishConfig": {
     "access": "public"
