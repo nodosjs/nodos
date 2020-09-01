@@ -6,6 +6,5 @@ export default async (app) => {
   app.config.db = {
     client: 'sqlite3',
     connection: 'db/development.sqlite3',
-    entities: path.join(__dirname, '/../../app/entities'),
   };
 };
