@@ -2,6 +2,9 @@
 
 exports[`nodos/new 1`] = `
 Array [
+  ".eslintignore",
+  ".eslintrc.yml",
+  ".gitignore",
   "Makefile",
   "app",
   "babel.config.js",
