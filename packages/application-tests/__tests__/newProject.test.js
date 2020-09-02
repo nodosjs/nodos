@@ -1,6 +1,5 @@
 import { promises as fsp } from 'fs';
 import path from 'path';
-import os from 'os';
 import { nodos } from '@nodosjs/core';
 import { runNew } from '@nodosjs/cli';
 import execa from 'execa';
