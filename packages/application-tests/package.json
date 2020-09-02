@@ -23,6 +23,9 @@
     "@nodosjs/core": "^0.0.41",
     "@nodosjs/db-extension": "^0.0.41",
     "@nodosjs/webpack-extension": "^0.0.41",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2",
+    "jest-cli": "^26.4.2",
     "execa": "^4.0.3"
   },
   "homepage": "https://github.com/nodosjs/nodos",
