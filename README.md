@@ -17,7 +17,8 @@ Node.js framework for humans
 $ npm i -g @nodosjs/cli
 $ nodos new MyBlog
 $ cd MyBlog
-$ nodos server
+$ npm install
+$ nodos server # see http://localhost:3000/
 # commands: nodos --help
 ```
 
