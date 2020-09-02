@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`check cli 1`] = `""`;
+
 exports[`list routes 1`] = `
 "Name      Verb   URI Pattern     Pipeline
 root      GET    /               browser 

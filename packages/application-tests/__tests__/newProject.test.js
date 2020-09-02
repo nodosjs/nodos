@@ -4,6 +4,8 @@ import { nodos } from '@nodosjs/core';
 import { runNew } from '@nodosjs/cli';
 import execa from 'execa';
 
+const envs = ['production', 'development', 'test'];
+
 let projectRoot;
 
 beforeAll(async () => {
@@ -19,8 +21,8 @@ beforeAll(async () => {
   await runNew({ args: ['new', appName, dir] });
 });
 
-test('start server', async () => {
-  const app = await nodos(projectRoot);
+test.each(envs)('start server', async (env) => {
+  const app = await nodos(projectRoot, env);
   await app.initApp();
   await app.initServer();
   await app.listen();
@@ -28,11 +30,11 @@ test('start server', async () => {
   expect(true).toBe(true);
 });
 
-test('list routes', async () => {
+test('check cli', async () => {
   const options = {
     cwd: projectRoot,
   };
-  const result = await execa('npx', ['nodos', 'routes'], options);
+  const result = await execa(`npx`, ['nodos', 'routes'], options);
   expect(result).not.toBeNull();
   expect(result.stdout).toMatchSnapshot();
 });
