@@ -20,7 +20,7 @@
     "@nodosjs/core": "^0.0.42",
     "@nodosjs/db-extension": "^0.0.42",
     "@nodosjs/jest-environment": "^0.0.42",
-    "@nodosjs/webpack-extension": "^0.0.41",
+    "@nodosjs/webpack-extension": "^0.0.42",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.2",
     "jest-cli": "^26.4.2",
