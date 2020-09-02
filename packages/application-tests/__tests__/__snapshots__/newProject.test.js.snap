@@ -25,16 +25,3 @@ user      PATCH  /users/:id      browser
 user      PUT    /users/:id      browser 
 user      DELETE /users/:id      browser "
 `;
-
-exports[`check cli 3`] = `
-"Name      Verb   URI Pattern     Pipeline
-root      GET    /               browser 
-users     GET    /users          browser 
-buildUser GET    /users/build    browser 
-users     POST   /users          browser 
-user      GET    /users/:id      browser 
-editUser  GET    /users/:id/edit browser 
-user      PATCH  /users/:id      browser 
-user      PUT    /users/:id      browser 
-user      DELETE /users/:id      browser "
-`;

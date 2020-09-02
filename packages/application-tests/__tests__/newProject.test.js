@@ -4,7 +4,9 @@ import { nodos } from '@nodosjs/core';
 import { runNew } from '@nodosjs/cli';
 import execa from 'execa';
 
-const envs = ['production', 'development', 'test'];
+// TODO: development пришлось отрубить так как запускается вебпкак который не умеет каскадно смотреть либы
+// SassError: Can't find stylesheet to import.
+const envs = ['production', 'test'];
 
 let projectRoot;
 
