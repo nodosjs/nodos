@@ -11,6 +11,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/__applications__/.*/config/",
+      "/__fixtures__/",
       "/tests/"
     ]
   },

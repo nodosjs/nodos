@@ -1,0 +1,18 @@
+---
+
+pipelines:
+
+  browser: []
+    # - checkMigrations
+    # - fastify-cookie
+    # - accepts
+    # - setLocale
+    # - fetchSession
+    # - fetchFlash
+    # - protectFromForgery
+
+scopes:
+
+  - name: '/'
+    pipeline: browser
+    root: true
