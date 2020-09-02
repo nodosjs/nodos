@@ -108,7 +108,7 @@ class Application {
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
 
     const { middlewaresPath } = this.config.paths;
-    const filenames = await fs.promises.readdir(middlewaresPath);
+    const filenames = await fs.promises.readdir(middlewaresPath).catch(() => []);
     const filepaths = filenames.map((filename) => path.resolve(middlewaresPath, filename));
     filepaths.forEach((filepath) => this.addMiddleware(filepath));
   }

@@ -10,6 +10,7 @@ let projectRoot;
 
 beforeAll(async () => {
   const dir = path.join(__dirname, '..', '__applications__');
+  await fsp.mkdir(dir, { recursive: true });
   const apps = await fsp.readdir(dir);
   apps.sort();
   const oldAppPaths = apps.reverse().slice(1).map((app) => path.join(dir, app));
@@ -30,11 +31,12 @@ test.each(envs)('start server', async (env) => {
   expect(true).toBe(true);
 });
 
-test('check cli', async () => {
+test.each(envs)('check cli', async (env) => {
   const options = {
     cwd: projectRoot,
+    env: { NODE_ENV: env },
   };
-  const result = await execa(`npx`, ['nodos', 'routes'], options);
+  const result = await execa('npx', ['nodos', 'routes'], options);
   expect(result).not.toBeNull();
   expect(result.stdout).toMatchSnapshot();
 });
