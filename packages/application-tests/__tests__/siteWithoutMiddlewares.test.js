@@ -1,7 +1,5 @@
-import { promises as fsp } from 'fs';
 import path from 'path';
 import { nodos } from '@nodosjs/core';
-// import execa from 'execa';
 
 const projectRoot = path.join(__dirname, '..', '__fixtures__', 'siteWithoutMiddlewares');
 
