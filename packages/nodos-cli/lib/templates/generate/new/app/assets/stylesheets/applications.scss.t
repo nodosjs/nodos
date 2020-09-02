@@ -1,4 +1,4 @@
 ---
 to: './<%= name %>/app/assets/stylesheets/application.scss'
 ---
-@import '~bootstrap';
+@import "~bootstrap/scss/bootstrap";
