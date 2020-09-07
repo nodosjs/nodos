@@ -1,3 +1,4 @@
+const parser = require('yargs');
 const { runner } = require('hygen');
 const Logger = require('hygen/lib/logger');
 const path = require('path');
@@ -7,20 +8,40 @@ const { version } = require('../package.json');
 
 const defaultTemplates = path.join(__dirname, 'templates');
 
-module.exports = async (options = {}) => {
-  const { args = process.argv.slice(2) } = options;
-  const [command, appName, dir] = args;
-  const cwd = dir || process.cwd();
-
-  await runner(['generate', command, appName, '--version', version], {
-    templates: defaultTemplates,
-    cwd,
-    logger: new Logger(console.log.bind(console)),
-    createPrompter: () => enquirer,
-    exec: (action, body) => {
-      const opts = body && body.length > 0 ? { input: body } : {};
-      return execa.shell(action, opts);
+module.exports = async (dir, options = {}) => {
+  const {
+    args = process.argv.slice(2),
+    exitProcess = true,
+  } = options;
+  parser.exitProcess(exitProcess);
+  // parser.fail(console.log);
+  parser.demandCommand();
+  parser.recommendCommands();
+  parser.strict();
+  parser.showHelpOnFail(true);
+  parser.command({
+    command: 'new <appName>',
+    describe: 'Create new Nodos application',
+    builder: (command) => {
+      command.positional('appName', {
+        describe: 'The Application Name',
+      });
     },
-    debug: !!process.env.DEBUG,
+    handler: async ({ appName }) => {
+      // TODO: pass version directly, without arguments
+      await runner(['generate', 'new', appName, '--version', version], {
+        templates: defaultTemplates,
+        cwd: dir,
+        logger: new Logger(console.log.bind(console)),
+        createPrompter: () => enquirer,
+        exec: (action, body) => {
+          const opts = body && body.length > 0 ? { input: body } : {};
+          return execa.shell(action, opts);
+        },
+        debug: !!process.env.DEBUG,
+      });
+    },
   });
+
+  await parser.parse(args);
 };

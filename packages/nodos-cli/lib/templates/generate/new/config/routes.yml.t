@@ -10,4 +10,4 @@ scopes:
     pipeline: browser
     root: true
     routes:
-      - resources: users
+      - resources: pages

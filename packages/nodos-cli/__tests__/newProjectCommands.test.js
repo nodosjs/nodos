@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import os from 'os';
+import { delay } from 'nanodelay';
 import runNew from '../lib/new.js';
 
 let dir;
@@ -11,7 +12,9 @@ beforeEach(async () => {
 
 test('nodos/new', async () => {
   const appName = 'site';
-  await runNew({ args: ['new', appName, dir] });
-  const fileNames = await fs.readdir(path.join(dir, appName));
+  const projectRoot = path.join(dir, appName);
+  await runNew(dir, { args: ['new', appName] });
+  await delay(1000);
+  const fileNames = await fs.readdir(projectRoot);
   expect(fileNames).toMatchSnapshot();
 });
