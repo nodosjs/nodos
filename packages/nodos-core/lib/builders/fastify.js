@@ -16,8 +16,9 @@ const pointOfView = require('point-of-view');
 const pug = require('pug');
 const qs = require('qs');
 // const debug = require('debug');
-const Response = require('../http/Response');
-const log = require('../logger');
+const Response = require('../http/Response.js');
+const Request = require('../http/Request.js');
+const log = require('../logger.js');
 
 const fetchMiddleware = async (app, middlewareName) => {
   const filepath = app.middlewares[middlewareName];
@@ -117,7 +118,7 @@ module.exports = async (app) => {
 
   const promises = app.router.routes.map(async (route) => {
     const pathToController = path.join(app.config.paths.controllersPath, route.resourceName);
-    const handler = async (request, reply) => {
+    const handler = async (fastifyRequest, reply) => {
       if (!app.config.cacheModules) {
         const appCacheKeys = Object.keys(require.cache).filter((p) => !p.match(/node_modules/))
           .filter((p) => p.match(/controllers/));
@@ -126,6 +127,7 @@ module.exports = async (app) => {
       log(pathToController);
       const actions = require(pathToController); // eslint-disable-line
       const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
+      const request = new Request(fastifyRequest);
       log('actions', [actions, route.actionName]);
       if (!_.has(actions, route.actionName)) {
         throw new Error(`Unknown action name: ${route.actionName}. Route: ${route}`);
