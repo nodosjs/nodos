@@ -11,6 +11,7 @@ const fastifyCookie = require('fastify-cookie');
 const fastifyFormbody = require('fastify-formbody');
 // fastify-method-override is ES6 module, that's why we need to require 'default'
 const fastifyMethodOverride = require('fastify-method-override').default;
+const fastifyCSRF = require('fastify-csrf');
 const fastifySession = require('fastify-session');
 const pointOfView = require('point-of-view');
 const pug = require('pug');
@@ -105,6 +106,7 @@ module.exports = async (app) => {
   });
   await fastifyApp.register(fastifyCookie);
   await fastifyApp.register(fastifyFormbody, { parser: (s) => qs.parse(s) });
+  await fastifyApp.register(fastifyCSRF, { cookie: true });
   await fastifyApp.register(fastifyMethodOverride);
   await fastifyApp.register(fastifySession, {
     cookieName: 'sessionId',

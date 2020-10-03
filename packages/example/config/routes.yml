@@ -6,6 +6,7 @@ pipelines:
     - handleErrors
     - setCurrentUser
     - checkMigrations
+    - protectFromForgery
     # - accepts
     # - setLocale
     # - fetchSession
