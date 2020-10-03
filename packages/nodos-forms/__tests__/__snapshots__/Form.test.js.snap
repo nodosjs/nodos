@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`input 1`] = `
+"
+      <input type=\\"text\\" name=firstName value=\\"kolya\\">
+    "
+`;
