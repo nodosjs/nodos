@@ -15,17 +15,21 @@ test('GET /', async () => {
 
 test('GET /users', async () => {
   const result = await app.get('/users');
-  expect(result).toMatchObject({ statusCode: 200, body: '<h1>hello</h1>' });
+  const expected = '{"users":[{"id":1,"name":"tom"}]}';
+  expect(result).toMatchObject({ statusCode: 200, body: expected });
 });
 
 test('GET /users/:id', async () => {
   const result = await app.get('/users/1');
-  expect(result).toMatchObject({ statusCode: 200, body: '<h3>tom</h3>' });
+  const expected = '{"user":{"id":1,"name":"tom"}}';
+  expect(result).toMatchObject({ statusCode: 200, body: expected });
 });
 
 test('POST /users fail', async () => {
   const result = await app.post('/users', { params: { user: {} } });
-  expect(result).toMatchObject({ statusCode: 200, body: '' });
+  console.log(result);
+  const expected = '{"user":{}}';
+  expect(result).toMatchObject({ statusCode: 200, body: expected });
 });
 
 test('POST /users success', async () => {

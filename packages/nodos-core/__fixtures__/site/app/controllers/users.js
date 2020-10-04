@@ -2,7 +2,7 @@ const users = [
   { id: 1, name: 'tom' },
 ];
 
-export const index = (_request, response) => response.render({ users });
+export const index = (_request, response) => response.send({ users });
 
 export const show = (request, response) => {
   const user = users.find((u) => Number(u.id) === Number(request.params.id));
@@ -11,7 +11,7 @@ export const show = (request, response) => {
     return;
   }
 
-  response.render({ user });
+  response.send({ user });
 };
 
 export const create = (request, response) => {
@@ -22,7 +22,7 @@ export const create = (request, response) => {
     return;
   }
 
-  response.render({ user }, 'build');
+  response.send({ user });
 };
 
 export const destroy = (request, response) => {
