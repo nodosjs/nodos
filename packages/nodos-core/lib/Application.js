@@ -55,9 +55,9 @@ class Application {
     this.extensions.push([extension, options]);
   }
 
-  addHook(name, value) {
-    this.hooks[name].push(value);
-  }
+  // addHook(name, value) {
+  //   this.hooks[name].push(value);
+  // }
 
   addGenerator(generator) {
     this.generators.push(generator);
@@ -81,11 +81,10 @@ class Application {
     this.generators = [];
     this.container = {};
     this.plugins = [];
-    this.hooks = {
-      onStop: [],
-      onReady: [],
-      onListen: [],
-    };
+    // this.hooks = {
+    //   onStop: [],
+    //   onListen: [],
+    // };
 
     const join = path.join.bind(null, projectRoot);
     this.config = {
@@ -124,7 +123,7 @@ class Application {
 
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
     const pluginPromises = this.plugins.map(([plugin, options]) => this.fastify.register(plugin, options));
-    await Promise.all(pluginPromises);
+    // await Promise.all(pluginPromises);
 
     const { middlewaresPath } = this.config.paths;
     const filenames = await fs.promises.readdir(middlewaresPath).catch(() => []);
@@ -135,7 +134,7 @@ class Application {
 
     log('CONFIG', this.config);
 
-    this.hooks.onReady.forEach((h) => h());
+    // this.hooks.onReady.forEach((h) => h());
   }
 
   async listen(...args) {
@@ -143,8 +142,8 @@ class Application {
     //   throw new Error('already finalized!');
     // }
     // this.finalized = true;
-    log('ON LISTEN');
-    this.hooks.onListen.forEach((h) => h());
+    // log('ON LISTEN');
+    // this.hooks.onListen.forEach((h) => h());
     // await this.fastify.ready();
     // log('AFTER READY');
     // this.hooks.afterReady.forEach((h) => h());
@@ -152,13 +151,13 @@ class Application {
   }
 
   close(...args) {
-    log('ON CLOSE');
-    this.hooks.onClose.forEach((h) => h());
+    // log('ON CLOSE');
+    // this.hooks.onClose.forEach((h) => h());
     return this.fastify.close(...args);
   }
 
   stop() {
-    this.hooks.onStop.forEach((h) => h());
+    // this.hooks.onStop.forEach((h) => h());
   }
 
   get(url) {

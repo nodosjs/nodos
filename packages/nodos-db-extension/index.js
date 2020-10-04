@@ -25,12 +25,15 @@ module.exports = async (app) => {
 
   const models = require(config.entities).default; // eslint-disable-line
   app.addPlugin(fastifyObjectionjs, { knexConfig: config, models });
+  app.addPlugin((_a, _b, done) => done(), (parent) => {
+    db.connection = parent.objection.knex;
+  });
 
   Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
   generators.forEach((generator) => app.addGenerator(generator));
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleDbErrors.js'));
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
   app.addDependency('db', db);
-  app.addHook('onStop', db.close);
-  app.addHook('onReady', () => { db.connection = app.fastify.objection.knex; });
+  // app.addHook('onStop', db.close);
+  // app.addHook('onReady', () => { db.connection = app.fastify.objection.knex; });
 };
