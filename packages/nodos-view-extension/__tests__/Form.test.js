@@ -8,4 +8,4 @@ test('input', () => {
   const html = form.input('firstName');
 
   expect(html).toMatchSnapshot();
-})
+});

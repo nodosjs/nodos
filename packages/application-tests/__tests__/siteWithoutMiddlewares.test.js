@@ -8,7 +8,6 @@ let app;
 beforeEach(async () => {
   app = await nodos(projectRoot);
   await app.initApp();
-  await app.initServer();
 });
 
 test('get /', async () => {

@@ -27,7 +27,6 @@ beforeAll(async () => {
 test.each(envs)('start server', async (env) => {
   const app = await nodos(projectRoot, env);
   await app.initApp();
-  await app.initServer();
   await app.listen();
   await app.close();
   expect(true).toBe(true);

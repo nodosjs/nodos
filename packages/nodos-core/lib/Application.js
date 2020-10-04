@@ -2,9 +2,15 @@
 
 const fs = require('fs');
 const path = require('path');
-const buildRouter = require('./builders/routes');
-const buildFastify = require('./builders/fastify');
-const log = require('./logger');
+
+const fastify = require('fastify');
+const fastifySensible = require('fastify-sensible');
+const fastifyStatic = require('fastify-static');
+const fastifyExpress = require('fastify-express');
+
+const buildNodosRouter = require('./builders/nodosRouter.js');
+const buildFastifyHandlers = require('./builders/fastifyHandlers.js');
+const log = require('./logger.js');
 const { requireDefaultFunction } = require('./utils.js');
 
 /**
@@ -66,6 +72,7 @@ class Application {
   }
 
   constructor(projectRoot, env = 'development') {
+    this.finalized = false;
     this.env = env;
     this.defaultRequestOptions = { headers: {}, params: null };
     this.commandBuilders = [];
@@ -77,6 +84,7 @@ class Application {
     this.hooks = {
       onStop: [],
       onReady: [],
+      onListen: [],
     };
 
     const join = path.join.bind(null, projectRoot);
@@ -104,27 +112,48 @@ class Application {
     await fillByEnv(this);
     await fillByApp(this);
 
-    this.router = await buildRouter(this.config.paths.routesPath, { host: this.config.host });
+    this.router = await buildNodosRouter(this.config.paths.routesPath, { host: this.config.host });
+    this.fastify = fastify({ logger: true });
+
+    this.addPlugin(fastifyExpress);
+    this.addPlugin(fastifySensible, { errorHandler: this.config.errorHandler });
+    this.addPlugin(fastifyStatic, {
+      root: this.config.paths.publicPath,
+      // prefix: '/public/', // optional: default '/'
+    });
+
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
+    const pluginPromises = this.plugins.map(([plugin, options]) => this.fastify.register(plugin, options));
+    await Promise.all(pluginPromises);
 
     const { middlewaresPath } = this.config.paths;
     const filenames = await fs.promises.readdir(middlewaresPath).catch(() => []);
     const filepaths = filenames.map((filename) => path.resolve(middlewaresPath, filename));
     filepaths.forEach((filepath) => this.addMiddleware(filepath));
-  }
 
-  async initServer() {
-    this.fastify = await buildFastify(this);
+    await buildFastifyHandlers(this);
+
+    log('CONFIG', this.config);
+
     this.hooks.onReady.forEach((h) => h());
-    log('CONFIG', this.config);
   }
 
-  listen(...args) {
-    log('CONFIG', this.config);
+  async listen(...args) {
+    // if (this.finalized) {
+    //   throw new Error('already finalized!');
+    // }
+    // this.finalized = true;
+    log('ON LISTEN');
+    this.hooks.onListen.forEach((h) => h());
+    // await this.fastify.ready();
+    // log('AFTER READY');
+    // this.hooks.afterReady.forEach((h) => h());
     return this.fastify.listen(...args);
   }
 
   close(...args) {
+    log('ON CLOSE');
+    this.hooks.onClose.forEach((h) => h());
     return this.fastify.close(...args);
   }
 

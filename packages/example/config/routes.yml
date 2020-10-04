@@ -3,9 +3,9 @@
 pipelines:
 
   browser:
-    - handleErrors
-    - setCurrentUser
     - checkMigrations
+    - handleDbErrors
+    - setCurrentUser
     - protectFromForgery
     # - accepts
     # - setLocale

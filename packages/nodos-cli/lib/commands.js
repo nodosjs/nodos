@@ -49,7 +49,6 @@ const buildServerCommand = ({ app }) => ({
   handler: async (argv) => {
     // NOTE without try/catch yargs performs retries (how to disable it?)
     try {
-      await app.initServer();
       await app.listen(argv.port, argv.host);
     } catch (e) {
       log(e);
@@ -110,7 +109,7 @@ const buildGeneratorsCommand = ({ app }) => ({
       describe: 'list of params that you want apply to your generator',
     });
   },
-  handler: ({ type, name, params }) => {
+  handler: async ({ type, name, params }) => {
     const { handler } = app.generators.find((generator) => generator.type === type);
     handler({
       app,

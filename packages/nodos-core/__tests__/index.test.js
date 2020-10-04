@@ -6,7 +6,6 @@ let app;
 beforeEach(async () => {
   app = await nodos(`${__dirname}/../__fixtures__/site`, 'test');
   await app.initApp();
-  await app.initServer();
 });
 
 test('GET /', async () => {

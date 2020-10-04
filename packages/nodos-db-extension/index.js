@@ -28,9 +28,9 @@ module.exports = async (app) => {
 
   Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
   generators.forEach((generator) => app.addGenerator(generator));
-  app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleErrors.js'));
+  app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleDbErrors.js'));
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
   app.addDependency('db', db);
   app.addHook('onStop', db.close);
-  app.addHook('onReady', async () => { db.connection = app.fastify.objection.knex; });
+  app.addHook('onReady', () => { db.connection = app.fastify.objection.knex; });
 };

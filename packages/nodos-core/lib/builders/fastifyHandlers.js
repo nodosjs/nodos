@@ -3,19 +3,6 @@
 
 const _ = require('lodash');
 const path = require('path');
-const fastify = require('fastify');
-const fastifySensible = require('fastify-sensible');
-const fastifyStatic = require('fastify-static');
-const fastifyExpress = require('fastify-express');
-const fastifyCookie = require('fastify-cookie');
-const fastifyFormbody = require('fastify-formbody');
-// fastify-method-override is ES6 module, that's why we need to require 'default'
-const fastifyMethodOverride = require('fastify-method-override').default;
-const fastifyCSRF = require('fastify-csrf');
-const fastifySession = require('fastify-session');
-const pointOfView = require('point-of-view');
-const pug = require('pug');
-const qs = require('qs');
 // const debug = require('debug');
 const Response = require('../http/Response.js');
 const Request = require('../http/Request.js');
@@ -78,45 +65,6 @@ const sendResponse = async (fastifyApp, response, reply) => {
  * @param {Application} app
  */
 module.exports = async (app) => {
-  const fastifyApp = fastify({ logger: true });
-
-  const { buildPath, buildUrl } = app.router;
-  // throw 'asdf';
-
-  await fastifyApp.register(fastifyExpress);
-  await fastifyApp.register(fastifySensible, { errorHandler: app.config.errorHandler });
-  // TODO: move to nodos-templates
-  await fastifyApp.register(pointOfView, {
-    engine: { pug },
-    includeViewExtension: true,
-    root: app.config.paths.templatesPath,
-    options: {
-      basedir: app.config.paths.templatesPath,
-      debug: false,
-      cache: app.config.cacheModules,
-    },
-    defaultContext: {
-      buildPath: buildPath.bind(app.router),
-      buildUrl: buildUrl.bind(app.router),
-    },
-  });
-  await fastifyApp.register(fastifyStatic, {
-    root: app.config.paths.publicPath,
-    // prefix: '/public/', // optional: default '/'
-  });
-  await fastifyApp.register(fastifyCookie);
-  await fastifyApp.register(fastifyFormbody, { parser: (s) => qs.parse(s) });
-  await fastifyApp.register(fastifyCSRF, { cookie: true });
-  await fastifyApp.register(fastifyMethodOverride);
-  await fastifyApp.register(fastifySession, {
-    cookieName: 'sessionId',
-    secret: 'a secret with minimum length of 32 characters',
-    cookie: { secure: false },
-    expires: 1800000,
-  });
-
-  const pluginPromises = app.plugins.map(([plugin, options]) => fastifyApp.register(plugin, options));
-  await Promise.all(pluginPromises);
 
   const promises = app.router.routes.map(async (route) => {
     const pathToController = path.join(app.config.paths.controllersPath, route.resourceName);
@@ -147,7 +95,7 @@ module.exports = async (app) => {
           return wrappedAction;
         }, currentAction);
       await actionWithMiddlewares(request, response, app);
-      await sendResponse(fastifyApp, response, reply);
+      await sendResponse(app.fastify, response, reply);
       return reply;
     };
 
@@ -157,13 +105,8 @@ module.exports = async (app) => {
       method: route.method.toUpperCase(),
       // preHandler: middlewares,
     };
-    fastifyApp.route(opts);
+    log(opts);
+    app.fastify.route(opts);
   });
   await Promise.all(promises);
-  // without calling ready() method fastify app instance keeps to be thenable object
-  // in this state instance will have bounded then method which returns only undefined
-  // when you call builder with thenable instance you will always get undefined
-  await fastifyApp.ready();
-
-  return fastifyApp;
 };

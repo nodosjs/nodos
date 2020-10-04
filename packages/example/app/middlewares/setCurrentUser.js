@@ -1,5 +1,5 @@
-import User from '../entities/User';
-import Guest from '../entities/Guest';
+import User from '../entities/User.js';
+import Guest from '../entities/Guest.js';
 
 export default async (action, request, response) => {
   const { userId } = request.fastifyRequest.session;
