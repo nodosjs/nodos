@@ -27,7 +27,6 @@ test('GET /users/:id', async () => {
 
 test('POST /users fail', async () => {
   const result = await app.post('/users', { params: { user: {} } });
-  console.log(result);
   const expected = '{"user":{}}';
   expect(result).toMatchObject({ statusCode: 200, body: expected });
 });
