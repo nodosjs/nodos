@@ -9,5 +9,6 @@ block content
   else
     h3 You are logged in as #{currentUser.email}
     form(action=buildPath('session') method="post")
+      input(type="hidden" name="_csrf" value=csrfToken)
       input(type="hidden" name="_method" value="DELETE")
       input(type="submit" value="Logout")
