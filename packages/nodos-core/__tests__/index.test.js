@@ -1,4 +1,3 @@
-import qs from 'qs';
 import { nodos } from '../index.js';
 
 let app;
@@ -29,18 +28,6 @@ test('POST /users fail', async () => {
   const result = await app.post('/users', { params: { user: {} } });
   const expected = '{"user":{}}';
   expect(result).toMatchObject({ statusCode: 200, body: expected });
-});
-
-test('POST /users success', async () => {
-  const params = qs.stringify({ user: { id: 4, name: 'gogo' } });
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-  };
-  const result = await app.post('/users', { params, headers });
-  expect(result).toMatchObject({ statusCode: 302 });
-
-  const result2 = await app.get('/users/4');
-  expect(result2).toMatchObject({ statusCode: 200 });
 });
 
 test('DELETE /users success', async () => {
