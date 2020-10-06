@@ -65,7 +65,6 @@ const sendResponse = async (fastifyApp, response, reply) => {
  * @param {Application} app
  */
 module.exports = async (app) => {
-
   const promises = app.router.routes.map(async (route) => {
     const pathToController = path.join(app.config.paths.controllersPath, route.resourceName);
     const handler = async (fastifyRequest, reply) => {

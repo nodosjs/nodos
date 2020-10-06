@@ -1,6 +1,7 @@
 extends /layouts/application.pug
 block content
   form(action=buildPath('sessions') method="post")
+    input(type="hidden" name="_csrf" value=csrfToken)
     div
       label Email
       input(type="text" name="user[email]")

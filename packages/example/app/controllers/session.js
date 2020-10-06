@@ -17,15 +17,15 @@ export const create = async (request, response, { router }) => {
       return;
     }
 
-    request.session.userId = user.id;
+    request.fastifyRequest.session.userId = user.id;
     response.redirectTo(router.buildPath('root'));
-  } catch ({ statusCode, data: { message } }) {
-    response.head(statusCode);
+  } catch (error) {
+    // TODO add flash message after integrating flash message into core or view
     response.redirectTo(router.buildPath('buildSession'));
   }
 };
 
 export const destroy = async (request, response, { router }) => {
-  request.destroySession(() => response.redirectTo(router.buildPath('root')));
+  request.fastifyRequest.destroySession(() => response.redirectTo(router.buildPath('root')));
 };
 

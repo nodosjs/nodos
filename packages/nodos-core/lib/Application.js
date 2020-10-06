@@ -71,6 +71,10 @@ class Application {
     return this.env !== 'development';
   }
 
+  isTest() {
+    return this.env === 'test';
+  }
+
   constructor(projectRoot, env = 'development') {
     this.finalized = false;
     this.env = env;
@@ -123,7 +127,7 @@ class Application {
 
     await Promise.all(this.extensions.map(([f, options]) => f(this, options)));
     const pluginPromises = this.plugins.map(([plugin, options]) => this.fastify.register(plugin, options));
-    // await Promise.all(pluginPromises);
+    await Promise.all(pluginPromises);
 
     const { middlewaresPath } = this.config.paths;
     const filenames = await fs.promises.readdir(middlewaresPath).catch(() => []);
