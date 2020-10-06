@@ -1,0 +1,11 @@
+extends /layouts/application.pug
+
+block content
+  if posts.length > 0
+    table
+      each post in posts
+        tr
+          td= post.title
+
+  //-a(href=buildPath('buildUser')) New user
+

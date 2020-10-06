@@ -28,6 +28,7 @@ scopes:
     root: true
     routes:
       - resources: users
+      - resources: posts
       - resource: session
       - resources:
           name: articles
