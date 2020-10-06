@@ -160,9 +160,10 @@ class Application {
     return this.fastify.close(...args);
   }
 
-  stop() {
-    // this.hooks.onStop.forEach((h) => h());
-  }
+  // stop() {
+  // log('ON STOP');
+  // this.hooks.onStop.forEach((h) => h());
+  // }
 
   get(url) {
     return this.request('GET', url);
