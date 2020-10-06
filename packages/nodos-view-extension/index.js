@@ -10,6 +10,13 @@ const pug = require('pug');
 const fastifyFormbody = require('fastify-formbody');
 const qs = require('qs');
 
+const buildCsrfOptions = (app) => {
+  const defaultOptions = { cookie: true };
+  const ignoreMethods = ['HEAD', 'OPTION', 'GET', 'POST', 'PUT', 'PATCH'];
+
+  return app.isTest() ? { ...defaultOptions, ignoreMethods } : defaultOptions;
+};
+
 module.exports = async (app) => {
   const { buildPath, buildUrl } = app.router;
 
@@ -23,7 +30,7 @@ module.exports = async (app) => {
 
   // TODO: check https://github.com/fastify/fastify-multipart
   app.addPlugin(fastifyFormbody, { parser: (s) => qs.parse(s) });
-  app.addPlugin(fastifyCSRF, { cmokie: true });
+  app.addPlugin(fastifyCSRF, buildCsrfOptions(app));
   app.addPlugin(fastifyMethodOverride);
   app.addPlugin(pointOfView, {
     engine: { pug },
