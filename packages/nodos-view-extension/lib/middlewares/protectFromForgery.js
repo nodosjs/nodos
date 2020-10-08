@@ -1,4 +1,4 @@
 module.exports = async (action, request, response) => {
-  response.addLocal('csrfToken', request.fastifyRequest.csrfToken());
+  response.addLocal('csrfToken', request.csrfToken());
   await action();
 };

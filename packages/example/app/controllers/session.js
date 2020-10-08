@@ -17,7 +17,7 @@ export const create = async (request, response, { router }) => {
       return;
     }
 
-    request.fastifyRequest.session.userId = user.id;
+    request.session.userId = user.id;
     response.redirectTo(router.buildPath('root'));
   } catch (error) {
     // TODO add flash message after integrating flash message into core or view
@@ -26,6 +26,6 @@ export const create = async (request, response, { router }) => {
 };
 
 export const destroy = async (request, response, { router }) => {
-  request.fastifyRequest.destroySession(() => response.redirectTo(router.buildPath('root')));
+  request.destroySession(() => response.redirectTo(router.buildPath('root')));
 };
 
