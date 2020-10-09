@@ -85,10 +85,10 @@ class Application {
     this.generators = [];
     this.container = {};
     this.plugins = [];
-    // this.hooks = {
-    //   onStop: [],
-    //   onListen: [],
-    // };
+    this.hooks = {
+      onStop: [],
+      // onListen: [],
+    };
 
     const join = path.join.bind(null, projectRoot);
     this.config = {
@@ -160,10 +160,10 @@ class Application {
     return this.fastify.close(...args);
   }
 
-  // stop() {
-  // log('ON STOP');
-  // this.hooks.onStop.forEach((h) => h());
-  // }
+  stop() {
+    log('ON STOP');
+    this.hooks.onStop.forEach((h) => h());
+  }
 
   get(url) {
     return this.request('GET', url);
