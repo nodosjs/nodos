@@ -5,14 +5,14 @@ class Request {
     this.fastifyRequest = fastifyRequest;
 
     return new Proxy(this, {
-      get: function(request, prop) {
+      get(request, prop) {
         if (prop in request) {
           return request[prop];
         }
 
         return request.fastifyRequest[prop];
-      }
-    })
+      },
+    });
   }
 
   get body() {
