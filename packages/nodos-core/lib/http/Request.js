@@ -3,6 +3,16 @@
 class Request {
   constructor(fastifyRequest) {
     this.fastifyRequest = fastifyRequest;
+
+    return new Proxy(this, {
+      get(request, prop) {
+        if (prop in request) {
+          return request[prop];
+        }
+
+        return request.fastifyRequest[prop];
+      },
+    });
   }
 
   get body() {
