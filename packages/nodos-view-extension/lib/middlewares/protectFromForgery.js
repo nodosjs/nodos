@@ -1,5 +1,5 @@
 module.exports = async (action, request, response, app) => {
-  if (!app.isTest()) {
+  if (app.config.csrf.enabled) {
     response.addLocal('csrfToken', request.csrfToken());
   }
 

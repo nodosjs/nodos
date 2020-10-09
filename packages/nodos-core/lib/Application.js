@@ -95,6 +95,7 @@ class Application {
       env,
       projectRoot,
       errorHandler: false,
+      csrf: { enabled: true },
       paths: {
         publicPath: join('public'),
         routesPath: join('config', 'routes.yml'),
