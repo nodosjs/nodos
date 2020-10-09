@@ -43,9 +43,11 @@ module.exports = async (app) => {
     app.addPlugin(fastifyErrorPage);
   }
 
+  const defaultCsrfConfig = { enabled: true, cookie: true };
+  const csrfConfig = { ...defaultCsrfConfig, ...app.config.csrf };
+  app.addConfig('csrf', csrfConfig);
+
   if (app.config.csrf.enabled) {
-    const defaultCsrfConfig = { cookie: true };
-    const csrfConfig = { ...defaultCsrfConfig, ...app.config.csrf };
     app.addPlugin(fastifyCSRF, csrfConfig);
   }
 

@@ -50,6 +50,10 @@ class Application {
     this.middlewares[middlewareName] = filepath;
   }
 
+  addConfig(key, config) {
+    this.config[key] = config;
+  }
+
   addExtension(extension, options = {}) {
     log('addExtension', extension);
     this.extensions.push([extension, options]);
@@ -95,7 +99,6 @@ class Application {
       env,
       projectRoot,
       errorHandler: false,
-      csrf: { enabled: true },
       paths: {
         publicPath: join('public'),
         routesPath: join('config', 'routes.yml'),
