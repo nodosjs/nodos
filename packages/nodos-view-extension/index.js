@@ -10,13 +10,6 @@ const pug = require('pug');
 const fastifyFormbody = require('fastify-formbody');
 const qs = require('qs');
 
-const buildCsrfOptions = (app) => {
-  const defaultOptions = { cookie: true };
-  const ignoreMethods = ['HEAD', 'OPTION', 'GET', 'POST', 'PUT', 'PATCH'];
-
-  return app.isTest() ? { ...defaultOptions, ignoreMethods } : defaultOptions;
-};
-
 module.exports = async (app) => {
   const { buildPath, buildUrl } = app.router;
 
@@ -30,7 +23,6 @@ module.exports = async (app) => {
 
   // TODO: check https://github.com/fastify/fastify-multipart
   app.addPlugin(fastifyFormbody, { parser: (s) => qs.parse(s) });
-  app.addPlugin(fastifyCSRF, buildCsrfOptions(app));
   app.addPlugin(fastifyMethodOverride);
   app.addPlugin(pointOfView, {
     engine: { pug },
@@ -49,6 +41,14 @@ module.exports = async (app) => {
 
   if (app.isDevelopment()) {
     app.addPlugin(fastifyErrorPage);
+  }
+
+  const defaultCsrfConfig = { enabled: true, cookie: true };
+  const csrfConfig = { ...defaultCsrfConfig, ...app.config.csrf };
+  app.addConfig('csrf', csrfConfig);
+
+  if (app.config.csrf.enabled) {
+    app.addPlugin(fastifyCSRF, csrfConfig);
   }
 
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));

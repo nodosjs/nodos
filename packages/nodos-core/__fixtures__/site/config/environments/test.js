@@ -3,6 +3,7 @@ export default async (app) => {
   app.config.errorHandler = false;
   app.config.cacheModules = true;
   app.config.host = 'http://example.com';
+  app.config.csrf = { enabled: false }
   // this.config.db = {
   //   type: 'sqlite',
   //   synchronize: true,

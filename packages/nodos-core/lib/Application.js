@@ -50,6 +50,10 @@ class Application {
     this.middlewares[middlewareName] = filepath;
   }
 
+  addConfig(key, config) {
+    this.config[key] = config;
+  }
+
   addExtension(extension, options = {}) {
     log('addExtension', extension);
     this.extensions.push([extension, options]);
@@ -85,10 +89,10 @@ class Application {
     this.generators = [];
     this.container = {};
     this.plugins = [];
-    // this.hooks = {
-    //   onStop: [],
-    //   onListen: [],
-    // };
+    this.hooks = {
+      onStop: [],
+      // onListen: [],
+    };
 
     const join = path.join.bind(null, projectRoot);
     this.config = {
@@ -160,10 +164,10 @@ class Application {
     return this.fastify.close(...args);
   }
 
-  // stop() {
-  // log('ON STOP');
-  // this.hooks.onStop.forEach((h) => h());
-  // }
+  stop() {
+    log('ON STOP');
+    this.hooks.onStop.forEach((h) => h());
+  }
 
   get(url) {
     return this.request('GET', url);
