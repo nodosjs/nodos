@@ -24,7 +24,7 @@ class Application {
   }
 
   /**
-   * Add fastify builder
+   * Add fastify plugin
    *
    * @param {FastifyPlugin} plugin
    * @param {Object} options Plugin options

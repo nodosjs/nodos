@@ -1,16 +1,24 @@
 // @ts-check
 
+/**
+  * @typedef FastifyRequest
+  * @name FastifyRequest
+  * @description fastify's original request object
+  */
+
+/**
+ * A Request object
+ * @param {FastifyRequest} fastifyRequest
+ */
 class Request {
   constructor(fastifyRequest) {
     this.fastifyRequest = fastifyRequest;
 
     return new Proxy(this, {
-      get(request, prop) {
-        if (prop in request) {
-          return request[prop];
-        }
+      get(request, prop, receiver) {
+        const requestObject = Reflect.has(request, prop) ? request : request.fastifyRequest;
 
-        return request.fastifyRequest[prop];
+        return Reflect.get(requestObject, prop, receiver);
       },
     });
   }
