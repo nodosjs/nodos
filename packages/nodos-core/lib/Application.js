@@ -7,6 +7,7 @@ const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
+const { merge } = require('lodash');
 
 const buildNodosRouter = require('./builders/nodosRouter.js');
 const buildFastifyHandlers = require('./builders/fastifyHandlers.js');
@@ -50,8 +51,8 @@ class Application {
     this.middlewares[middlewareName] = filepath;
   }
 
-  addConfig(key, config) {
-    this.config[key] = config;
+  setDefaultConfig(key, config) {
+    this.config[key] = merge(config, this.config[key]);
   }
 
   addExtension(extension, options = {}) {
