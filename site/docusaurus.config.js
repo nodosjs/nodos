@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Nodos',
-  tagline: 'Node.js framework for humans (inspired by rails, phoenix, django)',
+  tagline: 'Node.js framework for humans (inspired by Rails, Phoenix, Django)',
   url: 'https://nodosjs.github.io',
   baseUrl: '/nodosjs.github.io/',
   favicon: 'img/favicon.ico',
@@ -8,21 +8,26 @@ module.exports = {
   projectName: 'nodosjs.github.io', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'Nodos',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Nodos Logo',
         src: 'img/logo.svg',
       },
-      links: [
+      items: [
         {
-          to: 'docs/doc1',
+          to: 'docs/getting_started',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'Guides',
+          position: 'left',
+        },
+        {
+          href: 'https://nodosjs.github.io/nodos/',
+          label: 'API',
           position: 'left',
         },
         { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/nodosjs/nodos',
           label: 'GitHub',
           position: 'right',
         },
@@ -30,52 +35,7 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Style Guide',
-              to: 'docs/doc1',
-            },
-            {
-              label: 'Second Doc',
-              to: 'docs/doc2',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Nodos, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
@@ -84,15 +44,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/nodosjs/nodos/tree/master/site',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            'https://github.com/nodosjs/nodos/tree/master/site/blog',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
