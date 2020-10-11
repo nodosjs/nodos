@@ -44,11 +44,10 @@ module.exports = async (app) => {
   }
 
   const defaultCsrfConfig = { enabled: true, cookie: true };
-  const csrfConfig = { ...defaultCsrfConfig, ...app.config.csrf };
-  app.addConfig('csrf', csrfConfig);
+  app.setDefaultConfig('csrf', defaultCsrfConfig);
 
   if (app.config.csrf.enabled) {
-    app.addPlugin(fastifyCSRF, csrfConfig);
+    app.addPlugin(fastifyCSRF, app.config.csrf);
   }
 
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));
