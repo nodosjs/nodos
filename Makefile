@@ -34,7 +34,7 @@ docs-build:
 	npx documentation build packages/nodos-core -f html -o docs
 
 site-start:
-	cd site; npm start
+	cd site; npx docusaurus start
 
 site-deploy:
 	cd site; GIT_USER=$(U) npm run deploy
