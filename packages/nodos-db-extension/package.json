@@ -5,6 +5,7 @@
     "access": "public"
   },
   "dependencies": {
+    "debug": "^4.2.0",
     "enquirer": "^2.3.6",
     "execa": "^4.0.3",
     "fastify-objectionjs": "^0.2.2",

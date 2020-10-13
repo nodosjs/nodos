@@ -19,12 +19,12 @@ extends:
 
 ignorePatterns:
   - '**/site/*'
+  - '**/__applications__/*'
 
 rules:
   no-console: 0
   import/extensions: 0
-  import/no-extraneous-dependencies: 0
-  no-unused-vars: ['error', { argsIgnorePattern: '^_', ignoreRestSiblings: true }]
+  # import/no-extraneous-dependencies: 0
   max-len:
     - 1
     - code: 120

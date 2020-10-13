@@ -3,7 +3,8 @@ export default class Form {
     this.model = model;
   }
 
-  input(fieldName, _options) {
+  input(fieldName, options = {}) {
+    options.push(true);
     const html = `
       <input type="text" name=${fieldName} value="${this.model[fieldName]}">
     `;
