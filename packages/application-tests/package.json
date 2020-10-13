@@ -24,11 +24,11 @@
     "@nodosjs/core": "^0.0.42",
     "@nodosjs/db-extension": "^0.0.42",
     "@nodosjs/webpack-extension": "^0.0.42",
-    "babel-jest": "^26.3.0",
+    "babel-jest": "^26.5.2",
     "bootstrap": "^4.5.2",
     "execa": "^4.0.3",
-    "jest": "^26.4.2",
-    "jest-cli": "^26.4.2"
+    "jest": "^26.5.3",
+    "jest-cli": "^26.5.3"
   },
   "homepage": "https://github.com/nodosjs/nodos",
   "license": "MIT",

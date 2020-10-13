@@ -8,7 +8,7 @@
     "create-html-element": "^3.0.0",
     "fastify-error-page": "^4.0.0",
     "fastify-cookie": "^4.1.0",
-    "fastify-csrf": "^1.0.4",
+    "fastify-csrf": "^2.0.0",
     "fastify-formbody": "^5.0.0",
     "fastify-method-override": "^1.4.2",
     "point-of-view": "^4.6.0",
