@@ -12,11 +12,14 @@ clean:
 
 test:
 	DEBUG=nodos:* npx jest
-	# DEBUG=nodos:* cd packages/example && npx jest
 
-test-ci: test
-	cd packages/application-tests && make test
-	cd packages/example && make test
+test-application:
+	DEBUG=nodos:* cd packages/application-tests && make test
+
+test-example:
+	DEBUG=nodos:* cd packages/example && make test
+
+test-ci: test test-application test-example
 
 lint:
 	npx eslint .
