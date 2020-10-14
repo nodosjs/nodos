@@ -8,6 +8,8 @@ const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
 // const { merge } = require('lodash');
+const { merge } = require('lodash');
+const i18next = require('i18next');
 
 const buildNodosRouter = require('./builders/nodosRouter.js');
 const buildFastifyHandlers = require('./builders/fastifyHandlers.js');
@@ -91,6 +93,13 @@ class Application {
   constructor(projectRoot, options = {}) {
     const env = process.env.NODOS_ENV ?? options.env ?? 'development';
     // const mode = options.mode ?? 'server';
+    i18next.init({
+      fallbackLng: 'en',
+      debug: this.isDevelopment(),
+    });
+    this.i18next = i18next;
+    this.finalized = false;
+    this.env = env;
     this.defaultRequestOptions = { headers: {}, params: null };
     this.commandBuilders = [];
     this.extensions = [];
@@ -118,6 +127,7 @@ class Application {
         templatesPath: join('app', 'templates'),
         controllersPath: join('app', 'controllers'),
         middlewaresPath: join('app', 'middlewares'),
+        i18nextPath: join('config', 'locales', 'index.js'),
       },
     };
   }
@@ -143,12 +153,23 @@ class Application {
     const pluginPromises = this.plugins.map(([plugin, options]) => this.fastify.register(plugin, options));
     await Promise.all(pluginPromises);
 
-    const { middlewaresPath } = this.config.paths;
+    const { middlewaresPath, i18nextPath } = this.config.paths;
     const filenames = await fs.promises.readdir(middlewaresPath).catch(() => []);
     const filepaths = filenames.map((filename) => path.resolve(middlewaresPath, filename));
     filepaths.forEach((filepath) => this.addMiddleware(filepath));
 
     await buildFastifyHandlers(this);
+
+    let i18nextResources = {};
+    try {
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      i18nextResources = require(i18nextPath).default;
+      this.i18next.init({
+        resources: i18nextResources,
+      });
+    } catch (error) {
+      log('i18next - resources file not found', error.message);
+    }
 
     log('CONFIG', this.config);
 

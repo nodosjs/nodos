@@ -35,6 +35,7 @@ module.exports = async (app) => {
     defaultContext: {
       buildPath: buildPath.bind(app.router),
       buildUrl: buildUrl.bind(app.router),
+      t: app.i18next.t.bind(app.i18next),
     },
   });
 
