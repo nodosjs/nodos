@@ -12,15 +12,18 @@ export const create = async (request, response, { router }) => {
     const isPasswordValid = await user.verifyPassword(password);
 
     if (!isPasswordValid) {
+      request.flash('danger', `Wrong password for user ${email}`)
       response.head(422);
       response.redirectTo(router.buildPath('buildSession'));
       return;
     }
 
     request.session.userId = user.id;
+    request.flash('success', 'You are logged in!')
     response.redirectTo(router.buildPath('root'));
   } catch (error) {
     // TODO add flash message after integrating flash message into core or view
+    request.flash('danger', `No user with email ${email} was found`)
     response.redirectTo(router.buildPath('buildSession'));
   }
 };
