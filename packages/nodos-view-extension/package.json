@@ -6,19 +6,21 @@
   },
   "dependencies": {
     "create-html-element": "^3.0.0",
-    "fastify-error-page": "^4.0.0",
     "fastify-cookie": "^4.1.0",
     "fastify-csrf": "^2.0.0",
+    "fastify-error-page": "^4.0.0",
+    "fastify-flash": "^2.0.2",
     "fastify-formbody": "^5.0.0",
     "fastify-method-override": "^1.4.2",
+    "fastify-secure-session": "^2.3.0",
+    "fastify-session": "^5.2.0",
     "point-of-view": "^4.6.0",
     "pug": "^3.0.0",
-    "qs": "^6.9.4",
-    "fastify-session": "^5.2.0"
- },
- "devDependencies": {
+    "qs": "^6.9.4"
+  },
+  "devDependencies": {
     "@nodosjs/cli": "^0.0.42",
     "@nodosjs/core": "^0.0.42"
- },
+  },
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }

@@ -5,17 +5,19 @@
     "access": "public"
   },
   "dependencies": {
-    "babel-loader": "^8.1.0",
     "@popperjs/core": "^2.5.3",
+    "babel-loader": "^8.1.0",
+    "bootstrap": "^4.5.2",
     "css-loader": "^4.3.0",
     "fastify-webpack-hmr": "^3.0.0",
+    "jquery": "^3.5.1",
     "mini-css-extract-plugin": "^1.0.0",
+    "popper.js": "^1.16.1",
     "sass": "^1.27.0",
-    "bootstrap": "^4.5.2",
     "sass-loader": "^10.0.3",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
-    "webpack": "^5.0.0",
+    "webpack": "^5.1.2",
     "webpack-cli": "^4.0.0",
     "webpack-merge": "^5.2.0"
   }

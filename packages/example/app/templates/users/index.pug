@@ -1,6 +1,11 @@
 extends /layouts/application.pug
 
 block content
+  each message, type in flash
+    .alert.alert-dismissible.fade.show(class=`alert-${type}` role='alert')
+      = message
+      button.close(type='button' data-dismiss='alert' aria-label='Close')
+        span(aria-hidden='true') &times;
   if users.length > 0
     table
       each user in users

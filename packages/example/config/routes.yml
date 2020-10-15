@@ -5,13 +5,12 @@ pipelines:
   browser:
     - checkMigrations
     - handleDbErrors
+    # - protectFromForgery
     - setCurrentUser
-    - protectFromForgery
+    - fetchFlash
     # - accepts
     # - setLocale
     # - fetchSession
-    # - fetchFlash
-    # - protectFromForgery
 
   api:
     # - accepts
