@@ -25,9 +25,11 @@ export const create = async (request, response, { router }) => {
 
   if (user instanceof User) { // validation
     response.redirectTo(router.buildPath('users'));
+    request.flash('success', 'User successfully created');
     return;
   }
 
+  request.flash('danger', 'Something went wrong on creating new user');
   response.render({ user }, 'build');
 };
 

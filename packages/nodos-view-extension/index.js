@@ -4,8 +4,8 @@ const fastifyMethodOverride = require('fastify-method-override').default;
 const fastifyCSRF = require('fastify-csrf');
 const pointOfView = require('point-of-view');
 const fastifyErrorPage = require('fastify-error-page');
-const fastifyCookie = require('fastify-cookie');
-const fastifySession = require('fastify-session');
+const fastifySecureSession = require('fastify-secure-session');
+const fastifyFlash = require('fastify-flash');
 const pug = require('pug');
 const fastifyFormbody = require('fastify-formbody');
 const qs = require('qs');
@@ -13,13 +13,11 @@ const qs = require('qs');
 module.exports = async (app) => {
   const { buildPath, buildUrl } = app.router;
 
-  app.addPlugin(fastifyCookie);
-  app.addPlugin(fastifySession, {
-    cookieName: 'sessionId',
+  app.addPlugin(fastifySecureSession, {
     secret: 'a secret with minimum length of 32 characters',
-    cookie: { secure: false },
-    expires: 1800000,
+    cookie: { path: '/' },
   });
+  app.addPlugin(fastifyFlash);
 
   // TODO: check https://github.com/fastify/fastify-multipart
   app.addPlugin(fastifyFormbody, { parser: (s) => qs.parse(s) });
@@ -45,10 +43,12 @@ module.exports = async (app) => {
 
   const defaultCsrfConfig = { enabled: true, cookie: true };
   app.setDefaultConfig('csrf', defaultCsrfConfig);
+  // app.addPlugin(fastifyCSRF, app.config.csrf);
 
   if (app.config.csrf.enabled) {
     app.addPlugin(fastifyCSRF, app.config.csrf);
   }
 
-  app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));
+  // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));
+  app.addMiddleware(path.resolve(__dirname, './lib/middlewares/fetchFlash.js'));
 };

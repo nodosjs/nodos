@@ -12,7 +12,7 @@ const status = require('statuses');
  * @param {string} options.templateDir Name of dir with templates
  */
 class Response {
-  constructor({ templateName, templateDir }) {
+  constructor(fastifyResponse, { templateName, templateDir }) {
     this.templateName = templateName;
     this.templateDir = templateDir;
     this.responseType = 'rendering';
@@ -20,6 +20,14 @@ class Response {
     this.locals = {};
     this.code = 200;
     this.body = null;
+
+    return new Proxy(this, {
+      get(response, prop, receiver) {
+        const responseObject = Reflect.has(response, prop) ? response : fastifyResponse;
+
+        return Reflect.get(responseObject, prop, receiver);
+      },
+    });
   }
 
   /**

@@ -75,7 +75,7 @@ module.exports = async (app) => {
       }
       log(pathToController);
       const actions = require(pathToController); // eslint-disable-line
-      const response = new Response({ templateDir: route.resourceName, templateName: route.actionName });
+      const response = new Response(reply, { templateDir: route.resourceName, templateName: route.actionName });
       const request = new Request(fastifyRequest);
       log('actions', [actions, route.actionName]);
       if (!_.has(actions, route.actionName)) {
@@ -86,7 +86,6 @@ module.exports = async (app) => {
       const middlewarePromises = route.middlewares.map((middleware) => fetchMiddleware(app, middleware));
       const middlewares = await Promise.all(middlewarePromises);
 
-      // FIXME: wrap fastify's request with nodos request
       const currentAction = actions[route.actionName];
       const actionWithMiddlewares = middlewares
         .reduce((acc, middleware) => {
