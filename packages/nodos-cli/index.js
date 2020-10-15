@@ -6,16 +6,16 @@ const log = require('./lib/logger.js');
 module.exports = {
   runNew,
   runCurrent,
-  run(dir) {
+  run(dir, options = {}) {
     const core = importFrom.silent(dir, '@nodosjs/core');
     log(dir);
     log(core);
 
     if (core) {
       const app = core.nodos(dir);
-      runCurrent(app);
+      runCurrent(app, options);
     } else {
-      runNew(dir);
+      runNew(dir, options);
     }
   },
 };

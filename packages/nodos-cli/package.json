@@ -6,7 +6,7 @@
     "access": "public"
   },
   "bin": {
-    "nodos": "./bin/nodos"
+    "nodos": "./bin/nodos.js"
   },
   "bugs": "https://github.com/nodosjs/nodos/issues",
   "dependencies": {
