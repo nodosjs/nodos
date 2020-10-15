@@ -13,12 +13,11 @@ export const create = async (request, response, { router }) => {
 
     if (!isPasswordValid) {
       request.flash('danger', `Wrong password for user ${email}`)
-      response.head(422);
       response.redirectTo(router.buildPath('buildSession'));
       return;
     }
 
-    request.session.userId = user.id;
+    request.session.set('userId', user.id);
     request.flash('success', 'You are logged in!')
     response.redirectTo(router.buildPath('root'));
   } catch (error) {
@@ -29,6 +28,7 @@ export const create = async (request, response, { router }) => {
 };
 
 export const destroy = async (request, response, { router }) => {
-  request.destroySession(() => response.redirectTo(router.buildPath('root')));
+  request.session.delete()
+  response.redirectTo(router.buildPath('root'));
 };
 
