@@ -1,7 +1,5 @@
 module.exports = async (action, request, response) => {
-  const flash = response.flash()
-  console.log({ flash, f: request.session })
-  response.addLocal('flash', flash || {});
+  response.addLocal('flash', response.flash() || {});
 
   await action();
 };
