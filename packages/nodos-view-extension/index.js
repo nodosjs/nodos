@@ -9,6 +9,7 @@ const fastifyFlash = require('fastify-flash');
 const pug = require('pug');
 const fastifyFormbody = require('fastify-formbody');
 const qs = require('qs');
+const csrfPluginWrapper = require('./lib/csrfPluginWrapper');
 
 module.exports = async (app) => {
   const { buildPath, buildUrl } = app.router;
@@ -41,14 +42,14 @@ module.exports = async (app) => {
     app.addPlugin(fastifyErrorPage);
   }
 
-  const defaultCsrfConfig = { enabled: true, cookie: true };
-  const applicationConfig = app.config.csrf ?? {};
-  const configuration = { ...defaultCsrfConfig, ...applicationConfig };
+  const defaultCsrfConfig = { enabled: true, sessionPlugin: 'fastify-secure-session' };
+  app.setDefaultConfig('csrf', defaultCsrfConfig);
+  app.addPlugin(fastifyCSRF, app.config.csrf);
 
-  if (configuration.enabled) {
-    app.addPlugin(fastifyCSRF, configuration);
+  if (app.config.csrf.enabled) {
+    app.addPlugin(csrfPluginWrapper);
   }
 
-  // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));
+  app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/fetchFlash.js'));
 };

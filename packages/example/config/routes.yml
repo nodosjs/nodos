@@ -5,7 +5,7 @@ pipelines:
   browser:
     - checkMigrations
     - handleDbErrors
-    # - protectFromForgery
+    - protectFromForgery
     - setCurrentUser
     - fetchFlash
     # - accepts
