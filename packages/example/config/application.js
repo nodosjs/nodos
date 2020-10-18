@@ -4,5 +4,7 @@ import nodosView from '@nodosjs/view-extension';
 export default async (app) => {
   app.addExtension(nodosDb);
   app.addExtension(nodosView);
-  app.i18next.changeLanguage('en');
+  app.i18nextConfig = {
+    lng: 'en',
+  };
 };

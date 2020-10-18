@@ -10,6 +10,7 @@ const fastifyExpress = require('fastify-express');
 // const { merge } = require('lodash');
 const { merge } = require('lodash');
 const i18next = require('i18next');
+const Backend = require('i18next-fs-backend');
 
 const buildNodosRouter = require('./builders/nodosRouter.js');
 const buildFastifyHandlers = require('./builders/fastifyHandlers.js');
@@ -111,6 +112,12 @@ class Application {
       onStop: [],
       // onListen: [],
     };
+    this.i18nextConfig = {
+      fallbackLng: 'en',
+      lng: 'en',
+      debug: this.isDevelopment(),
+    };
+    this.i18next = i18next;
 
     const join = path.join.bind(null, projectRoot);
     this.config = {
@@ -127,7 +134,7 @@ class Application {
         templatesPath: join('app', 'templates'),
         controllersPath: join('app', 'controllers'),
         middlewaresPath: join('app', 'middlewares'),
-        i18nextPath: join('config', 'locales', 'index.js'),
+        i18nextPath: join('config', 'locales'),
       },
     };
   }
@@ -160,16 +167,12 @@ class Application {
 
     await buildFastifyHandlers(this);
 
-    let i18nextResources = {};
-    try {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      i18nextResources = require(i18nextPath).default;
-      this.i18next.init({
-        resources: i18nextResources,
-      });
-    } catch (error) {
-      log('i18next - resources file not found', error.message);
-    }
+    await this.i18next.use(Backend).init({
+      ...this.i18nextConfig,
+      backend: {
+        loadPath: `${i18nextPath}/{{lng}}.yml`,
+      },
+    });
 
     log('CONFIG', this.config);
 
