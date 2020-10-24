@@ -19,7 +19,7 @@ class IntegrationEnvironment extends NodeEnvironment {
     this.global.app = this.app;
   }
 
-  async tearDown() {
+  async teardown() {
     await this.app.stop();
   }
 }
