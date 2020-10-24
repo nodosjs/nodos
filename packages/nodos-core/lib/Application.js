@@ -144,6 +144,12 @@ class Application {
     log('CONFIG', this.config);
 
     // this.hooks.onReady.forEach((h) => h());
+    if (this.isTest()) {
+      this.fastify.setErrorHandler((error, _request, reply) => {
+        reply.send(error);
+        throw error;
+      });
+    }
   }
 
   async listen(...args) {
@@ -165,8 +171,9 @@ class Application {
     return this.fastify.close(...args);
   }
 
-  stop() {
+  async stop() {
     log('ON STOP');
+    await this.fastify.close();
     this.hooks.onStop.forEach((h) => h());
   }
 
