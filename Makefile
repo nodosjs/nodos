@@ -1,4 +1,5 @@
 setup: bootstrap
+	cd application-tests && npm install
 
 bootstrap:
 	npx lerna bootstrap --hoist
@@ -14,7 +15,7 @@ test:
 	DEBUG=nodos:* npx jest
 
 test-application:
-	DEBUG=nodos:* cd packages/application-tests && make test
+	DEBUG=nodos:* cd application-tests && make test
 
 test-example:
 	DEBUG=nodos:* cd packages/example && make test
