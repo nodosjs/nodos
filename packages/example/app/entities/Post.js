@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 import Password from 'objection-password';
-import User from './User'
+import User from './User.js'
 
 export default class Post extends Model {
   static get tableName() {

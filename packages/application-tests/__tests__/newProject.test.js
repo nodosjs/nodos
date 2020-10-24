@@ -21,8 +21,8 @@ beforeAll(async () => {
   const appName = `nodos-${Date.now().toString()}`;
   projectRoot = path.join(dir, appName);
 
-  const options = { exitProcess: false, args: ['new', appName, dir] };
-  await runNew(projectRoot, options);
+  const options = { exitProcess: false, args: ['new', appName] };
+  await runNew(dir, options);
 });
 
 test.each(envs)('start server', async (env) => {

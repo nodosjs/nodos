@@ -1,4 +1,4 @@
-import User from '../entities/User';
+import User from '../entities/User.js';
 
 export const index = async (_request, response) => {
   const users = await User.query();

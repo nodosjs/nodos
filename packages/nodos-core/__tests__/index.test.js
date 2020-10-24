@@ -40,11 +40,6 @@ test('GET /articles', async () => {
   expect(result).toMatchObject({ statusCode: 200, body: 'articles' });
 });
 
-test('GET /posts', async () => {
-  const result = await app.get('/posts');
-  expect(result).toMatchObject({ statusCode: 500 });
-});
-
 afterEach(async () => {
   await app.stop();
 });

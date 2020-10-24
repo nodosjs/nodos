@@ -79,7 +79,7 @@ module.exports = async (app) => {
       const request = new Request(fastifyRequest);
       log('actions', [actions, route.actionName]);
       if (!_.has(actions, route.actionName)) {
-        throw new Error(`Unknown action name: ${route.actionName}. Route: ${route}`);
+        throw new Error(`Unknown action name: ${route.actionName}. Route: ${JSON.stringify(route)}`);
       }
 
       // TODO read all middlewares before mapping routes (only for production)

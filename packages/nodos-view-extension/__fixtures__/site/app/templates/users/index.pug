@@ -1,0 +1,8 @@
+extends /layouts/application.pug
+
+block content
+  if users.length > 0
+    table
+      each user in users
+        tr
+          td= user

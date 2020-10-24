@@ -13,12 +13,16 @@ module.exports = async (next, request, response, app) => {
   try {
     await next();
   } catch (e) {
-    if (!app.isProduction()) {
-      throw e;
-    }
+    // if (!app.isProduction()) {
+    //   throw e;
+    // }
 
     if (e instanceof NotFoundError) {
-      response.head(404, 'Page not found!');
+      // response.head(404, 'Page not found!');
+      response.notFound();
+      return;
     }
+
+    throw e;
   }
 };
