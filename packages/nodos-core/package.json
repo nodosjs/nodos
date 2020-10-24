@@ -28,6 +28,7 @@
     "lodash": "^4.17.20",
     "marko": "^4.23.9",
     "middie": "^5.2.0",
+    "pino-pretty": "^4.3.0",
     "statuses": "^2.0.0"
   }
 }

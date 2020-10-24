@@ -1,5 +1,5 @@
 import path from 'path';
-import { nodos } from '@nodosjs/core';
+import { nodos } from '../index.js';
 
 const projectRoot = path.join(__dirname, '..', '__fixtures__', 'siteWithoutMiddlewares');
 

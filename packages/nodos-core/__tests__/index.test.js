@@ -3,7 +3,7 @@ import { nodos } from '../index.js';
 let app;
 
 beforeEach(async () => {
-  app = await nodos(`${__dirname}/../__fixtures__/site`, 'test');
+  app = await nodos(`${__dirname}/../__fixtures__/site`, { env: 'test' });
   await app.initApp();
 });
 

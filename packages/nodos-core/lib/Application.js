@@ -7,7 +7,7 @@ const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
-const { merge } = require('lodash');
+// const { merge } = require('lodash');
 
 const buildNodosRouter = require('./builders/nodosRouter.js');
 const buildFastifyHandlers = require('./builders/fastifyHandlers.js');
@@ -51,10 +51,6 @@ class Application {
     this.middlewares[middlewareName] = filepath;
   }
 
-  setDefaultConfig(key, config) {
-    this.config[key] = merge(config, this.config[key]);
-  }
-
   addExtension(extension, options = {}) {
     log('addExtension', extension);
     this.extensions.push([extension, options]);
@@ -69,20 +65,32 @@ class Application {
   }
 
   isDevelopment() {
-    return this.env === 'development';
+    return this.config.env === 'development';
   }
 
   isProduction() {
-    return this.env !== 'development';
+    return this.config.env !== 'development';
   }
 
   isTest() {
-    return this.env === 'test';
+    return this.config.env === 'test';
   }
 
-  constructor(projectRoot, env = 'development') {
-    this.finalized = false;
-    this.env = env;
+  // isConsole() {
+  //   return this.config.mode === 'console';
+  // }
+
+  // isServer() {
+  //   return this.config.mode === 'server';
+  // }
+
+  root() {
+    return this.config.projectRoot;
+  }
+
+  constructor(projectRoot, options = {}) {
+    const env = process.env.NODOS_ENV ?? options.env ?? 'development';
+    // const mode = options.mode ?? 'server';
     this.defaultRequestOptions = { headers: {}, params: null };
     this.commandBuilders = [];
     this.extensions = [];
@@ -98,6 +106,7 @@ class Application {
     const join = path.join.bind(null, projectRoot);
     this.config = {
       env,
+      // mode,
       projectRoot,
       errorHandler: false,
       paths: {
@@ -121,7 +130,7 @@ class Application {
     await fillByApp(this);
 
     this.router = await buildNodosRouter(this.config.paths.routesPath, { host: this.config.host });
-    this.fastify = fastify({ logger: true });
+    this.fastify = fastify({ logger: { prettyPrint: true } });
 
     this.addPlugin(fastifyExpress);
     this.addPlugin(fastifySensible, { errorHandler: this.config.errorHandler });
@@ -153,10 +162,6 @@ class Application {
   }
 
   async listen(...args) {
-    // if (this.finalized) {
-    //   throw new Error('already finalized!');
-    // }
-    // this.finalized = true;
     // log('ON LISTEN');
     // this.hooks.onListen.forEach((h) => h());
     // await this.fastify.ready();

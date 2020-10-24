@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`check cli 1`] = `
+"Name      Verb   URI Pattern     Pipeline
+root      GET    /               browser 
+pages     GET    /pages          browser 
+buildPage GET    /pages/build    browser 
+pages     POST   /pages          browser 
+page      GET    /pages/:id      browser 
+editPage  GET    /pages/:id/edit browser 
+page      PATCH  /pages/:id      browser 
+page      PUT    /pages/:id      browser 
+page      DELETE /pages/:id      browser "
+`;
+
+exports[`check cli 2`] = `
+"Name      Verb   URI Pattern     Pipeline
+root      GET    /               browser 
+pages     GET    /pages          browser 
+buildPage GET    /pages/build    browser 
+pages     POST   /pages          browser 
+page      GET    /pages/:id      browser 
+editPage  GET    /pages/:id/edit browser 
+page      PATCH  /pages/:id      browser 
+page      PUT    /pages/:id      browser 
+page      DELETE /pages/:id      browser "
+`;
+
+exports[`check cli 3`] = `
+"Name      Verb   URI Pattern     Pipeline
+root      GET    /               browser 
+pages     GET    /pages          browser 
+buildPage GET    /pages/build    browser 
+pages     POST   /pages          browser 
+page      GET    /pages/:id      browser 
+editPage  GET    /pages/:id/edit browser 
+page      PATCH  /pages/:id      browser 
+page      PUT    /pages/:id      browser 
+page      DELETE /pages/:id      browser "
+`;

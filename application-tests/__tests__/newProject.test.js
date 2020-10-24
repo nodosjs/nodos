@@ -1,12 +1,12 @@
 import { promises as fsp } from 'fs';
 import path from 'path';
+import { delay } from 'nanodelay';
 import { nodos } from '@nodosjs/core';
 import { runNew } from '@nodosjs/cli';
 import execa from 'execa';
 
-// TODO: development пришлось отрубить так как запускается вебпкак который не умеет каскадно смотреть либы
-// SassError: Can't find stylesheet to import.
-const envs = ['production', 'test'];
+const envs = ['production', 'test', 'development'];
+// const envs = ['development'];
 
 let projectRoot;
 
@@ -23,10 +23,14 @@ beforeAll(async () => {
 
   const options = { exitProcess: false, args: ['new', appName] };
   await runNew(dir, options);
+  await delay(1000);
+
+  const appScssFilePath = path.join(projectRoot, 'app/assets/stylesheets/application.scss');
+  await fsp.writeFile(appScssFilePath, '');
 });
 
-test.each(envs)('start server', async (env) => {
-  const app = await nodos(projectRoot, env);
+test('start server', async () => {
+  const app = await nodos(projectRoot);
   await app.initApp();
   await app.listen();
   await app.close();
@@ -38,7 +42,7 @@ test.each(envs)('check cli', async (env) => {
     cwd: projectRoot,
     env: { NODE_ENV: env },
   };
-  const result = await execa('npx', ['nodos', 'routes'], options);
+  const result = await execa('../../node_modules/.bin/nodos', ['routes'], options);
   expect(result).not.toBeNull();
   expect(result.stdout).toMatchSnapshot();
 });

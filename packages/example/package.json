@@ -6,6 +6,7 @@
     "build": "webpack -env production"
   },
   "jest": {
+    "testRunner": "jest-circus/runner",
     "testEnvironment": "@nodosjs/jest-environment",
     "testPathIgnorePatterns": [
       "/config/",

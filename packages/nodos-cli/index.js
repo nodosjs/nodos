@@ -12,7 +12,7 @@ module.exports = {
     log(core);
 
     if (core) {
-      const app = core.nodos(dir);
+      const app = core.nodos(dir, { mode: 'console' });
       runCurrent(app, options);
     } else {
       runNew(dir, options);

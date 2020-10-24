@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "jest": {
+    "testEnvironment": "node",
     "testRunner": "jest-circus/runner",
     "testPathIgnorePatterns": [
       "/node_modules/",
@@ -20,10 +21,11 @@
   },
   "bugs": "https://github.com/nodosjs/nodos-application/issues",
   "dependencies": {
-    "@nodosjs/cli": "^0.0.42",
-    "@nodosjs/core": "^0.0.42",
-    "@nodosjs/db-extension": "^0.0.42",
-    "@nodosjs/webpack-extension": "^0.0.42",
+    "@nodosjs/cli": "file:../packages/nodos-cli",
+    "@nodosjs/core": "file:../packages/nodos-core",
+    "@nodosjs/db-extension": "file:../packages/nodos-db-extension",
+    "@nodosjs/view-extension": "file:../packages/nodos-view-extension",
+    "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension",
     "babel-jest": "^26.6.1",
     "bootstrap": "^4.5.3",
     "execa": "^4.0.3",
