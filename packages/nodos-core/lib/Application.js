@@ -154,7 +154,7 @@ class Application {
 
     // this.hooks.onReady.forEach((h) => h());
     if (this.isTest()) {
-      this.fastify.setErrorHandler((error, _request, reply) => {
+      this.fastify.setErrorHandler((error) => {
         // reply.send(error);
         throw error;
       });

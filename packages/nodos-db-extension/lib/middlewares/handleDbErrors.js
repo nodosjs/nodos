@@ -9,7 +9,7 @@ const { NotFoundError } = require('objection');
  * @param {Request} request
  * @param {Response} response
  */
-module.exports = async (next, request, response, app) => {
+module.exports = async (next, request, response) => {
   try {
     await next();
   } catch (e) {

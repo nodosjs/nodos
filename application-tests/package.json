@@ -30,11 +30,11 @@
     "bootstrap": "^4.5.3",
     "execa": "^4.0.3",
     "jest": "^26.6.1",
-    "jest-cli": "^26.6.1"
+    "jest-cli": "^26.6.1",
+    "nanodelay": "^1.0.6"
   },
   "homepage": "https://github.com/nodosjs/nodos",
   "license": "MIT",
   "repository": "nodosjs/nodos",
-  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
-  "devDependencies": {}
+  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }
