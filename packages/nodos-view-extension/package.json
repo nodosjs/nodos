@@ -11,7 +11,7 @@
     "fastify-error-page": "^4.0.0",
     "fastify-flash": "^2.0.2",
     "fastify-formbody": "^5.0.0",
-    "fastify-method-override": "^1.4.2",
+    "fastify-method-override": "^1.5.0",
     "fastify-secure-session": "^2.3.0",
     "fastify-session": "^5.2.0",
     "point-of-view": "^4.6.0",
