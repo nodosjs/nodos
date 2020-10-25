@@ -1,7 +1,7 @@
 setup: bootstrap
 	cd application-tests && npm install
 	cd example && npm install
-	cd packages/example && npx nodos migrate
+	cd example && npx nodos db migrate
 
 bootstrap:
 	npx lerna bootstrap --hoist
