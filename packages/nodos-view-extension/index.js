@@ -42,11 +42,9 @@ module.exports = async (app) => {
     app.addPlugin(fastifyErrorPage);
   }
 
-  const defaultCsrfConfig = { enabled: true, sessionPlugin: 'fastify-secure-session' };
-  app.setDefaultConfig('csrf', defaultCsrfConfig);
-  app.addPlugin(fastifyCSRF, app.config.csrf);
+  app.addPlugin(fastifyCSRF, { sessionPlugin: 'fastify-secure-session' });
 
-  if (app.config.csrf.enabled) {
+  if (!app.isTest()) {
     app.addPlugin(csrfPluginWrapper);
   }
 
