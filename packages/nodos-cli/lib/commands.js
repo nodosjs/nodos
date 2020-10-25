@@ -66,7 +66,7 @@ const buildRoutesCommand = ({ app, container }) => ({
       const formattedRoutes = columnify(
         routes,
         {
-          columns: ['name', 'method', 'url', 'pipeline'],
+          columns: ['name', 'method', 'url', 'pipeline', 'controllerAction'],
           config: {
             name: {
               headingTransform: () => 'Name',
@@ -80,6 +80,9 @@ const buildRoutesCommand = ({ app, container }) => ({
             },
             pipeline: {
               headingTransform: () => 'Pipeline',
+            },
+            controllerAction: {
+              headingTransform: () => 'Controller#Action',
             },
           },
         },

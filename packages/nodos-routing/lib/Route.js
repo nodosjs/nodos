@@ -9,6 +9,10 @@ class Route {
     this.name = options.name;
     this.method = options.method;
   }
+
+  get controllerAction() {
+    return `${this.resourceName}#${this.actionName}`;
+  }
 }
 
 module.exports = Route;
