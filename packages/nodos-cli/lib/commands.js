@@ -47,14 +47,7 @@ const buildServerCommand = ({ app }) => ({
     .default('p', Number(process.env.PORT) || 3000)
     .alias('p', 'port'),
   handler: async (argv) => {
-    // NOTE without try/catch yargs performs retries (how to disable it?)
-    try {
-      await app.listen(argv.port, argv.host);
-    } catch (e) {
-      log(e);
-      console.error(e);
-      process.exit(1);
-    }
+    await app.listen(argv.port, argv.host);
   },
 });
 

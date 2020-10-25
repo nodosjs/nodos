@@ -15,14 +15,14 @@ test('nodos/console', async () => {
 
   const app = nodos(projectRoot);
   // app.listen = jest.fn().mockResolvedValue();
-  await runCurrent(app, { container, args: ['console'] });
+  await runCurrent(app, { container, exitProcess: false, args: ['console'] });
   expect(replServer.context).toHaveProperty('app');
 });
 
 test('nodos/server', async () => {
   const app = nodos(projectRoot, { mode: 'server' });
   app.listen = jest.fn().mockResolvedValue();
-  await runCurrent(app, { args: ['server'] });
+  await runCurrent(app, { exitProcess: false, args: ['server'] });
   // NOTE it seeems yargs run handlers as sync code
   await delay(10);
   expect(app.listen).toHaveBeenCalled();
@@ -33,5 +33,5 @@ test('nodos/routes', async () => {
   const container = {
     print: (output) => { expect(output).toMatchSnapshot(); },
   };
-  await runCurrent(app, { container, args: ['routes'] });
+  await runCurrent(app, { container, exitProcess: false, args: ['routes'] });
 });
