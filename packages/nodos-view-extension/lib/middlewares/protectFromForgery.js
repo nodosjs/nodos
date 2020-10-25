@@ -1,7 +1,7 @@
-module.exports = async (action, request, response, app) => {
+module.exports = async (action, _request, response, app) => {
   if (app.config.csrf.enabled) {
-    response.addLocal('csrfToken', request.csrfToken());
+    const token = await response.generateCsrf();
+    response.addLocal('csrfToken', token);
   }
-
   await action();
 };
