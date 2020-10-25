@@ -1,11 +1,15 @@
 setup: bootstrap
 	cd application-tests && npm install
+	cd example && npm install
+	cd packages/example && npx nodos migrate
 
 bootstrap:
 	npx lerna bootstrap --hoist
 
 update-deps:
-	ncu -u
+	npx ncu -u
+	cd application-tests && npx ncu -u
+	cd example && npx ncu -u
 	npx lerna exec ncu -- -u
 
 clean:
@@ -18,7 +22,7 @@ test-application:
 	DEBUG=nodos:* cd application-tests && make test
 
 test-example:
-	DEBUG=nodos:* cd packages/example && make test
+	DEBUG=nodos:* cd example && make test
 
 test-ci: test test-application test-example
 

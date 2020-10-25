@@ -1,8 +1,5 @@
 {
-  "private": true,
   "name": "application-tests",
-  "version": "0.0.41",
-  "author": "Kirill Mokevnin @mokevnin",
   "scripts": {
     "test": "jest"
   },
@@ -10,16 +7,10 @@
     "testEnvironment": "node",
     "testRunner": "jest-circus/runner",
     "testPathIgnorePatterns": [
-      "/node_modules/",
       "/__applications__/.*/config/",
-      "/__fixtures__/",
       "/tests/"
     ]
   },
-  "publishConfig": {
-    "access": "restricted"
-  },
-  "bugs": "https://github.com/nodosjs/nodos-application/issues",
   "dependencies": {
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
@@ -32,9 +23,5 @@
     "jest": "^26.6.1",
     "jest-cli": "^26.6.1",
     "nanodelay": "^1.0.6"
-  },
-  "homepage": "https://github.com/nodosjs/nodos",
-  "license": "MIT",
-  "repository": "nodosjs/nodos",
-  "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
+  }
 }
