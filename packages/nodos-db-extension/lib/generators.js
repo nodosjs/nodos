@@ -1,6 +1,6 @@
 const knex = require('knex');
 const { runner } = require('hygen');
-const Logger = require('hygen/lib/logger');
+const Logger = require('hygen/dist/logger').default;
 const enquirer = require('enquirer');
 const execa = require('execa');
 const path = require('path');

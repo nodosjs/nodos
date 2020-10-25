@@ -1,5 +1,5 @@
 const { runner } = require('hygen');
-const Logger = require('hygen/lib/logger');
+const Logger = require('hygen/dist/logger').default;
 const path = require('path');
 const enquirer = require('enquirer');
 const execa = require('execa');

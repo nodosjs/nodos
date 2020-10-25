@@ -1,6 +1,6 @@
 const parser = require('yargs');
 const { runner } = require('hygen');
-const Logger = require('hygen/lib/logger');
+const Logger = require('hygen/dist/logger.js').default;
 const path = require('path');
 const enquirer = require('enquirer');
 const execa = require('execa');

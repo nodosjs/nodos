@@ -12,9 +12,10 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/__fixtures__/",
-      "/example/",
       "/generators/",
-      "/application-tests/"
+      "/example/",
+      "/application-tests/",
+      "environments/test.js"
     ]
   },
   "devDependencies": {

@@ -1,30 +1,26 @@
 setup: bootstrap
-	cd application-tests && npm install
-	cd example && npm install
-	cd example && npx nodos db migrate
+	cd packages/example && npx nodos db migrate
 
 bootstrap:
 	npx lerna bootstrap --hoist
 
 update-deps:
 	npx ncu -u
-	cd application-tests && npx ncu -u
-	cd example && npx ncu -u
 	npx lerna exec ncu -- -u
 
 clean:
 	npx lerna clean
 
+test-example:
+	DEBUG=nodos:* cd example && npx jest
+
+test-application-tests:
+	DEBUG=nodos:* cd example && npx jest
+
 test:
 	DEBUG=nodos:* npx jest
 
-test-application:
-	DEBUG=nodos:* cd application-tests && make test
-
-test-example:
-	DEBUG=nodos:* cd example && make test
-
-test-ci: test test-application test-example
+test-ci: test test-example test-application-tests
 
 lint:
 	npx eslint .

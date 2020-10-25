@@ -21,4 +21,4 @@ jobs:
           make lint
       - name: Run tests
         run: |
-          make test-ci
+          make test
