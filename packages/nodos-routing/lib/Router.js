@@ -56,7 +56,7 @@ const prepareResourceName = (resourceName, actionName) => {
 };
 
 const getName = (prefix, parent, resourceName, actionName, actionPrefix = '') => {
-  const parentPrefix = parent ? singularize(parent.resourceName) : '';
+  const parentPrefix = parent ? singularize(parent.name) : '';
   const preparedResourceName = prepareResourceName(resourceName, actionName);
   const words = [actionPrefix, prefix, parentPrefix, preparedResourceName].filter((w) => w).join('_');
   return camelize(words, false);
@@ -66,6 +66,10 @@ const getUrl = (path, prefix, parent, resourceName, postfix = '') => {
   const parentUrl = parent ? urlJoin(parent.resourceName, getForeignKey(parent.resourceName)) : '';
   return urlJoin(path, prefix, parentUrl, resourceName, postfix);
 };
+
+const getResourceName = (prefix, parent, route) => [prefix, pluralize(parent?.name || ''), route.name]
+  .filter((item) => item)
+  .join('/');
 
 const mapResourcesToUrl = (url, params) => {
   const ids = params[Symbol.iterator]();
@@ -81,7 +85,7 @@ const types = {
   root: (routeItem, rec, {
     path, prefix, middlewares, pipeline, parent,
   }) => new Route({
-    resourceName: routeItem.name,
+    resourceName: getResourceName(prefix, parent, routeItem),
     middlewares,
     pipeline,
     path,
@@ -96,7 +100,7 @@ const types = {
     path, prefix, middlewares, pipeline, parent,
   }) => {
     const sharedData = {
-      resourceName: routeItem.name,
+      resourceName: getResourceName(prefix, parent, routeItem),
       middlewares,
       pipeline,
       path,
