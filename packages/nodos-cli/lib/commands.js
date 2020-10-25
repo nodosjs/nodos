@@ -2,7 +2,7 @@ const _ = require('lodash');
 // const jest = require('jest');
 const repl = require('repl');
 const columnify = require('columnify');
-const log = require('./logger.js');
+// const log = require('./logger.js');
 
 // const testCommand = ({ container }) => ({
 //   command: 'test [file]',
