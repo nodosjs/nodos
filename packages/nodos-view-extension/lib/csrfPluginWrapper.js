@@ -1,6 +1,5 @@
 const csrfChecker = (instance) => (request, response, done) => {
-  const checkingMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
-  if (checkingMethods.includes(request.method)) {
+  if (request.method !== 'GET') {
     instance.csrfProtection(request, response, done);
   } else {
     done();
