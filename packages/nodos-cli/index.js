@@ -1,5 +1,5 @@
 const importFrom = require('import-from');
-const semver = require('semver')
+const semver = require('semver');
 const runCurrent = require('./lib/current.js');
 const runNew = require('./lib/new.js');
 const log = require('./lib/logger.js');
