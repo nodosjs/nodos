@@ -8,7 +8,6 @@ const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
 // const { merge } = require('lodash');
-const { merge } = require('lodash');
 const i18next = require('i18next');
 const Backend = require('i18next-fs-backend');
 
