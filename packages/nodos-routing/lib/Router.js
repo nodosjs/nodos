@@ -274,17 +274,7 @@ class Router {
 
   route(name, ...params) {
     const route = this.routes.find((r) => r.name === name);
-    let withHost = false;
-    let routeParams;
-
-    if (_.isBoolean(params[0])) {
-      [withHost, ...routeParams] = params;
-    } else {
-      routeParams = params;
-    }
-
-    const url = mapResourcesToUrl(route.url, routeParams);
-    return withHost ? urlJoin(this.host, url) : url;
+    return urlJoin(this.host, mapResourcesToUrl(route.url, params));
   }
 }
 
