@@ -272,13 +272,19 @@ class Router {
   // recognize(request) {
   // }
 
-  buildPath(name, ...params) {
+  route(name, ...params) {
     const route = this.routes.find((r) => r.name === name);
-    return mapResourcesToUrl(route.url, params);
-  }
+    let withHost = false;
+    let routeParams;
 
-  buildUrl(name, ...params) {
-    return urlJoin(this.host, this.buildPath(name, ...params));
+    if (_.isBoolean(params[0])) {
+      [withHost, ...routeParams] = params;
+    } else {
+      routeParams = params;
+    }
+
+    const url = mapResourcesToUrl(route.url, routeParams);
+    return withHost ? urlJoin(this.host, url) : url;
   }
 }
 
