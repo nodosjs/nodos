@@ -12,7 +12,7 @@ const qs = require('qs');
 const csrfPluginWrapper = require('./lib/csrfPluginWrapper');
 
 module.exports = async (app) => {
-  const { buildPath, buildUrl } = app.router;
+  const { route } = app.router;
 
   app.addPlugin(fastifySecureSession, {
     secret: 'a secret with minimum length of 32 characters',
@@ -33,8 +33,7 @@ module.exports = async (app) => {
       cache: app.config.cacheModules,
     },
     defaultContext: {
-      buildPath: buildPath.bind(app.router),
-      buildUrl: buildUrl.bind(app.router),
+      route: route.bind(app.router),
     },
   });
 

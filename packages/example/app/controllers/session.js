@@ -13,22 +13,21 @@ export const create = async (request, response, { router }) => {
 
     if (!isPasswordValid) {
       request.flash('danger', `Wrong password for user ${email}`)
-      response.redirectTo(router.buildPath('buildSession'));
+      response.redirectTo(router.route('buildSession'));
       return;
     }
 
     request.session.set('userId', user.id);
     request.flash('success', 'You are logged in!')
-    response.redirectTo(router.buildPath('root'));
+    response.redirectTo(router.route('root'));
   } catch (error) {
     // TODO add flash message after integrating flash message into core or view
     request.flash('danger', `No user with email ${email} was found`)
-    response.redirectTo(router.buildPath('buildSession'));
+    response.redirectTo(router.route('buildSession'));
   }
 };
 
 export const destroy = async (request, response, { router }) => {
   request.session.delete()
-  response.redirectTo(router.buildPath('root'));
+  response.redirectTo(router.route('root'));
 };
-
