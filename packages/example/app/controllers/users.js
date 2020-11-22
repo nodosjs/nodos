@@ -24,7 +24,7 @@ export const create = async (request, response, { router }) => {
   const user = await User.query().insert(request.body.user);
 
   if (user instanceof User) { // validation
-    response.redirectTo(router.buildPath('users'));
+    response.redirectTo(router.route('users'));
     request.flash('success', 'User successfully created');
     return;
   }
@@ -40,5 +40,5 @@ export const destroy = async (request, response, { router }) => {
 
   await User.query().deleteById(id);
 
-  response.redirectTo(router.buildPath('users'));
+  response.redirectTo(router.route('users'));
 };

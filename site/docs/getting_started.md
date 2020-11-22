@@ -204,7 +204,7 @@ In the next section, you will add the ability to create new articles in your app
 
 To create a form within this template, you will use a _form builder_. The primary form builder for Nodos is provided by a helper method called **form**. To use this method, add this code into app/templates/articles/build.pug:
 ```
-form(action=buildPath('articles') method="post")
+form(action=route('articles') method="post")
   input(type="hidden" name="_csrf" value=csrfToken)
   div
     label title
@@ -289,7 +289,7 @@ export const create = async (request, response, { router }) => {
   const { body } = request;
   const article = await Article.query().insert(body.article);
 
-  response.redirectTo(router.buildPath('article', article.id));
+  response.redirectTo(router.route('article', article.id));
 };
 ```
 Here's what's going on: every Nodos model can be initialized with its respective attributes, which are automatically mapped to the respective database columns. In the first line we do just that (remember that body.article contains the attributes we're interested in), after that article will be created in database. Finally, we redirect the user to the show action, which we'll define later.
@@ -359,7 +359,7 @@ table
       td= article.title
       td= article.text
       td
-        a(href=buildPath('article', article.id)) Show
+        a(href=route('article', article.id)) Show
 ```
 Now if you go to [http://localhost:3000/articles](http://localhost:3000/articles) you will see a list of all the articles that you have created.
 
@@ -408,9 +408,9 @@ export const create = async (request, response, { router }) => {
   const article = await Article.query().insert(body.article).catch(() => false);
 
   if (article instanceof Article) {
-    response.redirectTo(router.buildPath('article', article.id));
+    response.redirectTo(router.route('article', article.id));
   } else {
-    response.redirectTo(router.buildPath('buildArticle'));
+    response.redirectTo(router.route('buildArticle'));
   }
 };
 ```
@@ -430,7 +430,7 @@ export const edit = async (request, response) => {
 ```
 The view will contain a form similar to the one we used when creating new articles. Open **app/templates/articles/edit.pug** and make it look as follows:
 ```
-form(action=buildPath('article', article.id) method="post")
+form(action=route('article', article.id) method="post")
   input(type="hidden" name="_method" value="put")
   input(type="hidden" name="_csrf" value=csrfToken)
   div
@@ -450,9 +450,9 @@ export const update = async (request, response, { router }) => {
   const article = await Article.query().findById(params.id).patch(body.article).catch(() => false);
 
   if (article !== false) {
-    response.redirectTo(router.buildPath('article', params.id));
+    response.redirectTo(router.route('article', params.id));
   } else {
-    response.redirectTo(router.buildPath('editArticle', params.id));
+    response.redirectTo(router.route('editArticle', params.id));
   }
 };
 ```
@@ -472,14 +472,14 @@ table
       td= article.title
       td= article.text
       td
-        a(href=buildPath('article', article.id)) Show
-        a(href=buildPath('editArticle', article.id)) Edit
+        a(href=route('article', article.id)) Show
+        a(href=route('editArticle', article.id)) Edit
 ```
 And we'll also add one to the **app/templates/articles/show.pug** template as well, so that there's also an "Edit" link on an article's page. Add this at the bottom of the template:
 ```
-a(href=buildPath('article', article.id)) Show
+a(href=route('article', article.id)) Show
 br
-a(href=buildPath('articles')) Back
+a(href=route('articles')) Back
 ```
 
 ### 5.10 Deleting Articles
@@ -499,7 +499,7 @@ import Article from '../entities/Article.js';
 export const destroy = async (request, response, { router }) => {
   const { id } = request.params;
   await Article.query().deleteById(id);
-  response.redirectTo(router.buildPath('articles'));
+  response.redirectTo(router.route('articles'));
 };
 ```
 Note that we don't need to add a view for this action since we're redirecting to the **index** action.
@@ -518,9 +518,9 @@ table
       td= article.title
       td= article.text
       td
-        a(href=buildPath('article', article.id)) Show
-        a(href=buildPath('editArticle', article.id)) Edit
-        form(action=buildPath('article', article.id) method="post")
+        a(href=route('article', article.id)) Show
+        a(href=route('editArticle', article.id)) Edit
+        form(action=route('article', article.id) method="post")
           input(type="hidden" name="_method" value="delete")
           input(type="hidden" name="_csrf" value=csrfToken)
           input(type="submit" value="Destroy")

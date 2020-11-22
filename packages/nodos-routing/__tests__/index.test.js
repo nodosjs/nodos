@@ -62,33 +62,29 @@ test('nodos-routing route helpers should return correct url', async () => {
   const article = { id: 123 };
   const comment = { id: 321 };
 
-  const rootPath = router.buildPath('root');
-  const expectedRootPath = '/';
+  const rootPath = router.route('root');
+  const expectedRootPath = 'http://site.com/';
   expect(rootPath).toBe(expectedRootPath);
 
-  const apiRootPath = router.buildPath('apiRoot');
-  const expectedApiRootPath = '/api';
+  const apiRootPath = router.route('apiRoot');
+  const expectedApiRootPath = 'http://site.com/api';
   expect(apiRootPath).toBe(expectedApiRootPath);
 
-  const apiUsersPath = router.buildPath('apiUsers');
-  const expectedApiUsersPath = '/api/users';
+  const apiUsersPath = router.route('apiUsers');
+  const expectedApiUsersPath = 'http://site.com/api/users';
   expect(apiUsersPath).toBe(expectedApiUsersPath);
 
-  const buildArticlesPath = router.buildPath('buildArticle');
-  const expectedBuildArticlesPath = '/articles/build';
+  const buildArticlesPath = router.route('buildArticle');
+  const expectedBuildArticlesPath = 'http://site.com/articles/build';
   expect(buildArticlesPath).toBe(expectedBuildArticlesPath);
 
-  const articleCommentsPath = router.buildPath('articleComments', article.id);
-  const expectedArticleCommentsPath = `/articles/${article.id}/comments`;
+  const articleCommentsPath = router.route('articleComments', article.id);
+  const expectedArticleCommentsPath = `http://site.com/articles/${article.id}/comments`;
   expect(articleCommentsPath).toBe(expectedArticleCommentsPath);
 
-  const articleCommentPath = router.buildPath('articleComment', article.id, comment.id);
-  const expectedArticleCommentPath = `/articles/${article.id}/comments/${comment.id}`;
+  const articleCommentPath = router.route('articleComment', article.id, comment.id);
+  const expectedArticleCommentPath = `http://site.com/articles/${article.id}/comments/${comment.id}`;
   expect(articleCommentPath).toBe(expectedArticleCommentPath);
-
-  const articleCommentUrl = router.buildUrl('articleComment', article.id, comment.id);
-  const expectedArticleCommentUrl = `http://site.com/articles/${article.id}/comments/${comment.id}`;
-  expect(articleCommentUrl).toBe(expectedArticleCommentUrl);
 });
 
 test('nodos-routing throws an error if schema is invalid', async () => {

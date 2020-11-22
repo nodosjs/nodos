@@ -1,7 +1,7 @@
 extends /layouts/application.pug
 
 block content
-  form(action=buildPath('users') method="post")
+  form(action=route('users') method="post")
     input(type="hidden" name="_csrf" value=csrfToken)
     div
       label Email
@@ -12,4 +12,4 @@ block content
     div
       input(type="submit")
 
-  a(href=buildPath('users')) Users
+  a(href=route('users')) Users

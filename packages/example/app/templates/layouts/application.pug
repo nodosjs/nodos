@@ -5,13 +5,13 @@ html
       link(href='/assets/main.css', rel='stylesheet')
   body.container.p-3
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand(href=buildPath('root')) Nodos Project
+      a.navbar-brand(href=route('root')) Nodos Project
       button.navbar-toggler("aria-controls"="navbarSupportedContent" "data-target"="#navbarSupportedContent" "data-toggle"="collapse" type="button")
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
         li.nav-item.active
-          a.nav-link(href=buildPath('users')) Users
+          a.nav-link(href=route('users')) Users
             span.sr-only (current)
         li.nav-item
           a.nav-link(href="#") Link
