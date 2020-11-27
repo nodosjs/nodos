@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "application-tests",
   "scripts": {
     "test": "jest"
