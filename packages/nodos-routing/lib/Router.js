@@ -257,7 +257,7 @@ class Router {
   constructor(routeMap, options) {
     validate(routeMap);
 
-    this.host = options.host;
+    this.host = options.host ?? 'example.com';
     this.routeMap = routeMap;
     this.scopes = routeMap.scopes.map(({ name, pipeline }) => ({
       name,
