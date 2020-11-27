@@ -257,7 +257,8 @@ class Router {
   constructor(routeMap, options) {
     validate(routeMap);
 
-    this.host = options.host;
+    // TODO: temporary solution with setting default host. We have to pass it from env configs
+    this.host = options.host ?? 'example.com';
     this.routeMap = routeMap;
     this.scopes = routeMap.scopes.map(({ name, pipeline }) => ({
       name,
