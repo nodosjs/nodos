@@ -94,8 +94,10 @@ class Response {
    */
   render(locals = {}, template = this.templateName) {
     this.responseType = 'rendering';
-    // FIXME: check if property already exists
-    Object.assign(this.locals, locals);
+    const self = this;
+    _.forEach(locals, function (value, key) {
+      self.addLocal(key, value);
+    });
     this.templateName = template;
   }
 
