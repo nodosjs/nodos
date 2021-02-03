@@ -95,9 +95,7 @@ class Response {
   render(locals = {}, template = this.templateName) {
     this.responseType = 'rendering';
     const self = this;
-    _.forEach(locals, function (value, key) {
-      self.addLocal(key, value);
-    });
+    _.forEach(locals, (value, key) => self.addLocal(key, value));
     this.templateName = template;
   }
 
