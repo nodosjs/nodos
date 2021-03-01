@@ -7,7 +7,7 @@ const log = require('./lib/logger.js');
 module.exports = {
   runNew,
   runCurrent,
-  run(dir, options = {}) {
+  async run(dir, options = {}) {
     if (semver.lt(process.versions.node, '14.0.0')) {
       throw new Error('You need at least Node v14 to work with nodos');
     }
@@ -16,8 +16,13 @@ module.exports = {
     log(core);
 
     if (core) {
-      const app = core.nodos(dir, { mode: 'console' });
-      runCurrent(app, options);
+      try {
+        const app = await core.nodos(dir, { mode: 'console' });
+        await runCurrent(app, options);
+      } catch (e) {
+        console.error('Nodos installed, but there is no application.js file\n');
+        console.error(e.message);
+      }
     } else {
       runNew(dir, options);
     }

@@ -5,6 +5,7 @@ const path = require('path');
 const enquirer = require('enquirer');
 const execa = require('execa');
 const { version } = require('../package.json');
+const fse = require('fs-extra');
 
 const defaultTemplates = path.join(__dirname, 'templates');
 
@@ -40,6 +41,24 @@ module.exports = async (dir, options = {}) => {
         },
         debug: !!process.env.DEBUG,
       });
+    },
+  });
+
+  parser.command({
+    command: 'example <rootDir>',
+    describe: 'Create example Nodos application',
+    builder: (command) => {
+      command.positional('rootDir', {
+        describe: 'The Application Path',
+        // default: '.',
+      });
+    },
+    handler: async ({ rootDir }) => {
+      // TODO: pass version directly, without arguments
+      const src = path.join(__dirname, '..', '..', 'example');
+      const dest = path.resolve(dir, rootDir);
+      await fse.copy(src, dest);
+      console.log(`Example was copied into ${dest}`);
     },
   });
 

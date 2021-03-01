@@ -18,3 +18,10 @@ test('nodos/new', async () => {
   const fileNames = await fs.readdir(projectRoot);
   expect(fileNames).toMatchSnapshot();
 });
+
+test('nodos/example', async () => {
+  await runNew(dir, { exitProcess: false, args: ['example', dir] });
+  await delay(1000);
+  const fileNames = await fs.readdir(dir);
+  expect(fileNames).toMatchSnapshot();
+});

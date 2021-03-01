@@ -1,48 +1,36 @@
 {
-  "name": "root",
-  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "nodos server",
+    "build": "webpack -env production"
   },
   "jest": {
     "testRunner": "jest-circus/runner",
-    "bail": true,
-    "rootDir": "packages",
     "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/__fixtures__/",
-      "/generators/",
-      "/example/",
-      "/application-tests/",
-      "environments/test.js"
+      "/config/",
+      "/node_modules/"
     ]
   },
-  "devDependencies": {
-    "@babel/cli": "^7.13.0",
+  "dependencies": {
     "@babel/core": "^7.13.8",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-decorators": "^7.13.5",
-    "@babel/plugin-proposal-pipeline-operator": "^7.12.13",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/node": "^7.13.0",
     "@babel/preset-env": "^7.13.8",
-    "babel-eslint": "^10.1.0",
+    "@nodosjs/cli": "^0.0.43",
+    "@nodosjs/core": "^0.0.43",
+    "@nodosjs/db-extension": "^0.0.43",
+    "@nodosjs/jest-environment": "^0.0.43",
+    "@nodosjs/view-extension": "^0.0.43",
+    "@nodosjs/webpack-extension": "^0.0.43",
     "babel-jest": "^26.6.3",
-    "babel-plugin-dynamic-import-node": "^2.3.3",
-    "documentation": "^13.1.1",
-    "eslint": "^7.21.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.1.5",
     "jest": "^26.6.3",
-    "jest-circus": "^26.6.3",
     "jest-cli": "^26.6.3",
-    "lerna": "^3.22.1",
     "sql.js": "^1.4.0"
   },
-  "engines": {
-    "node": ">=14"
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-jest": "^24.1.5"
   },
-  "dependencies": {}
+  "version": "0.0.43"
 }

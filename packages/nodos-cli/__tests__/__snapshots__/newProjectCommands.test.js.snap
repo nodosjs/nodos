@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`nodos/example 1`] = `
+Array [
+  ".eslintignore",
+  ".eslintrc.yml",
+  ".gitignore",
+  "Makefile",
+  "README.md",
+  "app",
+  "babel.config.js",
+  "config",
+  "db",
+  "node_modules",
+  "package.json",
+  "public",
+  "tests",
+]
+`;
+
 exports[`nodos/new 1`] = `
 Array [
   ".eslintignore",
