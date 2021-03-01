@@ -1,4 +1,4 @@
-const Ajv = require('ajv');
+const Ajv = require('ajv').default;
 const routesSchema = require('../files/routesSchema.json');
 const routeSchema = require('../files/routeSchema.json');
 const routeOnlyExceptSchema = require('../files/routeOnlyExceptSchema.json');

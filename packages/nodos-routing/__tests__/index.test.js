@@ -7,7 +7,7 @@ let routesMap;
 
 beforeAll(async () => {
   const routesData = await fs.readFile(`${__dirname}/../__fixtures__/routes.yml`);
-  routesMap = yml.safeLoad(routesData);
+  routesMap = yml.load(routesData);
 });
 
 test('nodos-routing', async () => {
@@ -89,14 +89,14 @@ test('nodos-routing route helpers should return correct url', async () => {
 
 test('nodos-routing throws an error if schema is invalid', async () => {
   const routesData = await fs.readFile(`${__dirname}/../__fixtures__/routesWithInvalidSchema.yml`);
-  const invalidRoutesMap = yml.safeLoad(routesData);
+  const invalidRoutesMap = yml.load(routesData);
 
   expect(() => new Router(invalidRoutesMap)).toThrow(/Routes schema is invalid/);
 });
 
 test('nodos-routing throws an error if routes key is missing', async () => {
   const routesData = await fs.readFile(`${__dirname}/../__fixtures__/scopeWithoutRoutes.yml`);
-  const invalidRoutesMap = yml.safeLoad(routesData);
+  const invalidRoutesMap = yml.load(routesData);
 
   expect(() => new Router(invalidRoutesMap, { host: 'http://site.com' })).toThrow(/Routes schema is invalid/);
 });

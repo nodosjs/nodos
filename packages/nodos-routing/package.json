@@ -5,9 +5,9 @@
     "access": "public"
   },
   "dependencies": {
-    "ajv": "^6.12.6",
+    "ajv": "^7.1.1",
     "inflected": "^2.1.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "url-join": "^4.0.1"
   },
   "files": [

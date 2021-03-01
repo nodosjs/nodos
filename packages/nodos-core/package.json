@@ -16,19 +16,19 @@
     "url": "https://github.com/nodosjs/nodos/issues"
   },
   "dependencies": {
-    "@babel/register": "^7.12.1",
+    "@babel/register": "^7.13.8",
     "@nodosjs/routing": "^0.0.43",
-    "debug": "^4.2.0",
+    "debug": "^4.3.1",
     "dotenv": "^8.2.0",
-    "fastify": "^3.7.0",
+    "fastify": "^3.12.0",
     "fastify-express": "^0.3.2",
-    "fastify-sensible": "^3.0.1",
-    "fastify-static": "^3.3.0",
-    "js-yaml": "^3.14.0",
-    "lodash": "^4.17.20",
-    "marko": "^4.23.9",
+    "fastify-sensible": "^3.1.0",
+    "fastify-static": "^4.0.1",
+    "js-yaml": "^4.0.0",
+    "lodash": "^4.17.21",
+    "marko": "^5.2.2",
     "middie": "^5.2.0",
-    "pino-pretty": "^4.3.0",
-    "statuses": "^2.0.0"
+    "pino-pretty": "^4.5.0",
+    "statuses": "^2.0.1"
   }
 }

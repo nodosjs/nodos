@@ -8,7 +8,7 @@ const Router = require('@nodosjs/routing');
 // const log = debug('nodos');
 
 module.exports = async (routesPath, { host }) => {
-  const rawData = await fs.readFile(routesPath);
-  const routesMap = yml.safeLoad(rawData);
+  const rawData = await fs.readFile(routesPath, 'utf-8');
+  const routesMap = yml.load(rawData);
   return new Router(routesMap, { host });
 };
