@@ -1,0 +1,24 @@
+{
+  "name": "@nodosjs/db-extension",
+  "version": "0.0.43",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "debug": "^4.3.1",
+    "enquirer": "^2.3.6",
+    "execa": "^5.0.0",
+    "fastify-objectionjs": "^0.3.0",
+    "hygen": "^6.0.4",
+    "knex": "^0.21.18",
+    "lodash": "^4.17.21",
+    "objection": "^2.2.14",
+    "objection-password": "^3.0.0",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "@nodosjs/cli": "^0.0.43",
+    "@nodosjs/core": "^0.0.43"
+  }
+}
