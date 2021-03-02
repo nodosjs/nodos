@@ -64,6 +64,10 @@ class Application {
     this.generators.push(generator);
   }
 
+  isInitialized() {
+    return this.state === 'initialized';
+  }
+
   isDevelopment() {
     return this.config.env === 'development';
   }
@@ -120,6 +124,8 @@ class Application {
         middlewaresPath: join('app', 'middlewares'),
       },
     };
+
+    this.state = 'created';
   }
 
   async initApp() {
@@ -159,6 +165,7 @@ class Application {
         throw error;
       });
     }
+    this.state = 'initialized';
   }
 
   async listen(...args) {

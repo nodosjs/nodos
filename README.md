@@ -14,11 +14,11 @@ Node.js framework for humans
 ## Install
 
 ```sh
-$ npm i -g @nodosjs/cli
-$ nodos new MyBlog
-$ cd MyBlog
-$ npm install
-$ nodos server # see http://localhost:3000/
+npm i -g @nodosjs/cli
+nodos new MyBlog
+cd MyBlog
+npm install
+nodos server # see http://localhost:3000/
 # commands: nodos --help
 ```
 
@@ -28,22 +28,22 @@ We use https://lerna.js.org
 
 ```sh
 # Setup
-$ git clone <this repo>
-$ cd nodos
-$ make setup
-$ make test
+git clone <this repo>
+cd nodos
+make setup
+make test
 
 # test single package
-$ npx jest packages/nodes-routing
+npx jest packages/nodes-routing
 ```
 
 ### Example project
 
 
 ```sh
-$ cd nodos/packages/example
-$ make test
-$ make start
+cd example
+make test
+make start
 ```
 
 ## TODO
@@ -71,6 +71,6 @@ $ make start
 
 * Реализовать автоматические формы с переводами и генерацией нужной верстки из коробки
 
-### package/example
+### example
 
 1. Привести в порядок layout, вывести все ссылки

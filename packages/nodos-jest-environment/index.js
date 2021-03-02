@@ -20,7 +20,9 @@ class IntegrationEnvironment extends NodeEnvironment {
   }
 
   async teardown() {
-    await this.app.stop();
+    if (this.app.isInitialized()) {
+      await this.app.stop();
+    }
   }
 }
 

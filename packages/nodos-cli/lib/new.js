@@ -44,23 +44,5 @@ module.exports = async (dir, options = {}) => {
     },
   });
 
-  parser.command({
-    command: 'example <rootDir>',
-    describe: 'Create example Nodos application',
-    builder: (command) => {
-      command.positional('rootDir', {
-        describe: 'The Application Path',
-        // default: '.',
-      });
-    },
-    handler: async ({ rootDir }) => {
-      // TODO: pass version directly, without arguments
-      const src = path.join(__dirname, '..', '..', 'example');
-      const dest = path.resolve(dir, rootDir);
-      await fse.copy(src, dest);
-      console.log(`Example was copied into ${dest}`);
-    },
-  });
-
-  await parser.parse(args);
+  return parser.parse(args);
 };

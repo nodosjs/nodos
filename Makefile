@@ -1,5 +1,6 @@
 setup: bootstrap
-	cd packages/example && npx nodos db migrate
+	cd example && npm i
+	cd example && npx nodos db migrate
 
 bootstrap:
 	npx lerna bootstrap --hoist
@@ -12,7 +13,7 @@ clean:
 	npx lerna clean
 
 test-example:
-	DEBUG=nodos:* cd packages/example && npx jest
+	DEBUG=nodos:* cd example && npx jest
 
 test-system:
 	DEBUG=nodos:* cd packages/application-tests && npx jest

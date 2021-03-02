@@ -275,6 +275,9 @@ class Router {
 
   route(name, ...params) {
     const route = this.routes.find((r) => r.name === name);
+    if (!route) {
+      throw Error(`Route with name '${name}' not found`);
+    }
     return urlJoin(this.host, mapResourcesToUrl(route.url, params));
   }
 }
