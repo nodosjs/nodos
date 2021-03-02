@@ -27,7 +27,7 @@ class Application {
   /**
    * Add fastify plugin
    *
-   * @param {FastifyPlugin} plugin
+   * @param {import('fastify').FastifyPlugin} plugin
    * @param {Object} options Plugin options
    * @example
    * import formbody from 'fastify-formbody';
@@ -109,6 +109,7 @@ class Application {
 
     const join = path.join.bind(null, projectRoot);
     this.config = {
+      port: options.port ?? 8080,
       env,
       // mode,
       projectRoot,
@@ -135,7 +136,10 @@ class Application {
     await fillByEnv(this);
     await fillByApp(this);
 
-    this.router = await buildNodosRouter(this.config.paths.routesPath, { host: this.config.host });
+    // TODO validate required options like host
+
+    const host = `http://${this.config.host}:${this.config.port}`;
+    this.router = await buildNodosRouter(this.config.paths.routesPath, { host: host });
     this.fastify = fastify({ logger: { prettyPrint: true } });
 
     this.addPlugin(fastifyExpress);

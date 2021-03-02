@@ -16,7 +16,7 @@
   "dependencies": {
     "@babel/core": "^7.13.8",
     "@babel/node": "^7.13.0",
-    "@babel/preset-env": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
     "@nodosjs/db-extension": "file:../packages/nodos-db-extension",
@@ -34,6 +34,5 @@
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-jest": "^24.1.5",
     "jest-circus": "^26.6.3"
-  },
-  "version": "0.0.43"
+  }
 }

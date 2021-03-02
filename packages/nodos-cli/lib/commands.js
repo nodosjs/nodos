@@ -44,7 +44,7 @@ const buildServerCommand = ({ app }) => ({
   builder: (yargs) => yargs
     .default('h', '127.0.0.1')
     .alias('h', 'host')
-    .default('p', Number(process.env.PORT) || 3000)
+    .default('p', Number(process.env.PORT) || app.config.port)
     .alias('p', 'port'),
   handler: async (argv) => {
     await app.listen(argv.port, argv.host);

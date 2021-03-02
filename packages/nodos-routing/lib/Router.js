@@ -3,8 +3,8 @@ const urlJoin = require('url-join');
 const {
   singularize, foreignKey, pluralize, camelize,
 } = require('inflected');
-const Route = require('./Route');
-const validate = require('./validator');
+const Route = require('./Route.js');
+const validate = require('./validator.js');
 
 const detectRouteType = (currentName) => {
   const names = ['resources', 'resource', 'root'];
@@ -257,8 +257,7 @@ class Router {
   constructor(routeMap, options) {
     validate(routeMap);
 
-    // TODO: temporary solution with setting default host. We have to pass it from env configs
-    this.host = options.host ?? 'example.com';
+    this.host = options.host;
     this.routeMap = routeMap;
     this.scopes = routeMap.scopes.map(({ name, pipeline }) => ({
       name,

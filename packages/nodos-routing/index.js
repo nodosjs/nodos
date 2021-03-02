@@ -1,3 +1,3 @@
-const Router = require('./lib/Router');
+const Router = require('./lib/Router.js');
 
 module.exports = Router;
