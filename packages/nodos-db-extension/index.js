@@ -23,8 +23,8 @@ module.exports = async (app) => {
   log('init db extension', config);
   const db = new Db(config);
 
-  const models = require(config.entities).default; // eslint-disable-line
-  app.addPlugin(fastifyObjectionjs, { knexConfig: config, models });
+  // const models = require(config.entities).default; // eslint-disable-line
+  app.addPlugin(fastifyObjectionjs, { knexConfig: config });
   app.addPlugin((_a, _b, done) => done(), (parent) => {
     db.connection = parent.objection.knex;
   });
