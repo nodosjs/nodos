@@ -15,7 +15,7 @@
   "dependencies": {
     "@nodosjs/cli": "^0.0.43",
     "@nodosjs/core": "^0.0.43",
-    "@nodosjs/db-extension": "^0.0.43",
+    "@nodosjs/db-objection-extension": "^0.0.43",
     "@nodosjs/view-extension": "^0.0.43",
     "@nodosjs/webpack-extension": "^0.0.43",
     "babel-jest": "^26.6.3",

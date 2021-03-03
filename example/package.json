@@ -19,7 +19,7 @@
     "@babel/preset-env": "^7.13.9",
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
-    "@nodosjs/db-extension": "file:../packages/nodos-db-extension",
+    "@nodosjs/db-objection-extension": "file:../packages/nodos-db-objection-extension",
     "@nodosjs/jest-environment": "file:../packages/nodos-jest-environment",
     "@nodosjs/view-extension": "file:../packages/nodos-view-extension",
     "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension",

@@ -1,5 +1,5 @@
 {
-  "name": "@nodosjs/db-extension",
+  "name": "@nodosjs/db-typeorm-extension",
   "version": "0.0.43",
   "publishConfig": {
     "access": "public"

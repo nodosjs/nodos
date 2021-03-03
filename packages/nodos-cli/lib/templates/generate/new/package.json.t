@@ -19,7 +19,7 @@ to: './<%= name %>/package.json'
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
     "@nodosjs/core": "^<%= version %>",
-    "@nodosjs/db-extension": "<%= version %>",
+    "@nodosjs/db-objection-extension": "<%= version %>",
     "@nodosjs/view-extension": "<%= version %>",
     "@nodosjs/jest-environment": "^<%= version %>",
     "@nodosjs/webpack-extension": "^<%= version %>",
