@@ -5,4 +5,4 @@ server:
 	npx nodos server
 
 test:
-	npx nodos test
+	npm -s test
