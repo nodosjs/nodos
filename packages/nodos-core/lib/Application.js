@@ -7,7 +7,7 @@ const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
-// const { merge } = require('lodash');
+const { has } = require('lodash');
 
 const buildNodosRouter = require('./builders/nodosRouter.js');
 const buildFastifyHandlers = require('./builders/fastifyHandlers.js');
@@ -47,7 +47,9 @@ class Application {
     const filename = path.basename(filepath);
     const middlewareName = filename.replace(path.extname(filename), '');
     log('addMiddleware', middlewareName, filepath);
-    // FIXME: check uniqueness
+    if (has(this.middlewares, middlewareName)) {
+      throw new Error('Middleware \'middlwareName\' already exist');
+    }
     this.middlewares[middlewareName] = filepath;
   }
 
