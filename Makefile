@@ -43,3 +43,9 @@ site-start:
 
 site-deploy:
 	cd site; GIT_USER=$(U) npm run deploy
+
+docker-build:
+	docker build -t nodosjs/nodos .
+
+docker-push:
+	docker push nodosjs/nodos

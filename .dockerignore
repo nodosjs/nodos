@@ -1,0 +1,5 @@
+**/node_modules/**
+site
+example
+docs
+.git
