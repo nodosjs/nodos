@@ -10,7 +10,7 @@
     "execa": "^5.0.0",
     "fastify-objectionjs": "^0.3.0",
     "hygen": "^6.0.4",
-    "knex": "^0.21.18",
+    "knex": "^0.95.2",
     "lodash": "^4.17.21",
     "objection": "^2.2.14",
     "objection-password": "^3.0.0",

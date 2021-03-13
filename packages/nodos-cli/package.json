@@ -27,6 +27,6 @@
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "devDependencies": {
     "@nodosjs/core": "^0.0.44",
-    "nanodelay": "^1.0.6"
+    "nanodelay": "^1.0.7"
   }
 }

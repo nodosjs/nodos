@@ -5,7 +5,7 @@
     "access": "public"
   },
   "dependencies": {
-    "ajv": "^7.1.1",
+    "ajv": "^7.2.1",
     "inflected": "^2.1.0",
     "lodash": "^4.17.21",
     "url-join": "^4.0.1"
