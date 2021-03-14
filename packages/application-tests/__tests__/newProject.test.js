@@ -18,10 +18,10 @@ beforeAll(async () => {
   const oldAppPaths = apps.reverse().slice(1).map((app) => path.join(dir, app));
   await Promise.all(oldAppPaths.map((appPath) => fsp.rmdir(appPath, { recursive: true })));
 
-  const appName = `nodos-${Date.now().toString()}`;
-  projectRoot = path.join(dir, appName);
+  const appPath = `nodos-${Date.now().toString()}`;
+  projectRoot = path.join(dir, appPath);
 
-  const options = { exitProcess: false, args: ['new', appName] };
+  const options = { exitProcess: false, args: ['new', appPath] };
   await runNew(dir, options);
   await delay(1000);
 

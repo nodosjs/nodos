@@ -139,7 +139,7 @@ class Application {
     // TODO validate required options like host
 
     const host = `http://${this.config.host}:${this.config.port}`;
-    this.router = await buildNodosRouter(this.config.paths.routesPath, { host: host });
+    this.router = await buildNodosRouter(this.config.paths.routesPath, { host });
     this.fastify = fastify({ logger: { prettyPrint: true } });
 
     this.addPlugin(fastifyExpress);

@@ -11,9 +11,9 @@ beforeEach(async () => {
 });
 
 test('nodos/new', async () => {
-  const appName = 'site';
-  const projectRoot = path.join(dir, appName);
-  await runNew(dir, { exitProcess: false, args: ['new', appName] });
+  const appPath = 'site';
+  const projectRoot = path.join(dir, appPath);
+  await runNew(dir, { exitProcess: false, args: ['new', appPath] });
   await delay(1000);
   const fileNames = await fs.readdir(projectRoot);
   expect(fileNames).toMatchSnapshot();

@@ -5,7 +5,7 @@ const path = require('path');
 const enquirer = require('enquirer');
 const execa = require('execa');
 const { version } = require('../package.json');
-const fse = require('fs-extra');
+// const fse = require('fs-extra');
 
 const defaultTemplates = path.join(__dirname, 'templates');
 
@@ -21,18 +21,22 @@ module.exports = async (dir, options = {}) => {
   parser.strict();
   parser.showHelpOnFail(true);
   parser.command({
-    command: 'new <appName>',
+    command: 'new <appPath>',
     describe: 'Create new Nodos application',
     builder: (command) => {
-      command.positional('appName', {
-        describe: 'The Application Name',
+      command.positional('appPath', {
+        describe: 'Base directory for the application. Type . for current one',
       });
     },
-    handler: async ({ appName }) => {
+    handler: async ({ appPath }) => {
       // TODO: pass version directly, without arguments
-      await runner(['generate', 'new', appName, '--version', version], {
+      const fullPath = path.resolve(dir, appPath);
+      const basename = path.basename(fullPath);
+      const dirname = path.dirname(fullPath);
+      console.log('!!!', fullPath);
+      await runner(['generate', 'new', basename, '--version', version], {
         templates: defaultTemplates,
-        cwd: dir,
+        cwd: dirname,
         logger: new Logger(console.log.bind(console)),
         createPrompter: () => enquirer,
         exec: (action, body) => {
