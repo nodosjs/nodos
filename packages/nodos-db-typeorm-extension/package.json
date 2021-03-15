@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/db-typeorm-extension",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "publishConfig": {
     "access": "public"
   },
@@ -16,8 +16,8 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@nodosjs/cli": "^0.0.47",
-    "@nodosjs/core": "^0.0.47",
+    "@nodosjs/cli": "^0.0.48",
+    "@nodosjs/core": "^0.0.48",
     "sqlite3": "^5.0.2"
   }
 }
