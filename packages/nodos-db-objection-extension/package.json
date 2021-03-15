@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/db-objection-extension",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "publishConfig": {
     "access": "public"
   },
@@ -18,7 +18,7 @@
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "@nodosjs/cli": "^0.0.49",
-    "@nodosjs/core": "^0.0.49"
+    "@nodosjs/cli": "^0.0.50",
+    "@nodosjs/core": "^0.0.50"
   }
 }
