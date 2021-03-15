@@ -22,14 +22,14 @@ to: './<%= name %>/package.json'
     "@nodosjs/db-typeorm-extension": "^<%= version %>",
     "@nodosjs/view-extension": "^<%= version %>",
     "@nodosjs/webpack-extension": "^<%= version %>",
-    "pg": "^7.14.0"
+    "pg": "^8.51.0"
   },
   "devDependencies": {
     "@nodosjs/jest-environment": "^<%= version %>",
     "babel-jest": "^26.3.0",
     "eslint": "^7.22.0",
     "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-jest": "^24.3.1",
     "jest": "^26.6.3",
     "jest-cli": "^26.6.3"
   }
