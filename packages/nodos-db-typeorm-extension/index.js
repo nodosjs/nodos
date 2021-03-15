@@ -26,6 +26,8 @@ module.exports = async (app) => {
     // TODO: подобные штуки не должны переопределяться
     migrations: [path.join(app.config.projectRoot, 'db/migrations/**/*.js')],
     logging: true,
+    connectTimeout: 1000,
+    // debug: true
   };
   const config = { ...defaultConfig, ...appConfig };
   log('init db extension', config);

@@ -8,6 +8,7 @@ const projectRoot = path.join(__dirname, '../__fixtures__/application');
 test('nodos/db', async () => {
   const app = nodos(projectRoot);
   await app.initApp();
+  await app.fastify.ready();
 
   expect(app).toMatchObject({
     container: {

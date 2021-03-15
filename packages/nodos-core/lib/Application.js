@@ -110,6 +110,7 @@ class Application {
     const join = path.join.bind(null, projectRoot);
     this.config = {
       port: options.port ?? 8080,
+      host: 'localhost',
       env,
       // mode,
       projectRoot,
@@ -169,7 +170,6 @@ class Application {
         throw error;
       });
     }
-    await this.fastify.ready();
     this.state = 'initialized';
   }
 
