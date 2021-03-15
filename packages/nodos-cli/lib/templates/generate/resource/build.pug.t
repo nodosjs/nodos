@@ -1,3 +1,7 @@
+---
+to: "./app/templates/<%= h.inflection.pluralize(name) %>/build.pug"
+---
+
 extends /layouts/application.pug
 
 block content

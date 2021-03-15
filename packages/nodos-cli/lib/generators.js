@@ -20,7 +20,7 @@ const buildCommand = (type, name, actions) => {
   ].join(' ');
 };
 
-const generatorHandler = ({ type, name, params }) => {
+const controllerHandler = ({ type, name, params }) => {
   const command = buildCommand(type, name, params);
 
   runner(command, {
@@ -36,4 +36,26 @@ const generatorHandler = ({ type, name, params }) => {
   });
 };
 
-module.exports = [{ type: 'controller', handler: generatorHandler }];
+const modelHandler = () => {};
+
+const resourceHandler = ({ type, name }) => {
+  const command = ['generate', type, name];
+
+  runner(command, {
+    templates: defaultTemplates,
+    cwd: process.cwd(),
+    logger: new Logger(console.log.bind(console)),
+    createPrompter: () => enquirer,
+    exec: (action, body) => {
+      const opts = body && body.length > 0 ? { input: body } : {};
+      return execa.shell(action, opts);
+    },
+    debug: !!process.env.DEBUG,
+  });
+};
+
+module.exports = [
+  { type: 'controller', handler: controllerHandler },
+  { type: 'model', handler: modelHandler },
+  { type: 'resource', handler: resourceHandler },
+];

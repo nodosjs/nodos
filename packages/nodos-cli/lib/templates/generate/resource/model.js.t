@@ -1,3 +1,7 @@
+---
+to: "./app/entities/<%= h.changeCase.upperCaseFirst(name) %>.js"
+---
+
 // @ts-check
 
 import { BaseEntity } from 'typeorm';
@@ -8,7 +12,7 @@ const schema = yup.object().shape({
   email: yup.string().required().email(),
 });
 
-export default class User extends BaseEntity {
+export default class <%= h.changeCase.upperCaseFirst(name) %> extends BaseEntity {
   constructor(attributes = {}) {
     super();
     this.email = attributes.email;

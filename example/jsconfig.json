@@ -1,0 +1,12 @@
+{
+  "include": ["app/**/*.js"],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./app",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}

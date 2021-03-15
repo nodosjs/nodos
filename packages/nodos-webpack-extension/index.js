@@ -10,5 +10,5 @@ module.exports = (app) => {
   // since current fastify-webpack-hmr does not support webpack v5
   const compiler = webpack(webpackConfig);
 
-  app.addPlugin(fastifyWebpackHMR, { compiler });
+  app.fastify.register(fastifyWebpackHMR, { compiler });
 };

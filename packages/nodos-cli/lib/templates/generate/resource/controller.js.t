@@ -1,3 +1,7 @@
+---
+to: "./app/controllers/<%= h.inflection.pluralize(name) %>.js"
+---
+
 import User from '../entities/User.js';
 
 export const index = async (_request, response) => {

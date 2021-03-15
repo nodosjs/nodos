@@ -1,23 +1,16 @@
 // @ts-check
 
-const { NotFoundError } = require('objection');
-/** @typedef { import('../http/Response') } Response */
+const { EntityNotFoundError } = require('typeorm/error/EntityNotFoundError');
 
-/**
- *
- * @param {function} next
- * @param {Request} request
- * @param {Response} response
- */
-module.exports = async (next, request, response) => {
+module.exports = async (action, request, response) => {
   try {
-    await next();
+    await action();
   } catch (e) {
     // if (!app.isProduction()) {
     //   throw e;
     // }
 
-    if (e instanceof NotFoundError) {
+    if (e instanceof EntityNotFoundError) {
       // response.head(404, 'Page not found!');
       response.notFound();
       return;

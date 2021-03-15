@@ -5,20 +5,19 @@
     "access": "public"
   },
   "dependencies": {
+    "class-validator": "^0.13.1",
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
     "execa": "^5.0.0",
-    "fastify-objectionjs": "^0.3.0",
     "hygen": "^6.0.4",
-    "knex": "^0.95.2",
     "lodash": "^4.17.21",
-    "objection": "^2.2.14",
-    "objection-password": "^3.0.0",
     "reflect-metadata": "^0.1.13",
-    "sqlite3": "^5.0.2"
+    "typeorm": "^0.2.31",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@nodosjs/cli": "^0.0.45",
-    "@nodosjs/core": "^0.0.45"
+    "@nodosjs/core": "^0.0.45",
+    "sqlite3": "^5.0.2"
   }
 }

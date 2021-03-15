@@ -1,39 +1,44 @@
 require('reflect-metadata');
 
 const path = require('path');
-const fastifyObjectionjs = require('fastify-objectionjs');
+// const fastifyObjectionjs = require('fastify-objectionjs');
+const { createConnection } = require('typeorm');
 
-const commandBuilders = require('./lib/commands.js');
-const generators = require('./lib/generators.js');
-const Db = require('./lib/Db.js');
+// const commandBuilders = require('./lib/commands.js');
+// const generators = require('./lib/generators.js');
+// const Db = require('./lib/Db.js');
 const log = require('./lib/logger.js');
+
+const portsMapping = {
+  postgres: 5432,
+  mysql: 3306,
+};
 
 module.exports = async (app) => {
   const appConfig = app.config.db;
+  // const entities = require(path.join(app.config.projectRoot, 'app/entities/index.js')).default;
   const defaultConfig = {
-    client: 'sqlite3',
-    entities: path.join(app.config.projectRoot, '/app/entities'),
-    connection: path.join(app.config.projectRoot, '/db/development.sqlite3'),
+    port: portsMapping[appConfig.type],
+    synchronize: true,
+    entities: [path.join(app.config.projectRoot, 'app/entities/*.js')],
+    // connection: path.join(app.config.projectRoot, 'db/development.sqlite3'),
     // TODO: подобные штуки не должны переопределяться
-    migrations: {
-      directory: path.join(app.config.projectRoot, '/db/migrations/'),
-    },
+    migrations: [path.join(app.config.projectRoot, 'db/migrations/**/*.js')],
+    logging: true,
   };
   const config = { ...defaultConfig, ...appConfig };
   log('init db extension', config);
-  const db = new Db(config);
 
-  // const models = require(config.entities).default; // eslint-disable-line
-  app.addPlugin(fastifyObjectionjs, { knexConfig: config });
-  app.addPlugin((_a, _b, done) => done(), (parent) => {
-    db.connection = parent.objection.knex;
-  });
-
-  Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
-  generators.forEach((generator) => app.addGenerator(generator));
+  const data = {}; // little hack for lazy loading
+  // Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
+  // generators.forEach((generator) => app.addGenerator(generator));
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleDbErrors.js'));
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
-  app.addDependency('db', db);
-  // app.addHook('onStop', db.close);
-  // app.addHook('onReady', () => { db.connection = app.fastify.objection.knex; });
+  // app.fastify.addHook('onStop', () => db.close());
+  app.fastify.addHook('onClose', () => data.db && data.db.close());
+  app.fastify.addHook('onReady', async () => {
+    const db = await createConnection(config);
+    data.db = db;
+    app.addDependency('db', db);
+  });
 };

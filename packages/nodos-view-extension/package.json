@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "create-html-element": "^3.0.0",
-    "fastify-cookie": "^5.1.0",
+    "fastify-cookie": "^5.2.0",
     "fastify-csrf": "^3.0.1",
     "fastify-error-page": "^4.0.0",
     "fastify-flash": "^2.0.2",

@@ -33,10 +33,10 @@ class Application {
    * import formbody from 'fastify-formbody';
    * app.addPlugin(formbody);
    */
-  addPlugin(plugin, options = {}) {
-    log('addPlugin', plugin);
-    this.plugins.push([plugin, options]);
-  }
+  // addPlugin(plugin, options = {}) {
+  //   log('addPlugin', plugin);
+  //   this.plugins.push([plugin, options]);
+  // }
 
   addDependency(name, value) {
     log('addDependency', name);
@@ -142,9 +142,9 @@ class Application {
     this.router = await buildNodosRouter(this.config.paths.routesPath, { host });
     this.fastify = fastify({ logger: { prettyPrint: true } });
 
-    this.addPlugin(fastifyExpress);
-    this.addPlugin(fastifySensible, { errorHandler: this.config.errorHandler });
-    this.addPlugin(fastifyStatic, {
+    this.fastify.register(fastifyExpress);
+    this.fastify.register(fastifySensible, { errorHandler: this.config.errorHandler });
+    this.fastify.register(fastifyStatic, {
       root: this.config.paths.publicPath,
       // prefix: '/public/', // optional: default '/'
     });
@@ -169,6 +169,7 @@ class Application {
         throw error;
       });
     }
+    await this.fastify.ready();
     this.state = 'initialized';
   }
 

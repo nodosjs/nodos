@@ -3,13 +3,5 @@ export default (app) => {
   app.config.errorHandler = false;
   app.config.cacheModules = true;
   app.config.host = 'http://example.com';
-  // this.config.db = {
-  //   type: 'sqlite',
-  //   synchronize: true,
-  //   logging: true,
-  //   database: 'db/test.sqlite3',
-  //   entities: [
-  //     `${__dirname}/../../app/entities/*.js`,
-  //   ],
-  // };
+s
 };

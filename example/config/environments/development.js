@@ -9,7 +9,7 @@ export default async (app) => {
   app.config.cacheModules = false;
   app.config.csrf = { enabled: true }
   app.config.db = {
-    client: 'sqlite3',
-    connection: 'db/development.sqlite3',
+    type: 'sqlite',
+    database: 'db/development.sqlite3',
   };
 };

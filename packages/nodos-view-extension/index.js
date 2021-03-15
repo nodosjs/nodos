@@ -14,16 +14,16 @@ const csrfPluginWrapper = require('./lib/csrfPluginWrapper');
 module.exports = async (app) => {
   const { route } = app.router;
 
-  app.addPlugin(fastifySecureSession, {
+  app.fastify.register(fastifySecureSession, {
     secret: 'a secret with minimum length of 32 characters',
     cookie: { path: '/' },
   });
-  app.addPlugin(fastifyFlash);
+  app.fastify.register(fastifyFlash);
 
   // TODO: check https://github.com/fastify/fastify-multipart
-  app.addPlugin(fastifyFormbody, { parser: (s) => qs.parse(s) });
-  app.addPlugin(fastifyMethodOverride);
-  app.addPlugin(pointOfView, {
+  app.fastify.register(fastifyFormbody, { parser: (s) => qs.parse(s) });
+  app.fastify.register(fastifyMethodOverride);
+  app.fastify.register(pointOfView, {
     engine: { pug },
     includeViewExtension: true,
     root: app.config.paths.templatesPath,
@@ -38,13 +38,13 @@ module.exports = async (app) => {
   });
 
   if (app.isDevelopment()) {
-    app.addPlugin(fastifyErrorPage);
+    app.fastify.register(fastifyErrorPage);
   }
 
-  app.addPlugin(fastifyCSRF, { sessionPlugin: 'fastify-secure-session' });
+  app.fastify.register(fastifyCSRF, { sessionPlugin: 'fastify-secure-session' });
 
   if (!app.isTest()) {
-    app.addPlugin(csrfPluginWrapper);
+    app.fastify.register(csrfPluginWrapper);
   }
 
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));

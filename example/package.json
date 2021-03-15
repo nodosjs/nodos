@@ -17,10 +17,11 @@
     "@babel/core": "^7.13.8",
     "@babel/node": "^7.13.0",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-decorators": "^7.13.5",
     "@babel/preset-env": "^7.13.9",
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
-    "@nodosjs/db-objection-extension": "file:../packages/nodos-db-objection-extension",
+    "@nodosjs/db-typeorm-extension": "file:../packages/nodos-db-typeorm-extension",
     "@nodosjs/view-extension": "file:../packages/nodos-view-extension",
     "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension",
     "sql.js": "^1.4.0"
