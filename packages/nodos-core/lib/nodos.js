@@ -9,8 +9,9 @@ const Application = require('./Application.js');
 
 module.exports = (projectRoot, env = process.env.NODE_ENV || 'development') => {
   log('PROJECT_ROOT', projectRoot);
+  log('ENV', env);
 
-  const app = new Application(projectRoot, env);
+  const app = new Application(projectRoot, { env });
 
   return app;
 };

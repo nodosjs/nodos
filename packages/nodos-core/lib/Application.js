@@ -93,7 +93,7 @@ class Application {
   }
 
   constructor(projectRoot, options = {}) {
-    const env = process.env.NODOS_ENV ?? options.env ?? 'development';
+    const env = options.env ?? process.env.NODOS_ENV ?? 'development';
     // const mode = options.mode ?? 'server';
     this.defaultRequestOptions = { headers: {}, params: null };
     this.commandBuilders = [];
@@ -133,8 +133,8 @@ class Application {
     const fillByApp = requireDefaultFunction(this.config.paths.applicationPath);
     const fillByEnv = requireDefaultFunction(this.config.paths.environmentPath);
 
-    await fillByEnv(this);
     await fillByApp(this);
+    await fillByEnv(this);
 
     // TODO validate required options like host
 

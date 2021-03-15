@@ -4,6 +4,6 @@ export default async (app) => {
   app.config.csrf = { enabled: false }
   app.config.db = {
     type: 'sqlite',
-    database: 'db/test.sqlite3',
+    database: ':memory:',
   };
 };

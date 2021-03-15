@@ -8,6 +8,7 @@ export default async (app) => {
   app.config.cacheModules = true;
 
   app.config.db = {
-    database: '<% name %>_test',
+    type: 'sqlite',
+    database: ':memory:',
   };
 };

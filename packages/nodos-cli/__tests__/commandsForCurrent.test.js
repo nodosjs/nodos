@@ -20,7 +20,7 @@ test('nodos/console', async () => {
 });
 
 test('nodos/server', async () => {
-  const app = nodos(projectRoot, { mode: 'server' });
+  const app = nodos(projectRoot);
   app.listen = jest.fn().mockResolvedValue();
   await runCurrent(app, { exitProcess: false, args: ['server'] });
   // NOTE it seeems yargs run handlers as sync code

@@ -3,5 +3,4 @@ export default (app) => {
   app.config.errorHandler = false;
   app.config.cacheModules = true;
   app.config.host = 'http://example.com';
-s
 };

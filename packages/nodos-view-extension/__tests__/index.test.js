@@ -7,7 +7,7 @@ const projectRoot = path.join(__dirname, '../__fixtures__/site');
 let app;
 
 beforeEach(async () => {
-  app = await nodos(projectRoot, { env: 'test' });
+  app = await nodos(projectRoot, 'test');
   app.addExtension(extension);
   await app.initApp();
 });

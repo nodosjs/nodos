@@ -11,6 +11,9 @@ export default async (app) => {
   app.addExtension(nodosWebpack);
 
   app.config.db = {
-    database: '<% name %>_development',
+    type: 'postgres',
+    username: 'postgres',
+    password: '',
+    database: '<%= name %>_development',
   };
 };

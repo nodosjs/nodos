@@ -5,7 +5,8 @@ import { nodos } from '@nodosjs/core';
 import { runNew } from '@nodosjs/cli';
 import execa from 'execa';
 
-const envs = ['production', 'test', 'development'];
+// generate sqlite configuration for other envs
+const envs = ['test'];
 // const envs = ['development'];
 
 let projectRoot;
@@ -30,7 +31,7 @@ beforeAll(async () => {
 });
 
 test('start server', async () => {
-  const app = await nodos(projectRoot);
+  const app = await nodos(projectRoot, 'test');
   await app.initApp();
   await app.listen();
   await app.close();
@@ -39,10 +40,13 @@ test('start server', async () => {
 
 test.each(envs)('check cli', async (env) => {
   const options = {
+    // stdout: 'inherit',
+    // stderr: 'inherit',
     cwd: projectRoot,
-    env: { NODE_ENV: env },
+    env: { NODE_ENV: env, DEBUG: 'nodos:core' },
   };
   const result = await execa('../../node_modules/.bin/nodos', ['routes'], options);
+  console.log(result.all);
   expect(result).not.toBeNull();
-  expect(result.stdout).toMatchSnapshot();
+  expect(result.stdout).toEqual(expect.stringContaining('root#default'));
 });

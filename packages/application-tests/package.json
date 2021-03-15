@@ -15,7 +15,7 @@
   "dependencies": {
     "@nodosjs/cli": "^0.0.47",
     "@nodosjs/core": "^0.0.47",
-    "@nodosjs/db-objection-extension": "^0.0.47",
+    "@nodosjs/db-typeorm-extension": "^0.0.47",
     "@nodosjs/view-extension": "^0.0.47",
     "@nodosjs/webpack-extension": "^0.0.47",
     "babel-jest": "^26.6.3",
@@ -23,7 +23,8 @@
     "execa": "^5.0.0",
     "jest": "^26.6.3",
     "jest-cli": "^26.6.3",
-    "nanodelay": "^1.0.7"
+    "nanodelay": "^1.0.7",
+    "pg": "^8.5.1"
   },
   "version": "0.0.47"
 }

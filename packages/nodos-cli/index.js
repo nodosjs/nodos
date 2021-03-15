@@ -17,7 +17,7 @@ module.exports = {
 
     if (core) {
       try {
-        const app = await core.nodos(dir, { mode: 'console' });
+        const app = await core.nodos(dir);
         await runCurrent(app, options);
       } catch (e) {
         console.error('Nodos installed, but there is no application.js file\n');

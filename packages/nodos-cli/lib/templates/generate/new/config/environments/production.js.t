@@ -8,10 +8,9 @@ export default async (app) => {
   app.config.cacheModules = true;
 
   app.config.db = {
-    database: '<% name %>_production',
-    host: process.env.NODOS_DB_HOSTNAME
+    database: '<%= name %>_production',
+    host: process.env.NODOS_DB_HOSTNAME,
     username: process.env.NODOS_DB_USERNAME,
     password: process.env.NODOS_DB_PASSWORD,
-  };
   };
 };
