@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/core",
-  "version": "0.0.50",
+  "version": "0.0.51",
   "publishConfig": {
     "access": "public"
   },
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@babel/register": "^7.13.8",
-    "@nodosjs/routing": "^0.0.50",
+    "@nodosjs/routing": "^0.0.51",
     "debug": "^4.3.1",
     "dotenv": "^8.2.0",
     "fastify": "^3.14.0",
