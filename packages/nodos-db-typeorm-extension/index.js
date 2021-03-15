@@ -20,7 +20,9 @@ module.exports = async (app) => {
   const defaultConfig = {
     port: portsMapping[appConfig.type],
     synchronize: true,
-    host: 'localhost',
+    host: process.env.NODOS_DB_HOSTNAME || 'localhost',
+    username: process.env.NODOS_DB_USERNAME,
+    password: process.env.NODOS_DB_PASSWORD,
     entities: [path.join(app.config.projectRoot, 'app/entities/*.js')],
     // connection: path.join(app.config.projectRoot, 'db/development.sqlite3'),
     // TODO: подобные штуки не должны переопределяться
