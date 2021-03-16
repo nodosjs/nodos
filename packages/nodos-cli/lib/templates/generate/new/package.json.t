@@ -18,6 +18,7 @@ to: './<%= name %>/package.json'
     "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
+    "@nodosjs/cli": "^<%= version %>",
     "@nodosjs/core": "^<%= version %>",
     "@nodosjs/db-typeorm-extension": "^<%= version %>",
     "@nodosjs/view-extension": "^<%= version %>",
