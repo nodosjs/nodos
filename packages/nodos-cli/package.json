@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/cli",
-  "version": "0.0.52",
+  "version": "0.0.53",
   "author": "Kirill Mokevnin @mokevnin",
   "publishConfig": {
     "access": "public"
@@ -26,7 +26,7 @@
   "repository": "nodosjs/nodos",
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "devDependencies": {
-    "@nodosjs/core": "^0.0.52",
+    "@nodosjs/core": "^0.0.53",
     "nanodelay": "^1.0.8"
   }
 }
