@@ -13,11 +13,11 @@
     ]
   },
   "dependencies": {
-    "@nodosjs/cli": "^0.0.54",
-    "@nodosjs/core": "^0.0.54",
-    "@nodosjs/db-typeorm-extension": "^0.0.54",
-    "@nodosjs/view-extension": "^0.0.54",
-    "@nodosjs/webpack-extension": "^0.0.54",
+    "@nodosjs/cli": "^0.0.55",
+    "@nodosjs/core": "^0.0.55",
+    "@nodosjs/db-typeorm-extension": "^0.0.55",
+    "@nodosjs/view-extension": "^0.0.55",
+    "@nodosjs/webpack-extension": "^0.0.55",
     "babel-jest": "^26.6.3",
     "bootstrap": "^4.6.0",
     "execa": "^5.0.0",
@@ -26,5 +26,5 @@
     "nanodelay": "^1.0.8",
     "pg": "^8.5.1"
   },
-  "version": "0.0.54"
+  "version": "0.0.55"
 }
