@@ -23,6 +23,7 @@ to: './<%= name %>/package.json'
     "@nodosjs/db-typeorm-extension": "^<%= version %>",
     "@nodosjs/view-extension": "^<%= version %>",
     "@nodosjs/webpack-extension": "^<%= version %>",
+    "sql.js": "^1.5.0",
     "pg": "^8.5.1"
   },
   "devDependencies": {
