@@ -21,6 +21,7 @@ module.exports = async (app) => {
     port: portsMapping[appConfig.type],
     synchronize: true, // # FIXME: only development and tests
     host: process.env.NODOS_DB_HOSTNAME || 'localhost',
+    type: process.env.NODOS_DB_TYPE,
     username: process.env.NODOS_DB_USERNAME,
     password: process.env.NODOS_DB_PASSWORD,
     entities: [path.join(app.config.projectRoot, 'app/entities/*.js')],
