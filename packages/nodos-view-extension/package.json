@@ -16,7 +16,7 @@
     "fastify-session": "^5.2.1",
     "point-of-view": "^4.14.0",
     "pug": "^3.0.2",
-    "qs": "^6.9.6"
+    "qs": "^6.10.0"
   },
   "devDependencies": {
     "@nodosjs/cli": "^0.0.53",
