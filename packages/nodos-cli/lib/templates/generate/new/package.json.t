@@ -23,7 +23,7 @@ to: './<%= name %>/package.json'
     "@nodosjs/db-typeorm-extension": "^<%= version %>",
     "@nodosjs/view-extension": "^<%= version %>",
     "@nodosjs/webpack-extension": "^<%= version %>",
-    "pg": "^8.51.0"
+    "pg": "^8.5.1"
   },
   "devDependencies": {
     "@nodosjs/jest-environment": "^<%= version %>",

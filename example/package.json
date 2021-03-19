@@ -14,24 +14,24 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.13.8",
-    "@babel/node": "^7.13.0",
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-decorators": "^7.13.5",
-    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-env": "^7.13.10",
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
     "@nodosjs/db-typeorm-extension": "file:../packages/nodos-db-typeorm-extension",
     "@nodosjs/view-extension": "file:../packages/nodos-view-extension",
     "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension",
-    "sql.js": "^1.4.0"
+    "sql.js": "^1.5.0"
   },
   "devDependencies": {
     "@nodosjs/jest-environment": "file:../packages/nodos-jest-environment",
     "babel-jest": "^26.6.3",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-jest": "^24.1.5",
+    "eslint-plugin-jest": "^24.3.2",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
     "jest-cli": "^26.6.3"

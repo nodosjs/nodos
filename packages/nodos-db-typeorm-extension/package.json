@@ -13,6 +13,7 @@
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31",
+    "sql.js": "^1.5.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {

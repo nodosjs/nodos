@@ -15,11 +15,11 @@ const portsMapping = {
 };
 
 module.exports = async (app) => {
-  const appConfig = app.config.db;
+  const appConfig = app.config.db || {};
   // const entities = require(path.join(app.config.projectRoot, 'app/entities/index.js')).default;
   const defaultConfig = {
     port: portsMapping[appConfig.type],
-    synchronize: true,
+    synchronize: true, // # FIXME: only development and tests
     host: process.env.NODOS_DB_HOSTNAME || 'localhost',
     username: process.env.NODOS_DB_USERNAME,
     password: process.env.NODOS_DB_PASSWORD,

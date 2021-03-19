@@ -1,6 +1,9 @@
 ---
 to: './<%= name %>/config/application.js'
 ---
+
+/* @ts-check */
+
 import nodosDb from '@nodosjs/db-typeorm-extension';
 import nodosView from '@nodosjs/view-extension';
 

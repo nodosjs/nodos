@@ -1,6 +1,7 @@
 ---
 to: './<%= name %>/config/routes.yml'
 ---
+
 pipelines:
   browser:
     - setLocale
