@@ -2,6 +2,8 @@
 
 exports[`nodos/new 1`] = `
 Array [
+  ".env",
+  ".env.example",
   ".eslintignore",
   ".eslintrc.yml",
   ".gitignore",
