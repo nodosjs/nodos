@@ -9,7 +9,6 @@ const fastifyFlash = require('fastify-flash');
 const pug = require('pug');
 const fastifyFormbody = require('fastify-formbody');
 const qs = require('qs');
-const csrfPluginWrapper = require('./lib/csrfPluginWrapper');
 
 module.exports = async (app) => {
   const { route } = app.router;
@@ -42,10 +41,6 @@ module.exports = async (app) => {
   }
 
   app.fastify.register(fastifyCSRF, { sessionPlugin: 'fastify-secure-session' });
-
-  if (!app.isTest()) {
-    app.fastify.register(csrfPluginWrapper);
-  }
 
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/protectFromForgery.js'));
   app.addMiddleware(path.resolve(__dirname, './lib/middlewares/fetchFlash.js'));
