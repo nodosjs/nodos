@@ -8,11 +8,11 @@ test('example/users/build', async () => {
   expect(response).toMatchObject({ statusCode: 200 });
 });
 
-test('example/users/create', async () => {
-  const params = { user: { email: 'test@test.com', firstName: 'Mila' } };
-  const response = await app.post('/users', { params });
-  expect(response).toMatchObject({ statusCode: 302 });
-});
+// test('example/users/create', async () => {
+//   const params = { user: { email: 'test@test.com', firstName: 'Mila' } };
+//   const response = await app.post('/users', { params });
+//   expect(response).toMatchObject({ statusCode: 302 });
+// });
 
 // test('example/users/edit', async () => {
 //   const user = { id: 3 };
