@@ -59,6 +59,16 @@ const sendResponse = async (fastifyApp, response, reply) => {
   }
 };
 
+const isProtectedFromForgery = (route) => route.middlewares.includes('protectFromForgery');
+
+const csrfChecker = (fastifyInstance, route) => (request, response, done) => {
+  if (isProtectedFromForgery(route) && request.method !== 'GET') {
+    fastifyInstance.csrfProtection(request, response, done);
+  } else {
+    done();
+  }
+};
+
 /**
  * Builds fastify app
  *
@@ -101,8 +111,9 @@ module.exports = async (app) => {
       handler,
       url: route.url,
       method: route.method.toUpperCase(),
-      // preHandler: middlewares,
+      preHandler: csrfChecker(app.fastify, route),
     };
+
     log(opts);
     app.fastify.route(opts);
   });

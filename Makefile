@@ -1,6 +1,6 @@
 setup: bootstrap
 	cd example && npm i
-	cd example && npx nodos db migrate
+	# cd example && npx nodos db migrate
 
 bootstrap:
 	npx lerna bootstrap --hoist

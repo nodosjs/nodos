@@ -8,11 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['14', '15']
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: ${{ matrix.node-version }}
+      - name: Node and npm versions
+        run: |
+          node --version
+          npm --version
+      - name: Set npm handle peer dependencies
+        run: |
+          npm config set legacy-peer-deps true
       - name: Install deps
         run: |
           make setup
