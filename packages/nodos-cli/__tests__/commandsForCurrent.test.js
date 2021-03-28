@@ -1,7 +1,7 @@
 import path from 'path';
 import { nodos } from '@nodosjs/core';
 import { delay } from 'nanodelay';
-import runCurrent from '../lib/current.js';
+import runCurrent from '../lib/current/index.js';
 
 const projectRoot = path.join(__dirname, '../__fixtures__/site');
 

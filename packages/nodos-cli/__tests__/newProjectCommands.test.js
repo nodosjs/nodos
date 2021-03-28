@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import os from 'os';
 import { delay } from 'nanodelay';
-import runNew from '../lib/new.js';
+import runNew from '../lib/new/index.js';
 
 let dir;
 

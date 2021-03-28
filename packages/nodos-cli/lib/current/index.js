@@ -1,7 +1,7 @@
 // const _ = require('lodash');
 const parser = require('yargs');
 const commandBuilders = require('./commands.js');
-const log = require('./logger.js');
+const log = require('../logger.js');
 const generators = require('./generators.js');
 // const log = require('./logger');
 

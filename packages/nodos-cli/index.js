@@ -1,7 +1,7 @@
 const importFrom = require('import-from');
 const semver = require('semver');
-const runCurrent = require('./lib/current.js');
-const runNew = require('./lib/new.js');
+const runCurrent = require('./lib/current/index.js');
+const runNew = require('./lib/index/new.js');
 const log = require('./lib/logger.js');
 
 module.exports = {

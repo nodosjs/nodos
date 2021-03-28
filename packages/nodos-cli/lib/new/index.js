@@ -4,7 +4,7 @@ const Logger = require('hygen/dist/logger.js').default;
 const path = require('path');
 const enquirer = require('enquirer');
 const execa = require('execa');
-const { version } = require('../package.json');
+const { version } = require('../../package.json');
 // const fse = require('fs-extra');
 
 const defaultTemplates = path.join(__dirname, 'templates');
