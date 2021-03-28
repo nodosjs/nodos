@@ -3,6 +3,7 @@ const Logger = require('hygen/dist/logger').default;
 const path = require('path');
 const enquirer = require('enquirer');
 const execa = require('execa');
+const generateNewRoute = require('./routeGenerator');
 
 const defaultTemplates = path.join(__dirname, 'templates');
 const defaultActions = ['index', 'build', 'show', 'create', 'edit', 'update', 'destroy'];
@@ -38,12 +39,13 @@ const controllerHandler = ({ type, name, params }) => {
 
 const modelHandler = () => {};
 
-const resourceHandler = ({ type, name }) => {
+const resourceHandler = ({ type, name, scopeName }) => {
   const command = ['generate', type, name];
+  const workdir = process.cwd(),
 
   runner(command, {
     templates: defaultTemplates,
-    cwd: process.cwd(),
+    cwd: workdir,
     logger: new Logger(console.log.bind(console)),
     createPrompter: () => enquirer,
     exec: (action, body) => {
@@ -52,6 +54,7 @@ const resourceHandler = ({ type, name }) => {
     },
     debug: !!process.env.DEBUG,
   });
+  generateNewRoute(workdir, name, scopeName)
 };
 
 module.exports = [
