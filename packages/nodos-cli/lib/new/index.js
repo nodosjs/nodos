@@ -45,6 +45,7 @@ module.exports = async (dir, options = {}) => {
         },
         debug: !!process.env.DEBUG,
       });
+      await execa.command('npm i', { cwd: fullPath });
     },
   });
 

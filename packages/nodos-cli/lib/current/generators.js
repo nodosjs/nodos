@@ -41,7 +41,7 @@ const modelHandler = () => {};
 
 const resourceHandler = ({ type, name, scopeName }) => {
   const command = ['generate', type, name];
-  const workdir = process.cwd(),
+  const workdir = process.cwd();
 
   runner(command, {
     templates: defaultTemplates,
@@ -54,7 +54,7 @@ const resourceHandler = ({ type, name, scopeName }) => {
     },
     debug: !!process.env.DEBUG,
   });
-  generateNewRoute(workdir, name, scopeName)
+  generateNewRoute(workdir, name, scopeName);
 };
 
 module.exports = [
