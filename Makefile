@@ -13,10 +13,10 @@ clean:
 	npx lerna clean
 
 test-example:
-	DEBUG=nodos:* cd example && npx jest
+	cd example && DEBUG=nodos:* npx jest
 
 test-system:
-	DEBUG=nodos:* cd packages/application-tests && npx jest
+	cd packages/application-tests && DEBUG=nodos:* npx jest
 
 test-packages:
 	DEBUG=nodos:* npx jest

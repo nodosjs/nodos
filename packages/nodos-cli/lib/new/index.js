@@ -5,6 +5,7 @@ const path = require('path');
 const enquirer = require('enquirer');
 const execa = require('execa');
 const { version } = require('../../package.json');
+const log = require('../logger.js');
 // const fse = require('fs-extra');
 
 const defaultTemplates = path.join(__dirname, 'templates');
@@ -12,6 +13,7 @@ const defaultTemplates = path.join(__dirname, 'templates');
 module.exports = async (dir, options = {}) => {
   const {
     args = process.argv.slice(2),
+    env = {},
     exitProcess = true,
   } = options;
   parser.exitProcess(exitProcess);
@@ -27,25 +29,44 @@ module.exports = async (dir, options = {}) => {
       command.positional('appPath', {
         describe: 'Base directory for the application. Type . for current one',
       });
+      command.option('--skip-install', {
+        default: false,
+        describe: 'skip npm install',
+        type: 'boolean',
+      });
     },
-    handler: async ({ appPath }) => {
+    handler: async (params) => {
+      log(params);
+      const { appPath, skipInstall } = params;
       // TODO: pass version directly, without arguments
       const fullPath = path.resolve(dir, appPath);
       const basename = path.basename(fullPath);
       const dirname = path.dirname(fullPath);
-      console.log('!!!', fullPath);
-      await runner(['generate', 'new', basename, '--version', version], {
+
+      console.log('> genearte file structure');
+      const result = await runner(['generate', 'new', basename, '--version', version], {
         templates: defaultTemplates,
         cwd: dirname,
         logger: new Logger(console.log.bind(console)),
         createPrompter: () => enquirer,
-        exec: (action, body) => {
-          const opts = body && body.length > 0 ? { input: body } : {};
-          return execa.shell(action, opts);
-        },
+        // exec: async (action, body) => {
+        //   const opts = body && body.length > 0 ? { input: body } : {};
+        //   await execa.shell(action, opts);
+        // },
         debug: !!process.env.DEBUG,
       });
-      await execa.command('npm i', { cwd: fullPath });
+
+      if (result.success && !skipInstall) {
+        const execaOptions = {
+          env, cwd: fullPath, all: true, buffer: false, shell: true,
+        };
+        log(execaOptions);
+        console.log('> npm install');
+        const subprocess = execa.command('npm install', execaOptions);
+        subprocess.stdout.pipe(process.stdout);
+        subprocess.stderr.pipe(process.stderr);
+        await subprocess;
+      }
     },
   });
 

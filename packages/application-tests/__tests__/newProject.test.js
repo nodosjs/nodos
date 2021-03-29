@@ -5,6 +5,8 @@ import { nodos } from '@nodosjs/core';
 import { runNew } from '@nodosjs/cli';
 import execa from 'execa';
 
+const fixturesPath = path.join(__dirname, '../__fixtures__');
+
 // generate sqlite configuration for other envs
 const envs = ['test'];
 // const envs = ['development'];
@@ -22,7 +24,10 @@ beforeAll(async () => {
   const appPath = `nodos-${Date.now().toString()}`;
   projectRoot = path.join(dir, appPath);
 
-  const options = { exitProcess: false, args: ['new', appPath] };
+  const env = {
+    PATH: `${path.join(fixturesPath, 'bin')}:/usr/bin:/bin`,
+  };
+  const options = { env, exitProcess: false, args: ['new', appPath] };
   await runNew(dir, options);
   await delay(1000);
 
