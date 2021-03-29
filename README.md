@@ -9,7 +9,7 @@ Node.js framework for humans
 
 ## Requirements
 
-* Nodejs >= 12
+* Nodejs >= 14
 
 ## Install
 
