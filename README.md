@@ -18,7 +18,7 @@ npm i -g @nodosjs/cli
 nodos new MyBlog
 cd MyBlog
 npm install
-nodos server # see http://localhost:3000/
+nodos server # see http://localhost:8080/
 # commands: nodos --help
 ```
 
