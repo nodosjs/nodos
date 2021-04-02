@@ -20,6 +20,7 @@
     "js-yaml": "^4.0.0",
     "lodash": "^4.17.21",
     "semver": "^7.3.5",
+    "@nodosjs/core": "^0.0.56",
     "yargs": "^16.2.0"
   },
   "homepage": "https://github.com/nodosjs/nodos",
@@ -27,7 +28,6 @@
   "repository": "nodosjs/nodos",
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba",
   "devDependencies": {
-    "@nodosjs/core": "^0.0.56",
     "nanodelay": "^1.0.8"
   }
 }
