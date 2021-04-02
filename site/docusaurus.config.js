@@ -1,33 +1,31 @@
+/** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'Nodos',
-  tagline: 'Node.js framework for humans (inspired by Rails, Phoenix, Django)',
-  url: 'https://nodosjs.github.io',
-  baseUrl: '/nodosjs.github.io/',
+  title: 'My Site',
+  tagline: 'The tagline of my site',
+  url: 'https://your-docusaurus-test-site.com',
+  baseUrl: '/',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'nodosjs', // Usually your GitHub org/user name.
-  projectName: 'nodosjs.github.io', // Usually your repo name.
+  organizationName: 'facebook', // Usually your GitHub org/user name.
+  projectName: 'docusaurus', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Nodos',
+      title: 'My Site',
       logo: {
-        alt: 'Nodos Logo',
+        alt: 'My Site Logo',
         src: 'img/logo.svg',
       },
       items: [
         {
-          to: 'docs/getting_started',
+          to: 'docs/',
           activeBasePath: 'docs',
-          label: 'Guides',
+          label: 'Docs',
           position: 'left',
         },
+        {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://nodosjs.github.io/nodos/',
-          label: 'API',
-          position: 'left',
-        },
-        { to: 'blog', label: 'Blog', position: 'left' },
-        {
-          href: 'https://github.com/nodosjs/nodos',
+          href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',
         },
@@ -35,25 +33,55 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} Nodos, Inc. Built with Docusaurus.`,
+      links: [
+        {
+          title: 'Community',
+          items: [
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+            },
+            {
+              label: 'Discord',
+              href: 'https://discordapp.com/invite/docusaurus',
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/docusaurus',
+            },
+          ],
+        },
+        {
+          title: 'More',
+          items: [
+            {
+              label: 'Blog',
+              to: 'blog/',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/facebook/docusaurus',
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
     [
-      '@docusaurus/preset-classic',
+      '@docusaurus/preset-bootstrap',
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/nodosjs/nodos/tree/master/site',
+            'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         blog: {
           showReadingTime: true,
+          // Please change this to your repo.
           editUrl:
-            'https://github.com/nodosjs/nodos/tree/master/site/blog',
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
         },
       },
     ],
