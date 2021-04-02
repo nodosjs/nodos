@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/cli",
-  "version": "0.0.56",
+  "version": "0.0.57",
   "author": "Kirill Mokevnin @mokevnin",
   "publishConfig": {
     "access": "public"
@@ -10,6 +10,7 @@
   },
   "bugs": "https://github.com/nodosjs/nodos/issues",
   "dependencies": {
+    "@nodosjs/core": "^0.0.57",
     "columnify": "^1.5.4",
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
@@ -20,7 +21,6 @@
     "js-yaml": "^4.0.0",
     "lodash": "^4.17.21",
     "semver": "^7.3.5",
-    "@nodosjs/core": "^0.0.56",
     "yargs": "^16.2.0"
   },
   "homepage": "https://github.com/nodosjs/nodos",

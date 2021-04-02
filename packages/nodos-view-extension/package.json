@@ -1,6 +1,6 @@
 {
   "name": "@nodosjs/view-extension",
-  "version": "0.0.56",
+  "version": "0.0.57",
   "publishConfig": {
     "access": "public"
   },
@@ -19,8 +19,8 @@
     "qs": "^6.10.1"
   },
   "devDependencies": {
-    "@nodosjs/cli": "^0.0.56",
-    "@nodosjs/core": "^0.0.56"
+    "@nodosjs/cli": "^0.0.57",
+    "@nodosjs/core": "^0.0.57"
   },
   "gitHead": "e2b43349902ba83a388bdae975efd6b53571ecba"
 }
