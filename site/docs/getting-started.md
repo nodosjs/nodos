@@ -3,7 +3,14 @@ title: Getting Started
 slug: /
 ---
 
-## Step 1: Generate a new project
+## Step 1: Install Nodejs
+
+```sh
+curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+## Step 2: Generate a new project
 
 ```sh
 npx init @nodosjs projectName 
@@ -14,7 +21,7 @@ This command performs next actions:
 1. Generating file structure
 1. Installing npm dependencies
 
-## Step 2: Start your website
+## Step 3: Start your website
 
 Run the development server in the newly created `projectName` directory:
 
