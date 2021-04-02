@@ -85,13 +85,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/nodosjs/nodos/tree/master/site/docs',
+            'https://github.com/nodosjs/nodos/tree/master/site',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/nodosjs/nodos/tree/master/site/blog',
+            'https://github.com/nodosjs/nodos/tree/master/site',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

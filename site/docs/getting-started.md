@@ -5,22 +5,26 @@ slug: /
 
 ## Step 1: Generate a new project
 
-```shell
-npx init @nodosjs 
+```sh
+npx init @nodosjs projectName 
 ```
 
-<!-- ## Step 2: Start your Docusaurus site -->
+This command performs next actions:
 
-<!-- Run the development server in the newly created `my-website` folder: -->
+1. Generating file structure
+1. Installing npm dependencies
 
-<!-- ```shell -->
-<!-- cd my-website -->
+## Step 2: Start your website
 
-<!-- npx docusaurus start -->
-<!-- ``` -->
+Run the development server in the newly created `projectName` directory:
 
-<!-- Open `docs/getting-started.md` and edit some lines. The site reloads automatically and display your changes. -->
+```sh
+cd projectName
+npx nodos start
+```
 
-<!-- ## That's it! -->
+Then open *http://localhost:8080*
 
-<!-- Congratulations! You've successfully run and modified your Docusaurus project. -->
+## That's it!
+
+Congratulations! You've successfully setup and run Nodosjs project.
