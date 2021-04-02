@@ -9,3 +9,5 @@ tmp
 *.lerna_backup
 package-lock.json
 !example/package-lock.json
+site/build
+site/.docusaurus
