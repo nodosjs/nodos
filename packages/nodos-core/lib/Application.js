@@ -1,12 +1,14 @@
 // @ts-check
 
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 
 const fastify = require('fastify');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
+const findUp = require('find-up');
 // const { merge } = require('lodash');
 
 const buildNodosRouter = require('./builders/nodosRouter.js');
@@ -43,12 +45,18 @@ class Application {
     this.container[name] = value;
   }
 
-  addMiddleware(filepath) {
+  async addMiddleware(filepath) {
     const filename = path.basename(filepath);
+    const dirname = path.dirname(filepath);
     const middlewareName = filename.replace(path.extname(filename), '');
-    log('addMiddleware', middlewareName, filepath);
+    const packageConfigPath = await findUp('package.json', { cwd: dirname });
+    // log('!!!', packageConfigPath);
+    const packageConfig = await fse.readJson(packageConfigPath);
+    // log('addMiddleware package.json', packageConfig);
+    const fullMiddlewareName = `${packageConfig.name}/${middlewareName}`;
+    log('addMiddleware', fullMiddlewareName, filepath);
     // FIXME: check uniqueness
-    this.middlewares[middlewareName] = filepath;
+    this.middlewares[fullMiddlewareName] = filepath;
   }
 
   addExtension(extension, options = {}) {
@@ -157,7 +165,9 @@ class Application {
     const { middlewaresPath } = this.config.paths;
     const filenames = await fs.promises.readdir(middlewaresPath).catch(() => []);
     const filepaths = filenames.map((filename) => path.resolve(middlewaresPath, filename));
-    filepaths.forEach((filepath) => this.addMiddleware(filepath));
+
+    const middlewarePromises = filepaths.map((filepath) => this.addMiddleware(filepath));
+    await Promise.all(middlewarePromises);
 
     await buildFastifyHandlers(this);
 

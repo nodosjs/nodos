@@ -24,6 +24,7 @@
     "fastify-express": "^0.3.2",
     "fastify-sensible": "^3.1.1",
     "fastify-static": "^4.0.1",
+    "find-up": "^3.0.0",
     "inflected": "^2.1.0",
     "js-yaml": "^4.0.0",
     "lodash": "^4.17.21",

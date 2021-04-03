@@ -11,7 +11,8 @@ const log = require('../logger.js');
 const fetchMiddleware = async (app, middlewareName) => {
   const filepath = app.middlewares[middlewareName];
   if (!filepath) {
-    throw new Error(`Cannot find middleware: ${middlewareName}. Middlewares: ${app.middlewares.join(', ')}`);
+    const middlewareNames = Object.keys(app.middlewares).join(', ');
+    throw new Error(`Cannot find middleware: ${middlewareName}. Middlewares: ${middlewareNames}`);
   }
 
   const module = require(filepath); // eslint-disable-line
@@ -114,7 +115,7 @@ module.exports = async (app) => {
       preHandler: csrfChecker(app.fastify, route),
     };
 
-    log(opts);
+    // log(opts);
     app.fastify.route(opts);
   });
   await Promise.all(promises);

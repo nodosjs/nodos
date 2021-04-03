@@ -3,7 +3,7 @@
 pipelines:
 
   browser:
-    - setLocale
+    - site/setLocale
     # - checkMigrations
     # - fastify-cookie
     # - accepts
@@ -14,7 +14,7 @@ pipelines:
 
   api:
     - accepts
-    - setLocale
+    - site/setLocale
 
 scopes:
 

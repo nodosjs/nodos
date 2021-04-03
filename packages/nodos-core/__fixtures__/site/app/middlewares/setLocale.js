@@ -1,1 +1,1 @@
-module.exports = (next) => next();
+module.exports = (action) => action();

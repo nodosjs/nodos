@@ -3,18 +3,18 @@
 pipelines:
 
   browser:
-    - checkMigrations
-    - handleDbErrors
-    - protectFromForgery
-    - setCurrentUser
-    - fetchFlash
+    - "@nodosjs/view-extension/protectFromForgery"
+    # - checkMigrations
+    # - handleDbErrors
+    - example/setCurrentUser
+    - "@nodosjs/view-extension/fetchFlash"
     # - accepts
     # - setLocale
     # - fetchSession
 
   api:
     # - accepts
-    - setLocale
+    - example/setLocale
 
 scopes:
   - name: '/api'

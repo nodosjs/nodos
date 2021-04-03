@@ -1,7 +1,9 @@
 ---
 to: './<%= name %>/package.json'
 ---
+
 {
+  "name": "<%= name %>",
   "scripts": {
     "test": "jest",
     "start": "nodos server",

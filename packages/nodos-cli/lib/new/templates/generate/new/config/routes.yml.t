@@ -4,8 +4,8 @@ to: './<%= name %>/config/routes.yml'
 
 pipelines:
   browser:
-    - setLocale
-    - protectFromForgery
+    - "<%= name %>/setLocale"
+    - "@nodosjs/view-extension/protectFromForgery"
 
 scopes:
   - name: '/'
