@@ -1,5 +1,7 @@
 import path from 'path';
+
 import extension from '../../../index.js';
+
 
 export default (app) => {
 	app.addExtension(extension);
