@@ -18,6 +18,7 @@
     "fs-extra": "^9.1.0",
     "hygen": "^6.0.4",
     "import-from": "^3.0.0",
+    "inflected": "^2.1.0",
     "js-yaml": "^4.0.0",
     "lodash": "^4.17.21",
     "semver": "^7.3.5",

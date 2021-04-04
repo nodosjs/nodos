@@ -1,28 +1,19 @@
 ---
 
 pipelines:
-
   browser:
-    - "@nodosjs/view-extension/protectFromForgery"
-    # - checkMigrations
-    # - handleDbErrors
+    - '@nodosjs/view-extension/protectFromForgery'
     - example/setCurrentUser
-    - "@nodosjs/view-extension/fetchFlash"
-    # - accepts
-    # - setLocale
-    # - fetchSession
-
+    - '@nodosjs/view-extension/fetchFlash'
   api:
-    # - accepts
     - example/setLocale
 
 scopes:
-  - name: '/api'
+  - name: /api
     pipeline: api
     routes:
       - resources: users
-
-  - name: '/'
+  - name: /
     pipeline: browser
     root: true
     routes:
@@ -32,3 +23,4 @@ scopes:
           name: posts
           routes:
             - resources: comments
+      - resources: people

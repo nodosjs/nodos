@@ -199,9 +199,11 @@ class Application {
   }
 
   async stop() {
-    log('ON STOP');
-    await this.fastify.close();
-    this.hooks.onStop.forEach((h) => h());
+    if (this.isInitialized()) {
+      log('ON STOP');
+      await this.fastify.close();
+      this.hooks.onStop.forEach((h) => h());
+    }
   }
 
   get(url) {
