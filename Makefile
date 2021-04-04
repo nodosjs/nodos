@@ -1,5 +1,6 @@
 setup: bootstrap
 	cd example && npm i
+	npx prisma generate --schema=./packages/nodos-db-prisma-extension/__fixtures__/application/prisma/schema.prisma
 	# cd example && npx nodos db migrate
 
 bootstrap:
