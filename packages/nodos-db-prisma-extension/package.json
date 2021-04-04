@@ -1,5 +1,5 @@
 {
-  "name": "@nodosjs/db-mikro-extension",
+  "name": "@nodosjs/db-prisma-extension",
   "version": "0.0.57",
   "publishConfig": {
     "access": "public"
