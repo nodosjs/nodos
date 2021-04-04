@@ -1,4 +1,6 @@
-// import { User } from '../entities/User.js';
+import UserContainer from '../entities/User.js';
+
+const { User } = UserContainer;
 
 export const index = async (_request, response) => {
   const users = await User.find();

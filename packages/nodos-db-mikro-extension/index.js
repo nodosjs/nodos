@@ -41,14 +41,14 @@ module.exports = async (app) => {
   // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
   // app.fastify.addHook('onStop', () => db.close());
   app.fastify.addHook('onClose', () => data.db && data.db.close());
-  const orm = await MikroORM.init({
-    entities: [config.entitiesPath],
-    dbName: config.database,
-    type: config.type,
-    debug: config.debug,
-    // clientUrl: '...', // defaults to 'mongodb://localhost:27017' for mongodb driver
-  });
   app.fastify.addHook('onReady', async () => {
+    const orm = await MikroORM.init({
+      entities: [config.entitiesPath],
+      dbName: config.database,
+      type: config.type,
+      debug: config.debug,
+      // clientUrl: '...', // defaults to 'mongodb://localhost:27017' for mongodb driver
+    });
     // const db = await createConnection(config);
     data.db = orm;
     app.addDependency('db', orm);

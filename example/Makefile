@@ -22,4 +22,4 @@ nodos-console:
 	DEBUG=nodos:* npx nodos console
 
 test:
-	BABEL_DECORATORS_COMPAT=true DEBUG=nodos:* npm test
+	DEBUG=nodos:* npm test

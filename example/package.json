@@ -25,9 +25,7 @@
     "@nodosjs/core": "file:../packages/nodos-core",
     "@nodosjs/db-mikro-extension": "file:../packages/nodos-db-mikro-extension",
     "@nodosjs/view-extension": "file:../packages/nodos-view-extension",
-    "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension",
-    "babel-plugin-transform-typescript-metadata": "^0.3.2",
-    "sql.js": "^1.5.0"
+    "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension"
   },
   "devDependencies": {
     "@nodosjs/jest-environment": "file:../packages/nodos-jest-environment",
