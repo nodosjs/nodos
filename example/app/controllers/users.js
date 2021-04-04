@@ -1,4 +1,4 @@
-import User from '../entities/User.js';
+// import { User } from '../entities/User.js';
 
 export const index = async (_request, response) => {
   const users = await User.find();
@@ -12,7 +12,8 @@ export const build = (_request, response) => {
   response.render({ user });
 };
 
-export const create = async (request, response, { router }) => {
+export const create = async (request, response, { router, container }) => {
+  const { db } = container;
   const user = new User(request.body.user);
 
   try {

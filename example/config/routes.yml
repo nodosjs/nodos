@@ -23,4 +23,3 @@ scopes:
           name: posts
           routes:
             - resources: comments
-      - resources: people

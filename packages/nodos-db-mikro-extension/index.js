@@ -1,8 +1,7 @@
-require('reflect-metadata');
-
 const path = require('path');
+const fsp = require('fs/promises');
 // const fastifyObjectionjs = require('fastify-objectionjs');
-const { createConnection } = require('typeorm');
+const { MikroORM } = require('@mikro-orm/core');
 
 // const commandBuilders = require('./lib/commands.js');
 // const generators = require('./lib/generators.js');
@@ -24,13 +23,13 @@ module.exports = async (app) => {
     type: process.env.NODOS_DB_TYPE,
     username: process.env.NODOS_DB_USERNAME,
     password: process.env.NODOS_DB_PASSWORD,
-    entities: [path.join(app.config.projectRoot, 'app/entities/*.js')],
+    entitiesPath: path.join(app.config.projectRoot, 'app/entities'),
     // connection: path.join(app.config.projectRoot, 'db/development.sqlite3'),
     // TODO: подобные штуки не должны переопределяться
-    migrations: [path.join(app.config.projectRoot, 'db/migrations/**/*.js')],
+    migrationPaths: [path.join(app.config.projectRoot, 'db/migrations/**/*.js')],
     logging: true,
     connectTimeout: 1000,
-    // debug: true
+    debug: true,
   };
   const config = { ...defaultConfig, ...appConfig };
   log('init db extension', config);
@@ -38,13 +37,20 @@ module.exports = async (app) => {
   const data = {}; // little hack for lazy loading
   // Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
   // generators.forEach((generator) => app.addGenerator(generator));
-  app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleDbErrors.js'));
-  app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
+  // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleDbErrors.js'));
+  // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
   // app.fastify.addHook('onStop', () => db.close());
   app.fastify.addHook('onClose', () => data.db && data.db.close());
+  const orm = await MikroORM.init({
+    entities: [config.entitiesPath],
+    dbName: config.database,
+    type: config.type,
+    debug: config.debug,
+    // clientUrl: '...', // defaults to 'mongodb://localhost:27017' for mongodb driver
+  });
   app.fastify.addHook('onReady', async () => {
-    const db = await createConnection(config);
-    data.db = db;
-    app.addDependency('db', db);
+    // const db = await createConnection(config);
+    data.db = orm;
+    app.addDependency('db', orm);
   });
 };

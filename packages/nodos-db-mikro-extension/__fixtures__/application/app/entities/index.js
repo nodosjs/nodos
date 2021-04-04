@@ -1,3 +1,4 @@
-import User from './User';
+// @ts-check
 
-export default [User];
+module.exports.BaseEntity = require('./BaseEntity.js');
+module.exports.User = require('./User.js');

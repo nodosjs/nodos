@@ -1,11 +1,11 @@
 import User from '../entities/User.js';
-import Guest from '../entities/Guest.js';
+// import Guest from '../entities/Guest.js';
 
 export default async (action, request, response) => {
   const userId = request.session.get('userId');
   const currentUser = userId
     ? await User.query().findById(userId)
-    : new Guest();
+    : null;
 
   request.currentUser = currentUser;
   response.addLocal('currentUser', currentUser);

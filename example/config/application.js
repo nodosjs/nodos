@@ -1,4 +1,4 @@
-import nodosDb from '@nodosjs/db-typeorm-extension';
+import nodosDb from '@nodosjs/db-mikro-extension';
 import nodosView from '@nodosjs/view-extension';
 import { inflections } from 'inflected';
 

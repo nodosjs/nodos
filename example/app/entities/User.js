@@ -1,20 +1,12 @@
 // @ts-check
 
-import { BaseEntity } from 'typeorm';
-import * as yup from 'yup';
+const { Entity, PrimaryKey, Property } = require('@mikro-orm/core');
 
-const schema = yup.object().shape({
-  firstName: yup.string().required(),
-  email: yup.string().required().email(),
-});
+@Entity()
+export class User {
+  @PrimaryKey()
+  _id!: ObjectId;
 
-export default class User extends BaseEntity {
-  constructor(attributes = {}) {
-    super();
-    this.email = attributes.email;
-    this.firstName = attributes.firstName;
-  }
-  validate() {
-    return schema.validate(this);
-  }
+  @Property()
+  email!: string;
 }

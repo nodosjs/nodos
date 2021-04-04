@@ -14,7 +14,7 @@ export default async (app) => {
   app.config.cacheModules = false;
 
   app.config.db = {
-    type: 'sqljs',
-    location: 'db/development.sqlite',
+    type: 'sqlite',
+    database: 'db/development.sqlite',
   };
 };
