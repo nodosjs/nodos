@@ -1,7 +1,7 @@
 const path = require('path');
 const fsp = require('fs/promises');
+const { PrismaClient } = require('@prisma/client');
 // const fastifyObjectionjs = require('fastify-objectionjs');
-const { MikroORM } = require('@mikro-orm/core');
 
 // const commandBuilders = require('./lib/commands.js');
 // const generators = require('./lib/generators.js');
@@ -40,17 +40,11 @@ module.exports = async (app) => {
   // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleDbErrors.js'));
   // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
   // app.fastify.addHook('onStop', () => db.close());
-  app.fastify.addHook('onClose', () => data.db && data.db.close());
+  app.fastify.addHook('onClose', () => data.db && data.db.$disconnect());
   app.fastify.addHook('onReady', async () => {
-    const orm = await MikroORM.init({
-      entities: [config.entitiesPath],
-      dbName: config.database,
-      type: config.type,
-      debug: config.debug,
-      // clientUrl: '...', // defaults to 'mongodb://localhost:27017' for mongodb driver
-    });
+    const prisma = new PrismaClient();
     // const db = await createConnection(config);
-    data.db = orm;
-    app.addDependency('db', orm);
+    data.db = prisma;
+    app.addDependency('db', prisma);
   });
 };

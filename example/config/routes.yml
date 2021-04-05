@@ -2,10 +2,11 @@
 
 pipelines:
   browser:
+    - '@nodosjs/view-extension/fetchFlash'
     - '@nodosjs/view-extension/protectFromForgery'
     - example/setCurrentUser
-    - '@nodosjs/view-extension/fetchFlash'
   api:
+    - example/setLocale
     - example/setLocale
 
 scopes:

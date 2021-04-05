@@ -20,10 +20,9 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-decorators": "^7.13.5",
     "@babel/preset-env": "^7.13.10",
-    "@mikro-orm/sqlite": "^4.5.1",
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
-    "@nodosjs/db-mikro-extension": "file:../packages/nodos-db-mikro-extension",
+    "@nodosjs/db-prisma-extension": "file:../packages/nodos-db-prisma-extension",
     "@nodosjs/view-extension": "file:../packages/nodos-view-extension",
     "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension"
   },

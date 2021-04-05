@@ -5,15 +5,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@mikro-orm/core": "^4.5.1",
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
     "execa": "^5.0.0",
     "hygen": "^6.0.4",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "prisma": "^2.20.1"
   },
   "devDependencies": {
-    "@mikro-orm/sqlite": "^4.5.1",
     "@nodosjs/cli": "^0.0.57",
     "@nodosjs/core": "^0.0.57",
     "sqlite3": "^5.0.2"

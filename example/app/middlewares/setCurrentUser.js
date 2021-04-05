@@ -1,4 +1,4 @@
-import User from '../entities/User.js';
+// import User from '../entities/User.js';
 // import Guest from '../entities/Guest.js';
 
 export default async (action, request, response) => {

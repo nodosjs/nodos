@@ -11,3 +11,5 @@ package-lock.json
 !example/package-lock.json
 site/build
 site/.docusaurus
+public/assets
+.env

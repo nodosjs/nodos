@@ -18,6 +18,7 @@
     "@babel/core": "^7.13.14",
     "@babel/node": "^7.13.13",
     "@babel/preset-env": "^7.13.12",
+    "@prisma/client": "^2.20.1",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
