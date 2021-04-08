@@ -3,6 +3,7 @@ const parser = require('yargs');
 const commandBuilders = require('./commands.js');
 const log = require('../logger.js');
 const generators = require('./generators.js');
+const destroyers = require('./destroyers.js');
 // const log = require('./logger');
 
 module.exports = async (app, options = {}) => {
@@ -24,6 +25,7 @@ module.exports = async (app, options = {}) => {
 
   Object.values(commandBuilders).forEach((build) => app.addCommandBuilder(build));
   generators.forEach((generator) => app.addGenerator(generator));
+  destroyers.forEach((destroyer) => app.addDestroyer(destroyer));
   await app.initApp();
   const commands = app.commandBuilders.map((build) => build({ app, container }));
   log(commands);

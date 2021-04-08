@@ -116,6 +116,23 @@ const buildGeneratorsCommand = ({ app }) => ({
   },
 });
 
+const buildDestroyersCommand = ({ app }) => ({
+  command: 'destroy <type> <name>',
+  describe: '',
+  builder: (command) => {
+    command.positional('type', {
+      describe: 'what you need to create [controller model resource]',
+    });
+    command.positional('name', {
+      describe: 'name of entity',
+    });
+  },
+  handler: async ({ type, name }) => {
+    const { handler } = app.destroyers.find((destroyer) => destroyer.type === type);
+    handler(name);
+  },
+});
+
 module.exports = {
-  buildConsoleCommand, buildServerCommand, buildRoutesCommand, buildGeneratorsCommand,
+  buildConsoleCommand, buildServerCommand, buildRoutesCommand, buildGeneratorsCommand, buildDestroyersCommand,
 };
