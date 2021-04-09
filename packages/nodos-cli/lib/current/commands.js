@@ -121,7 +121,7 @@ const buildDestroyersCommand = ({ app }) => ({
   describe: '',
   builder: (command) => {
     command.positional('type', {
-      describe: 'what you need to create [controller model resource]',
+      describe: 'what you need to destroy [controller model resource]',
     });
     command.positional('name', {
       describe: 'name of entity',
