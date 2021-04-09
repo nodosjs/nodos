@@ -17,7 +17,7 @@ beforeEach(async () => {
   fsp.copyFile(routePath, path.join(configPath, 'routes.yml'));
 });
 
-test('nodos/generate/resource', async () => {
+test('nodos/destroy/resource', async () => {
   await generateNewRoute(dir, 'users');
   const { newYaml: result } = await destroyRoute(dir, 'users');
   expect(result).toMatchSnapshot();

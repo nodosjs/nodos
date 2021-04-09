@@ -22,8 +22,8 @@ const destroyRoute = async (workdir, resourceName, scopeName = '/') => {
   if (!scope.routes) {
     scope.routes = [];
   }
-  const removedResourse = _.remove(scope.routes, ({ resources }) => resources === resourceName);
-  const isDestroyRoute = !_.isEmpty(removedResourse);
+  const removedResource = _.remove(scope.routes, ({ resources }) => resources === resourceName);
+  const isDestroyRoute = !_.isEmpty(removedResource);
 
   const mapper = ([key, value]) => {
     const dumped = yaml.dump(value).trim();
