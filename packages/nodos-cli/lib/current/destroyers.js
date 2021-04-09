@@ -28,8 +28,6 @@ const resourceHandler = async (name) => {
   const paths = [
     `*/templates/${Inflector.pluralize(name)}`,
     `*/controllers/${Inflector.pluralize(name)}.js`,
-    `*/entities/${Inflector.classify(name)}.js`,
-    `*/entities/${Inflector.classify(name)}Schema.js`,
   ];
 
   const deletedPaths = await del(paths, { cwd: workdir, onlyFiles: false });
