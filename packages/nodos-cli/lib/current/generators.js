@@ -62,5 +62,5 @@ const resourceHandler = ({ type, name, scopeName }) => {
 module.exports = [
   { type: 'controller', handler: controllerHandler },
   { type: 'model', handler: modelHandler },
-  { type: 'resource', handler: resourceHandler },
+  { type: 'resources', handler: resourceHandler },
 ];

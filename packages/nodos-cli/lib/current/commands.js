@@ -96,7 +96,7 @@ const buildGeneratorsCommand = ({ app }) => ({
   command: 'generate <type> <name> [params...]',
   builder: (command) => {
     command.positional('type', {
-      describe: 'what you need to create [controller model migration]',
+      describe: 'what you need to create [controller model resources]',
     });
     command.positional('name', {
       describe: 'name of entity',
@@ -121,7 +121,7 @@ const buildDestroyersCommand = ({ app }) => ({
   describe: '',
   builder: (command) => {
     command.positional('type', {
-      describe: 'what you need to destroy [controller model resource]',
+      describe: 'what you need to destroy [controller model resources]',
     });
     command.positional('name', {
       describe: 'name of entity',

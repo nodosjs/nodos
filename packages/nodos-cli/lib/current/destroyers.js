@@ -43,5 +43,5 @@ const resourceHandler = async (name) => {
 module.exports = [
   { type: 'controller', handler: controllerHandler },
   { type: 'model', handler: modelHandler },
-  { type: 'resource', handler: resourceHandler },
+  { type: 'resources', handler: resourceHandler },
 ];
