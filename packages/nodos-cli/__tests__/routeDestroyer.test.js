@@ -1,6 +1,7 @@
 import fsp from 'fs/promises';
 import path from 'path';
 import os from 'os';
+import yaml from 'js-yaml';
 import destroyRoute from '../lib/current/routeDestroyer.js';
 import generateNewRoute from '../lib/current/routeGenerator.js';
 
@@ -17,8 +18,32 @@ beforeEach(async () => {
   fsp.copyFile(routePath, path.join(configPath, 'routes.yml'));
 });
 
-test('nodos/destroy/resource', async () => {
+test('nodos/destroy/resources', async () => {
   await generateNewRoute(dir, 'users');
+  const { newYaml: result } = await destroyRoute(dir, 'users');
+  expect(result).toMatchSnapshot();
+});
+
+test('nodos/destroy/nestedResources', async () => {
+  const scopeName = '/';
+  const routesPath = path.join(dir, 'config/routes.yml');
+  const currentYaml = await fsp.readFile(routesPath, 'utf8');
+  const data = yaml.load(currentYaml);
+
+  const scope = data.scopes.find((s) => s.name === scopeName);
+  scope.routes = [
+    {
+      resources: {
+        name: 'users',
+        routes: [
+          {
+            resources: 'comments',
+          },
+        ],
+      },
+    },
+  ];
+
   const { newYaml: result } = await destroyRoute(dir, 'users');
   expect(result).toMatchSnapshot();
 });

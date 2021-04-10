@@ -1,6 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`nodos/generate/resource 1`] = `
+exports[`nodos/destroy/nestedResources 1`] = `
+"---
+
+pipelines:
+  browser: []
+
+scopes:
+  - name: /
+    pipeline: browser
+    root: true
+    routes: []"
+`;
+
+exports[`nodos/destroy/resources 1`] = `
 "---
 
 pipelines:
