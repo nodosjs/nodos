@@ -96,7 +96,7 @@ const buildGeneratorsCommand = ({ app }) => ({
   command: 'generate <type> <name> [params...]',
   builder: (command) => {
     command.positional('type', {
-      describe: 'what you need to create [controller model resources]',
+      describe: 'what you need to create [controller model resource resources]',
     });
     command.positional('name', {
       describe: 'name of entity',

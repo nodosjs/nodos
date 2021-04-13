@@ -16,7 +16,12 @@ beforeEach(async () => {
   fsp.copyFile(routePath, path.join(configPath, 'routes.yml'));
 });
 
+test('nodos/generate/resources', async () => {
+  const result = await generateNewRoute(dir, 'resources', 'users');
+  expect(result).toMatchSnapshot();
+});
+
 test('nodos/generate/resource', async () => {
-  const result = await generateNewRoute(dir, 'users');
+  const result = await generateNewRoute(dir, 'resource', 'session');
   expect(result).toMatchSnapshot();
 });
