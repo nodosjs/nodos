@@ -72,6 +72,10 @@ class Application {
     this.generators.push(generator);
   }
 
+  addDestroyer(destroyer) {
+    this.destroyers.push(destroyer);
+  }
+
   isInitialized() {
     return this.state === 'initialized';
   }
@@ -108,6 +112,7 @@ class Application {
     this.extensions = [];
     this.middlewares = [];
     this.generators = [];
+    this.destroyers = [];
     this.container = {};
     this.plugins = [];
     this.hooks = {
