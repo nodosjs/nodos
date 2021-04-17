@@ -43,7 +43,7 @@ test('nodos/destroy/nestedResources', async () => {
       },
     },
   ];
-  const newYaml = yaml.dump(data)
+  const newYaml = yaml.dump(data);
   await fsp.writeFile(routesPath, newYaml);
 
   const { newYaml: result } = await destroyRoute(dir, 'users');
