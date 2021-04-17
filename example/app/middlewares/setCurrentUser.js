@@ -1,10 +1,7 @@
-// import User from '../entities/User.js';
-// import Guest from '../entities/Guest.js';
-
-export default async (action, request, response) => {
+export default async (action, request, response, app) => {
   const userId = request.session.get('userId');
   const currentUser = userId
-    ? await User.query().findById(userId)
+    ? await container.db.user.findUnique({ where: { id: userId } })
     : null;
 
   request.currentUser = currentUser;

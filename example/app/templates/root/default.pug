@@ -2,7 +2,8 @@ extends /layouts/application.pug
 
 block content
   h1 Nodos Project
-  if currentUser.isGuest
+  // TODO: refactor check as `currentUser.isGuest` after wrapping Prisma object with entity classes
+  if !currentUser
     h3 You are not logged in
 
     a(href=route('buildSession')) Login
