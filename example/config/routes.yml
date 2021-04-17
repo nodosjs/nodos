@@ -10,7 +10,7 @@ pipelines:
     - example/setLocale
 
 scopes:
-  - name: /api
+  - name: api
     pipeline: api
     routes:
       - resources: users
