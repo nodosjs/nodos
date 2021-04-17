@@ -19,7 +19,7 @@ beforeEach(async () => {
 });
 
 test('nodos/destroy/resources', async () => {
-  await generateNewRoute(dir, 'users');
+  await generateNewRoute(dir, 'resources', 'users');
   const { newYaml: result } = await destroyRoute(dir, 'users');
   expect(result).toMatchSnapshot();
 });
@@ -43,6 +43,8 @@ test('nodos/destroy/nestedResources', async () => {
       },
     },
   ];
+  const newYaml = yaml.dump(data)
+  await fsp.writeFile(routesPath, newYaml);
 
   const { newYaml: result } = await destroyRoute(dir, 'users');
   expect(result).toMatchSnapshot();
