@@ -34,17 +34,22 @@ module.exports = async (dir, options = {}) => {
         describe: 'skip npm install',
         type: 'boolean',
       });
+      command.option('--without', {
+        default: false,
+        describe: 'generate new app without packages',
+        type: 'array',
+      });
     },
     handler: async (params) => {
       log(params);
-      const { appPath, skipInstall } = params;
+      const { appPath, skipInstall, without } = params;
       // TODO: pass version directly, without arguments
       const fullPath = path.resolve(dir, appPath);
       const basename = path.basename(fullPath);
       const dirname = path.dirname(fullPath);
 
       console.log('> genearte file structure');
-      const result = await runner(['generate', 'new', basename, '--version', version], {
+      const result = await runner(['generate', 'new', basename, '--version', version, '--without', without], {
         templates: defaultTemplates,
         cwd: dirname,
         logger: new Logger(console.log.bind(console)),

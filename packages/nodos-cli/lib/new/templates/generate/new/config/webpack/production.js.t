@@ -1,5 +1,5 @@
 ---
-to: './<%= name %>/config/webpack/production.js'
+to: "<%= without.includes('webpack') ? null : `./${name}/config/webpack/production.js` %>"
 ---
 import TerserPlugin from 'terser-webpack-plugin';
 import { merge } from 'webpack-merge';
