@@ -18,4 +18,7 @@ test('nodos/new', async () => {
   await delay(1000);
   const configFiles = await fsp.readdir(path.join(projectRoot, '/config'));
   expect(configFiles).toMatchSnapshot();
+
+  const packageJsonContent = await fsp.readFile(path.join(projectRoot, 'package.json'), 'utf-8');
+  expect(packageJsonContent).toMatchSnapshot();
 });
