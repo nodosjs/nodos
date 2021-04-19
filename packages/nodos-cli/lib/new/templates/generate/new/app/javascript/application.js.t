@@ -1,5 +1,5 @@
 ---
-to: './<%= name %>/app/javascript/application.js'
+to: "<%= without.includes('webpack') ? null : `./${name}/app/javascript/application.js` %>"
 ---
 
 /* @ts-check */

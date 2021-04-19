@@ -1,5 +1,5 @@
 ---
-to: './<%= name %>/config/webpack/common.js'
+to: "<%= without.includes('webpack') ? null : `./${name}/config/webpack/common.js` %>"
 ---
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';

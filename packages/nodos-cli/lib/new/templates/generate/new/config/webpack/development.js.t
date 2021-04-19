@@ -1,5 +1,5 @@
 ---
-to: './<%= name %>/config/webpack/development.js'
+to: "<%= without.includes('webpack') ? null : `./${name}/config/webpack/development.js` %>"
 ---
 import { merge } from 'webpack-merge';
 import common from './common.js';

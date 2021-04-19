@@ -1,14 +1,14 @@
-const path = require('path');
-const fsp = require('fs/promises');
+// const path = require('path');
+// const fsp = require('fs/promises');
 const { PrismaClient } = require('@prisma/client');
 
 // const commandBuilders = require('./lib/commands.js');
 // const generators = require('./lib/generators.js');
 // const Db = require('./lib/Db.js');
-const log = require('./lib/logger.js');
+// const log = require('./lib/logger.js');
 
 module.exports = async (app) => {
-  const appConfig = app.config.db || {};
+  // const appConfig = app.config.db || {};
 
   // TODO: we have to decide how we will configure Prisma - nodos config files or schema.prisma file
   // const defaultConfig = {

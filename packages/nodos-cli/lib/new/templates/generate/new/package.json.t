@@ -24,7 +24,9 @@ to: './<%= name %>/package.json'
     "@nodosjs/core": "^<%= version %>",
     "@nodosjs/db-typeorm-extension": "^<%= version %>",
     "@nodosjs/view-extension": "^<%= version %>",
+<% if (!without.includes('webpack')) { -%>
     "@nodosjs/webpack-extension": "^<%= version %>",
+<% } -%>
     "sql.js": "^1.5.0",
     "pg": "^8.5.1"
   },
