@@ -16,11 +16,19 @@ beforeEach(async () => {
 
   await fsp.mkdir(configPath);
   fsp.copyFile(routePath, path.join(configPath, 'routes.yml'));
+  await generateNewRoute(dir, 'resources', 'posts');
+  await generateNewRoute(dir, 'resource', 'order');
 });
 
 test('nodos/destroy/resources', async () => {
   await generateNewRoute(dir, 'resources', 'users');
-  const { newYaml: result } = await destroyRoute(dir, 'users');
+  const { newYaml: result } = await destroyRoute(dir, 'resources', 'users');
+  expect(result).toMatchSnapshot();
+});
+
+test('nodos/destroy/resource', async () => {
+  await generateNewRoute(dir, 'resource', 'session');
+  const { newYaml: result } = await destroyRoute(dir, 'resource', 'session');
   expect(result).toMatchSnapshot();
 });
 
@@ -31,21 +39,19 @@ test('nodos/destroy/nestedResources', async () => {
   const data = yaml.load(currentYaml);
 
   const scope = data.scopes.find((s) => s.name === scopeName);
-  scope.routes = [
-    {
-      resources: {
-        name: 'users',
-        routes: [
-          {
-            resources: 'comments',
-          },
-        ],
-      },
+  scope.routes.push({
+    resources: {
+      name: 'users',
+      routes: [
+        {
+          resources: 'comments',
+        },
+      ],
     },
-  ];
+  });
   const newYaml = yaml.dump(data);
   await fsp.writeFile(routesPath, newYaml);
 
-  const { newYaml: result } = await destroyRoute(dir, 'users');
+  const { newYaml: result } = await destroyRoute(dir, 'resources', 'users');
   expect(result).toMatchSnapshot();
 });

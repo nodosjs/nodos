@@ -130,7 +130,10 @@ const buildDestroyersCommand = ({ app }) => ({
   },
   handler: async ({ type, name }) => {
     const { handler } = app.destroyers.find((destroyer) => destroyer.type === type);
-    handler(name);
+    handler({
+      name,
+      type,
+    });
   },
 });
 

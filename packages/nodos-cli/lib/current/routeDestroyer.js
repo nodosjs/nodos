@@ -6,7 +6,7 @@ const Logger = require('hygen/dist/logger').default;
 
 const log = new Logger(console.log.bind(console));
 
-const destroyRoute = async (workdir, resourceName, scopeName = '/') => {
+const destroyRoute = async (workdir, resourceType, resourceName, scopeName = '/') => {
   const routesPath = path.join(workdir, 'config/routes.yml');
   const currentYaml = await fsp.readFile(routesPath, 'utf8');
   const data = yaml.load(currentYaml);
@@ -22,7 +22,10 @@ const destroyRoute = async (workdir, resourceName, scopeName = '/') => {
   if (!scope.routes) {
     scope.routes = [];
   }
-  const checkName = ({ resources }) => resources === resourceName || resources.name === resourceName;
+  const checkName = (route) => {
+    const resource = route[resourceType];
+    return _.isObject(resource) ? resource.name === resourceName : resource === resourceName;
+  };
   const removedResource = _.remove(scope.routes, checkName);
   const isDestroyRoute = !_.isEmpty(removedResource);
 
