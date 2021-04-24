@@ -154,7 +154,16 @@ class Application {
 
     const host = `http://${this.config.host}:${this.config.port}`;
     this.router = await buildNodosRouter(this.config.paths.routesPath, { host });
-    this.fastify = fastify({ logger: { prettyPrint: true } });
+    this.fastify = fastify({
+      logger: {
+        prettyPrint: {
+          translateTime: 'yyyy-mm-dd HH:MM:ss',
+          messageFormat: '[#{reqId}] {msg} {req.method} {req.url} {res.statusCode} {responseTime}',
+          ignore: 'pid,hostname',
+          hideObject: true,
+        },
+      },
+    });
 
     this.fastify.register(fastifyExpress);
     this.fastify.register(fastifySensible, { errorHandler: this.config.errorHandler });
