@@ -56,11 +56,32 @@ const resourceHandler = ({ type, name, scopeName }) => {
     },
     debug: !!process.env.DEBUG,
   });
-  generateNewRoute(workdir, Inflector.pluralize(name), scopeName);
+
+  generateNewRoute(workdir, type, Inflector.singularize(name), scopeName);
+};
+
+const resourcesHandler = ({ type, name, scopeName }) => {
+  const command = ['generate', type, name];
+  const workdir = process.cwd();
+
+  runner(command, {
+    templates: defaultTemplates,
+    cwd: workdir,
+    logger: new Logger(console.log.bind(console)),
+    createPrompter: () => enquirer,
+    exec: (action, body) => {
+      const opts = body && body.length > 0 ? { input: body } : {};
+      return execa.shell(action, opts);
+    },
+    debug: !!process.env.DEBUG,
+  });
+
+  generateNewRoute(workdir, type, Inflector.pluralize(name), scopeName);
 };
 
 module.exports = [
   { type: 'controller', handler: controllerHandler },
   { type: 'model', handler: modelHandler },
-  { type: 'resources', handler: resourceHandler },
+  { type: 'resource', handler: resourceHandler },
+  { type: 'resources', handler: resourcesHandler },
 ];

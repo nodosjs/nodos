@@ -11,5 +11,19 @@ scopes:
     pipeline: browser
     root: true
     routes:
+      - resource: session"
+`;
+
+exports[`nodos/generate/resources 1`] = `
+"---
+
+pipelines:
+  browser: []
+
+scopes:
+  - name: /
+    pipeline: browser
+    root: true
+    routes:
       - resources: users"
 `;

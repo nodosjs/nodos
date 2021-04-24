@@ -94,9 +94,10 @@ const buildRoutesCommand = ({ app, container }) => ({
 
 const buildGeneratorsCommand = ({ app }) => ({
   command: 'generate <type> <name> [params...]',
+  describe: 'Creates folders and files for the <type> you specify',
   builder: (command) => {
     command.positional('type', {
-      describe: 'what you need to create [controller model resources]',
+      describe: 'what you need to create [controller model resource resources]',
     });
     command.positional('name', {
       describe: 'name of entity',
@@ -118,10 +119,10 @@ const buildGeneratorsCommand = ({ app }) => ({
 
 const buildDestroyersCommand = ({ app }) => ({
   command: 'destroy <type> <name>',
-  describe: '',
+  describe: 'Deletes files and folders created by the generate command for the <type> you specify',
   builder: (command) => {
     command.positional('type', {
-      describe: 'what you need to destroy [controller model resources]',
+      describe: 'what you need to destroy [controller model resource resources]',
     });
     command.positional('name', {
       describe: 'name of entity',
@@ -129,7 +130,10 @@ const buildDestroyersCommand = ({ app }) => ({
   },
   handler: async ({ type, name }) => {
     const { handler } = app.destroyers.find((destroyer) => destroyer.type === type);
-    handler(name);
+    handler({
+      name,
+      type,
+    });
   },
 });
 

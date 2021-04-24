@@ -2,7 +2,7 @@ const path = require('path');
 const fsp = require('fs/promises');
 const yaml = require('js-yaml');
 
-const generateNewRoute = async (workdir, resourceName, scopeName = '/') => {
+const generateNewRoute = async (workdir, resourceType, resourceName, scopeName = '/') => {
   const routesPath = path.join(workdir, 'config/routes.yml');
   const currentYaml = await fsp.readFile(routesPath, 'utf8');
   const data = yaml.load(currentYaml);
@@ -16,7 +16,7 @@ const generateNewRoute = async (workdir, resourceName, scopeName = '/') => {
   if (!scope.routes) {
     scope.routes = [];
   }
-  scope.routes.push({ resources: resourceName });
+  scope.routes.push({ [resourceType]: resourceName });
 
   const mapper = ([key, value]) => {
     const dumped = yaml.dump(value).trim();
