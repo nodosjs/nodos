@@ -13,7 +13,7 @@ sudo apt-get install -y nodejs
 ## Step 2: Generate a new project
 
 ```sh
-npx init @nodosjs projectName 
+npm init @nodosjs projectName 
 ```
 
 This command performs next actions:
