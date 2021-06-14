@@ -15,11 +15,11 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/node": "^7.13.10",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-decorators": "^7.13.5",
-    "@babel/preset-env": "^7.13.10",
+    "@babel/core": "^7.14.5",
+    "@babel/node": "^7.14.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-decorators": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
     "@nodosjs/db-prisma-extension": "file:../packages/nodos-db-prisma-extension",
@@ -28,12 +28,12 @@
   },
   "devDependencies": {
     "@nodosjs/jest-environment": "file:../packages/nodos-jest-environment",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.22.0",
+    "babel-jest": "^27.0.2",
+    "eslint": "^7.28.0",
     "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-jest": "^24.3.2",
-    "jest": "^26.6.3",
-    "jest-circus": "^26.6.3",
-    "jest-cli": "^26.6.3"
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.4",
+    "jest-circus": "^27.0.4",
+    "jest-cli": "^27.0.4"
   }
 }
