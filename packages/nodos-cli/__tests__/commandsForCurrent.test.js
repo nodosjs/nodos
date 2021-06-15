@@ -1,6 +1,6 @@
 import path from 'path';
 import { nodos } from '@nodosjs/core';
-import { delay } from 'nanodelay';
+import { setTimeout } from 'timers/promises';
 import runCurrent from '../lib/current/index.js';
 
 const projectRoot = path.join(__dirname, '../__fixtures__/site');
@@ -24,7 +24,7 @@ test('nodos/server', async () => {
   app.listen = jest.fn().mockResolvedValue();
   await runCurrent(app, { exitProcess: false, args: ['server'] });
   // NOTE it seeems yargs run handlers as sync code
-  await delay(10);
+  await setTimeout(10);
   expect(app.listen).toHaveBeenCalled();
 });
 

@@ -1,6 +1,6 @@
 import { promises as fsp } from 'fs';
 import path from 'path';
-import { delay } from 'nanodelay';
+import { setTimeout } from 'timers/promises';
 import { nodos } from '@nodosjs/core';
 import { runNew } from '@nodosjs/cli';
 import execa from 'execa';
@@ -29,7 +29,7 @@ beforeAll(async () => {
   };
   const options = { env, exitProcess: false, args: ['new', appPath] };
   await runNew(dir, options);
-  await delay(1000);
+  await setTimeout(1000);
 
   const appScssFilePath = path.join(projectRoot, 'app/assets/stylesheets/application.scss');
   await fsp.writeFile(appScssFilePath, '');

@@ -1,7 +1,7 @@
 import fsp from 'fs/promises';
 import path from 'path';
 import os from 'os';
-import { delay } from 'nanodelay';
+import { setTimeout } from 'timers/promises';
 import runNew from '../lib/new/index.js';
 
 let dir;
@@ -15,7 +15,7 @@ test('nodos/new', async () => {
   const projectRoot = path.join(dir, appPath);
   const options = { exitProcess: false, args: ['new', appPath, '--skip-install', '--without', 'webpack'] };
   await runNew(dir, options);
-  await delay(1000);
+  await setTimeout(1000);
   const configFiles = await fsp.readdir(path.join(projectRoot, '/config'));
   expect(configFiles).toMatchSnapshot();
 
