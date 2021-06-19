@@ -19,9 +19,15 @@ Routers are the main hubs of Nodos applications. They match HTTP requests and di
 
 Routes are definedinside the `config/routes.yml`.
 
+```sh
+- app/
+     config/
+       routes.yml
+```
+
 ## Routes file
 
-The router file that Nodos generates, config/routes.yml, will look something like this one:
+The routes for your application or engine live in the file config/routes.rb and typically looks like this:
 
 ```sh
 pipelines:
@@ -79,7 +85,7 @@ In Nodos, a resourceful route provides a mapping between HTTP verbs and URLs to 
       - resources: users
 ```
 
-creates seven different routes in your application, all mapping to the Users controller.
+creates eight  different routes in your application, all mapping to the Users controller.
 
 Running `npx nodos routes` now shows that we have all the routes.
 
@@ -96,3 +102,86 @@ user             DELETE /users/:id                        browser  users#destroy
 ```
 
 Because the router uses the HTTP verb and URL to match inbound requests, four URLs map to eight different actions.
+
+## Nested Resources
+
+It is also possible to nest resources in a Nodos router. Let's say we also have a posts resource which has a many-to-one relationship with comments. Let's add a new resource
+
+That is to say, we have many posts, and an individual comment belongs to only one post. We can represent that by adding a nested route in config/router.yml like this:
+
+```sh
+pipelines:
+  browser:
+    - '@nodosjs/view-extension/fetchFlash'
+    - '@nodosjs/view-extension/protectFromForgery'
+
+  api:
+    - example/setLocale
+    - example/setLocale
+
+scopes:
+  - name: api
+    pipeline: api
+    routes:
+      - resources: users
+  - name: /
+    pipeline: browser
+    root: true
+    routes:
+      - resources: users
+      - resources:
+          name: posts
+          routes:
+            - resources: comments
+```
+When we run `npx nodos routes` now, in addition to the routes we saw for users above, we get the following set of routes:
+
+```sh
+Name             Verb   URI Pattern                       Pipeline Controller#Action
+users            GET    /users                            browser  users#index
+buildUser        GET    /users/build                      browser  users#build
+users            POST   /users                            browser  users#create
+user             GET    /users/:id                        browser  users#show
+editUser         GET    /users/:id/edit                   browser  users#edit
+user             PATCH  /users/:id                        browser  users#update
+user             PUT    /users/:id                        browser  users#update
+user             DELETE /users/:id                        browser  users#destroy
+posts            GET    /posts                            browser  posts#index
+buildPost        GET    /posts/build                      browser  posts#build
+posts            POST   /posts                            browser  posts#create
+post             GET    /posts/:id                        browser  posts#show
+editPost         GET    /posts/:id/edit                   browser  posts#edit
+post             PATCH  /posts/:id                        browser  posts#update
+post             PUT    /posts/:id                        browser  posts#update
+post             DELETE /posts/:id                        browser  posts#destroy
+postComments     GET    /posts/:post_id/comments          browser  posts/comments#index
+buildPostComment GET    /posts/:post_id/comments/build    browser  posts/comments#build
+postComments     POST   /posts/:post_id/comments          browser  posts/comments#create
+postComment      GET    /posts/:post_id/comments/:id      browser  posts/comments#show
+editPostComment  GET    /posts/:post_id/comments/:id/edit browser  posts/comments#edit
+postComment      PATCH  /posts/:post_id/comments/:id      browser  posts/comments#update
+postComment      PUT    /posts/:post_id/comments/:id      browser  posts/comments#update
+postComment      DELETE /posts/:post_id/comments/:id      browser  posts/comments#destroy
+```
+
+We see that each of these routes scopes the posts to a comments ID. For the first one, we will invoke the controller index action, but we will pass in a post_id. This implies that we would display all the comments for that individual posts only. The same scoping applies for all these routes.
+
+##  Pipelines
+We have come quite a long way in this guide without talking about one of the first lines we saw in the router. It's time to fix that.
+
+```sh
+pipelines:
+  browser:
+    - '@nodosjs/view-extension/fetchFlash'
+    - '@nodosjs/view-extension/protectFromForgery'
+```
+
+Routes are defined inside scopes and scopes may pipe through multiple pipelines. Once a route matches, Nodos invokes all plugs defined in all pipelines associated to that route. For example, accessing "/" will pipe through the :browser pipeline, consequently invoking all of its plugs.
+
+Nodos defines two pipelines by default, `:browser` and `:api`, which can be used for a number of common tasks. In turn we can customize them as well as create new pipelines to meet our needs.
+
+## The :browser and :api Pipelines
+As their names suggest, the :browser pipeline prepares for routes which render requests for a browser. The :api pipeline prepares for routes which produce data for an api.
+
+The router invokes a pipeline on a route defined within a scope. Routes outside of a scope have no pipelines.:
+
