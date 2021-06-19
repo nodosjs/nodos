@@ -7,9 +7,9 @@ This guide covers the user-facing features of Nodos routing.
 
 After reading this guide, you will know:
 
--   [✓] **How to interpret the code in config/routes.yml.**
+- [✓] **How to interpret the code in config/routes.yml.**
 
--   [✓] **How to construct your own routes**
+- [✓] **How to construct your own routes**
 
 ## The Purpose of the Nodos Router
 
@@ -43,25 +43,27 @@ scopes:
       - resources: users
 ```
 
-Both the router and controller module names same. The
-` pipeline: browser`
-line will get a full treatment in the Pipeline section of this guide. For now, you only need to know that pipelines allow a set of plugs to be applied to different sets of routes.
+Both the router and controller module names same. 
 
-Inside block, we have our first actual routes and `/users` and when your Nodos application receives an incoming request for:
+The `pipeline: browser` line will get a full treatment in the Pipeline section of this guide.
 
-`GET /users/1`
+For now, you only need to know that pipelines allow a set of plugs to be applied to different sets of routes.
 
-it asks the router to match it to a controller action. If the first matching route is:
+Inside block, we have our first actual routes `/users`.
 
-`get '/users/:id'`
+When your Nodos application receives an incoming request for: `GET /users/1` it asks the router to match it to a controller action. 
 
-the request is dispatched to the users controller's index action with { id: '1' } in params.
+If the first matching route is: `get '/users/:id'` the request is dispatched to the users controller's index action with { id: '1' } in params.
 
 ## Resource Routing on the Web: the Nodos Default
 
-Resource routing allows you to quickly declare all of the common routes for a given resourceful controller. A single call to resources can declare all of the necessary routes for your index, show, new, edit, create, update, and destroy actions.
+Resource routing allows you to quickly declare all of the common routes for a given resourceful controller.
 
-Browsers request pages from Nodos by making a request for a URL using a specific HTTP method, such as GET, POST, PATCH, PUT and DELETE. Each method is a request to perform an operation on the resource. A resource route maps a number of related requests to actions in a single controller.
+A single call to resources can declare all of the necessary routes for your index, show, new, edit, create, update, and destroy actions.
+
+Browsers request pages from Nodos by making a request for a URL using a specific HTTP method, such as GET, POST, PATCH, PUT and DELETE. 
+
+Each method is a request to perform an operation on the resource. A resource route maps a number of related requests to actions in a single controller.
 
 When your Nodos application receives an incoming request for:
 
@@ -78,7 +80,11 @@ Nodos would dispatch that request to the destroy action on the users controller 
 
 ## CRUD, Verbs, and Actions
 
-In Nodos, a resourceful route provides a mapping between HTTP verbs and URLs to controller actions. By convention, each action also maps to a specific CRUD operation in a database. A single entry in the routing file, such as:
+In Nodos, a resourceful route provides a mapping between HTTP verbs and URLs to controller actions.
+
+By convention, each action also maps to a specific CRUD operation in a database.
+
+A single entry in the routing file, such as:
 
 ```sh
     routes:
@@ -105,9 +111,13 @@ Because the router uses the HTTP verb and URL to match inbound requests, four UR
 
 ## Nested Resources
 
-It is also possible to nest resources in a Nodos router. Let's say we also have a posts resource which has a many-to-one relationship with comments. Let's add a new resource
+It is also possible to nest resources in a Nodos router. 
 
-That is to say, we have many posts, and an individual comment belongs to only one post. We can represent that by adding a nested route in config/router.yml like this:
+Let's say we also have a posts resource which has a many-to-one relationship with comments. Let's add a new resource.
+
+That is to say, we have many posts, and an individual comment belongs to only one post.
+
+We can represent that by adding a nested route in config/router.yml like this:
 
 ```sh
 pipelines:
@@ -134,6 +144,7 @@ scopes:
           routes:
             - resources: comments
 ```
+
 When we run `npx nodos routes` now, in addition to the routes we saw for users above, we get the following set of routes:
 
 ```sh
@@ -164,9 +175,16 @@ postComment      PUT    /posts/:post_id/comments/:id      browser  posts/comment
 postComment      DELETE /posts/:post_id/comments/:id      browser  posts/comments#destroy
 ```
 
-We see that each of these routes scopes the posts to a comments ID. For the first one, we will invoke the controller index action, but we will pass in a post_id. This implies that we would display all the comments for that individual posts only. The same scoping applies for all these routes.
+We see that each of these routes scopes the posts to a comments ID.
 
-##  Pipelines
+For the first one, we will invoke the controller index action, but we will pass in a `post_id`.
+
+This implies that we would display all the comments for that individual posts only.
+
+The same scoping applies for all these routes.
+
+## Pipelines
+
 We have come quite a long way in this guide without talking about one of the first lines we saw in the router. It's time to fix that.
 
 ```sh
@@ -176,12 +194,20 @@ pipelines:
     - '@nodosjs/view-extension/protectFromForgery'
 ```
 
-Routes are defined inside scopes and scopes may pipe through multiple pipelines. Once a route matches, Nodos invokes all plugs defined in all pipelines associated to that route. For example, accessing "/" will pipe through the :browser pipeline, consequently invoking all of its plugs.
+Routes are defined inside scopes and scopes may pipe through multiple pipelines.
 
-Nodos defines two pipelines by default, `:browser` and `:api`, which can be used for a number of common tasks. In turn we can customize them as well as create new pipelines to meet our needs.
+Once a route matches, Nodos invokes all plugs defined in all pipelines associated to that route.
+
+For example, accessing `"/"` will pipe through the `:browser` pipeline, consequently invoking all of its plugs.
+
+Nodos defines two pipelines by default, `:browser` and `:api`, which can be used for a number of common tasks.
+
+In turn we can customize them as well as create new pipelines to meet our needs.
 
 ## The :browser and :api Pipelines
-As their names suggest, the :browser pipeline prepares for routes which render requests for a browser. The :api pipeline prepares for routes which produce data for an api.
 
-The router invokes a pipeline on a route defined within a scope. Routes outside of a scope have no pipelines.:
+As their names suggest, the `:browser` pipeline prepares for routes which render requests for a browser.
 
+The :api pipeline prepares for routes which produce data for an api.
+
+The router invokes a pipeline on a route defined within a scope.
