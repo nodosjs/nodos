@@ -5,6 +5,7 @@ dist
 *.tgz
 *.sqlite3
 *.sqlite
+*.DS_Store
 tmp
 *.lerna_backup
 package-lock.json
@@ -13,3 +14,4 @@ site/build
 site/.docusaurus
 public/assets
 .env
+
