@@ -7,9 +7,9 @@ This guide covers the user-facing features of Nodos routing.
 
 After reading this guide, you will know:
 
-- [✓] **How to interpret the code in config/routes.yml.**
+- [✓] How to interpret the code in config/routes.yml.
 
-- [✓] **How to construct your own routes**
+- [✓] How to construct your own routes
 
 ## The Purpose of the Nodos Router
 
@@ -43,7 +43,7 @@ scopes:
       - resources: users
 ```
 
-Both the router and controller module names same. 
+Both the router and controller module names same.
 
 The `pipeline: browser` line will get a full treatment in the Pipeline section of this guide.
 
@@ -51,7 +51,7 @@ For now, you only need to know that pipelines allow a set of plugs to be applied
 
 Inside block, we have our first actual routes `/users`.
 
-When your Nodos application receives an incoming request for: `GET /users/1` it asks the router to match it to a controller action. 
+When your Nodos application receives an incoming request for: `GET /users/1` it asks the router to match it to a controller action.
 
 If the first matching route is: `get '/users/:id'` the request is dispatched to the users controller's index action with { id: '1' } in params.
 
@@ -61,7 +61,7 @@ Resource routing allows you to quickly declare all of the common routes for a gi
 
 A single call to resources can declare all of the necessary routes for your index, show, new, edit, create, update, and destroy actions.
 
-Browsers request pages from Nodos by making a request for a URL using a specific HTTP method, such as GET, POST, PATCH, PUT and DELETE. 
+Browsers request pages from Nodos by making a request for a URL using a specific HTTP method, such as GET, POST, PATCH, PUT and DELETE.
 
 Each method is a request to perform an operation on the resource. A resource route maps a number of related requests to actions in a single controller.
 
@@ -111,7 +111,7 @@ Because the router uses the HTTP verb and URL to match inbound requests, four UR
 
 ## Nested Resources
 
-It is also possible to nest resources in a Nodos router. 
+It is also possible to nest resources in a Nodos router.
 
 Let's say we also have a posts resource which has a many-to-one relationship with comments. Let's add a new resource.
 
