@@ -27,7 +27,7 @@ Routes are definedinside the `config/routes.yml`.
 
 ## Routes file
 
-The routes for your application or engine live in the file config/routes.yml and typically looks like this:
+The routes for your application or engine live in the file `config/routes.yml` and typically looks like this:
 
 ```sh
 pipelines:
