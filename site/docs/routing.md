@@ -187,18 +187,20 @@ The same scoping applies for all these routes.
 
 We have come quite a long way in this guide without talking about one of the first lines we saw in the router. It's time to fix that.
 
+Pipelines are a series of plugs that can be attached to specific scopes.
+
+Routes are defined inside scopes and scopes may pipe through multiple pipelines.
+
+Once a route matches, Nodos invokes all plugs defined in all pipelines associated to that route.
+
+For example, accessing "/" will pipe through the :browser pipeline, consequently invoking all of its plugs.
+
 ```sh
 pipelines:
   browser:
     - '@nodosjs/view-extension/fetchFlash'
     - '@nodosjs/view-extension/protectFromForgery'
 ```
-
-Routes are defined inside scopes and scopes may pipe through multiple pipelines.
-
-Once a route matches, Nodos invokes all plugs defined in all pipelines associated to that route.
-
-For example, accessing `"/"` will pipe through the `:browser` pipeline, consequently invoking all of its plugs.
 
 Nodos defines two pipelines by default, `:browser` and `:api`, which can be used for a number of common tasks.
 
@@ -208,6 +210,57 @@ In turn we can customize them as well as create new pipelines to meet our needs.
 
 As their names suggest, the `:browser` pipeline prepares for routes which render requests for a browser.
 
-The :api pipeline prepares for routes which produce data for an api.
+The `:api` pipeline prepares for routes which produce data for an api.
+
+The `:browser` pipeline has 2 plugs:
+
+`'@nodosjs/view-extension/fetchFlash'`
+
+`'@nodosjs/view-extension/protectFromForgery'`
 
 The router invokes a pipeline on a route defined within a scope.
+
+## Creating New Pipelines
+
+Nodos allows us to create our own custom pipelines anywhere in the router. 
+
+To do so, we create a new middleware and add to routes.yml
+
+```sh
+- app/
+     middlewares/
+       yourMiddlewares.js
+```
+
+```sh
+pipelines:
+  browser:
+    - '@nodosjs/view-extension/fetchFlash'
+    - '@nodosjs/view-extension/protectFromForgery'
+    - yourMiddlewares
+
+  api:
+    - example/setLocale
+    - example/setLocale
+
+scopes:
+  - name: api
+    pipeline: api
+    routes:
+      - resources: users
+  - name: /
+    pipeline: browser
+    root: true
+    routes:
+      - resources: users
+      - resources:
+          name: posts
+          routes:
+            - resources: comments
+```
+
+Right now when the server accepts a request, the request will always first pass through the plugs in our Endpoint, after which it will attempt to match on the path and HTTP verb.
+
+Let's say that the request matches our first route: a GET to `/` .
+
+The router will first pipe that request through the `:browser` pipeline before it dispatches the request to the contoller index action.
