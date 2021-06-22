@@ -15,7 +15,7 @@ beforeEach(async () => {
   const configPath = path.join(dir, 'config');
 
   await fsp.mkdir(configPath);
-  fsp.copyFile(routePath, path.join(configPath, 'routes.yml'));
+  await fsp.copyFile(routePath, path.join(configPath, 'routes.yml'));
   await generateNewRoute(dir, 'resources', 'posts');
   await generateNewRoute(dir, 'resource', 'order');
 });

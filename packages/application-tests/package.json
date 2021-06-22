@@ -5,8 +5,6 @@
     "test": "jest"
   },
   "jest": {
-    "testEnvironment": "node",
-    "testRunner": "jest-circus/runner",
     "testPathIgnorePatterns": [
       "/__applications__/.*/config/",
       "/tests/"
@@ -18,11 +16,11 @@
     "@nodosjs/db-typeorm-extension": "^0.0.57",
     "@nodosjs/view-extension": "^0.0.57",
     "@nodosjs/webpack-extension": "^0.0.57",
-    "babel-jest": "^27.0.2",
+    "babel-jest": "^27.0.5",
     "bootstrap": "^5.0.1",
     "execa": "^5.1.1",
-    "jest": "^27.0.4",
-    "jest-cli": "^27.0.4",
+    "jest": "^27.0.5",
+    "jest-cli": "^27.0.5",
     "pg": "^8.6.0"
   },
   "version": "0.0.57"

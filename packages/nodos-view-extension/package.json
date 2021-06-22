@@ -14,7 +14,7 @@
     "fastify-method-override": "^1.5.6",
     "fastify-secure-session": "^2.3.1",
     "fastify-session": "^5.2.1",
-    "point-of-view": "^4.14.0",
+    "point-of-view": "^4.15.0",
     "pug": "^3.0.2",
     "qs": "^6.10.1"
   },
