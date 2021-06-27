@@ -6,7 +6,7 @@ slug: /
 ## Step 1: Install Nodejs
 
 ```sh
-curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
