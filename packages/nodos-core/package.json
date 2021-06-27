@@ -29,9 +29,9 @@
     "inflected": "^2.1.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
-    "marko": "^5.10.6",
+    "marko": "^5.10.7",
     "middie": "^5.2.0",
-    "pino-pretty": "^5.0.2",
+    "pino-pretty": "^5.1.0",
     "statuses": "^2.0.1"
   }
 }

@@ -17,7 +17,7 @@
     "@nodosjs/view-extension": "^0.0.57",
     "@nodosjs/webpack-extension": "^0.0.57",
     "babel-jest": "^27.0.5",
-    "bootstrap": "^5.0.1",
+    "bootstrap": "^5.0.2",
     "execa": "^5.1.1",
     "jest": "^27.0.5",
     "jest-cli": "^27.0.5",
