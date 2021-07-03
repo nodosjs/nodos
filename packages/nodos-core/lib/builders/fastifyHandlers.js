@@ -77,7 +77,7 @@ const csrfChecker = (fastifyInstance, route) => (request, response, done) => {
  */
 module.exports = async (app) => {
   const promises = app.router.routes.map(async (route) => {
-    const pathToController = path.join(app.config.paths.controllersPath, route.resourceName);
+    const pathToController = path.join(app.config.paths.controllersPath, route.controllerPath);
     const handler = async (fastifyRequest, reply) => {
       if (!app.config.cacheModules) {
         const appCacheKeys = Object.keys(require.cache).filter((p) => !p.match(/node_modules/))
@@ -86,7 +86,7 @@ module.exports = async (app) => {
       }
       log(pathToController);
       const actions = require(pathToController); // eslint-disable-line
-      const response = new Response(reply, { templateDir: route.resourceName, templateName: route.actionName });
+      const response = new Response(reply, { templateDir: route.controllerPath, templateName: route.actionName });
       const request = new Request(fastifyRequest);
       log('actions', [actions, route.actionName]);
       if (!_.has(actions, route.actionName)) {

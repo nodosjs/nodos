@@ -2,17 +2,19 @@
 
 const urlJoin = require('url-join');
 const {
-  singularize, camelize,
+  singularize, camelize, pluralize,
 } = require('inflected');
 const _ = require('lodash');
-const log = require('./logger.js');
+const path = require('path');
+// const log = require('./logger.js');
 const { getOrError } = require('./utils.js');
 const Route = require('./Route.js');
 
 const resourcesActionNames = ['index', 'build', 'create', 'show', 'edit', 'update', 'destroy'];
 const resourceActionNames = ['build', 'create', 'show', 'edit', 'update', 'destroy'];
 
-const buildRouteInfo = (/** @type {{ name: any; suffix?: any; actionName?: string; }} */ options) => ({
+const buildRouteInfo = (options) => ({
+  controllerName: '',
   actionName: '',
   suffix: '',
   ...options,
@@ -20,6 +22,7 @@ const buildRouteInfo = (/** @type {{ name: any; suffix?: any; actionName?: strin
 
 const buildResourcesInfo = (/** @type {any} */ options) => ({
   only: resourcesActionNames,
+  controllerName: pluralize(options.name),
   parentSuffix: `${options.name}/:${singularize(options.name)}_id`,
   routes: [],
   collection: [],
@@ -32,17 +35,27 @@ const buildResourceInfo = (/** @type {any} */ options) => ({
   routes: [],
   collection: [],
   member: [],
+  controllerName: pluralize(options.name),
   only: resourceActionNames,
   parentSuffix: options.name,
   except: [],
   ...options,
 });
 
+const getControllerPath = (
+  /** @type {any} */ scope,
+  /** @type {{ name?: string; suffix: string; actionName: string; controllerName: string; }} */ routeInfo,
+) => {
+  const { controllerName } = scope.parentResourceInfo;
+  const fullPath = path.join(scope.path, controllerName, routeInfo.controllerName);
+  return fullPath;
+};
+
 const getTemplate = (
   /** @type {any} */ scope,
   /** @type {{ name?: string; suffix: string; actionName: string; }} */ routeInfo,
 ) => {
-  log('getTemplate', routeInfo);
+  // log('getTemplate', routeInfo);
   const { parentSuffix = '' } = scope.parentResourceInfo;
   const fullUrl = urlJoin(scope.path, parentSuffix, routeInfo.suffix, routeInfo.actionName);
   return fullUrl;
@@ -66,18 +79,18 @@ const buildMemberRoutes = () => {
 };
 
 export const buildRoot = (value, scope) => {
-  const { path } = scope;
   const [controllerName, actionName] = value.split('#');
-  const routeInfo = buildRouteInfo({ name: 'root' });
+  const routeInfo = buildRouteInfo({ name: 'root', controllerName });
 
   const route = new Route(scope, {
     controllerName,
-    path: urlJoin(path, controllerName),
+    path: urlJoin(scope.path, controllerName),
     // prefix,
     actionName,
     method: 'get',
     template: getTemplate(scope, routeInfo),
     name: getRouteName(scope, routeInfo),
+    controllerPath: getControllerPath(scope, routeInfo),
   });
 
   return route;
@@ -87,48 +100,64 @@ export const buildResources = (value, rec, scope) => {
   const data = value instanceof Object ? value : { name: value };
   const resourceInfo = buildResourcesInfo(data);
 
-  const { path } = scope;
-
-  const prefix = urlJoin(path);
+  const controllerName = pluralize(resourceInfo.name);
 
   const actionDataBuilders = {
     index: () => {
-      const routeInfo = buildRouteInfo({ name: resourceInfo.name, suffix: resourceInfo.name });
-      return {
-        method: 'get',
-        template: getTemplate(scope, routeInfo),
-        name: getRouteName(scope, routeInfo),
-      };
-    },
-    build: () => {
-      const actionName = 'build';
+      const actionName = 'index';
       const routeInfo = buildRouteInfo({
-        name: singularize(resourceInfo.name), suffix: resourceInfo.name, actionName,
+        name: resourceInfo.name,
+        suffix: resourceInfo.name,
+        controllerName,
       });
+
       return {
         actionName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
+      };
+    },
+    build: () => {
+      const actionName = 'build';
+      const routeInfo = buildRouteInfo({
+        name: singularize(resourceInfo.name),
+        suffix: resourceInfo.name,
+        controllerName,
+        actionName,
+      });
+
+      return {
+        actionName,
+        method: 'get',
+        template: getTemplate(scope, routeInfo),
+        name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
     create: () => {
       const routeInfo = buildRouteInfo({
-        name: resourceInfo.name, suffix: resourceInfo.name,
+        name: resourceInfo.name,
+        suffix: resourceInfo.name,
+        controllerName,
       });
 
       return {
         actionName: 'create',
         method: 'post',
         template: getTemplate(scope, routeInfo),
-        name: getRouteName(scope, routeInfo),
+        // name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
 
     show: () => {
       const name = singularize(resourceInfo.name);
       const routeInfo = buildRouteInfo({
-        name, suffix: `${resourceInfo.name}/:id`,
+        controllerName,
+        name,
+        suffix: `${resourceInfo.name}/:id`,
       });
 
       return {
@@ -136,13 +165,17 @@ export const buildResources = (value, rec, scope) => {
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
 
     edit: () => {
       const actionName = 'edit';
       const routeInfo = buildRouteInfo({
-        name: singularize(resourceInfo.name), actionName, suffix: `${resourceInfo.name}/:id`,
+        name: singularize(resourceInfo.name),
+        actionName,
+        suffix: `${resourceInfo.name}/:id`,
+        controllerName,
       });
 
       return {
@@ -150,22 +183,45 @@ export const buildResources = (value, rec, scope) => {
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
 
-    update: () => ({
-      actionName: 'update',
-      method: 'patch',
-      template: urlJoin(prefix, ':id'),
-      // name: getRouteName(prefix, parent, routeItem.name, 'update'),
-    }),
+    update: () => {
+      const actionName = 'update';
+      const routeInfo = buildRouteInfo({
+        name: singularize(resourceInfo.name),
+        actionName,
+        suffix: `${resourceInfo.name}/:id`,
+        controllerName,
+      });
 
-    destroy: () => ({
-      actionName: 'destroy',
-      method: 'delete',
-      template: urlJoin(prefix, ':id'),
-      // name: getRouteName(prefix, parent, routeItem.name, 'destroy'),
-    }),
+      return {
+        actionName,
+        method: 'patch',
+        template: getTemplate(scope, routeInfo),
+        // name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
+      };
+    },
+
+    destroy: () => {
+      const actionName = 'destroy';
+      const routeInfo = buildRouteInfo({
+        name: singularize(resourceInfo.name),
+        actionName,
+        suffix: `${resourceInfo.name}/:id`,
+        controllerName,
+      });
+
+      return {
+        actionName,
+        method: 'delete',
+        template: getTemplate(scope, routeInfo),
+        // name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
+      };
+    },
   };
 
   const actionNames = _.difference(resourceInfo.only, resourceInfo.except);
@@ -186,8 +242,8 @@ export const buildResources = (value, rec, scope) => {
     nestedRoutes = rec(nestedScope);
   }
 
-  const collectionRoutes = buildCollectionRoutes(scope, resourceInfo);
-  const memberRoutes = buildMemberRoutes(scope, resourceInfo);
+  // const collectionRoutes = buildCollectionRoutes(scope, resourceInfo);
+  // const memberRoutes = buildMemberRoutes(scope, resourceInfo);
 
   return [...routes, ...nestedRoutes];
 };
@@ -196,36 +252,47 @@ export const buildResource = (value, rec, scope) => {
   const data = value instanceof Object ? value : { name: value };
   const resourceInfo = buildResourceInfo(data);
 
+  const controllerName = pluralize(resourceInfo.name);
+
   const actionDataBuilders = {
     build: () => {
       const actionName = 'build';
       const routeInfo = buildRouteInfo({
-        name: singularize(resourceInfo.name), suffix: resourceInfo.name, actionName,
+        name: singularize(resourceInfo.name),
+        suffix: resourceInfo.name,
+        actionName,
+        controllerName,
       });
       return {
         actionName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
     create: () => {
       const routeInfo = buildRouteInfo({
-        name: resourceInfo.name, suffix: resourceInfo.name,
+        name: resourceInfo.name,
+        suffix: resourceInfo.name,
+        controllerName,
       });
 
       return {
         actionName: 'create',
         method: 'post',
         template: getTemplate(scope, routeInfo),
-        name: getRouteName(scope, routeInfo),
+        // name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
 
     show: () => {
       const actionName = 'show';
       const routeInfo = buildRouteInfo({
-        name: resourceInfo,
+        suffix: resourceInfo.name,
+        name: resourceInfo.name,
+        controllerName,
       });
 
       return {
@@ -233,13 +300,17 @@ export const buildResource = (value, rec, scope) => {
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
 
     edit: () => {
       const actionName = 'edit';
       const routeInfo = buildRouteInfo({
-        name: resourceInfo.name, actionName, suffix: resourceInfo.name,
+        name: resourceInfo.name,
+        actionName,
+        suffix: resourceInfo.name,
+        controllerName,
       });
 
       return {
@@ -247,6 +318,7 @@ export const buildResource = (value, rec, scope) => {
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
       };
     },
 
@@ -254,13 +326,16 @@ export const buildResource = (value, rec, scope) => {
       const actionName = 'update';
 
       const routeInfo = buildRouteInfo({
-        name: resourceInfo.name, suffix: resourceInfo.name,
+        name: resourceInfo.name,
+        suffix: resourceInfo.name,
+        controllerName,
       });
 
       return {
         actionName,
         method: 'patch',
         template: getTemplate(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
         // name: getRouteName(prefix, parent, routeItem.name, 'update'),
       };
     },
@@ -269,12 +344,15 @@ export const buildResource = (value, rec, scope) => {
       const actionName = 'destroy';
 
       const routeInfo = buildRouteInfo({
-        name: resourceInfo.name, suffix: resourceInfo.name,
+        name: resourceInfo.name,
+        suffix: resourceInfo.name,
+        controllerName,
       });
       return {
         actionName,
         method: 'delete',
         template: getTemplate(scope, routeInfo),
+        controllerPath: getControllerPath(scope, routeInfo),
         // name: getRouteName(prefix, parent, routeItem.name, 'destroy'),
       };
     },

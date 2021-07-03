@@ -39,7 +39,7 @@ class Router {
       path,
       routes,
       name: path.slice(1),
-      parentResourceInfo: {},
+      parentResourceInfo: { controllerName: '', actionName: '' },
       middlewares: routeMap.pipelines[pipeline],
     }));
     this.routes = this.scopes

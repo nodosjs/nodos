@@ -9,23 +9,56 @@ import Router from '../index.js';
 let router;
 
 const host = 'http://site.com';
+// TODO: move to __fixtures__/expected.yaml
 const mapping = [
-  { expected: '', name: 'root', params: [] },
-  { expected: '/api', name: 'apiRoot', params: [] },
-  { expected: '/api/users', name: 'apiUsers', params: [] },
-  { expected: '/api/users/build', name: 'buildApiUser', params: [] },
-  { expected: '/api/users/toto', name: 'apiUser', params: ['toto'] },
-  { expected: '/api/users/toto/edit', name: 'editApiUser', params: ['toto'] },
-  { expected: '/api/users/toto/photo', name: 'apiUserPhoto', params: ['toto'] },
-  { expected: '/api/users/toto/photo/edit', name: 'editApiUserPhoto', params: ['toto'] },
-  { expected: '/test', name: 'testRoot', params: [] },
-  { expected: '/users/3', name: 'user', params: [3] },
-  { expected: '/session', name: 'session', params: [] },
-  { expected: '/session/edit', name: 'editSession', params: [] },
-  { expected: '/session/tokens', name: 'sessionTokens', params: [] },
-  { expected: '/session/tokens/build', name: 'buildSessionToken', params: [] },
-  { expected: '/session/tokens/5', name: 'sessionToken', params: [5] },
-  { expected: '/session/tokens/5/edit', name: 'editSessionToken', params: [5] },
+  {
+    controller: '/home', action: 'index', url: '', name: 'root', params: [],
+  },
+  {
+    controller: '/api/home', action: 'index', url: '/api', name: 'apiRoot', params: [],
+  },
+  {
+    controller: '/api/users', action: 'index', url: '/api/users', name: 'apiUsers', params: [],
+  },
+  {
+    controller: '/api/users', action: 'build', url: '/api/users/build', name: 'buildApiUser', params: [],
+  },
+  {
+    controller: '/api/users', action: 'show', url: '/api/users/toto', name: 'apiUser', params: ['toto'],
+  },
+  {
+    controller: '/api/users', action: 'edit', url: '/api/users/toto/edit', name: 'editApiUser', params: ['toto'],
+  },
+  {
+    controller: '/api/users/photos', action: 'show', url: '/api/users/toto/photo', name: 'apiUserPhoto', params: ['toto'],
+  },
+  {
+    controller: '/api/users/photos', action: 'edit', url: '/api/users/toto/photo/edit', name: 'editApiUserPhoto', params: ['toto'],
+  },
+  {
+    controller: '/test/home', action: 'index', url: '/test', name: 'testRoot', params: [],
+  },
+  {
+    controller: '/users', action: 'show', url: '/users/3', name: 'user', params: [3],
+  },
+  {
+    controller: '/sessions', action: 'show', url: '/session', name: 'session', params: [],
+  },
+  {
+    controller: '/sessions', action: 'edit', url: '/session/edit', name: 'editSession', params: [],
+  },
+  {
+    controller: '/sessions/tokens', action: 'index', url: '/session/tokens', name: 'sessionTokens', params: [],
+  },
+  {
+    controller: '/sessions/tokens', action: 'build', url: '/session/tokens/build', name: 'buildSessionToken', params: [],
+  },
+  {
+    controller: '/sessions/tokens', action: 'show', url: '/session/tokens/5', name: 'sessionToken', params: [5],
+  },
+  {
+    controller: '/sessions/tokens', action: 'edit', url: '/session/tokens/5/edit', name: 'editSessionToken', params: [5],
+  },
 ];
 
 beforeAll(async () => {
@@ -34,8 +67,22 @@ beforeAll(async () => {
   router = new Router(routesMap, { host });
 });
 
-test.each(mapping)('router.route: $expected, $name, $params', ({ expected, name, params }) => {
-  expect(router.route(name, ...params)).toBe(urlJoin(host, expected));
+test('router should respect only and except', () => {
+  expect(router.routes).toHaveLength(49);
+});
+
+test.each(mapping)('router.route: $url, $name, $params', (options) => {
+  const {
+    url, controller, action, name, params,
+  } = options;
+
+  expect(router.route(name, ...params)).toBe(urlJoin(host, url));
+
+  const route = router.routes.find((r) => name === r.name);
+  expect(route).toMatchObject({
+    actionName: action,
+    controllerPath: controller,
+  });
   // const expectedRoutes = [
   //   { actionName: 'index', url: '/', method: 'get' },
   //   { actionName: 'index', url: '/api/users', method: 'get' },
