@@ -53,5 +53,5 @@ test.each(envs)('check cli', async (env) => {
   const result = await execa('../../node_modules/.bin/nodos', ['routes'], options);
   console.log(result.all);
   expect(result).not.toBeNull();
-  expect(result.stdout).toEqual(expect.stringContaining('root#default'));
+  expect(result.stdout).toEqual(expect.stringContaining('home#index'));
 });

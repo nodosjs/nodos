@@ -78,7 +78,7 @@ const getRouteName = (
 //   // TODO: implement it
 // };
 
-export const buildRoot = (value, scope) => {
+const buildRoot = (value, scope) => {
   const [controllerName, actionName] = value.split('#');
   const routeInfo = buildRouteInfo({ name: 'root', controllerName });
 
@@ -96,7 +96,7 @@ export const buildRoot = (value, scope) => {
   return route;
 };
 
-export const buildResources = (value, rec, scope) => {
+const buildResources = (value, rec, scope) => {
   const data = value instanceof Object ? value : { name: value };
   const resourceInfo = buildResourcesInfo(data);
 
@@ -247,7 +247,7 @@ export const buildResources = (value, rec, scope) => {
   return [...routes, ...nestedRoutes];
 };
 
-export const buildResource = (value, rec, scope) => {
+const buildResource = (value, rec, scope) => {
   const data = value instanceof Object ? value : { name: value };
   const resourceInfo = buildResourceInfo(data);
 
@@ -378,4 +378,10 @@ export const buildResource = (value, rec, scope) => {
   }
 
   return [...routes, ...nestedRoutes];
+};
+
+module.exports = {
+  buildRoot,
+  buildResources,
+  buildResource,
 };
