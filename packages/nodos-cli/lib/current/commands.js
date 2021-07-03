@@ -66,7 +66,7 @@ const buildRoutesCommand = ({ app, container }) => ({
       const formattedRoutes = columnify(
         routes,
         {
-          columns: ['name', 'method', 'url', 'pipeline', 'controllerAction'],
+          columns: ['name', 'method', 'template', 'pipeline', 'controllerAction'],
           config: {
             name: {
               headingTransform: () => 'Name',
@@ -75,11 +75,12 @@ const buildRoutesCommand = ({ app, container }) => ({
               headingTransform: () => 'Verb',
               dataTransform: _.toUpper,
             },
-            url: {
+            template: {
               headingTransform: () => 'URI Pattern',
             },
             pipeline: {
               headingTransform: () => 'Pipeline',
+              // dataTransform: (scope) => ,
             },
             controllerAction: {
               headingTransform: () => 'Controller#Action',

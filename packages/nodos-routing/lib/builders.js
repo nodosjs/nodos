@@ -113,6 +113,7 @@ const buildResources = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
@@ -130,6 +131,7 @@ const buildResources = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
@@ -145,6 +147,7 @@ const buildResources = (value, rec, scope) => {
 
       return {
         actionName: 'create',
+        controllerName,
         method: 'post',
         template: getTemplate(scope, routeInfo),
         // name: getRouteName(scope, routeInfo),
@@ -162,6 +165,7 @@ const buildResources = (value, rec, scope) => {
 
       return {
         actionName: 'show',
+        controllerName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
@@ -180,6 +184,7 @@ const buildResources = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
@@ -198,6 +203,7 @@ const buildResources = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'patch',
         template: getTemplate(scope, routeInfo),
         // name: getRouteName(scope, routeInfo),
@@ -215,6 +221,7 @@ const buildResources = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'delete',
         template: getTemplate(scope, routeInfo),
         // name: getRouteName(scope, routeInfo),
@@ -262,8 +269,10 @@ const buildResource = (value, rec, scope) => {
         prefix: actionName,
         controllerName,
       });
+
       return {
         actionName,
+        controllerName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
@@ -279,6 +288,7 @@ const buildResource = (value, rec, scope) => {
 
       return {
         actionName: 'create',
+        controllerName,
         method: 'post',
         template: getTemplate(scope, routeInfo),
         // name: getRouteName(scope, routeInfo),
@@ -296,6 +306,7 @@ const buildResource = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
@@ -314,6 +325,7 @@ const buildResource = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'get',
         template: getTemplate(scope, routeInfo),
         name: getRouteName(scope, routeInfo),
@@ -332,6 +344,7 @@ const buildResource = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'patch',
         template: getTemplate(scope, routeInfo),
         controllerPath: getControllerPath(scope, routeInfo),
@@ -350,6 +363,7 @@ const buildResource = (value, rec, scope) => {
 
       return {
         actionName,
+        controllerName,
         method: 'delete',
         template: getTemplate(scope, routeInfo),
         controllerPath: getControllerPath(scope, routeInfo),
