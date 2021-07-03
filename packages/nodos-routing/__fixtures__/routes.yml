@@ -17,6 +17,11 @@ scopes:
       - root: 'home#index'
       - resources:
           name: users
+          collection:
+            filtered: get
+          member:
+            send: post
+            money: get
           routes:
             - resource: photo
 

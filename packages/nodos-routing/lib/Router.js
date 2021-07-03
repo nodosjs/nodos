@@ -10,17 +10,6 @@ const detectRouteType = (/** @type {string} */ currentName) => {
   return names.find((name) => name === currentName);
 };
 
-// const normalizeRouteItem = (valueOrValues) => {
-//   const routeItem = _.isObject(valueOrValues) ? valueOrValues : { name: valueOrValues };
-//   const routes = routeItem.routes || [];
-
-//   return {
-//     ...routeItem,
-//     actionNames: buildActionNames(routeItem),
-//     routes,
-//   };
-// };
-
 const mapResourcesToTemplate = (/** @type {string} */ template, /** @type {any[]} */ params) => {
   const ids = params[Symbol.iterator]();
   return template.replace(/:\w+/g, () => ids.next().value);

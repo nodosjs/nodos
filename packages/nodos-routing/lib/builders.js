@@ -21,11 +21,17 @@ const buildRouteInfo = (/** @type {{ name: any; suffix?: any; actionName?: strin
 const buildResourcesInfo = (/** @type {any} */ options) => ({
   only: resourcesActionNames,
   parentSuffix: `${options.name}/:${singularize(options.name)}_id`,
+  routes: [],
+  collection: [],
+  member: [],
   except: [],
   ...options,
 });
 
 const buildResourceInfo = (/** @type {any} */ options) => ({
+  routes: [],
+  collection: [],
+  member: [],
   only: resourceActionNames,
   parentSuffix: options.name,
   except: [],
@@ -49,6 +55,14 @@ const getRouteName = (
   const parentName = scope.parentResourceInfo.name ? singularize(scope.parentResourceInfo.name) : '';
   const words = [routeInfo.actionName, scope.name, parentName, routeInfo.name].filter((w) => w).join('_');
   return camelize(words, false);
+};
+
+const buildCollectionRoutes = () => {
+  // TODO: implement it
+};
+
+const buildMemberRoutes = () => {
+  // TODO: implement it
 };
 
 export const buildRoot = (value, scope) => {
@@ -163,7 +177,7 @@ export const buildResources = (value, rec, scope) => {
   });
 
   let nestedRoutes = [];
-  if (_.has(resourceInfo, 'routes')) {
+  if (resourceInfo.routes.length > 0) {
     const nestedScope = {
       ...scope,
       parentResourceInfo: resourceInfo,
@@ -171,6 +185,9 @@ export const buildResources = (value, rec, scope) => {
     };
     nestedRoutes = rec(nestedScope);
   }
+
+  const collectionRoutes = buildCollectionRoutes(scope, resourceInfo);
+  const memberRoutes = buildMemberRoutes(scope, resourceInfo);
 
   return [...routes, ...nestedRoutes];
 };

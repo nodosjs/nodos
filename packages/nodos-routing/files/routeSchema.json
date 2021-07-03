@@ -10,6 +10,9 @@
           "properties": {
             "name": { "type": "string" },
 
+            "collection": { "type": "object" },
+            "member": { "type": "object" },
+
             "routes": {
               "type": "array",
               "items": { "$ref": "routeSchema" }
@@ -28,6 +31,9 @@
           "type": "object",
           "properties": {
             "name": { "type": "string" },
+
+            "collection": { "type": "object" },
+            "member": { "type": "object" },
 
             "routes": {
               "type": "array",
