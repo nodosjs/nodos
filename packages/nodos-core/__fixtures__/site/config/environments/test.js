@@ -1,6 +1,6 @@
 export default async (app) => {
   app.config.logLevel = 'debug';
-  app.config.errorHandler = false;
+  app.config.errorHandler = true;
   app.config.cacheModules = true;
   app.config.host = 'http://example.com';
   app.config.csrf = { enabled: false }

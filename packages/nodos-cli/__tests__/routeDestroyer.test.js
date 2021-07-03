@@ -38,7 +38,7 @@ test('nodos/destroy/nestedResources', async () => {
   const currentYaml = await fsp.readFile(routesPath, 'utf8');
   const data = yaml.load(currentYaml);
 
-  const scope = data.scopes.find((s) => s.name === scopeName);
+  const scope = data.scopes.find((s) => s.path === scopeName);
   scope.routes.push({
     resources: {
       name: 'users',

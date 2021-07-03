@@ -10,14 +10,14 @@ pipelines:
     - example/setLocale
 
 scopes:
-  - name: api
+  - path: /api
     pipeline: api
     routes:
       - resources: users
-  - name: /
+  - path: /
     pipeline: browser
     routes:
-      - root: 'welcome#index'
+      - root: 'home#index'
       - resources: users
       - resource: session
       - resources:

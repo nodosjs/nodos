@@ -229,18 +229,18 @@ class Application {
   }
 
   put(url, options = {}) {
-    this.request('PUT', url, options);
+    return this.request('PUT', url, options);
   }
 
   patch(url, options = {}) {
-    this.request('PATCH', url, options);
+    return this.request('PATCH', url, options);
   }
 
   delete(url) {
     return this.request('DELETE', url);
   }
 
-  request(method, url, options) {
+  request(method, url, options = {}) {
     const { params, headers } = { ...this.defaultRequestOptions, ...options };
 
     return this.fastify.inject({

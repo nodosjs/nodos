@@ -9,7 +9,7 @@ const generateNewRoute = async (workdir, resourceType, resourceName, scopeName =
   if (!data.scopes) {
     throw new Error('No scopes in routes.js');
   }
-  const scope = data.scopes.find((s) => s.name === scopeName);
+  const scope = data.scopes.find((s) => s.path === scopeName);
   if (!scope) {
     throw new Error(`Scope '${scopeName} does not exists`);
   }

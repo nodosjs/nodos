@@ -9,4 +9,4 @@ scopes:
   - path: '/'
     pipeline: browser
     routes:
-      root: 'home#index'
+      - root: 'home#index'

@@ -15,7 +15,7 @@ const resourceActionNames = ['build', 'create', 'show', 'edit', 'update', 'destr
 
 const buildRouteInfo = (options) => ({
   controllerName: '',
-  actionName: '',
+  prefix: '',
   suffix: '',
   ...options,
 });
@@ -44,7 +44,7 @@ const buildResourceInfo = (/** @type {any} */ options) => ({
 
 const getControllerPath = (
   /** @type {any} */ scope,
-  /** @type {{ name?: string; suffix: string; actionName: string; controllerName: string; }} */ routeInfo,
+  /** @type {{ name?: string; suffix: string; prefix: string; controllerName: string; }} */ routeInfo,
 ) => {
   const { controllerName } = scope.parentResourceInfo;
   const fullPath = path.join(scope.path, controllerName, routeInfo.controllerName);
@@ -53,30 +53,30 @@ const getControllerPath = (
 
 const getTemplate = (
   /** @type {any} */ scope,
-  /** @type {{ name?: string; suffix: string; actionName: string; }} */ routeInfo,
+  /** @type {{ name?: string; suffix: string; prefix: string; }} */ routeInfo,
 ) => {
   // log('getTemplate', routeInfo);
   const { parentSuffix = '' } = scope.parentResourceInfo;
-  const fullUrl = urlJoin(scope.path, parentSuffix, routeInfo.suffix, routeInfo.actionName);
-  return fullUrl;
+  const fullUrl = urlJoin(scope.path, parentSuffix, routeInfo.suffix, routeInfo.prefix);
+  return fullUrl || '/';
 };
 
 const getRouteName = (
   /** @type {any} */ scope,
-  /** @type {{ name: string; suffix?: string; actionName: string; }} */ routeInfo,
+  /** @type {{ name: string; suffix?: string; prefix: string; }} */ routeInfo,
 ) => {
   const parentName = scope.parentResourceInfo.name ? singularize(scope.parentResourceInfo.name) : '';
-  const words = [routeInfo.actionName, scope.name, parentName, routeInfo.name].filter((w) => w).join('_');
+  const words = [routeInfo.prefix, scope.name, parentName, routeInfo.name].filter((w) => w).join('_');
   return camelize(words, false);
 };
 
-const buildCollectionRoutes = () => {
-  // TODO: implement it
-};
+// const buildCollectionRoutes = () => {
+//   // TODO: implement it
+// };
 
-const buildMemberRoutes = () => {
-  // TODO: implement it
-};
+// const buildMemberRoutes = () => {
+//   // TODO: implement it
+// };
 
 export const buildRoot = (value, scope) => {
   const [controllerName, actionName] = value.split('#');
@@ -84,7 +84,7 @@ export const buildRoot = (value, scope) => {
 
   const route = new Route(scope, {
     controllerName,
-    path: urlJoin(scope.path, controllerName),
+    // path: urlJoin(scope.path, controllerName),
     // prefix,
     actionName,
     method: 'get',
@@ -125,7 +125,7 @@ export const buildResources = (value, rec, scope) => {
         name: singularize(resourceInfo.name),
         suffix: resourceInfo.name,
         controllerName,
-        actionName,
+        prefix: actionName,
       });
 
       return {
@@ -173,7 +173,7 @@ export const buildResources = (value, rec, scope) => {
       const actionName = 'edit';
       const routeInfo = buildRouteInfo({
         name: singularize(resourceInfo.name),
-        actionName,
+        prefix: actionName,
         suffix: `${resourceInfo.name}/:id`,
         controllerName,
       });
@@ -191,7 +191,7 @@ export const buildResources = (value, rec, scope) => {
       const actionName = 'update';
       const routeInfo = buildRouteInfo({
         name: singularize(resourceInfo.name),
-        actionName,
+        prefix: actionName,
         suffix: `${resourceInfo.name}/:id`,
         controllerName,
       });
@@ -209,7 +209,6 @@ export const buildResources = (value, rec, scope) => {
       const actionName = 'destroy';
       const routeInfo = buildRouteInfo({
         name: singularize(resourceInfo.name),
-        actionName,
         suffix: `${resourceInfo.name}/:id`,
         controllerName,
       });
@@ -260,7 +259,7 @@ export const buildResource = (value, rec, scope) => {
       const routeInfo = buildRouteInfo({
         name: singularize(resourceInfo.name),
         suffix: resourceInfo.name,
-        actionName,
+        prefix: actionName,
         controllerName,
       });
       return {
@@ -308,7 +307,7 @@ export const buildResource = (value, rec, scope) => {
       const actionName = 'edit';
       const routeInfo = buildRouteInfo({
         name: resourceInfo.name,
-        actionName,
+        prefix: actionName,
         suffix: resourceInfo.name,
         controllerName,
       });
@@ -348,6 +347,7 @@ export const buildResource = (value, rec, scope) => {
         suffix: resourceInfo.name,
         controllerName,
       });
+
       return {
         actionName,
         method: 'delete',

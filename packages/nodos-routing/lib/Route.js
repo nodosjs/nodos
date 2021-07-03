@@ -1,6 +1,6 @@
 // @ts-check
 
-const log = require('./logger.js');
+// const log = require('./logger.js');
 
 class Route {
   constructor(scope, options) {
@@ -13,6 +13,7 @@ class Route {
     this.template = options.template;
     this.name = options.name;
     this.method = options.method;
+    this.middlewares = scope.middlewares;
   }
 
   get controllerAction() {

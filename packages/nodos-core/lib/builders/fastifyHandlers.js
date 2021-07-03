@@ -1,4 +1,5 @@
 // @ts-check
+
 /** @typedef { import('../Application') } Application */
 
 const _ = require('lodash');
@@ -40,12 +41,13 @@ const sendResponse = async (fastifyApp, response, reply) => {
       log('template', pathToTemplate);
       const html = await fastifyApp.view(pathToTemplate, response.locals);
       // TODO point-of-view send errors as a normal html
-      // if (_.isObject(html)) {
-      //   reply.code(500)
-      //     .type('text/html')
-      //     .send(html.toString());
-      //   return reply;
-      // }
+      if (_.isObject(html)) {
+        throw new Error(html.toString());
+        // reply.code(500)
+        //   .type('text/html')
+        //   .send(html.toString());
+        // return reply;
+      }
       reply.code(response.code)
         .type('text/html')
         .send(html);
@@ -110,13 +112,14 @@ module.exports = async (app) => {
 
     const opts = {
       handler,
-      url: route.url,
+      url: route.template,
       method: route.method.toUpperCase(),
       preHandler: csrfChecker(app.fastify, route),
     };
 
-    // log(opts);
+    log(opts);
     app.fastify.route(opts);
   });
-  await Promise.all(promises);
+
+  return Promise.all(promises);
 };

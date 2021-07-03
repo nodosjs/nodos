@@ -29,6 +29,6 @@ scopes:
       - resources: posts
       - resource: session
       - resources:
-          path: /articles
+          name: articles
           routes:
             - resources: comments

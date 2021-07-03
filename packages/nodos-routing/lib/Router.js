@@ -3,6 +3,7 @@
 const _ = require('lodash');
 const urlJoin = require('url-join');
 const validateSchema = require('./validator.js');
+const { getOrError } = require('./utils.js');
 const { buildRoot, buildResources, buildResource } = require('./builders.js');
 
 const detectRouteType = (/** @type {string} */ currentName) => {
@@ -40,7 +41,7 @@ class Router {
       routes,
       name: path.slice(1),
       parentResourceInfo: { controllerName: '', actionName: '' },
-      middlewares: routeMap.pipelines[pipeline],
+      middlewares: getOrError(routeMap.pipelines, pipeline),
     }));
     this.routes = this.scopes
       .map((scope) => buildRoutes(scope))
@@ -60,7 +61,8 @@ class Router {
       throw Error(`Route with name '${name}' not found`);
     }
     // TODO: move mapResourcesToTemplate to Route (prepared regexp for performance purpose)
-    return urlJoin(this.host, mapResourcesToTemplate(route.template, params));
+    const fullUrl = urlJoin(this.host, mapResourcesToTemplate(route.template, params));
+    return _.trimEnd(fullUrl, '/');
   }
 }
 

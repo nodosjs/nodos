@@ -9,7 +9,7 @@ pipelines:
     - "@nodosjs/view-extension/protectFromForgery"
 
 scopes:
-  - name: '/'
+  - path: '/'
     pipeline: browser
     routes:
       - root: 'home#index'

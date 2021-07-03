@@ -1,7 +1,7 @@
-test('example/users', async () => {
-  const response = await app.get('/users');
-  expect(response).toMatchObject({ statusCode: 200 });
-});
+// test('example/users', async () => {
+//   const response = await app.get('/users');
+//   expect(response).toMatchObject({ statusCode: 200 });
+// });
 
 test('example/users/build', async () => {
   const response = await app.get('/users/build');
