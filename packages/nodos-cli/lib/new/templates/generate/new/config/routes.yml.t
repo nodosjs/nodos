@@ -11,4 +11,5 @@ pipelines:
 scopes:
   - name: '/'
     pipeline: browser
-    root: true
+    routes:
+      - root: 'home#index'

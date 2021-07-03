@@ -18,15 +18,15 @@ pipelines:
 
 scopes:
 
-  - name: 'api'
+  - path: '/api'
     pipeline: browser
     routes:
       - resources: users
 
-  - name: '/'
+  - path: '/'
     pipeline: browser
-    root: true
     routes:
+      - root: 'home#index'
       - resources: users
       - resources: posts
       - resource: session

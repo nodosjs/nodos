@@ -13,8 +13,8 @@ pipelines:
 
 scopes:
 
-  - name: '/'
+  - path: '/'
     pipeline: browser
-    root: true
     routes:
       - resources: users
+      - root: 'home#index'

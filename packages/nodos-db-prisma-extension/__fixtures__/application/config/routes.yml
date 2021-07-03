@@ -17,19 +17,18 @@ pipelines:
 
 scopes:
 
-  - name: 'api'
+  - path: '/api'
     pipeline: browser
     routes:
       - resources: users
 
-  - name: '/'
+  - path: '/'
     pipeline: browser
-    root: true
     routes:
       - resources: users
       - resources: posts
       - resource: session
       - resources:
-          name: articles
+          path: /articles
           routes:
             - resources: comments

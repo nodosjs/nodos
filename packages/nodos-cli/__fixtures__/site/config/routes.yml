@@ -4,6 +4,7 @@ pipelines:
   browser: []
 
 scopes:
-  - name: '/'
+  - path: '/'
     pipeline: browser
-    root: true
+    routes:
+      - root: 'home#index'
