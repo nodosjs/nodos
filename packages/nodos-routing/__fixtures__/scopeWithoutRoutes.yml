@@ -11,19 +11,19 @@ pipelines:
     - setLocale
 
 scopes:
-  - name: 'api'
+  - path: '/api'
     pipeline: browser
-    root: true
     routes:
+      - root: 'root#index'
       - resources: users
 
-  - name: 'test'
+  - path: '/test'
     pipeline: api
 
-  - name: '/'
+  - path: '/'
     pipeline: browser
-    root: true
     routes:
+      - root: 'root#index'
       - resources:
           name: users
           only: ['show']

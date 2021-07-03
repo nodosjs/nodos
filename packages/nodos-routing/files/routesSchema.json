@@ -1,6 +1,7 @@
 {
   "$id": "routesSchema",
   "type": "object",
+  "required": ["pipelines", "scopes"],
   "properties": {
     "pipelines": {
       "type": "object",
@@ -13,19 +14,19 @@
       "type": "array",
       "items": {
           "type": "object",
+          "required": ["path", "pipeline", "routes"],
           "properties": {
-            "name": { "type": "string" },
-            "root": { "type": "boolean" },
+            "path": {
+              "type": "string",
+              "pattern": "^/.*$"
+            },
             "pipeline": { "type": "string" },
             "routes": {
               "type": "array",
               "items": { "$ref": "routeSchema" }
             }
           },
-          "additionalProperties": false,
-          "if": { "properties": { "root": false } },
-          "then": { "required": ["routes"] },
-          "else": { "required": ["root"] }
+          "additionalProperties": false
         }
     }
   },

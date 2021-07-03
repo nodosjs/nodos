@@ -10,8 +10,8 @@
     "execa": "^5.1.1",
     "hygen": "^6.1.0",
     "lodash": "^4.17.21",
-    "@prisma/client": "^2.25.0",
-    "prisma": "^2.25.0"
+    "@prisma/client": "^2.26.0",
+    "prisma": "^2.26.0"
   },
   "devDependencies": {
     "@nodosjs/cli": "^0.0.57",

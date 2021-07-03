@@ -16,8 +16,8 @@ scopes:
       - resources: users
   - name: /
     pipeline: browser
-    root: true
     routes:
+      - route: 'welcome#index'
       - resources: users
       - resource: session
       - resources:

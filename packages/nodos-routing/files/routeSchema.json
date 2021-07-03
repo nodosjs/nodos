@@ -39,7 +39,8 @@
           "additionalProperties": false
         }
       ]
-    }
+    },
+    "root": { "type": "string" }
   },
   "additionalProperties": false
 }

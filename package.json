@@ -18,9 +18,9 @@
     "@babel/eslint-parser": "^7.14.7",
     "@babel/node": "^7.14.7",
     "@babel/preset-env": "^7.14.7",
-    "babel-jest": "^27.0.5",
-    "jest": "^27.0.5",
-    "jest-cli": "^27.0.5",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "jest-cli": "^27.0.6",
     "lerna": "^4.0.0",
     "sql.js": "^1.5.0"
   },

@@ -16,11 +16,11 @@
     "@nodosjs/db-typeorm-extension": "^0.0.57",
     "@nodosjs/view-extension": "^0.0.57",
     "@nodosjs/webpack-extension": "^0.0.57",
-    "babel-jest": "^27.0.5",
+    "babel-jest": "^27.0.6",
     "bootstrap": "^5.0.2",
     "execa": "^5.1.1",
-    "jest": "^27.0.5",
-    "jest-cli": "^27.0.5",
+    "jest": "^27.0.6",
+    "jest-cli": "^27.0.6",
     "pg": "^8.6.0"
   },
   "version": "0.0.57"

@@ -20,7 +20,7 @@
     "@nodosjs/routing": "^0.0.57",
     "debug": "^4.3.1",
     "dotenv": "^10.0.0",
-    "fastify": "^3.18.0",
+    "fastify": "^3.18.1",
     "fastify-express": "^0.3.2",
     "fastify-sensible": "^3.1.1",
     "fastify-static": "^4.2.2",
@@ -30,7 +30,7 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "marko": "^5.10.7",
-    "middie": "^5.2.0",
+    "middie": "^5.3.0",
     "pino-pretty": "^5.1.0",
     "statuses": "^2.0.1"
   }

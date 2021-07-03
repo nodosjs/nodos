@@ -11,20 +11,25 @@ pipelines:
     - setLocale
 
 scopes:
-  - name: 'api'
+  - path: '/api'
     pipeline: browser
-    root: true
     routes:
-      - resources: users
+      - root: 'home#index'
+      - resources:
+          name: users
+          routes:
+            - resource: photo
 
-  - name: 'test'
+  - path: '/test'
     pipeline: api
-    root: true
-
-  - name: '/'
-    pipeline: browser
-    root: true
     routes:
+      - root: 'home#index'
+
+  - path: '/'
+    pipeline: browser
+    routes:
+      - root: 'home#index'
+
       - resources:
           name: users
           only: ['show']
@@ -34,6 +39,7 @@ scopes:
           except: ['build']
           routes:
             - resources: tokens
+            - root: 'home#index'
 
       - resources:
           name: articles
