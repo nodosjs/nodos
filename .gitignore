@@ -4,6 +4,7 @@ dist
 *.log
 *.tgz
 *.sqlite3
+*.sqlite3-journal
 *.sqlite
 *.DS_Store
 tmp
@@ -14,4 +15,3 @@ site/build
 site/.docusaurus
 public/assets
 .env
-

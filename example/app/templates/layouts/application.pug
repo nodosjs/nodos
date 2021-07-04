@@ -3,28 +3,31 @@ html
     title Nodos
     block scripts
       link(href='/assets/main.css', rel='stylesheet')
-  body.container.p-3
+  body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand(href=route('root')) Nodos Project
-      button.navbar-toggler("aria-controls"="navbarSupportedContent" "data-target"="#navbarSupportedContent" "data-toggle"="collapse" type="button")
-        span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto
-        li.nav-item.active
-          a.nav-link(href=route('users')) Users
-            span.sr-only (current)
-        li.nav-item
-          a.nav-link(href="#") Link
+      .container-fluid
+        a.navbar-brand(href=route('root')) Nodos Project
+        button.navbar-toggler("aria-controls"="navbarSupportedContent" "data-target"="#navbarSupportedContent" "data-toggle"="collapse" type="button")
+          span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.me-auto
+          li.nav-item.active
+            a.nav-link(href=route('users')) Users
+              span.sr-only (current)
+          li.nav-item
+            a.nav-link(href="#") Link
+
     .container.p-3
       each message, type in flash
         .alert.alert-dismissible.fade.show(class=`alert-${type}` role='alert')
           = message
-          button.close(type='button' data-dismiss='alert' aria-label='Close')
-            span(aria-hidden='true') &times;
+          button.btn-close(type='button' data-dismiss='alert' aria-label='Close')
       block content
+
     hr
+
     block footer
-      #footer
+      .container-fluid#footer
         h5 Nodos Project
         a(href='https://github.com/nodosjs/nodos') GitHub
     script(src='/assets/main.js')
