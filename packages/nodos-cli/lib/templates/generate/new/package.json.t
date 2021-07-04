@@ -24,7 +24,8 @@ to: './<%= name %>/package.json'
     "@nodosjs/view-extension": "^<%= version %>",
     "@nodosjs/webpack-extension": "^<%= version %>",
     "sql.js": "^1.5.0",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "middie": "5.2.0"
   },
   "devDependencies": {
     "@nodosjs/jest-environment": "^<%= version %>",
