@@ -15,18 +15,17 @@ export const build = (_request, response, { container }) => {
 
 export const create = async (request, response, { router, container }) => {
   const { db } = container;
-  const user = new User(request.body.user);
+  const userData = request.body.user;
 
   try {
-    await user.validate();
-    await user.save();
+    const user = await db.user.create({ data: userData });
     response.redirectTo(router.route('users'));
-    request.flash('success', 'User successfully created');
+    request.flash('success', `User ${user.email} successfully created`);
   } catch (e) {
     console.log(request.body);
     console.log(e);
-    console.log(user.email);
+    console.log(userData.email);
     request.flash('danger', 'Something went wrong on creating new user');
-    response.render({ user }, 'build');
+    response.render({ user: userData }, 'build');
   }
 };
