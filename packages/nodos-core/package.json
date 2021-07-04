@@ -18,7 +18,7 @@
   "dependencies": {
     "@babel/register": "^7.14.5",
     "@nodosjs/routing": "^0.0.57",
-    "debug": "^4.3.1",
+    "debug": "^4.3.2",
     "dotenv": "^10.0.0",
     "fastify": "^3.18.1",
     "fastify-express": "^0.3.3",

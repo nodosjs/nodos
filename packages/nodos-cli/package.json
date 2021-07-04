@@ -12,7 +12,7 @@
   "dependencies": {
     "@nodosjs/core": "^0.0.57",
     "columnify": "^1.5.4",
-    "debug": "^4.3.1",
+    "debug": "^4.3.2",
     "del": "^6.0.0",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
