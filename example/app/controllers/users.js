@@ -24,7 +24,7 @@ export const create = async (request, response, { router, container }) => {
   } catch (e) {
     console.log(request.body);
     console.log(e);
-    console.log(user.email);
+    console.log(userData.email);
     request.flash('danger', 'Something went wrong on creating new user');
     response.render({ user: userData }, 'build');
   }
