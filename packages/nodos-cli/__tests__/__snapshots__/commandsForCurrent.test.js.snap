@@ -2,5 +2,5 @@
 
 exports[`nodos/routes 1`] = `
 "Name Verb URI Pattern Pipeline Controller#Action
-root GET                       home#index       "
+root GET  /                    home#index       "
 `;
