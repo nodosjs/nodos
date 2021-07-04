@@ -35,7 +35,7 @@ async function fastifyWebpack(instance, opts) {
     webpackDev.publicPath = publicPath;
   }
 
-  await instance.register(require('middie'));
+  // await instance.register(require('middie'));
 
   instance
     .addHook('onReady', (next) => {
