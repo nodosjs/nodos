@@ -1,7 +1,7 @@
 setup: install migrate
 
 migrate:
-	npx nodos db migrate
+	npx prisma migrate dev
 
 install:
 	npm install
