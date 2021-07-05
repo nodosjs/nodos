@@ -9,7 +9,6 @@ export default async (app) => {
   app.config.cacheModules = false;
   app.config.csrf = { enabled: true }
   app.config.db = {
-    type: 'sqlite',
-    database: 'db/development.sqlite',
+    databaseUrl: 'sqlite::memory:',
   };
 };

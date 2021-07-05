@@ -22,7 +22,7 @@ to: './<%= name %>/package.json'
     "@babel/preset-env": "^7.14.5",
     "@nodosjs/cli": "^<%= version %>",
     "@nodosjs/core": "^<%= version %>",
-    "@nodosjs/db-prisma-extension": "^<%= version %>",
+    "@nodosjs/db-sequalize-extension": "^<%= version %>",
     "@nodosjs/view-extension": "^<%= version %>",
 <% if (!without.includes('webpack')) { -%>
     "@nodosjs/webpack-extension": "^<%= version %>",

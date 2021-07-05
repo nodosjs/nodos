@@ -21,7 +21,7 @@
     "@babel/preset-env": "^7.14.5",
     "@nodosjs/cli": "file:../packages/nodos-cli",
     "@nodosjs/core": "file:../packages/nodos-core",
-    "@nodosjs/db-prisma-extension": "file:../packages/nodos-db-prisma-extension",
+    "@nodosjs/db-sequalize-extension": "file:../packages/nodos-db-sequalize-extension",
     "@nodosjs/view-extension": "file:../packages/nodos-view-extension",
     "@nodosjs/webpack-extension": "file:../packages/nodos-webpack-extension"
   },

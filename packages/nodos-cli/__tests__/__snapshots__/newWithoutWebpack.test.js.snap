@@ -29,7 +29,7 @@ exports[`nodos/new 2`] = `
     \\"@babel/preset-env\\": \\"^7.14.5\\",
     \\"@nodosjs/cli\\": \\"^0.0.57\\",
     \\"@nodosjs/core\\": \\"^0.0.57\\",
-    \\"@nodosjs/db-prisma-extension\\": \\"^0.0.57\\",
+    \\"@nodosjs/db-sequalize-extension\\": \\"^0.0.57\\",
     \\"@nodosjs/view-extension\\": \\"^0.0.57\\",
     \\"pg\\": \\"^8.5.3\\"
   },

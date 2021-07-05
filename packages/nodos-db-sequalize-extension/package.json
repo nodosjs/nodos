@@ -5,13 +5,13 @@
     "access": "public"
   },
   "dependencies": {
-    "debug": "^4.3.1",
+    "debug": "^4.3.2",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
     "hygen": "^6.1.0",
     "lodash": "^4.17.21",
-    "@prisma/client": "^2.26.0",
-    "prisma": "^2.26.0"
+    "sequelize": "^6.6.4",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "@nodosjs/cli": "^0.0.57",

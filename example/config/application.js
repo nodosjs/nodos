@@ -1,4 +1,4 @@
-import nodosDb from '@nodosjs/db-prisma-extension';
+import nodosDb from '@nodosjs/db-sequalize-extension';
 import nodosView from '@nodosjs/view-extension';
 import { inflections } from 'inflected';
 

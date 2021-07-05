@@ -5,6 +5,7 @@ const fse = require('fs-extra');
 const path = require('path');
 
 const fastify = require('fastify');
+const fastifyEnv = require('fastify-env');
 const fastifySensible = require('fastify-sensible');
 const fastifyStatic = require('fastify-static');
 const fastifyExpress = require('fastify-express');
@@ -164,6 +165,9 @@ class Application {
         },
       },
     });
+
+    const schema = { type: 'object' };
+    this.fastify.register(fastifyEnv, { schema, dotenv: true });
 
     this.fastify.register(fastifyExpress);
     this.fastify.register(fastifySensible, { errorHandler: this.config.errorHandler });

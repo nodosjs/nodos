@@ -1,14 +1,14 @@
 // const path = require('path');
 // const fsp = require('fs/promises');
-const { PrismaClient } = require('@prisma/client');
 
+const { Sequelize } = require('sequelize');
 // const commandBuilders = require('./lib/commands.js');
 // const generators = require('./lib/generators.js');
 // const Db = require('./lib/Db.js');
 // const log = require('./lib/logger.js');
 
 module.exports = async (app) => {
-  // const appConfig = app.config.db || {};
+  const appConfig = app.config.db || {};
 
   // TODO: we have to decide how we will configure Prisma - nodos config files or schema.prisma file
   // const defaultConfig = {
@@ -27,10 +27,13 @@ module.exports = async (app) => {
   // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/handleDbErrors.js'));
   // app.addMiddleware(path.resolve(__dirname, './lib/middlewares/checkMigrations.js'));
   // app.fastify.addHook('onStop', () => db.close());
-  app.fastify.addHook('onClose', () => data.db && data.db.$disconnect());
+
+  app.fastify.addHook('onClose', () => data.db && data.db.close());
   app.fastify.addHook('onReady', async () => {
-    const prisma = new PrismaClient();
-    data.db = prisma;
-    app.addDependency('db', prisma);
+    // console.log(process.env.DATABASE_URL);
+    // xxx
+    const db = new Sequelize(appConfig.databaseUrl);
+    data.db = db;
+    app.addDependency('db', db);
   });
 };
