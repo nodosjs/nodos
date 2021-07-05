@@ -13,7 +13,7 @@ beforeEach(async () => {
 test('nodos/new', async () => {
   const appPath = 'site';
   const projectRoot = path.join(dir, appPath);
-  const options = { exitProcess: false, args: ['new', appPath, '--skip-install', '--without', 'webpack'] };
+  const options = { exitProcess: false, args: ['new', appPath, '--skip-install', '--skip-db', '--without', 'webpack'] };
   await runNew(dir, options);
   await setTimeout(1000);
   const configFiles = await fsp.readdir(path.join(projectRoot, '/config'));

@@ -14,8 +14,8 @@ env:
   node: true
   jest: true
 
-# https://github.com/babel/babel-eslint
-parser: babel-eslint
+# https://github.com/babel/babel/tree/main/eslint/babel-eslint-parser
+parser: @babel/eslint-parser
 
 globals:
   app: readonly

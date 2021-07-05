@@ -13,7 +13,7 @@ beforeEach(async () => {
 test('nodos/new', async () => {
   const appPath = 'site';
   const projectRoot = path.join(dir, appPath);
-  const options = { exitProcess: false, args: ['new', appPath, '--skip-install'] };
+  const options = { exitProcess: false, args: ['new', appPath, '--skip-install', '--skip-db'] };
   await runNew(dir, options);
   await setTimeout(1000);
   const fileNames = await fsp.readdir(projectRoot);

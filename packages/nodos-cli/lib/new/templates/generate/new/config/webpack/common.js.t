@@ -7,8 +7,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 export default ({
   context: path.resolve(__dirname, '../..'),
   entry: [
-    './app/assets/stylesheets/application.scss',
-    './app/javascript/application.js',
+    './app/frontend/stylesheets/application.scss',
+    './app/frontend/application.js',
   ],
   output: {
     publicPath: '/assets/',

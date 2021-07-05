@@ -34,6 +34,11 @@ module.exports = async (dir, options = {}) => {
         describe: 'skip npm install',
         type: 'boolean',
       });
+      command.option('--skip-db', {
+        default: false,
+        describe: 'skip db setup',
+        type: 'boolean',
+      });
       command.option('--without', {
         default: false,
         describe: 'generate new app without packages',
@@ -42,7 +47,7 @@ module.exports = async (dir, options = {}) => {
     },
     handler: async (params) => {
       log(params);
-      const { appPath, skipInstall, without } = params;
+      const { appPath, without } = params;
       // TODO: pass version directly, without arguments
       const fullPath = path.resolve(dir, appPath);
       const basename = path.basename(fullPath);
@@ -61,16 +66,27 @@ module.exports = async (dir, options = {}) => {
         debug: !!process.env.DEBUG,
       });
 
-      if (result.success && !skipInstall) {
+      if (result.success) {
         const execaOptions = {
           env, cwd: fullPath, all: true, buffer: false, shell: true,
         };
         log(execaOptions);
-        console.log('> npm install');
-        const subprocess = execa.command('npm install', execaOptions);
-        subprocess.stdout.pipe(process.stdout);
-        subprocess.stderr.pipe(process.stderr);
-        await subprocess;
+
+        if (!params.skipInstall) {
+          console.log('> npm install');
+          const subprocess = execa.command('npm install', execaOptions);
+          subprocess.stdout.pipe(process.stdout);
+          subprocess.stderr.pipe(process.stderr);
+          await subprocess;
+        }
+
+        if (!params.skipDb) {
+          console.log('> prism init');
+          const subprocess = execa.command('npx prism init', execaOptions);
+          subprocess.stdout.pipe(process.stdout);
+          subprocess.stderr.pipe(process.stderr);
+          await subprocess;
+        }
       }
     },
   });

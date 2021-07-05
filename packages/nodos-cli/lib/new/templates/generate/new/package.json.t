@@ -17,26 +17,25 @@ to: './<%= name %>/package.json'
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/node": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
+    "@babel/core": "^7.14.5",
+    "@babel/node": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
     "@nodosjs/cli": "^<%= version %>",
     "@nodosjs/core": "^<%= version %>",
-    "@nodosjs/db-typeorm-extension": "^<%= version %>",
+    "@nodosjs/db-prisma-extension": "^<%= version %>",
     "@nodosjs/view-extension": "^<%= version %>",
 <% if (!without.includes('webpack')) { -%>
     "@nodosjs/webpack-extension": "^<%= version %>",
 <% } -%>
-    "sql.js": "^1.5.0",
-    "pg": "^8.5.1"
+    "pg": "^8.5.3"
   },
   "devDependencies": {
     "@nodosjs/jest-environment": "^<%= version %>",
-    "babel-jest": "^26.3.0",
-    "eslint": "^7.22.0",
+    "babel-jest": "^27.0.6",
+    "eslint": "^7.28.0",
     "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-jest": "^24.3.1",
-    "jest": "^26.6.3",
-    "jest-cli": "^26.6.3"
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.6",
+    "jest-cli": "^27.0.6"
   }
 }
