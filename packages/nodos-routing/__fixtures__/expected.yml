@@ -23,6 +23,18 @@
   params: []
 
 - controller: '/api/users'
+  action: 'send'
+  url: '/api/users/toto/send'
+  name: 'sendApiUser'
+  params: ['toto']
+
+- controller: '/api/users'
+  action: 'money'
+  url: '/api/users/toto/money'
+  name: 'moneyApiUser'
+  params: ['toto']
+
+- controller: '/api/users'
   action: 'show'
   url: '/api/users/toto'
   name: 'apiUser'

@@ -20,8 +20,8 @@ scopes:
           collection:
             filtered: get
           member:
-            send: post
-            money: get
+            - post: send
+            - get: money
           routes:
             - resource: photo
 

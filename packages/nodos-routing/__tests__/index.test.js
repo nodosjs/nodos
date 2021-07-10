@@ -21,10 +21,10 @@ beforeAll(async () => {
 });
 
 test('router should respect only and except', () => {
-  expect(router.routes).toHaveLength(49);
+  expect(router.routes).toHaveLength(51);
 });
 
-// We can't user test.each with mapping
+// We can't use test.each with mapping
 // it throws error "`.each` must be called with an Array or Tagged Template Literal."
 // because it tries to setup test.each(mapping) before initialization within beforeAll finishes
 test('router.route: $url, $name, $params', () => {

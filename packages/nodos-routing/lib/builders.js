@@ -74,9 +74,29 @@ const getRouteName = (
 //   // TODO: implement it
 // };
 
-// const buildMemberRoutes = () => {
-//   // TODO: implement it
-// };
+const buildMemberRoutes = (scope, { name, member }) => {
+  const controllerName = pluralize(name);
+  const buildMemberRoute = (/** @type {any} */ member) => {
+    const [method, actionName] = Object.entries(member)[0];
+    const routeInfo = buildRouteInfo({
+      name: singularize(name),
+      suffix: `${name}/:id`,
+      prefix: actionName,
+      controllerName,
+    });
+
+    return new Route(scope, {
+      actionName,
+      controllerName,
+      method,
+      name: getRouteName(scope, routeInfo),
+      template: getTemplate(scope, routeInfo),
+      controllerPath: getControllerPath(scope, routeInfo),
+    });
+  };
+
+  return member.map(buildMemberRoute);
+};
 
 const buildRoot = (value, scope) => {
   const [controllerName, actionName] = value.split('#');
@@ -234,8 +254,7 @@ const buildResources = (value, rec, scope) => {
 
   const routes = actionNames.map((n) => {
     const options = getOrError(actionDataBuilders, n)();
-    const route = new Route(scope, options);
-    return route;
+    return new Route(scope, options);
   });
 
   let nestedRoutes = [];
@@ -249,9 +268,9 @@ const buildResources = (value, rec, scope) => {
   }
 
   // const collectionRoutes = buildCollectionRoutes(scope, resourceInfo);
-  // const memberRoutes = buildMemberRoutes(scope, resourceInfo);
+  const memberRoutes = buildMemberRoutes(scope, resourceInfo);
 
-  return [...routes, ...nestedRoutes];
+  return [...routes, ...memberRoutes, ...nestedRoutes];
 };
 
 const buildResource = (value, rec, scope) => {
