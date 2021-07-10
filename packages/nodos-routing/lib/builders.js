@@ -72,8 +72,8 @@ const getRouteName = (
 
 const buildCollectionRoutes = (scope, { name, collection }) => {
   const controllerName = pluralize(name);
-  const buildCollectionRoute = (/** @type {any} */ collection) => {
-    const [method, actionName] = Object.entries(collection)[0];
+  const buildCollectionRoute = (/** @type {any} */ coll) => {
+    const [method, actionName] = Object.entries(coll)[0];
     const routeInfo = buildRouteInfo({
       name,
       suffix: name,
@@ -96,8 +96,8 @@ const buildCollectionRoutes = (scope, { name, collection }) => {
 
 const buildMemberRoutes = (scope, { name, member }) => {
   const controllerName = pluralize(name);
-  const buildMemberRoute = (/** @type {any} */ member) => {
-    const [method, actionName] = Object.entries(member)[0];
+  const buildMemberRoute = (m) => {
+    const [method, actionName] = Object.entries(m)[0];
     const routeInfo = buildRouteInfo({
       name: singularize(name),
       suffix: `${name}/:id`,
@@ -294,7 +294,7 @@ const buildResources = (value, rec, scope) => {
     ...routes,
     ...memberRoutes,
     ...collectionRoutes,
-    ...nestedRoutes
+    ...nestedRoutes,
   ];
 };
 
