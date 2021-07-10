@@ -33,7 +33,7 @@
             "name": { "type": "string" },
 
             "collection": { "type": "object" },
-            "member": { "type": "object" },
+            "member": { "type": "array" },
 
             "routes": {
               "type": "array",
