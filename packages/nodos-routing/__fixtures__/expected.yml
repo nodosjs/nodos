@@ -1,0 +1,95 @@
+- controller: '/home'
+  action: 'index'
+  url: ''
+  name: 'root'
+  params: []
+
+- controller: '/api/home'
+  action: 'index'
+  url: '/api'
+  name: 'apiRoot'
+  params: []
+
+- controller: '/api/users'
+  action: 'index'
+  url: '/api/users'
+  name: 'apiUsers'
+  params: []
+
+- controller: '/api/users'
+  action: 'build'
+  url: '/api/users/build'
+  name: 'buildApiUser'
+  params: []
+
+- controller: '/api/users'
+  action: 'show'
+  url: '/api/users/toto'
+  name: 'apiUser'
+  params: ['toto']
+
+- controller: '/api/users'
+  action: 'edit'
+  url: '/api/users/toto/edit'
+  name: 'editApiUser'
+  params: ['toto']
+
+- controller: '/api/users/photos'
+  action: 'show'
+  url: '/api/users/toto/photo'
+  name: 'apiUserPhoto'
+  params: ['toto']
+
+- controller: '/api/users/photos'
+  action: 'edit'
+  url: '/api/users/toto/photo/edit'
+  name: 'editApiUserPhoto'
+  params: ['toto']
+
+- controller: '/test/home'
+  action: 'index'
+  url: '/test'
+  name: 'testRoot'
+  params: []
+
+- controller: '/users'
+  action: 'show'
+  url: '/users/3'
+  name: 'user'
+  params: [3]
+
+- controller: '/sessions'
+  action: 'show'
+  url: '/session'
+  name: 'session'
+  params: []
+
+- controller: '/sessions'
+  action: 'edit'
+  url: '/session/edit'
+  name: 'editSession'
+  params: []
+
+- controller: '/sessions/tokens'
+  action: 'index'
+  url: '/session/tokens'
+  name: 'sessionTokens'
+  params: []
+
+- controller: '/sessions/tokens'
+  action: 'build'
+  url: '/session/tokens/build'
+  name: 'buildSessionToken'
+  params: []
+
+- controller: '/sessions/tokens'
+  action: 'show'
+  url: '/session/tokens/5'
+  name: 'sessionToken'
+  params: [5]
+
+- controller: '/sessions/tokens'
+  action: 'edit'
+  url: '/session/tokens/5/edit'
+  name: 'editSessionToken'
+  params: [5]
