@@ -10,7 +10,7 @@
           "properties": {
             "name": { "type": "string" },
 
-            "collection": { "type": "object" },
+            "collection": { "type": "array" },
             "member": { "type": "array" },
 
             "routes": {
@@ -32,7 +32,7 @@
           "properties": {
             "name": { "type": "string" },
 
-            "collection": { "type": "object" },
+            "collection": { "type": "array" },
             "member": { "type": "array" },
 
             "routes": {

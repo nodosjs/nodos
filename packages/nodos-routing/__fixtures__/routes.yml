@@ -18,7 +18,7 @@ scopes:
       - resources:
           name: users
           collection:
-            filtered: get
+            - get: filtered
           member:
             - post: send
             - get: money

@@ -70,9 +70,29 @@ const getRouteName = (
   return camelize(words, false);
 };
 
-// const buildCollectionRoutes = () => {
-//   // TODO: implement it
-// };
+const buildCollectionRoutes = (scope, { name, collection }) => {
+  const controllerName = pluralize(name);
+  const buildCollectionRoute = (/** @type {any} */ collection) => {
+    const [method, actionName] = Object.entries(collection)[0];
+    const routeInfo = buildRouteInfo({
+      name,
+      suffix: name,
+      prefix: actionName,
+      controllerName,
+    });
+
+    return new Route(scope, {
+      actionName,
+      controllerName,
+      method,
+      name: getRouteName(scope, routeInfo),
+      template: getTemplate(scope, routeInfo),
+      controllerPath: getControllerPath(scope, routeInfo),
+    });
+  };
+
+  return collection.map(buildCollectionRoute);
+};
 
 const buildMemberRoutes = (scope, { name, member }) => {
   const controllerName = pluralize(name);
@@ -267,10 +287,15 @@ const buildResources = (value, rec, scope) => {
     nestedRoutes = rec(nestedScope);
   }
 
-  // const collectionRoutes = buildCollectionRoutes(scope, resourceInfo);
+  const collectionRoutes = buildCollectionRoutes(scope, resourceInfo);
   const memberRoutes = buildMemberRoutes(scope, resourceInfo);
 
-  return [...routes, ...memberRoutes, ...nestedRoutes];
+  return [
+    ...routes,
+    ...memberRoutes,
+    ...collectionRoutes,
+    ...nestedRoutes
+  ];
 };
 
 const buildResource = (value, rec, scope) => {

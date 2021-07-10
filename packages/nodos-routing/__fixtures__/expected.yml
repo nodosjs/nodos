@@ -35,6 +35,12 @@
   params: ['toto']
 
 - controller: '/api/users'
+  action: 'filtered'
+  url: '/api/users/filtered'
+  name: 'filteredApiUsers'
+  params: []
+
+- controller: '/api/users'
   action: 'show'
   url: '/api/users/toto'
   name: 'apiUser'

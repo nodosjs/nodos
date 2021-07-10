@@ -21,7 +21,7 @@ beforeAll(async () => {
 });
 
 test('router should respect only and except', () => {
-  expect(router.routes).toHaveLength(51);
+  expect(router.routes).toHaveLength(52);
 });
 
 // We can't use test.each with mapping
