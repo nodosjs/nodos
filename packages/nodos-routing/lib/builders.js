@@ -72,7 +72,7 @@ const getRouteName = (
 
 const buildCollectionRoutes = (scope, { name, collection }) => {
   const controllerName = pluralize(name);
-  const buildCollectionRoute = (/** @type {any} */ coll) => {
+  const buildCollectionRoute = (coll) => {
     const [method, actionName] = Object.entries(coll)[0];
     const routeInfo = buildRouteInfo({
       name,
