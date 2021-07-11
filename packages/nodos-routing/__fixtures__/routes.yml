@@ -18,10 +18,10 @@ scopes:
       - resources:
           name: users
           collection:
-            filtered: get
+            - get: filtered
           member:
-            send: post
-            money: get
+            - post: send
+            - get: money
           routes:
             - resource: photo
 

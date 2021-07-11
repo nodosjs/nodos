@@ -10,8 +10,8 @@
           "properties": {
             "name": { "type": "string" },
 
-            "collection": { "type": "object" },
-            "member": { "type": "object" },
+            "collection": { "type": "array" },
+            "member": { "type": "array" },
 
             "routes": {
               "type": "array",
@@ -32,8 +32,8 @@
           "properties": {
             "name": { "type": "string" },
 
-            "collection": { "type": "object" },
-            "member": { "type": "object" },
+            "collection": { "type": "array" },
+            "member": { "type": "array" },
 
             "routes": {
               "type": "array",

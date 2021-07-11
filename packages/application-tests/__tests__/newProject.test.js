@@ -31,7 +31,7 @@ beforeAll(async () => {
   await runNew(dir, options);
   await setTimeout(1000);
 
-  const appScssFilePath = path.join(projectRoot, 'app/assets/stylesheets/application.scss');
+  const appScssFilePath = path.join(projectRoot, 'app/frontend/stylesheets/application.scss');
   await fsp.writeFile(appScssFilePath, '');
 });
 

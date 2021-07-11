@@ -22,5 +22,7 @@ scopes:
       - resource: session
       - resources:
           name: posts
+          member:
+            - post: send
           routes:
             - resources: comments
