@@ -1,6 +1,7 @@
 export const index = async (_request, response, { container }) => {
   const { db } = container;
-  const users = await db.user.findMany();
+  // const users = await db.user.findMany();
+  const users = [];
   console.log(users);
 
   response.render({ users });
