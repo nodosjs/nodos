@@ -74,3 +74,19 @@ make start
 ### example
 
 1. Привести в порядок layout, вывести все ссылки
+
+
+##
+
+<p align="center">
+  <a href="https://hexlet.io/?utm_source=github&utm_medium=link&utm_campaign=hexlet-assets">
+    <img src="https://raw.githubusercontent.com/Hexlet/assets/master/images/hexlet_logo.svg" alt="Hexlet Ltd. logo" height="128">
+  </a>
+</p>
+
+<p align="center">
+  This repository is created and maintained by the team and the community of Hexlet, an educational project.
+  <br>
+  <a href="https://hexlet.io/?utm_source=github&utm_medium=link&utm_campaign=nodos"><strong>Read more about Hexlet »</strong></a>
+  <br>
+</p>
